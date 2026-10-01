@@ -48,6 +48,29 @@ export const ja: Messages = {
     solved: "通れました。よかった！",
     home: "最初に戻る",
   },
+  card: {
+    title: "どのカードを使う？",
+    where: {
+      ask: "いまどこにいますか？",
+      airport: { label: "仁川空港にいる", hint: "これからソウルへ向かう" },
+      seoul: { label: "もうソウルにいる", hint: "市内を移動する" },
+    },
+    rides: {
+      ask: "どのくらい乗りますか？",
+      few: { label: "数回だけ", hint: "1〜2回の移動" },
+      lots: { label: "何日もたくさん乗る", hint: "ほぼ毎日、地下鉄やバス" },
+    },
+    result: "あなたに合うカード",
+    later: "あとでソウルで",
+    note: "知っておくと安心",
+    restart: "最初から",
+    cards: {
+      single: { name: "1回用交通カード", why: "1回ずつ払います。登録はいりません。" },
+      tmoney: { name: "Tmoney", why: "電車・バスにくり返し使える交通カードです。" },
+      wowpass: { name: "WOWPASS", why: "交通カードと支払いカードが1枚に。" },
+      climate: { name: "Climate Card 短期券", why: "ソウル市内を1〜7日間移動するためのパスです。" },
+    },
+  },
   phrase: { draft: "翻訳はネイティブ確認前の下書きです。" },
   langSwitch: { label: "言語" },
 };

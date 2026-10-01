@@ -46,6 +46,35 @@ export const en = {
     solved: "You're through. Nice!",
     home: "Back to start",
   },
+  card: {
+    title: "Which card?",
+    where: {
+      ask: "Where are you now?",
+      airport: { label: "At Incheon Airport", hint: "About to head into Seoul" },
+      seoul: { label: "Already in Seoul", hint: "Getting around the city" },
+    },
+    rides: {
+      ask: "How much will you ride?",
+      few: { label: "Just a few rides", hint: "A trip or two" },
+      lots: { label: "A lot, over several days", hint: "Subway and bus most days" },
+    },
+    result: "These fit you best",
+    later: "Later, in Seoul",
+    note: "Good to know",
+    restart: "Start over",
+    cards: {
+      single: {
+        name: "Single-journey card",
+        why: "Pay for one ride at a time. Nothing to sign up for.",
+      },
+      tmoney: { name: "Tmoney", why: "A reusable transit card for trains and buses." },
+      wowpass: { name: "WOWPASS", why: "A transit card and a payment card in one." },
+      climate: {
+        name: "Climate Card Tourist Pass",
+        why: "A 1 to 7 day pass for getting around Seoul.",
+      },
+    },
+  },
   phrase: { draft: "Draft translation, not yet checked by a native speaker." },
   langSwitch: { label: "Language" },
 } as const;
