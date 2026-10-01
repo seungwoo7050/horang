@@ -7,6 +7,13 @@ export const ja: Messages = {
     title: "Horang",
     description: "仁川空港からソウル駅までの初日を助ける、非公式のお助けアプリです。",
   },
+  common: { back: "戻る" },
+  fact: {
+    evidence: { A: "現地で確認", B: "公式情報", C: "旅行者の報告" },
+    checked: "{date}確認",
+    stale: "要再確認",
+    notOnSite: "現地ではまだ確認していません。",
+  },
   home: {
     ask: "お困りですか？",
     sub: "困っている場面をタップしてください。一緒に解決します。",
@@ -17,7 +24,8 @@ export const ja: Messages = {
       station: { title: "ソウル駅：出口と乗り換え", hint: "1号線・4号線・KTX・15番出口" },
     },
     staff: "スタッフに見せる",
-    footer: "非公式のお助けアプリ・オフラインで使えます",
+    staffKo: "직원에게 보여 주기",
+    footer: "非公式のお助けアプリです。鉄道会社の運営ではありません。",
   },
   langSwitch: { label: "言語" },
 };

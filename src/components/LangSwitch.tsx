@@ -1,6 +1,7 @@
 "use client";
 
 import { getMessages, LOCALE_STORAGE_KEY, locales, type Locale } from "@/i18n";
+import styles from "./LangSwitch.module.css";
 
 /** 언어를 바꾸고 선택을 브라우저에만 저장한다 */
 export function LangSwitch({ current }: { current: Locale }) {
@@ -13,7 +14,7 @@ export function LangSwitch({ current }: { current: Locale }) {
     }
   };
   return (
-    <nav aria-label={t.langSwitch.label}>
+    <nav aria-label={t.langSwitch.label} className={styles.nav}>
       {locales.map((lang) => (
         <a
           key={lang}

@@ -5,6 +5,13 @@ export const en = {
     title: "Horang",
     description: "Unofficial helper for your first trip from Incheon Airport to Seoul Station.",
   },
+  common: { back: "Back" },
+  fact: {
+    evidence: { A: "Checked on site", B: "Official source", C: "Traveler report" },
+    checked: "checked {date}",
+    stale: "Needs recheck",
+    notOnSite: "Not yet checked on site.",
+  },
   home: {
     ask: "Do you need help?",
     sub: "Tap where you're stuck. I'll walk you through it.",
@@ -15,7 +22,8 @@ export const en = {
       station: { title: "Seoul Station: exits & transfers", hint: "Lines 1 · 4, KTX, Exit 15" },
     },
     staff: "Show this to staff",
-    footer: "Unofficial helper · works offline",
+    staffKo: "직원에게 보여 주기",
+    footer: "Unofficial helper. Not run by any rail company.",
   },
   langSwitch: { label: "Language" },
 } as const;

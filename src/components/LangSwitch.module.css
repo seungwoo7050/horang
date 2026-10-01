@@ -1,0 +1,20 @@
+.nav {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.nav a {
+  display: grid;
+  place-items: center;
+  min-height: var(--hit-min);
+  padding-inline: var(--space-2);
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  text-decoration: none;
+}
+
+.nav a[aria-current="page"] {
+  color: var(--color-ink);
+  font-weight: 700;
+}
