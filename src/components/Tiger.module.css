@@ -1,0 +1,37 @@
+.tiger {
+  display: block;
+  flex: none;
+}
+
+.body {
+  fill: var(--color-tiger);
+}
+
+.face {
+  fill: var(--color-tiger-face);
+}
+
+.ink {
+  fill: var(--color-tiger-ink);
+}
+
+.stroke {
+  fill: none;
+  stroke: var(--color-tiger-ink);
+  stroke-linecap: round;
+}
+
+/* 꼬리 = 화면의 리본(같은 토큰) */
+.tail {
+  fill: none;
+  stroke: var(--color-ribbon);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.arm {
+  fill: none;
+  stroke: var(--color-tiger);
+  stroke-width: 8;
+  stroke-linecap: round;
+}

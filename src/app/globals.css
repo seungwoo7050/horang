@@ -15,6 +15,10 @@
   --color-ribbon-text: #9a6200; /* 호박색 글자(bg 4.63:1) */
   --color-ribbon-fill: #ffb547; /* 버튼 바탕 전용 */
   --color-on-ribbon: #0e1424;
+  /* 호랑이(design/character-2026-10-01 시안 색). 장식이며 정보 전달에 쓰지 않는다 */
+  --color-tiger: #ffb547;
+  --color-tiger-face: #ffffff;
+  --color-tiger-ink: #0e1424;
   color-scheme: light;
 
   /* 간격 */
@@ -84,6 +88,7 @@
     --color-ribbon-text: #ffb547;
     --color-ribbon-fill: #ffb547;
     --color-on-ribbon: #0e1424;
+    --color-tiger-face: #fff4e0;
     color-scheme: dark;
   }
 }
@@ -98,6 +103,7 @@
   --color-ribbon-text: #ffb547;
   --color-ribbon-fill: #ffb547;
   --color-on-ribbon: #0e1424;
+  --color-tiger-face: #fff4e0;
   color-scheme: dark;
 }
 
