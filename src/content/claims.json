@@ -18,7 +18,10 @@
       }
     ],
     "verifiedAt": "2026-10-01",
-    "verifiedBy": "Phase R desk research"
+    "verifiedBy": "Phase R desk research",
+    "data": {
+      "adult": 13000
+    }
   },
   {
     "id": "arex.express.time",
@@ -35,7 +38,11 @@
       }
     ],
     "verifiedAt": "2026-10-01",
-    "verifiedBy": "Phase R desk research"
+    "verifiedBy": "Phase R desk research",
+    "data": {
+      "t1": 43,
+      "t2": 51
+    }
   },
   {
     "id": "arex.express.no-transit-card",
@@ -69,7 +76,11 @@
       }
     ],
     "verifiedAt": "2026-10-01",
-    "verifiedBy": "Phase R desk research"
+    "verifiedBy": "Phase R desk research",
+    "data": {
+      "card": 4750,
+      "single": 4850
+    }
   },
   {
     "id": "arex.allstop.fare-seoul-t2",
@@ -86,7 +97,11 @@
       }
     ],
     "verifiedAt": "2026-10-01",
-    "verifiedBy": "Phase R desk research"
+    "verifiedBy": "Phase R desk research",
+    "data": {
+      "card": 5350,
+      "single": 5450
+    }
   },
   {
     "id": "arex.allstop.time",
@@ -103,7 +118,11 @@
       }
     ],
     "verifiedAt": "2026-10-01",
-    "verifiedBy": "Phase R desk research"
+    "verifiedBy": "Phase R desk research",
+    "data": {
+      "t1": 59,
+      "t2": 66
+    }
   },
   {
     "id": "arex.single-journey.deposit",
