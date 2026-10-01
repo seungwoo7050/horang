@@ -2,6 +2,7 @@
   "name": "horang",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,22 +10,26 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "npm run lint && npm run typecheck && npm run format:check"
+    "check": "npm run lint && npm run typecheck && npm run format:check",
+    "content:check": "node scripts/check-content.mts",
+    "prebuild": "npm run content:check"
   },
   "dependencies": {
     "next": "16.3.8",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "zod": "4.6.5"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "22.20.4",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.8",
     "eslint-config-prettier": "10.1.8",
     "prettier": "3.9.9",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "5.0.3"
   },
   "engines": {
     "node": ">=22"
