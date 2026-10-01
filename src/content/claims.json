@@ -311,5 +311,60 @@
     ],
     "verifiedAt": "2026-10-01",
     "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "seoul-station.route.arex-to-lines-1-4",
+    "kind": "route",
+    "text": {
+      "en": "Elevator route from the AREX platform (B7) to Lines 1 and 4: elevator up to the AREX concourse (B3), through the transfer corridor, elevator up to the Lines 1·4 concourse (B1), then elevator down to the platform (B2).",
+      "ja": "空港鉄道ホーム（地下7階）から1号線・4号線へのエレベーター経路：エレベーターで空港鉄道コンコース（地下3階）へ上がり、乗り換え通路を通って、エレベーターで1・4号線コンコース（地下1階）へ上がり、エレベーターでホーム（地下2階）へ下ります。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://station.kric.go.kr/v2/altmInfoSys/index.do?areCd=01&railOprIsttCd=AR&lnCd=A1&prprStinCd=0296",
+        "title": "KRIC station info: Seoul Station (AREX) — transfer and exit routes"
+      },
+      {
+        "url": "https://station.kric.go.kr/v2/altmInfoSys/index.do?areCd=01&railOprIsttCd=S1&lnCd=4&prprStinCd=0296",
+        "title": "KRIC station info: Seoul Station (Line 4) — transfer route"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "seoul-station.route.arex-to-exit-15",
+    "kind": "route",
+    "text": {
+      "en": "Elevator route from the AREX platform (B7) to Exit 15: elevator up to the concourse (B3), out through the ticket gate, then elevator up to Exit 15 on 1F. Exit 15 is signed for Seoul Station (KTX and regular trains).",
+      "ja": "空港鉄道ホーム（地下7階）から15番出口へのエレベーター経路：エレベーターでコンコース（地下3階）へ上がり、改札を出て、エレベーターで1階の15番出口へ上がります。15番出口はソウル駅（KTX・一般列車）の案内です。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://station.kric.go.kr/v2/altmInfoSys/index.do?areCd=01&railOprIsttCd=AR&lnCd=A1&prprStinCd=0296",
+        "title": "KRIC station info: Seoul Station (AREX) — transfer and exit routes"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "arex.transfer-gate",
+    "kind": "card-rule",
+    "text": {
+      "en": "When you transfer between AREX and Lines 1 or 4, tap your card at the transfer gate. No extra fare is taken. If you go out through an exit gate and come back in, it counts as a new ride.",
+      "ja": "空港鉄道と1号線・4号線を乗り換えるときは、乗り換え改札でカードをタッチします。追加の運賃はかかりません。出口の改札から出て入り直すと、新しい乗車になります。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.airportrailroad.com/policy/transport",
+        "title": "AREX passenger transport terms (Art. 8, 21)"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
   }
 ]
