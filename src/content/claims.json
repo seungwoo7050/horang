@@ -366,5 +366,81 @@
     ],
     "verifiedAt": "2026-10-01",
     "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "gate.card-clash",
+    "kind": "card-rule",
+    "text": {
+      "en": "If another transit card is in your wallet, the gate may ask for one card only, or charge the wrong card. Take out the card you want to use and tap it on its own.",
+      "ja": "財布の中に別の交通カードがあると、改札が「カードは1枚だけ」と表示したり、違うカードで支払われたりすることがあります。使うカードを1枚だけ取り出してタッチしてください。"
+    },
+    "evidence": "C",
+    "sources": [
+      {
+        "url": "https://mediahub.seoul.go.kr/archives/1206604",
+        "title": "Seoul city media hub, citizen reporter: transit gate errors (2019, updated 2020)"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "gate.tap-again",
+    "kind": "card-rule",
+    "text": {
+      "en": "If the gate shows an error, tap again on the same reader instead of moving to another gate. The readers are not connected to each other.",
+      "ja": "改札でエラーが出たら、別の改札に移らず同じ読み取り機にもう一度タッチしてください。読み取り機どうしはつながっていません。"
+    },
+    "evidence": "C",
+    "sources": [
+      {
+        "url": "https://mediahub.seoul.go.kr/archives/1206604",
+        "title": "Seoul city media hub, citizen reporter: transit gate errors (2019, updated 2020)"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "gate.staff-help",
+    "kind": "card-rule",
+    "text": {
+      "en": "If a gate didn't process your ticket properly (for example, it was broken), station staff at the station where you get off will help you.",
+      "ja": "改札の故障などで乗車券が正しく処理されなかったときは、降りる駅の駅員が案内します。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "http://www.seoulmetro.co.kr/kr/page.do?menuIdx=528",
+        "title": "Seoul Metro passenger transport terms (Art. 30)"
+      },
+      {
+        "url": "https://info.korail.com/crosseditor_u/binary/files/000001/korail_metro_policy_250623.pdf",
+        "title": "Korail metro passenger terms (2025-06-23, Art. 22)"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "arex.express.qr-gate",
+    "kind": "service",
+    "text": {
+      "en": "Your Express ticket has a QR code. Scan it on the QR reader at the Express gate to open it. Be on the platform at least 3 minutes before departure.",
+      "ja": "直通列車の乗車券にはQRコードがあります。直通列車の改札のQR読み取り機にかざすと開きます。発車の3分前までにホームに着いてください。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.airportrailroad.com/train/express/guide",
+        "title": "AREX Express Train guide (official)"
+      },
+      {
+        "url": "https://www.airportrailroad.com/policy/transport",
+        "title": "AREX passenger transport terms (Art. 6, 37)"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
   }
 ]
