@@ -25,6 +25,29 @@ export const en = {
     staffKo: "직원에게 보여 주기",
     footer: "Unofficial helper. Not run by any rail company.",
   },
+  gate: {
+    title: "Stuck at the gate",
+    stepOf: "Step {n} of 3",
+    ask: "What happened at the gate?",
+    causes: {
+      lowBalance: { label: "Not enough balance", headline: "Top up, then tap out" },
+      cardError: { label: "It beeped or showed an error", headline: "One card, same reader" },
+      wrongDirection: {
+        label: "I went in the wrong direction",
+        headline: "Going back out is free once, if you're quick",
+      },
+      expressTicket: { label: "I have an Express train ticket", headline: "Use the QR reader" },
+      other: { label: "Something else", headline: "Station staff can help" },
+    },
+    calm: "It's okay. This happens a lot, and nobody will rush you.",
+    worked: "That worked",
+    still: "Still stuck",
+    staffHead: "Show this to station staff",
+    moreSentences: "More sentences",
+    solved: "You're through. Nice!",
+    home: "Back to start",
+  },
+  phrase: { draft: "Draft translation, not yet checked by a native speaker." },
   langSwitch: { label: "Language" },
 } as const;
 

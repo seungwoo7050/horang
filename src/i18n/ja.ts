@@ -27,5 +27,28 @@ export const ja: Messages = {
     staffKo: "직원에게 보여 주기",
     footer: "非公式のお助けアプリです。鉄道会社の運営ではありません。",
   },
+  gate: {
+    title: "改札から出られない",
+    stepOf: "ステップ {n}／3",
+    ask: "改札で何が起きましたか？",
+    causes: {
+      lowBalance: { label: "残高が足りない", headline: "チャージしてから出ましょう" },
+      cardError: { label: "エラー音・エラー表示が出た", headline: "カード1枚で、同じ読み取り機に" },
+      wrongDirection: {
+        label: "反対方向の改札に入った",
+        headline: "すぐ出れば1回は無料です",
+      },
+      expressTicket: { label: "直通列車の乗車券を持っている", headline: "QR読み取り機を使います" },
+      other: { label: "その他", headline: "駅員が助けてくれます" },
+    },
+    calm: "大丈夫。よくあることです。急がなくていいですよ。",
+    worked: "解決した",
+    still: "まだ出られない",
+    staffHead: "この画面を駅員さんに見せてください",
+    moreSentences: "ほかの文",
+    solved: "通れました。よかった！",
+    home: "最初に戻る",
+  },
+  phrase: { draft: "翻訳はネイティブ確認前の下書きです。" },
   langSwitch: { label: "言語" },
 };
