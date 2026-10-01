@@ -1,0 +1,9 @@
+.next/
+out/
+node_modules/
+package-lock.json
+next-env.d.ts
+# project-docs 워크트리와 링크(main에 없는 문서)
+.docs/
+docs
+CLAUDE.md
