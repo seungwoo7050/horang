@@ -21,7 +21,11 @@ const JSX_TEXT = new RegExp(`>\\s*[^<>{}\\s]*${LETTER}[^<>{}]*<`, "g");
 const TEXT_ATTR = new RegExp(`\\b(aria-label|title|alt|placeholder)="[^"]*${LETTER}`, "g");
 
 function hardcoded(source: string): string[] {
-  const code = source.replace(/\/\/.*$/gm, "").replace(/\/\*[\s\S]*?\*\//g, "");
+  const code = source
+    .replace(/\/\/.*$/gm, "")
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    // 화살표·비교 연산자의 꺾쇠를 JSX로 오인하지 않게 지운다
+    .replace(/=>|>=|<=/g, " ");
   return [...code.matchAll(JSX_TEXT), ...code.matchAll(TEXT_ATTR)].map((m) => m[0].trim());
 }
 
@@ -48,6 +52,9 @@ describe("UI text comes from message files", () => {
     expect(hardcoded("<p>お困りですか</p>")).toHaveLength(1);
     expect(hardcoded('<nav aria-label="Language">')).toHaveLength(1);
     expect(hardcoded("<p>{t.home.ask}</p>")).toHaveLength(0);
+    expect(
+      hardcoded('const a = list.some((c) => c.ok === "x");\nreturn (\n<p>{a}</p>'),
+    ).toHaveLength(0);
     expect(hardcoded("<strong>{s.title}</strong> <small>{s.hint}</small>")).toHaveLength(0);
   });
 });
