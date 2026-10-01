@@ -109,8 +109,8 @@
     "id": "arex.single-journey.deposit",
     "kind": "fare",
     "text": {
-      "en": "A single-journey card costs the fare + ₩100, plus a ₩500 deposit you get back at the deposit refund machine after you exit.",
-      "ja": "1回用交通カードは運賃+100ウォンと保証金500ウォンです。保証金は降りた駅の保証金払い戻し機で戻ります。"
+      "en": "On AREX, a single-journey card costs the fare + ₩100, plus a ₩500 deposit you get back at the deposit refund machine after you exit.",
+      "ja": "空港鉄道の1回用交通カードは運賃+100ウォンと保証金500ウォンです。保証金は降りた駅の保証金払い戻し機で戻ります。"
     },
     "evidence": "B",
     "sources": [
@@ -615,5 +615,26 @@
     ],
     "verifiedAt": "2026-10-02",
     "verifiedBy": "User desk check of official page (not reachable from build container)"
+  },
+  {
+    "id": "seoul-metro.single-journey.deposit",
+    "kind": "fare",
+    "text": {
+      "en": "On the Seoul subway, a single-journey ticket costs the fare plus a ₩500 deposit. Put the card in the deposit refund machine after you exit to get the ₩500 back.",
+      "ja": "ソウルの地下鉄の1回用乗車券は、運賃に保証金500ウォンが加わります。降りたあと保証金払い戻し機にカードを入れると500ウォンが戻ります。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "http://www.seoulmetro.co.kr/kr/page.do?menuIdx=355",
+        "title": "Seoul Metro: ticket guide"
+      },
+      {
+        "url": "https://news.seoul.go.kr/traffic/archives/1763",
+        "title": "Seoul City: single-journey transit card"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
   }
 ]
