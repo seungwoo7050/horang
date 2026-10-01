@@ -1,0 +1,23 @@
+[
+  {
+    "id": "arex-official",
+    "url": "https://www.airportrailroad.com/",
+    "label": { "en": "AREX official site", "ja": "空港鉄道(AREX)公式サイト" },
+    "affiliate": false,
+    "checkedAt": "2026-10-01"
+  },
+  {
+    "id": "climate-card",
+    "url": "https://english.seoul.go.kr/policy/transportation/climate-card/",
+    "label": { "en": "Climate Card (Seoul city)", "ja": "Climate Card(ソウル市)" },
+    "affiliate": false,
+    "checkedAt": "2026-10-01"
+  },
+  {
+    "id": "wowpass",
+    "url": "https://www.wowpass.io/en",
+    "label": { "en": "WOWPASS", "ja": "WOWPASS" },
+    "affiliate": false,
+    "checkedAt": "2026-10-01"
+  }
+]

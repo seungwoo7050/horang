@@ -39,6 +39,19 @@ export const Phrase = z.object({
 });
 export type Phrase = z.infer<typeof Phrase>;
 
+/**
+ * 외부 링크 레지스트리 항목(ARCHITECTURE.md §4). 화면은 id로만 링크한다.
+ * affiliate가 true면 OutLink가 유료 링크 고지를 붙인다.
+ */
+export const Link = z.object({
+  id: Id,
+  url: z.url({ protocol: /^https$/ }),
+  label: z.object({ en: z.string().min(1), ja: z.string().min(1) }),
+  affiliate: z.boolean(),
+  checkedAt: IsoDate,
+});
+export type Link = z.infer<typeof Link>;
+
 const uniqueIds = <T extends { id: string }>(items: T[], ctx: z.RefinementCtx) => {
   const seen = new Set<string>();
   items.forEach((item, i) => {
@@ -51,6 +64,7 @@ const uniqueIds = <T extends { id: string }>(items: T[], ctx: z.RefinementCtx) =
 
 export const ClaimsFile = z.array(Claim).superRefine(uniqueIds);
 export const PhrasesFile = z.array(Phrase).superRefine(uniqueIds);
+export const LinksFile = z.array(Link).superRefine(uniqueIds);
 
 /** CONTENT_OPS.md §3: 재검증 주기와 경고 기준(일) */
 export const STALENESS_POLICY: Record<ClaimKind, { recheck: number; warn: number }> = {
