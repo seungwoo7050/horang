@@ -15,7 +15,7 @@ async function axe(page: Page) {
 
 for (const scheme of ["dark", "light"] as const) {
   test.describe(`${scheme} mode`, () => {
-    test.use({ colorScheme: scheme, reducedMotion: "reduce" });
+    test.use({ colorScheme: scheme, contextOptions: { reducedMotion: "reduce" } });
 
     test("every screen passes axe (first step)", async ({ page }) => {
       for (const lang of ["en", "ja"]) {
