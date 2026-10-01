@@ -1,1 +1,79 @@
-[]
+[
+  {
+    "id": "gate.card-not-working",
+    "ko": "카드가 안 찍혀요. 도와주세요.",
+    "en": "My card doesn't work at the gate. Please help.",
+    "ja": "カードが改札で反応しません。助けてください。",
+    "reviewed": false
+  },
+  {
+    "id": "gate.cant-exit",
+    "ko": "개찰구에서 나갈 수가 없어요.",
+    "en": "I can't get out through the gate.",
+    "ja": "改札から出られません。",
+    "reviewed": false
+  },
+  {
+    "id": "card.low-balance",
+    "ko": "잔액이 부족해요. 어디서 충전해요?",
+    "en": "My card balance is too low. Where can I top it up?",
+    "ja": "残高が足りません。どこでチャージできますか。",
+    "reviewed": false
+  },
+  {
+    "id": "arex.where-express",
+    "ko": "공항철도 직통열차 타는 곳이 어디예요?",
+    "en": "Where do I board the AREX Express Train?",
+    "ja": "空港鉄道の直通列車の乗り場はどこですか。",
+    "reviewed": false
+  },
+  {
+    "id": "arex.express-ticket-gate",
+    "ko": "직통열차 표로 이 개찰구를 지나갈 수 있어요?",
+    "en": "Can I go through this gate with my Express Train ticket?",
+    "ja": "直通列車の切符でこの改札を通れますか。",
+    "reviewed": false
+  },
+  {
+    "id": "station.where-elevator",
+    "ko": "엘리베이터가 어디예요?",
+    "en": "Where is the elevator?",
+    "ja": "エレベーターはどこですか。",
+    "reviewed": false
+  },
+  {
+    "id": "card.deposit-refund",
+    "ko": "1회용 카드 보증금은 어디서 돌려받아요?",
+    "en": "Where can I get my single-journey card deposit back?",
+    "ja": "1回用交通カードの保証金はどこで返してもらえますか。",
+    "reviewed": false
+  },
+  {
+    "id": "gate.wrong-direction",
+    "ko": "반대 방향으로 잘못 들어왔어요.",
+    "en": "I went through the gate for the wrong direction.",
+    "ja": "反対方向の改札に入ってしまいました。",
+    "reviewed": false
+  },
+  {
+    "id": "station.lost-item",
+    "ko": "물건을 잃어버렸어요. 어디에 물어봐야 해요?",
+    "en": "I lost something. Where should I ask?",
+    "ja": "物をなくしました。どこに聞けばいいですか。",
+    "reviewed": false
+  },
+  {
+    "id": "station.hotel-exit",
+    "ko": "이 호텔로 가려면 몇 번 출구로 나가요?",
+    "en": "Which exit should I take for this hotel?",
+    "ja": "このホテルへは何番出口から出ればいいですか。",
+    "reviewed": false
+  },
+  {
+    "id": "card.child-ticket",
+    "ko": "아이 표를 사고 싶어요.",
+    "en": "I'd like to buy a child's ticket.",
+    "ja": "子ども用の切符を買いたいです。",
+    "reviewed": false
+  }
+]

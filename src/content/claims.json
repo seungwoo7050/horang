@@ -1,1 +1,315 @@
-[]
+[
+  {
+    "id": "arex.express.fare-adult",
+    "kind": "fare",
+    "text": {
+      "en": "The AREX Express Train costs ₩13,000 for an adult.",
+      "ja": "空港鉄道の直通列車は大人13,000ウォンです。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.airportrailroad.com/train/express/introduce",
+        "title": "AREX Express Train (official)"
+      },
+      {
+        "url": "https://www.airportrailroad.com/ticket/rsv",
+        "title": "AREX Express ticket booking (official)"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "arex.express.time",
+    "kind": "schedule",
+    "text": {
+      "en": "The Express takes 43 minutes between Seoul Station and Terminal 1, and 51 minutes to Terminal 2.",
+      "ja": "直通列車はソウル駅から第1ターミナルまで43分、第2ターミナルまで51分です。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.airportrailroad.com/train/express/introduce",
+        "title": "AREX Express Train (official)"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "arex.express.no-transit-card",
+    "kind": "fare",
+    "text": {
+      "en": "You can't pay for the Express with a transit card. Buy an Express ticket (cash or credit/debit card).",
+      "ja": "直通列車は交通カードで乗れません。直通列車の乗車券を買ってください（現金・クレジットカード・デビットカード）。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.airportrailroad.com/policy/transport",
+        "title": "AREX passenger transport terms"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "arex.allstop.fare-seoul-t1",
+    "kind": "fare",
+    "text": {
+      "en": "All-stop train, Seoul Station → Terminal 1, adult: ₩4,750 with a transit card, ₩4,850 with a single-journey card.",
+      "ja": "一般列車のソウル駅→第1ターミナル（大人）は交通カードで4,750ウォン、1回用カードで4,850ウォンです。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.airportrailroad.com/train/normal/fare",
+        "title": "AREX All-stop fares (official)"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "arex.allstop.fare-seoul-t2",
+    "kind": "fare",
+    "text": {
+      "en": "All-stop train, Seoul Station → Terminal 2, adult: ₩5,350 with a transit card, ₩5,450 with a single-journey card.",
+      "ja": "一般列車のソウル駅→第2ターミナル（大人）は交通カードで5,350ウォン、1回用カードで5,450ウォンです。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.airportrailroad.com/train/normal/fare",
+        "title": "AREX All-stop fares (official)"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "arex.allstop.time",
+    "kind": "schedule",
+    "text": {
+      "en": "The All-stop train takes about 59 minutes between Seoul Station and Terminal 1, and about 66 minutes to Terminal 2.",
+      "ja": "一般列車はソウル駅から第1ターミナルまで約59分、第2ターミナルまで約66分です。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.airportrailroad.com/train/normal/introduce",
+        "title": "AREX All-stop Train (official)"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "arex.single-journey.deposit",
+    "kind": "fare",
+    "text": {
+      "en": "A single-journey card costs the fare + ₩100, plus a ₩500 deposit you get back at the deposit refund machine after you exit.",
+      "ja": "1回用交通カードは運賃+100ウォンと保証金500ウォンです。保証金は降りた駅の保証金払い戻し機で戻ります。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.airportrailroad.com/train/normal/fare",
+        "title": "AREX All-stop fares (official)"
+      },
+      {
+        "url": "https://www.airportrailroad.com/policy/transport",
+        "title": "AREX passenger transport terms"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "climate-card.tourist.prices",
+    "kind": "card-rule",
+    "text": {
+      "en": "Climate Card Tourist Pass: 1 day ₩5,000, 2 days ₩8,000, 3 days ₩10,000, 5 days ₩15,000, 7 days ₩20,000. The card itself is ₩3,000.",
+      "ja": "Climate Card 短期券：1日5,000ウォン、2日8,000ウォン、3日10,000ウォン、5日15,000ウォン、7日20,000ウォン。カード本体は3,000ウォンです。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://news.seoul.go.kr/traffic/archives/512725",
+        "title": "Seoul City: Climate Card short-term pass"
+      },
+      {
+        "url": "https://news.seoul.go.kr/traffic/public/climatecard-faq/faq-stop",
+        "title": "Seoul City: Climate Card FAQ (from 2026-10-01)"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "climate-card.no-airport-boarding",
+    "kind": "card-rule",
+    "text": {
+      "en": "You can't board with a Climate Card at the Incheon Airport stations, so it doesn't cover your ride from the airport into Seoul.",
+      "ja": "仁川空港駅ではClimate Cardで乗車できません。空港からソウルへの移動には使えません。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://news.seoul.go.kr/traffic/archives/512841",
+        "title": "Seoul City: Climate Card coverage"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "seoul-metro.machines.foreign-card",
+    "kind": "card-rule",
+    "text": {
+      "en": "Since March 17, 2026, the new ticket machines on Lines 1–8 accept overseas cards for single-journey tickets and the Climate Card Tourist Pass, with an average 3.7% fee.",
+      "ja": "2026年3月17日から、1〜8号線の新型券売機で海外カードを使って1回用乗車券とClimate Card短期券を買えます（手数料は平均3.7%）。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://news.seoul.go.kr/traffic/archives/516544",
+        "title": "Seoul City: overseas cards at Seoul Metro ticket machines"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "tmoney.topup.cash",
+    "kind": "card-rule",
+    "text": {
+      "en": "Topping up a regular Tmoney card at subway machines is cash only.",
+      "ja": "地下鉄の機械で一般のTmoneyにチャージするには現金が必要です。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://news.seoul.go.kr/traffic/public/climatecard-faq/faq-climatepass",
+        "title": "Seoul City: Climate Pass FAQ (Q7)"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "gate.reentry.arex",
+    "kind": "card-rule",
+    "text": {
+      "en": "On AREX, if you tapped in for the wrong direction, tapping out and back in at the same station within 5 minutes is free once.",
+      "ja": "空港鉄道では、反対方向に入ってしまっても、同じ駅で5分以内に出て入り直せば1回だけ無料です。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.airportrailroad.com/policy/transport",
+        "title": "AREX passenger transport terms"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "gate.reentry.seoul-metro",
+    "kind": "card-rule",
+    "text": {
+      "en": "On Seoul Metro (Lines 1–8), tapping out and back in at the same station with the same card within 15 minutes is free once.",
+      "ja": "ソウル交通公社（1〜8号線）では、同じ駅で同じカードを使い15分以内に入り直せば1回だけ無料です。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "http://www.seoulmetro.co.kr/kr/page.do?menuIdx=528",
+        "title": "Seoul Metro passenger transport terms"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "gate.low-balance.exit",
+    "kind": "card-rule",
+    "text": {
+      "en": "If your balance is too low to exit, top up at the fare adjustment / top-up machine near the gate, then tap out.",
+      "ja": "残高不足で出られないときは、改札近くの精算・チャージ機でチャージしてから出てください。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "http://www.seoulmetro.co.kr/kr/page.do?menuIdx=528",
+        "title": "Seoul Metro passenger transport terms"
+      },
+      {
+        "url": "https://info.korail.com/crosseditor_u/binary/files/000001/korail_metro_policy_250623.pdf",
+        "title": "Korail metro passenger terms (2025-06-23)"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "seoul-station.arex.floors",
+    "kind": "route",
+    "text": {
+      "en": "At Seoul Station, the AREX platform is on B7 and the AREX concourse is on B3. AREX's own exit is Exit 15 on 1F.",
+      "ja": "ソウル駅の空港鉄道ホームは地下7階、コンコースは地下3階です。空港鉄道の出口は1階の15番出口です。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://station.kric.go.kr/v2/altmInfoSys/index.do?areCd=01&railOprIsttCd=AR&lnCd=A1&prprStinCd=0296",
+        "title": "KRIC station info: Seoul Station (AREX)"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "seoul-station.lines-1-4.floors",
+    "kind": "route",
+    "text": {
+      "en": "At Seoul Station, the Line 1 and Line 4 platforms are on B2 and their concourse is on B1.",
+      "ja": "ソウル駅の1号線・4号線のホームは地下2階、コンコースは地下1階です。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://station.kric.go.kr/v2/altmInfoSys/index.do?areCd=01&railOprIsttCd=S1&lnCd=1&prprStinCd=0296",
+        "title": "KRIC station info: Seoul Station (Line 1)"
+      },
+      {
+        "url": "https://station.kric.go.kr/v2/altmInfoSys/index.do?areCd=01&railOprIsttCd=S1&lnCd=4&prprStinCd=0296",
+        "title": "KRIC station info: Seoul Station (Line 4)"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "helpline.1330",
+    "kind": "service",
+    "text": {
+      "en": "Korea Travel Helpline: call 1330 in Korea, or +82-2-1330 from abroad. Press 2 for English, 3 for Japanese.",
+      "ja": "韓国観光通訳案内：韓国内は1330、海外からは+82-2-1330。英語は2番、日本語は3番です。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.touristcomplaint.or.kr/en/intro",
+        "title": "KTO Tourist Complaint Center (EN)"
+      },
+      {
+        "url": "https://www.touristcomplaint.or.kr/jp/intro",
+        "title": "KTO Tourist Complaint Center (JA)"
+      }
+    ],
+    "verifiedAt": "2026-10-01",
+    "verifiedBy": "Phase R desk research"
+  }
+]
