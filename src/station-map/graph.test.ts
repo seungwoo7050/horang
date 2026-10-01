@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { claims } from "@/content";
-import { layoutRoute, validateStation } from "./graph";
+import { layoutRoute, MAP, validateStation } from "./graph";
 import { seoulStation } from "./seoul-station";
 import type { Station } from "./types";
 
@@ -123,10 +123,11 @@ describe("layoutRoute", () => {
   });
 
   it("splits the ribbon by length at each step end", () => {
-    // a(0) → a-el(34 오른쪽) → b-el(위로) → b(34 왼쪽): 첫 단계는 34 + 세로 길이까지
+    // a(0) → a-el(오른쪽 한 칸) → b-el(위로) → b(왼쪽 한 칸): 첫 단계는 한 칸 + 세로 길이까지
     const l = layoutRoute(tiny, "a-to-b");
     const vertical = l.points[1]![1] - l.points[2]![1];
-    expect(l.stepEnds[0]).toBeCloseTo((34 + vertical) / (68 + vertical), 3);
+    const lane = MAP.laneGap;
+    expect(l.stepEnds[0]).toBeCloseTo((lane + vertical) / (lane * 2 + vertical), 3);
   });
 
   it("throws for an unknown route", () => {

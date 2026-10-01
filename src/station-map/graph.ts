@@ -92,7 +92,7 @@ function validateRoute(
 export const MAP = {
   pad: 8,
   boxRight: 214,
-  laneGap: 34,
+  laneGap: 42,
   rowH: 40,
   rowGap: 22,
   /** 사이 층을 건너뛸 때(B3 → B7) 더 띄운다 */
