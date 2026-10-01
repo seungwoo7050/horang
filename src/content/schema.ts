@@ -7,7 +7,7 @@ export const Evidence = z.enum(["A", "B", "C"]);
 export type Evidence = z.infer<typeof Evidence>;
 
 /** 최신성 정책이 갈리는 묶음 */
-export const ClaimKind = z.enum(["fare", "schedule", "route", "card-rule"]);
+export const ClaimKind = z.enum(["fare", "schedule", "route", "card-rule", "service"]);
 export type ClaimKind = z.infer<typeof ClaimKind>;
 
 const IsoDate = z.iso.date();
@@ -72,6 +72,8 @@ export const STALENESS_POLICY: Record<ClaimKind, { recheck: number; warn: number
   schedule: { recheck: 30, warn: 60 },
   "card-rule": { recheck: 30, warn: 60 },
   route: { recheck: 90, warn: 180 },
+  // 안내 전화·채팅 같은 서비스 정보
+  service: { recheck: 30, warn: 60 },
 };
 
 export type Staleness = "fresh" | "due" | "stale";
