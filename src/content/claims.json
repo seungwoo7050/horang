@@ -159,10 +159,14 @@
       {
         "url": "https://news.seoul.go.kr/traffic/archives/512841",
         "title": "Seoul City: Climate Card coverage"
+      },
+      {
+        "url": "https://english.seoul.go.kr/policy/transportation/climate-card/",
+        "title": "Seoul Metropolitan Government: Climate Card"
       }
     ],
-    "verifiedAt": "2026-10-01",
-    "verifiedBy": "Phase R desk research"
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official page opened in session (2026-10-02 KST)"
   },
   {
     "id": "seoul-metro.machines.foreign-card",
@@ -295,8 +299,8 @@
     "id": "helpline.1330",
     "kind": "service",
     "text": {
-      "en": "Korea Travel Helpline: call 1330 in Korea, or +82-2-1330 from abroad. Press 2 for English, 3 for Japanese.",
-      "ja": "韓国観光通訳案内：韓国内は1330、海外からは+82-2-1330。英語は2番、日本語は3番です。"
+      "en": "Korea Travel Helpline: call 1330 in Korea, or +82-2-1330 from abroad. English and Japanese are available 24/7 (press 2 for English, 3 for Japanese). There is also a free online chat.",
+      "ja": "韓国観光通訳案内：韓国内は1330、海外からは+82-2-1330。英語・日本語は24時間年中無休です（英語は2番、日本語は3番）。無料のオンラインチャットもあります。"
     },
     "evidence": "B",
     "sources": [
@@ -307,10 +311,18 @@
       {
         "url": "https://www.touristcomplaint.or.kr/jp/intro",
         "title": "KTO Tourist Complaint Center (JA)"
+      },
+      {
+        "url": "https://contest.visitkorea.or.kr/eng/overview/facilities.kto",
+        "title": "Korea Tourism Organization: facilities (1330 hours)"
+      },
+      {
+        "url": "https://english.visitkorea.or.kr/svc/contents/contentsView.do?menuSn=454&vcontsId=140632",
+        "title": "VISITKOREA: 1330 Travel Helpline"
       }
     ],
-    "verifiedAt": "2026-10-01",
-    "verifiedBy": "Phase R desk research"
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official page opened in session (2026-10-02 KST)"
   },
   {
     "id": "seoul-station.route.arex-to-lines-1-4",
@@ -442,5 +454,166 @@
     ],
     "verifiedAt": "2026-10-01",
     "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "climate-card.arex-range",
+    "kind": "card-rule",
+    "text": {
+      "en": "On AREX, the Climate Card covers Gimpo Airport to Seoul Station (Gimpo Airport, Gyeyang, Digital Media City, Hongik Univ., Gongdeok, Seoul Station). You can get off at Incheon Airport T1 and T2, but you can't board there.",
+      "ja": "空港鉄道でClimate Cardが使えるのは金浦空港〜ソウル駅（金浦空港・桂陽・デジタルメディアシティ・弘大入口・孔徳・ソウル駅）です。仁川空港第1・第2ターミナルでは降りられますが、乗ることはできません。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://english.seoul.go.kr/policy/transportation/climate-card/",
+        "title": "Seoul Metropolitan Government: Climate Card"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official page opened in session (2026-10-02 KST)"
+  },
+  {
+    "id": "climate-card.where-to-buy",
+    "kind": "card-rule",
+    "text": {
+      "en": "The physical Climate Card is sold at the new card vending machines in Seoul Metro Line 1–8 stations. Short-term passes can be bought with international credit and debit cards.",
+      "ja": "Climate Cardの実物カードは、ソウル交通公社1〜8号線の駅にある新型カード販売機で買えます。短期券は海外のクレジットカード・デビットカードで買えます。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://english.seoul.go.kr/policy/transportation/climate-card/",
+        "title": "Seoul Metropolitan Government: Climate Card"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official page opened in session (2026-10-02 KST)"
+  },
+  {
+    "id": "tmoney.card.price",
+    "kind": "card-rule",
+    "text": {
+      "en": "A regular Tmoney card costs from about ₩3,000 (some designs cost more), with balance added separately. Sold at convenience stores (GS25, CU, 7-Eleven, Emart24) and subway ticket machines.",
+      "ja": "一般のTmoneyカードは約3,000ウォンから（デザインによって高いものもあります）。残高は別にチャージします。コンビニ（GS25・CU・セブンイレブン・emart24）と地下鉄の券売機で買えます。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://blog.tmoney.co.kr/english/getting-around-korea-after-you-arrive-the-only-transit-card-guide-you-need/",
+        "title": "Tmoney official blog: transit card guide for visitors"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official page opened in session (2026-10-02 KST)"
+  },
+  {
+    "id": "tmoney.travel-card",
+    "kind": "card-rule",
+    "text": {
+      "en": "The Tmoney Travel Card costs ₩4,000. It's sold at convenience stores and the bus ticket office at Incheon Airport.",
+      "ja": "Tmoney Travel Cardは4,000ウォンです。仁川空港のコンビニとバスのチケット売り場で買えます。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.tmoney.co.kr/aeb/biz/bridge/foreignTravel.dev",
+        "title": "Tmoney official: Tmoney Travel Card"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official page opened in session (2026-10-02 KST)"
+  },
+  {
+    "id": "wowpass.card",
+    "kind": "card-rule",
+    "text": {
+      "en": "WOWPASS is a prepaid card for visitors that works as a payment card and a Tmoney transit card. The card costs ₩6,000, or ₩5,500 if you book online in advance.",
+      "ja": "WOWPASSは旅行者向けのプリペイドカードで、支払いとTmoney交通カードの両方に使えます。カードは6,000ウォン、オンラインで事前予約すると5,500ウォンです。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.wowpass.io/ko/product?location=ICN_T1",
+        "title": "WOWPASS official: Incheon Airport T1 product page"
+      },
+      {
+        "url": "https://www.wowpass.io/en/guide",
+        "title": "WOWPASS official user guide"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official page opened in session (2026-10-02 KST)"
+  },
+  {
+    "id": "wowpass.transit-balance",
+    "kind": "card-rule",
+    "text": {
+      "en": "WOWPASS has two balances. Trains and buses use the Tmoney balance, which you top up separately: at subway machines or convenience stores like any transit card, or in the app from your WOWPASS balance. Overseas cards can top up the WOWPASS balance in the app.",
+      "ja": "WOWPASSには残高が2つあります。電車・バスはTmoney残高を使い、これは別にチャージします（ふつうの交通カードと同じく地下鉄の機械やコンビニで、またはアプリでWOWPASS残高から）。海外カードはアプリでWOWPASS残高にチャージできます。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.wowpass.io/en/guide",
+        "title": "WOWPASS official user guide"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official page opened in session (2026-10-02 KST)"
+  },
+  {
+    "id": "wowpass.airport",
+    "kind": "card-rule",
+    "text": {
+      "en": "At Incheon Airport, WOWPASS machines are at CU store 1 (T1) and CU store 3 (T2), and they take Korean won cash only. Cards booked online are picked up at the CU counter in the 1F arrivals hall.",
+      "ja": "仁川空港のWOWPASS機械は第1ターミナルのCU 1号店と第2ターミナルのCU 3号店にあり、韓国ウォンの現金のみ使えます。オンライン予約したカードは1階到着ロビーのCUのレジで受け取ります。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.wowpass.io/ko/product?location=ICN_T1",
+        "title": "WOWPASS official: Incheon Airport T1 product page"
+      },
+      {
+        "url": "https://www.wowpass.io/product?location=ICN_T2",
+        "title": "WOWPASS official: Incheon Airport T2 product page"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official page opened in session (2026-10-02 KST)"
+  },
+  {
+    "id": "arex.express.seoul-departures",
+    "kind": "schedule",
+    "text": {
+      "en": "Express trains leave Seoul Station for the airport from 06:10 to 22:50, every 30–40 minutes.",
+      "ja": "直通列車はソウル駅から空港へ6:10〜22:50、30〜40分おきに出ます。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.airport.kr/ap_en/1420/subview.do",
+        "title": "Incheon Airport official: Airport Railroad"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "User desk check of official page (not reachable from build container)"
+  },
+  {
+    "id": "seoul-station.arex.express-gate",
+    "kind": "route",
+    "text": {
+      "en": "At Seoul Station, Express passengers go through the Express gate on B2 and board on the B7 platform.",
+      "ja": "ソウル駅では、直通列車の乗客は地下2階の直通列車改札を通り、地下7階のホームで乗車します。"
+    },
+    "evidence": "B",
+    "sources": [
+      {
+        "url": "https://www.airport.kr/ap_en/1420/subview.do",
+        "title": "Incheon Airport official: Airport Railroad"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "User desk check of official page (not reachable from build container)"
   }
 ]
