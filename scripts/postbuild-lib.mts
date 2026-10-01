@@ -47,3 +47,78 @@ export function renderServiceWorker(template: string, version: string, urls: str
     .replace("__VERSION__", version)
     .replace("__PRECACHE__", JSON.stringify(urls, null, 2));
 }
+
+// ---- 보안 헤더(_headers, Cloudflare 정적 자산) ----
+// 정적 export에는 nonce를 쓸 수 없어서(Next CSP 가이드: nonce는 동적 렌더링 필요)
+// 페이지마다 인라인 스크립트의 sha256을 CSP에 넣는다.
+
+/** Cloudflare _headers 한도(workers/static-assets/headers, 2026-10-02 확인) */
+export const HEADERS_LIMITS = { rules: 100, lineChars: 2000 } as const;
+
+export function inlineScriptHashes(html: string): string[] {
+  const hashes = [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)]
+    .map((m) => m[1] ?? "")
+    .filter((body) => body.length > 0)
+    .map((body) => `'sha256-${createHash("sha256").update(body, "utf8").digest("base64")}'`);
+  return [...new Set(hashes)];
+}
+
+export function contentSecurityPolicy(scriptHashes: string[]): string {
+  return [
+    "default-src 'self'",
+    `script-src 'self' ${scriptHashes.join(" ")}`.trim(),
+    // CSS는 파일로만. SVG 리본의 style 속성(dashoffset)만 인라인 허용
+    "style-src 'self'",
+    "style-src-attr 'unsafe-inline'",
+    "img-src 'self' data:",
+    "font-src 'self'",
+    "connect-src 'self'",
+    "manifest-src 'self'",
+    "worker-src 'self'",
+    "object-src 'none'",
+    "base-uri 'none'",
+    "form-action 'none'",
+    "frame-ancestors 'none'",
+    "upgrade-insecure-requests",
+  ].join("; ");
+}
+
+/** HTML 파일 경로 → 요청 경로("en/gate/index.html" → "/en/gate/"). index가 아닌 HTML은 그대로 */
+export const htmlRoute = (file: string) =>
+  file === "index.html"
+    ? "/"
+    : file.endsWith("/index.html")
+      ? `/${file.slice(0, -10)}`
+      : `/${file}`;
+
+export function headersFile(pages: { route: string; html: string }[]): string {
+  const blocks = [
+    // 모든 응답 공통(같은 헤더를 여러 규칙에 두면 쉼표로 합쳐지므로 CSP는 페이지 규칙에만 둔다)
+    [
+      "/*",
+      "X-Content-Type-Options: nosniff",
+      "Referrer-Policy: strict-origin-when-cross-origin",
+      "Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+      "X-Frame-Options: DENY",
+    ],
+    ["/_next/static/*", "Cache-Control: public, max-age=31536000, immutable"],
+    // 서비스 워커는 늘 새로 확인해야 새 버전이 퍼진다
+    ["/sw.js", "Cache-Control: no-cache"],
+    ...pages.map((p) => [
+      p.route,
+      `Content-Security-Policy: ${contentSecurityPolicy(inlineScriptHashes(p.html))}`,
+    ]),
+  ];
+  if (blocks.length > HEADERS_LIMITS.rules) {
+    throw new Error(`_headers 규칙 ${blocks.length}개 > ${HEADERS_LIMITS.rules}`);
+  }
+  const text = blocks.map(([route, ...lines]) => [route, ...lines.map((l) => `  ${l}`)].join("\n"));
+  for (const line of text.join("\n").split("\n")) {
+    if (line.length > HEADERS_LIMITS.lineChars) {
+      throw new Error(
+        `_headers 줄이 ${HEADERS_LIMITS.lineChars}자를 넘는다: ${line.slice(0, 60)}…`,
+      );
+    }
+  }
+  return text.join("\n\n") + "\n";
+}

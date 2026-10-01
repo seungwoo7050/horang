@@ -1,7 +1,15 @@
 import { readFileSync } from "node:fs";
 import { Script } from "node:vm";
 import { describe, expect, it } from "vitest";
-import { buildVersion, precacheUrls, renderServiceWorker } from "./postbuild-lib.mts";
+import {
+  buildVersion,
+  contentSecurityPolicy,
+  headersFile,
+  htmlRoute,
+  inlineScriptHashes,
+  precacheUrls,
+  renderServiceWorker,
+} from "./postbuild-lib.mts";
 
 describe("precacheUrls", () => {
   it("maps index.html files to slash URLs and keeps other files", () => {
@@ -66,5 +74,41 @@ describe("renderServiceWorker", () => {
     const template = readFileSync("scripts/sw.template.js", "utf8");
     const sw = renderServiceWorker(template, "abc", ["/", "/en/"]);
     expect(() => new Script(sw)).not.toThrow();
+  });
+});
+
+describe("security headers", () => {
+  const html = '<script src="/a.js"></script><script>self.x=1</script><script></script>';
+
+  it("hashes only non-empty inline scripts", () => {
+    // echo -n 'self.x=1' | openssl dgst -sha256 -binary | base64
+    expect(inlineScriptHashes(html)).toEqual([
+      "'sha256-OeQ5f9lOMes7jOc0cGCXX08CnAERweUkLpVXXpflaLg='",
+    ]);
+  });
+
+  it("allows only our own files plus the hashed inline scripts", () => {
+    const csp = contentSecurityPolicy(["'sha256-abc'"]);
+    expect(csp).toContain("script-src 'self' 'sha256-abc'");
+    expect(csp).toContain("frame-ancestors 'none'");
+    expect(csp).not.toMatch(/script-src[^;]*unsafe/);
+  });
+
+  it("maps HTML files to routes", () => {
+    expect(htmlRoute("index.html")).toBe("/");
+    expect(htmlRoute("en/gate/index.html")).toBe("/en/gate/");
+  });
+
+  it("puts CSP only on page rules so headers never merge", () => {
+    const text = headersFile([{ route: "/en/", html }]);
+    const blocks = text.trim().split("\n\n");
+    expect(blocks[0]).toMatch(/^\/\*\n/);
+    expect(blocks[0]).not.toContain("Content-Security-Policy");
+    expect(blocks.at(-1)).toMatch(/^\/en\/\n {2}Content-Security-Policy: /);
+  });
+
+  it("fails the build when Cloudflare limits are exceeded", () => {
+    const many = Array.from({ length: 100 }, (_, i) => ({ route: `/p${i}/`, html: "" }));
+    expect(() => headersFile(many)).toThrow("규칙");
   });
 });
