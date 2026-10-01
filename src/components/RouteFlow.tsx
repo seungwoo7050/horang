@@ -1,0 +1,156 @@
+"use client";
+
+import Link from "next/link";
+import { useState, type ReactNode } from "react";
+import { getMessages, type Locale } from "@/i18n";
+import type { RouteLayout } from "@/station-map/graph";
+import styles from "./flow.module.css";
+import { RouteMap } from "./RouteMap";
+import { BackButton, BackLink, Screen, ScreenHeader } from "./Screen";
+import { TigerSitting } from "./Tiger";
+
+export type RouteChoice = {
+  id: string;
+  label: string;
+  hint: string;
+  layout: RouteLayout;
+  steps: { title: string; body: string }[];
+  /** 근거 줄과 현장 미확인 표시(서버에서 그림) */
+  evidence: ReactNode;
+  sourcesDisagree: boolean;
+};
+
+type Props = {
+  lang: Locale;
+  routes: RouteChoice[];
+  places: Record<string, string>;
+  /** 길을 못 찾을 때 직원에게 보여 줄 문장(서버에서 그림) */
+  phrase: ReactNode;
+};
+
+const Chevron = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M9 5l7 7-7 7" />
+  </svg>
+);
+
+/** 서울역 경로: 목적지 고르기 → 리본을 따라 한 단계씩 */
+export function RouteFlow({ lang, routes, places, phrase }: Props) {
+  const t = getMessages(lang);
+  const s = t.station;
+  const [routeId, setRouteId] = useState(null as string | null);
+  const [step, setStep] = useState(0);
+  const [dir, setDir] = useState("forward" as "forward" | "backward");
+  const [arrived, setArrived] = useState(false);
+  const [help, setHelp] = useState(false);
+  const route = routes.find((r) => r.id === routeId);
+
+  const move = (next: number) => {
+    setDir(next >= step ? "forward" : "backward");
+    setStep(next);
+    setHelp(false);
+  };
+  const reset = () => {
+    setDir("backward");
+    setRouteId(null);
+    setStep(0);
+    setArrived(false);
+    setHelp(false);
+  };
+
+  const left = route ? (
+    <BackButton
+      onClick={() => (step > 0 && !arrived ? move(step - 1) : reset())}
+      label={t.common.back}
+    />
+  ) : (
+    <BackLink href={`/${lang}/`} label={t.common.back} />
+  );
+
+  if (!route) {
+    return (
+      <Screen lang={lang} header={<ScreenHeader left={left} title={s.title} />}>
+        <div className={`${styles.stage} ${styles[dir]}`}>
+          <h1 className={styles.heading}>{s.ask}</h1>
+          <ul className={styles.options}>
+            {routes.map((r) => (
+              <li key={r.id}>
+                <button
+                  type="button"
+                  className={styles.option}
+                  onClick={() => {
+                    setDir("forward");
+                    setRouteId(r.id);
+                    setStep(0);
+                  }}
+                >
+                  <span className={styles.optionText}>
+                    {r.label}
+                    <small>{r.hint}</small>
+                  </span>
+                  <Chevron />
+                </button>
+              </li>
+            ))}
+          </ul>
+          <p className={styles.note}>{s.schematic}</p>
+        </div>
+      </Screen>
+    );
+  }
+
+  const last = step === route.steps.length - 1;
+  const current = route.steps[step]!;
+  const stepLabel = s.stepOf
+    .replace("{n}", String(step + 1))
+    .replace("{total}", String(route.steps.length));
+
+  return (
+    <Screen
+      lang={lang}
+      header={<ScreenHeader left={left} title={route.label} />}
+      actions={
+        arrived ? (
+          <Link href={`/${lang}/`} className={styles.primary}>
+            {s.home}
+          </Link>
+        ) : (
+          <div className={styles.row}>
+            <button type="button" className={styles.secondary} onClick={() => setHelp(!help)}>
+              {s.cantFind}
+            </button>
+            <button
+              type="button"
+              className={styles.primary}
+              onClick={() => (last ? setArrived(true) : move(step + 1))}
+            >
+              {last ? s.done : s.next}
+            </button>
+          </div>
+        )
+      }
+    >
+      <RouteMap
+        layout={route.layout}
+        places={places}
+        label={s.mapLabel.replace("{route}", route.label)}
+        step={arrived ? route.steps.length - 1 : step}
+      />
+      {arrived ? (
+        <div className={styles.center}>
+          <TigerSitting mood="solved" size={112} />
+          <h1 className={styles.heading}>{s.arrived}</h1>
+        </div>
+      ) : (
+        <div key={`${route.id}-${step}`} className={`${styles.stage} ${styles[dir]}`}>
+          <p className={styles.kicker}>{stepLabel}</p>
+          <h1 className={styles.heading}>{current.title}</h1>
+          <p className={styles.body}>{current.body}</p>
+          {help ? phrase : null}
+        </div>
+      )}
+      {route.sourcesDisagree ? <p className={styles.caution}>{s.disagree}</p> : null}
+      {route.evidence}
+    </Screen>
+  );
+}

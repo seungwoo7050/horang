@@ -94,6 +94,59 @@ export const en = {
     hurryBack: "Back to the comparison",
     departHeading: "Leaving from Seoul Station",
   },
+  station: {
+    title: "Seoul Station",
+    ask: "From the AREX platform, where are you going?",
+    schematic: "Elevator routes for luggage. Maps are schematic, not to scale.",
+    stepOf: "Step {n} of {total}",
+    routes: {
+      "arex-to-line-4": { label: "Line 4", hint: "Elevator route via B3 and B1", line: "Line 4" },
+      "arex-to-line-1": { label: "Line 1", hint: "Elevator route via B3 and B1", line: "Line 1" },
+      "arex-to-exit-15": {
+        label: "Exit 15 (KTX side)",
+        hint: "Elevator route to 1F",
+        line: "Exit 15",
+      },
+    },
+    steps: {
+      "up-to-b3": {
+        title: "Take the elevator up to B3",
+        body: "From the AREX platform on B7, take the elevator up to the AREX concourse on B3.",
+      },
+      "transfer-corridor": {
+        title: "Transfer gate, then up to B1",
+        body: "Tap your card at the transfer gate, not an exit gate. Walk the transfer corridor and take the elevator up to the Lines 1·4 concourse on B1.",
+      },
+      "down-to-platform": {
+        title: "Down to the {line} platform",
+        body: "Take the elevator down to the {line} platform on B2.",
+      },
+      "exit-gate": {
+        title: "Out through the ticket gate",
+        body: "On B3, tap out at the ticket gate.",
+      },
+      "up-to-exit": {
+        title: "Up to Exit 15",
+        body: "Take the elevator up to Exit 15 on 1F. It's signed for Seoul Station (KTX and regular trains).",
+      },
+    },
+    places: {
+      "arex-platform": "AREX platform",
+      "arex-concourse": "AREX concourse",
+      "lines-1-4-concourse": "Lines 1·4 concourse",
+      "line-4-platform": "Line 4 platform",
+      "line-1-platform": "Line 1 platform",
+      "exit-15": "Exit 15",
+    },
+    mapLabel: "Route map for {route}, from the AREX platform. Schematic, not to scale.",
+    disagree:
+      "Sources disagree about the elevator route to Line 1. If the elevator isn't where this says, ask staff.",
+    next: "Next",
+    done: "I'm there",
+    cantFind: "Can't find it?",
+    arrived: "You made it!",
+    home: "Back to start",
+  },
   phrase: { draft: "Draft translation, not yet checked by a native speaker." },
   langSwitch: { label: "Language" },
 } as const;

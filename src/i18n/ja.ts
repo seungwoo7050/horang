@@ -90,6 +90,67 @@ export const ja: Messages = {
     hurryBack: "比較に戻る",
     departHeading: "ソウル駅から出発",
   },
+  station: {
+    title: "ソウル駅",
+    ask: "空港鉄道のホームから、どこへ行きますか？",
+    schematic: "荷物があっても通れるエレベーター経路です。図は略図で、縮尺は正確ではありません。",
+    stepOf: "ステップ {n}／{total}",
+    routes: {
+      "arex-to-line-4": {
+        label: "4号線",
+        hint: "地下3階・地下1階を通るエレベーター経路",
+        line: "4号線",
+      },
+      "arex-to-line-1": {
+        label: "1号線",
+        hint: "地下3階・地下1階を通るエレベーター経路",
+        line: "1号線",
+      },
+      "arex-to-exit-15": {
+        label: "15番出口（KTX側）",
+        hint: "1階へのエレベーター経路",
+        line: "15番出口",
+      },
+    },
+    steps: {
+      "up-to-b3": {
+        title: "エレベーターで地下3階へ",
+        body: "地下7階の空港鉄道ホームから、エレベーターで地下3階の空港鉄道コンコースへ上がります。",
+      },
+      "transfer-corridor": {
+        title: "乗り換え改札を通って地下1階へ",
+        body: "出口の改札ではなく、乗り換え改札でカードをタッチします。乗り換え通路を進み、エレベーターで地下1階の1・4号線コンコースへ上がります。",
+      },
+      "down-to-platform": {
+        title: "{line}のホームへ下りる",
+        body: "エレベーターで地下2階の{line}ホームへ下ります。",
+      },
+      "exit-gate": {
+        title: "改札を出る",
+        body: "地下3階で改札にカードをタッチして出ます。",
+      },
+      "up-to-exit": {
+        title: "15番出口へ上がる",
+        body: "エレベーターで1階の15番出口へ上がります。15番出口はソウル駅（KTX・一般列車）の案内です。",
+      },
+    },
+    places: {
+      "arex-platform": "空港鉄道ホーム",
+      "arex-concourse": "空港鉄道コンコース",
+      "lines-1-4-concourse": "1・4号線コンコース",
+      "line-4-platform": "4号線ホーム",
+      "line-1-platform": "1号線ホーム",
+      "exit-15": "15番出口",
+    },
+    mapLabel: "{route}への経路図（空港鉄道ホームから）。略図で、縮尺は正確ではありません。",
+    disagree:
+      "1号線へのエレベーター経路は資料によって違います。エレベーターが見つからないときは駅員に聞いてください。",
+    next: "次へ",
+    done: "着いた",
+    cantFind: "見つからない",
+    arrived: "着きました！",
+    home: "最初に戻る",
+  },
   phrase: { draft: "翻訳はネイティブ確認前の下書きです。" },
   langSwitch: { label: "言語" },
 };
