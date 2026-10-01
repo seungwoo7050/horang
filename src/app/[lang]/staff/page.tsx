@@ -20,7 +20,7 @@ export default async function StaffPage({ params }: PageProps<"/[lang]/staff">) 
   const t = getMessages(lang).staff;
   return (
     <Screen lang={lang} back={`/${lang}/`} title={t.title}>
-      <p className={styles.body}>{t.lead}</p>
+      <h1 className={styles.heading}>{t.lead}</h1>
       <StaffPhrases
         cards={Object.fromEntries(
           phrases.map((p) => [p.id, <PhraseCard key={p.id} id={p.id} lang={lang} />]),

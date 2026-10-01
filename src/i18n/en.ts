@@ -149,7 +149,7 @@ export const en = {
   },
   staff: {
     title: "Show this to staff",
-    lead: "Show this screen to station staff. The big Korean sentence is for them.",
+    lead: "Show this screen to station staff.",
     others: "Other sentences",
     helpline: "Need a person who speaks your language?",
   },
