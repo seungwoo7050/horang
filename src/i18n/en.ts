@@ -5,7 +5,7 @@ export const en = {
     title: "Horang",
     description: "Unofficial helper for your first trip from Incheon Airport to Seoul Station.",
   },
-  common: { back: "Back" },
+  common: { back: "Back", stepOf: "Step {n} of 3" },
   fact: {
     evidence: { A: "Checked on site", B: "Official source", C: "Traveler report" },
     checked: "checked {date}",
@@ -27,7 +27,6 @@ export const en = {
   },
   gate: {
     title: "Stuck at the gate",
-    stepOf: "Step {n} of 3",
     ask: "What happened at the gate?",
     causes: {
       lowBalance: { label: "Not enough balance", headline: "Top up, then tap out" },

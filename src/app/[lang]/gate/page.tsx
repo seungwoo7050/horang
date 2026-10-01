@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
-import { Fact } from "@/components/Fact";
-import styles from "@/components/flow.module.css";
+import { FactList } from "@/components/Fact";
 import { GateFlow, type GateCause } from "@/components/GateFlow";
 import { PhraseCard } from "@/components/PhraseCard";
 import { getMessages, isLocale, type Locale } from "@/i18n";
@@ -28,15 +27,7 @@ function causes(lang: Locale): GateCause[] {
     id: c.id,
     label: t[c.id].label,
     headline: t[c.id].headline,
-    help: (
-      <ul className={styles.facts}>
-        {c.claims.map((id) => (
-          <li key={id}>
-            <Fact id={id} lang={lang} />
-          </li>
-        ))}
-      </ul>
-    ),
+    help: <FactList ids={c.claims} lang={lang} />,
     phrase: <PhraseCard id={c.phrase} lang={lang} />,
   }));
 }

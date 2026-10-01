@@ -47,3 +47,16 @@ export function NotOnSite({ ids, lang }: { ids: string[]; lang: Locale }) {
   if (ids.every((id) => getClaim(id).evidence === "A")) return null;
   return <p className={styles.notOnSite}>{getMessages(lang).fact.notOnSite}</p>;
 }
+
+/** claim 여러 개를 카드 목록으로 */
+export function FactList({ ids, lang }: { ids: readonly string[]; lang: Locale }) {
+  return (
+    <ul className={styles.list}>
+      {ids.map((id) => (
+        <li key={id}>
+          <Fact id={id} lang={lang} />
+        </li>
+      ))}
+    </ul>
+  );
+}
