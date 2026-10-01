@@ -147,6 +147,12 @@ export const en = {
     arrived: "You made it!",
     home: "Back to start",
   },
+  staff: {
+    title: "Show this to staff",
+    lead: "Show this screen to station staff. The big Korean sentence is for them.",
+    others: "Other sentences",
+    helpline: "Need a person who speaks your language?",
+  },
   phrase: { draft: "Draft translation, not yet checked by a native speaker." },
   langSwitch: { label: "Language" },
 } as const;

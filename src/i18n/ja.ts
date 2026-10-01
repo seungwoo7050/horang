@@ -151,6 +151,12 @@ export const ja: Messages = {
     arrived: "着きました！",
     home: "最初に戻る",
   },
+  staff: {
+    title: "スタッフに見せる",
+    lead: "この画面を駅員さんに見せてください。大きな韓国語の文は駅員さん向けです。",
+    others: "ほかの文",
+    helpline: "日本語で話せる人が必要なら",
+  },
   phrase: { draft: "翻訳はネイティブ確認前の下書きです。" },
   langSwitch: { label: "言語" },
 };
