@@ -18,10 +18,12 @@ type Props = {
 /** 모든 외부 링크는 이 컴포넌트로만 낸다(ARCHITECTURE.md §4). */
 export function OutLink({ id, lang = "en", children, className }: Props) {
   const link = getLink(id);
+  // 전화는 새 탭 없이 바로 건다
+  const isTel = link.url.startsWith("tel:");
   return (
     <a
       href={link.url}
-      target="_blank"
+      target={isTel ? undefined : "_blank"}
       rel={link.affiliate ? "noopener noreferrer sponsored" : "noopener noreferrer"}
       className={className}
     >

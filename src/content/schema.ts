@@ -45,7 +45,8 @@ export type Phrase = z.infer<typeof Phrase>;
  */
 export const Link = z.object({
   id: Id,
-  url: z.url({ protocol: /^https$/ }),
+  /** https 페이지, 또는 국가번호부터 쓴 전화(tel:+82…). 누르면 바로 걸린다 */
+  url: z.union([z.url({ protocol: /^https$/ }), z.string().regex(/^tel:\+[1-9]\d{5,14}$/)]),
   label: z.object({ en: z.string().min(1), ja: z.string().min(1) }),
   affiliate: z.boolean(),
   checkedAt: IsoDate,

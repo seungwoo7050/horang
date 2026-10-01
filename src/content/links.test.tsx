@@ -46,6 +46,12 @@ describe("LinksFile", () => {
     expect(LinksFile.safeParse([link]).success).toBe(true);
   });
 
+  it("accepts an international tel: number and rejects malformed ones", () => {
+    expect(LinksFile.safeParse([{ ...link, url: "tel:+8221330" }]).success).toBe(true);
+    expect(LinksFile.safeParse([{ ...link, url: "tel:1330" }]).success).toBe(false);
+    expect(LinksFile.safeParse([{ ...link, url: "tel:+82-2-1330" }]).success).toBe(false);
+  });
+
   it("rejects plain http and other schemes", () => {
     expect(LinksFile.safeParse([{ ...link, url: "http://example.com" }]).success).toBe(false);
     expect(LinksFile.safeParse([{ ...link, url: "javascript:alert(1)" }]).success).toBe(false);
