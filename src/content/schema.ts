@@ -18,15 +18,35 @@ export const Source = z.object({
   title: z.string().min(1),
 });
 
-export const Claim = z.object({
-  id: Id,
-  kind: ClaimKind,
-  text: z.object({ en: z.string().min(1), ja: z.string().min(1) }),
-  evidence: Evidence,
-  sources: z.array(Source).min(1, "출처 없는 claim은 넣을 수 없다"),
-  verifiedAt: IsoDate,
-  verifiedBy: z.string().min(1),
-});
+export const Claim = z
+  .object({
+    id: Id,
+    kind: ClaimKind,
+    text: z.object({ en: z.string().min(1), ja: z.string().min(1) }),
+    evidence: Evidence,
+    sources: z.array(Source).min(1, "출처 없는 claim은 넣을 수 없다"),
+    verifiedAt: IsoDate,
+    verifiedBy: z.string().min(1),
+    /**
+     * 화면에 크게 쓰는 숫자(요금·분). 문장과 어긋나지 않게 en·ja 문장에 같은 숫자가 있어야 한다
+     * (천 단위 쉼표 포함, 예: 13000 → "13,000")
+     */
+    data: z.record(z.string(), z.number()).optional(),
+  })
+  .superRefine((claim, ctx) => {
+    for (const [key, n] of Object.entries(claim.data ?? {})) {
+      const shown = n.toLocaleString("en-US");
+      for (const lang of ["en", "ja"] as const) {
+        if (!claim.text[lang].includes(shown)) {
+          ctx.addIssue({
+            code: "custom",
+            message: `data.${key}(${shown})가 ${lang} 문장에 없다`,
+            path: ["data", key],
+          });
+        }
+      }
+    }
+  });
 export type Claim = z.infer<typeof Claim>;
 
 /** 직원에게 보여 줄 문장. reviewed가 false면 화면에 "초안" 표시를 한다. */

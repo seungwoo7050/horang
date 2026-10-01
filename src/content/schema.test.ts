@@ -25,6 +25,15 @@ describe("ClaimsFile", () => {
     expect(ClaimsFile.safeParse([{ ...claim(), evidence: "D" }]).success).toBe(false);
   });
 
+  it("accepts screen numbers that appear in both texts", () => {
+    expect(ClaimsFile.safeParse([claim({ data: { adult: 13000 } })]).success).toBe(true);
+  });
+
+  it("rejects screen numbers missing from a text", () => {
+    const r = ClaimsFile.safeParse([claim({ data: { adult: 12000 } })]);
+    expect(r.success).toBe(false);
+  });
+
   it("rejects a non-ISO verification date", () => {
     expect(ClaimsFile.safeParse([claim({ verifiedAt: "2026/10/01" })]).success).toBe(false);
   });
