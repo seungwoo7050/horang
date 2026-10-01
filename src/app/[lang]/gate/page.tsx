@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { pageMetadata } from "@/app/seo";
 import { FactList } from "@/components/Fact";
 import { GateFlow, type GateCause } from "@/components/GateFlow";
 import { PhraseCard } from "@/components/PhraseCard";
@@ -34,7 +35,7 @@ function causes(lang: Locale): GateCause[] {
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/gate">) {
   const { lang } = await params;
-  return isLocale(lang) ? { title: getMessages(lang).gate.title } : {};
+  return isLocale(lang) ? pageMetadata(lang, "gate/", getMessages(lang).gate.title) : {};
 }
 
 export default async function GatePage({ params }: PageProps<"/[lang]/gate">) {

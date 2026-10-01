@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getMessages, isLocale, locales } from "@/i18n";
+import { isLocale, locales } from "@/i18n";
 import { RegisterServiceWorker } from "@/components/RegisterServiceWorker";
 import { appIcons, appViewport } from "../app-head";
+import { pageMetadata } from "../seo";
 import "../globals.css";
 
 export const viewport = appViewport;
@@ -16,8 +17,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Promise<Metadata> {
   const { lang } = await params;
   if (!isLocale(lang)) return {};
-  const t = getMessages(lang);
-  return { title: t.meta.title, description: t.meta.description, icons: appIcons };
+  return { ...pageMetadata(lang, ""), icons: appIcons };
 }
 
 export default async function LangLayout({ children, params }: LayoutProps<"/[lang]">) {

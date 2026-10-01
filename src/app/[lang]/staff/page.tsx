@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { pageMetadata } from "@/app/seo";
 import { Fact } from "@/components/Fact";
 import styles from "@/components/flow.module.css";
 import { OutLink } from "@/components/OutLink";
@@ -10,7 +11,7 @@ import { getMessages, isLocale } from "@/i18n";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/staff">) {
   const { lang } = await params;
-  return isLocale(lang) ? { title: getMessages(lang).staff.title } : {};
+  return isLocale(lang) ? pageMetadata(lang, "staff/", getMessages(lang).staff.title) : {};
 }
 
 export default async function StaffPage({ params }: PageProps<"/[lang]/staff">) {

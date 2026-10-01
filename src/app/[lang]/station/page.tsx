@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { pageMetadata } from "@/app/seo";
 import { FactMeta, NotOnSite } from "@/components/Fact";
 import { PhraseCard } from "@/components/PhraseCard";
 import { RouteFlow, type RouteChoice } from "@/components/RouteFlow";
@@ -36,7 +37,7 @@ function choices(lang: Locale): RouteChoice[] {
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/station">) {
   const { lang } = await params;
-  return isLocale(lang) ? { title: getMessages(lang).station.title } : {};
+  return isLocale(lang) ? pageMetadata(lang, "station/", getMessages(lang).station.title) : {};
 }
 
 export default async function StationPage({ params }: PageProps<"/[lang]/station">) {

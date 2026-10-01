@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { pageMetadata } from "@/app/seo";
 import { ChoiceFlow } from "@/components/ChoiceFlow";
 import { FactList } from "@/components/Fact";
 import styles from "@/components/flow.module.css";
@@ -77,7 +78,7 @@ function results(lang: Locale) {
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/card">) {
   const { lang } = await params;
-  return isLocale(lang) ? { title: getMessages(lang).card.title } : {};
+  return isLocale(lang) ? pageMetadata(lang, "card/", getMessages(lang).card.title) : {};
 }
 
 export default async function CardPage({ params }: PageProps<"/[lang]/card">) {

@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { pageMetadata } from "@/app/seo";
 import { ArexCompare, type Terminal } from "@/components/ArexCompare";
 import { FactList, FactMeta } from "@/components/Fact";
 import { PhraseCard } from "@/components/PhraseCard";
@@ -43,7 +44,7 @@ const metaIds = (tm: Terminal) => [
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/arex">) {
   const { lang } = await params;
-  return isLocale(lang) ? { title: getMessages(lang).arex.heading } : {};
+  return isLocale(lang) ? pageMetadata(lang, "arex/", getMessages(lang).arex.heading) : {};
 }
 
 export default async function ArexPage({ params }: PageProps<"/[lang]/arex">) {
