@@ -10,9 +10,10 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "npm run lint && npm run typecheck && npm run format:check",
+    "check": "npm run lint && npm run typecheck && npm run format:check && npm run test",
     "content:check": "node scripts/check-content.mts",
-    "prebuild": "npm run content:check"
+    "prebuild": "npm run content:check",
+    "test": "vitest run"
   },
   "dependencies": {
     "next": "16.3.8",
