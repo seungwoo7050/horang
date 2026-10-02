@@ -8,6 +8,7 @@ import {
   headersFile,
   htmlRoute,
   inlineScriptHashes,
+  injectMetaCsp,
   precacheUrls,
   renderServiceWorker,
 } from "./postbuild-lib.mts";
@@ -136,5 +137,25 @@ describe("security headers", () => {
   it("fails the build when Cloudflare limits are exceeded", () => {
     const many = Array.from({ length: 100 }, (_, i) => ({ route: `/p${i}/`, html: "" }));
     expect(() => headersFile(many)).toThrow("규칙");
+  });
+});
+
+describe("404 screen CSP (meta, since _headers rules cannot match every missing path)", () => {
+  const page =
+    '<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><script>self.x=1</script></head><body></body></html>';
+
+  it("puts a CSP meta with the page's script hashes before any script", () => {
+    const out = injectMetaCsp(page);
+    const meta = out.match(/<meta http-equiv="Content-Security-Policy" content="([^"]*)"\/>/);
+    expect(meta?.[1]).toContain("'sha256-OeQ5f9lOMes7jOc0cGCXX08CnAERweUkLpVXXpflaLg='");
+    expect(out.indexOf("Content-Security-Policy")).toBeLessThan(out.indexOf("<script"));
+  });
+
+  it("leaves out frame-ancestors, which a meta CSP ignores (X-Frame-Options covers it)", () => {
+    expect(injectMetaCsp(page)).not.toContain("frame-ancestors");
+  });
+
+  it("refuses to inject twice", () => {
+    expect(() => injectMetaCsp(injectMetaCsp(page))).toThrow();
   });
 });

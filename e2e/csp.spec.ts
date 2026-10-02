@@ -27,3 +27,21 @@ test("pages run under the generated CSP without violations", async ({ page }) =>
 
   expect(violations).toEqual([]);
 });
+
+test("the 404 screen runs under a CSP too", async ({ page }) => {
+  const violations: string[] = [];
+  page.on("console", (m) => {
+    if (/Content Security Policy|Refused to/i.test(m.text())) violations.push(m.text());
+  });
+  const response = await page.goto("/en/no-such-page/");
+  expect(response?.status()).toBe(404);
+  const policy =
+    response?.headers()["content-security-policy"] ??
+    (await page
+      .locator('meta[http-equiv="Content-Security-Policy"]')
+      .getAttribute("content", { timeout: 1000 })
+      .catch(() => null));
+  expect(policy).toContain("script-src 'self' 'sha256-");
+  await expect(page.getByRole("heading", { name: "This page isn't here" })).toBeVisible();
+  expect(violations).toEqual([]);
+});
