@@ -74,6 +74,7 @@ export function ChoiceFlow({
     <Screen
       lang={lang}
       header={<ScreenHeader left={left} title={title} morph={morph} />}
+      actionsFlow={done}
       actions={
         done ? (
           <button

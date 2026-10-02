@@ -68,3 +68,7 @@
   padding-bottom: env(safe-area-inset-bottom);
   background: var(--color-bg);
 }
+
+.flow {
+  position: static;
+}
