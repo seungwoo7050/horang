@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import { pageMetadata } from "@/app/seo";
 import { ArexCompare, type Terminal } from "@/components/ArexCompare";
-import { FactList, FactMeta } from "@/components/Fact";
+import { FactMeta } from "@/components/Fact";
+import { FactSheet } from "@/components/FactSheet";
 import { PhraseCard } from "@/components/PhraseCard";
 import { Screen } from "@/components/Screen";
 import { SponsorSlot } from "@/components/SponsorSlot";
@@ -62,6 +63,7 @@ export default async function ArexPage({ params }: PageProps<"/[lang]/arex">) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   const t = getMessages(lang).arex;
+  const f = t.figures;
   return (
     <Screen lang={lang} back={`/${lang}/`} title={t.title} morph="arex">
       <ArexCompare
@@ -84,24 +86,44 @@ export default async function ArexPage({ params }: PageProps<"/[lang]/arex">) {
           t2: <FactMeta ids={metaIds("t2")} lang={lang} />,
         }}
         arrive={
-          <FactList
-            ids={[
-              "arex.express.airport-departures",
-              "arex.express.no-transit-card",
-              "arex.express.foreign-cards",
-              "arex.express.qr-gate",
-              "arex.allstop.fare-seoul-t1",
-              "arex.allstop.fare-seoul-t2",
-              "arex.single-journey.deposit",
-              "climate-card.no-airport-boarding",
-            ]}
-            lang={lang}
-          />
+          <>
+            <FactSheet
+              title={t.groups.express}
+              level={3}
+              ids={[
+                "arex.express.airport-departures",
+                "arex.express.no-transit-card",
+                "arex.express.foreign-cards",
+                "arex.express.qr-gate",
+              ]}
+              lang={lang}
+            />
+            <FactSheet
+              title={t.groups.allstop}
+              sub={t.groups.allstopSub}
+              level={3}
+              rows={[
+                { label: f.t1Card, claim: ALLSTOP_FARE.t1, key: "card" },
+                { label: f.t1Single, claim: ALLSTOP_FARE.t1, key: "single" },
+                { label: f.t2Card, claim: ALLSTOP_FARE.t2, key: "card" },
+                { label: f.t2Single, claim: ALLSTOP_FARE.t2, key: "single" },
+                { label: f.deposit, claim: "arex.single-journey.deposit", key: "deposit" },
+              ]}
+              ids={[
+                ALLSTOP_FARE.t1,
+                ALLSTOP_FARE.t2,
+                "arex.single-journey.deposit",
+                "climate-card.no-airport-boarding",
+              ]}
+              folded={[ALLSTOP_FARE.t1, ALLSTOP_FARE.t2]}
+              lang={lang}
+            />
+          </>
         }
-        atSeoul={<FactList ids={["seoul-station.arex.express-arrival"]} lang={lang} />}
+        atSeoul={<FactSheet ids={["seoul-station.arex.express-arrival"]} lang={lang} />}
         depart={
           <>
-            <FactList
+            <FactSheet
               ids={[
                 "arex.express.seoul-departures",
                 "seoul-station.arex.to-express",

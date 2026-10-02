@@ -105,6 +105,18 @@ export const en = {
     allstopNote: "Tap a transit card. Shown fare is with a transit card.",
     atSeoul: "At Seoul Station (Express)",
     details: "Before you board",
+    groups: {
+      express: "Express ticket",
+      allstop: "All-stop and transit cards",
+      allstopSub: "Seoul Station → airport, adult",
+    },
+    figures: {
+      t1Card: "Terminal 1 · transit card",
+      t1Single: "Terminal 1 · single-journey card",
+      t2Card: "Terminal 2 · transit card",
+      t2Single: "Terminal 2 · single-journey card",
+      deposit: "Single-journey card deposit",
+    },
     hurry: "Going to the airport?",
     hurryBack: "Back to the comparison",
     departHeading: "Leaving from Seoul Station",

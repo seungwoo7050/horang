@@ -101,6 +101,18 @@ export const ja: Messages = {
     allstopNote: "交通カードでタッチ。表示は交通カードの運賃です。",
     atSeoul: "ソウル駅に着いたら（直通列車）",
     details: "乗る前に",
+    groups: {
+      express: "直通列車の乗車券",
+      allstop: "一般列車と交通カード",
+      allstopSub: "ソウル駅→空港、大人",
+    },
+    figures: {
+      t1Card: "第1ターミナル・交通カード",
+      t1Single: "第1ターミナル・1回用カード",
+      t2Card: "第2ターミナル・交通カード",
+      t2Single: "第2ターミナル・1回用カード",
+      deposit: "1回用カードの保証金",
+    },
     hurry: "空港へ向かいますか？",
     hurryBack: "比較に戻る",
     departHeading: "ソウル駅から出発",
