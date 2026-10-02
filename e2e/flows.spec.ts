@@ -185,9 +185,37 @@ test("theme: the address bar color (theme-color) follows the chosen brightness a
   expect(same(await matches()), `after reload: ${await matches()}`).toBe(true);
   await page.goto("/en/gate/");
   expect(same(await matches()), `another screen: ${await matches()}`).toBe(true);
+  // 앱 안 이동: Next가 머리를 다시 그리며 meta를 뺐다 넣는 동안에도 그려지는 모든 프레임에서 맞아야 한다.
+  // 한 순간만 재면 빠진 뒤 다시 넣기 전 틈(최대 수백 ms)에 걸리느냐에 따라 결과가 갈린다
   await page.goto("/en/");
+  await page.evaluate(() => {
+    const frames: string[] = ((window as unknown as { __tc: string[] }).__tc = []);
+    const sample = () => {
+      const metas = [...document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')];
+      const used = metas.find((m) => !m.media || matchMedia(m.media).matches)?.content;
+      const bg = getComputedStyle(document.documentElement).getPropertyValue("--color-bg").trim();
+      frames.push(`${used} = ${bg}`);
+      requestAnimationFrame(sample);
+    };
+    requestAnimationFrame(sample);
+  });
   await page.getByRole("link", { name: /stuck at the gate/ }).click();
   await expect(page.getByRole("heading", { name: "What happened at the gate?" })).toBeVisible();
+  // Next가 기기 밝기별 meta 둘을 다시 넣어 머리가 자리 잡을 때까지(고른 밝기 meta와 함께) 기다린 뒤 프레임 기록을 본다
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          document.querySelectorAll('meta[name="theme-color"][media]').length >= 2 &&
+          !!document.querySelector('meta[name="theme-color"][data-chosen]'),
+      ),
+    )
+    .toBe(true);
+  const frames = await page.evaluate(() => (window as unknown as { __tc: string[] }).__tc);
+  expect(
+    frames.filter((f) => !same(f)),
+    `in-app move, wrong frames of ${frames.length}`,
+  ).toEqual([]);
   expect(same(await matches()), `in-app move: ${await matches()}`).toBe(true);
   await page.goto("/en/");
   await page.getByRole("button", { name: "Switch to dark mode" }).click();
