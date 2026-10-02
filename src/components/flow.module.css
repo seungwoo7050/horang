@@ -56,6 +56,19 @@
   cursor: pointer;
 }
 
+/*
+ * 콘텐츠(phrases·links)에서 온 일본어 문구는 ja.ts 문구와 달리 구 경계(U+200B)가 없다. 버튼의 keep-all을 그대로 두면
+ * 줄 전체가 한 덩어리(칸의 최소 폭)가 되어 칸 밖으로 밀려 나가므로, 사실 문장(p·li)처럼 끊는다:
+ * 지원 브라우저는 구 단위(auto-phrase), 아니면 글자 단위(line-break: strict 금칙은 그대로).
+ * 구 하나가 칸보다 길 때(320px 두 칸 줄의 "オンラインチャット")도 칸 안에서 끊기게 anywhere:
+ * break-word는 최소 폭(min-content)을 줄이지 않아 플렉스·그리드 칸이 글자만큼 넓어진다
+ */
+:is(.option, .primary, .secondary).fromContent {
+  word-break: normal;
+  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+}
+
 .option svg {
   flex: none;
   width: var(--space-5);

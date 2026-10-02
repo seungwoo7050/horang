@@ -14,6 +14,8 @@ export default function manifest(): MetadataRoute.Manifest {
     // globals.css 다크 bg 토큰과 같은 값
     background_color: "#0b1020",
     theme_color: "#0b1020",
+    // 홈 화면 아이콘은 마스코트 PNG(scripts/make-icons.mts). SVG(작은 얼굴, 파비콘용)를 "any"로 두면
+    // 브라우저가 PNG 대신 고를 수 있어 넣지 않는다
     icons: [
       { src: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
       { src: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
@@ -23,7 +25,6 @@ export default function manifest(): MetadataRoute.Manifest {
         type: "image/png",
         purpose: "maskable",
       },
-      { src: "/icons/icon.svg", sizes: "any", type: "image/svg+xml" },
     ],
   };
 }

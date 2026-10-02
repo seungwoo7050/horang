@@ -8,7 +8,8 @@
 }
 
 .face {
-  fill: var(--color-tiger-face);
+  /* 크림 귀 안·입 주변·배: 마스코트와 같은 브랜드 크림 */
+  fill: var(--brand-cream);
 }
 
 .ink {

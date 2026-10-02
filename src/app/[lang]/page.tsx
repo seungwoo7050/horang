@@ -4,7 +4,7 @@ import { LangSwitch } from "@/components/LangSwitch";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { MorphTitle, Screen } from "@/components/Screen";
 import { Boop } from "@/components/Boop";
-import { TigerSitting } from "@/components/Tiger";
+import { Mascot } from "@/components/Brand";
 import { getMessages, isLocale } from "@/i18n";
 import styles from "./home.module.css";
 
@@ -39,7 +39,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
     >
       <div className={styles.hello}>
         <Boop>
-          <TigerSitting mood="hi" size={104} />
+          <Mascot className={styles.mascot} />
         </Boop>
         <h1 className={styles.ask}>{t.home.ask}</h1>
       </div>

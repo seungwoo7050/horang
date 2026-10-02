@@ -1,27 +1,43 @@
 /* 키 큰 화면에서 남는 높이는 위로 보낸다: 고를 목록이 엄지 쪽(아래)으로 내려온다(Rauno 손가락·엄지 영역) */
 .hello {
   display: flex;
-  align-items: flex-end;
-  gap: var(--space-3);
+  align-items: flex-start;
   margin-top: auto;
   padding-top: var(--space-2);
 }
 
-/* 말풍선: 호랑이가 먼저 말을 건다 */
+/* 마스코트 136px(파생본은 2배). 들어 올린 앞발(오른쪽 끝, 위에서 40~64px)이 말풍선 쪽으로 손을 흔든다 */
+.mascot {
+  height: 136px;
+}
+
+/* 말풍선: 호랑이가 먼저 말을 건다. 뾰족한 모서리(왼쪽 위)가 얼굴 쪽을 향한다 */
 .ask {
   position: relative;
   flex: 1;
-  margin: 0 0 var(--space-6);
+  margin: var(--space-7) 0 0 var(--space-2);
   padding: var(--space-4) var(--space-5);
   background: var(--color-surface);
   border: 0;
   box-shadow: var(--edge);
   border-radius: var(--radius);
-  border-bottom-left-radius: var(--space-1);
+  border-top-left-radius: var(--space-1);
   font-size: var(--text-xl);
   line-height: 1.2;
   letter-spacing: var(--tracking-tighter);
   text-wrap: balance;
+}
+
+/* 320px 폰: 말풍선 글자 자리를 남긴다("Do you / need help?" 두 줄) */
+@media (max-width: 359px) {
+  .mascot {
+    height: 108px;
+  }
+
+  .ask {
+    margin-top: var(--space-6);
+    padding-inline: var(--space-4);
+  }
 }
 
 .sub {

@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 test.describe("language", () => {
   test("/ sends a Japanese browser to /ja/", async ({ browser }) => {
@@ -185,9 +185,37 @@ test("theme: the address bar color (theme-color) follows the chosen brightness a
   expect(same(await matches()), `after reload: ${await matches()}`).toBe(true);
   await page.goto("/en/gate/");
   expect(same(await matches()), `another screen: ${await matches()}`).toBe(true);
+  // 앱 안 이동: Next가 머리를 다시 그리며 meta를 뺐다 넣는 동안에도 그려지는 모든 프레임에서 맞아야 한다.
+  // 한 순간만 재면 빠진 뒤 다시 넣기 전 틈(최대 수백 ms)에 걸리느냐에 따라 결과가 갈린다
   await page.goto("/en/");
+  await page.evaluate(() => {
+    const frames: string[] = ((window as unknown as { __tc: string[] }).__tc = []);
+    const sample = () => {
+      const metas = [...document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')];
+      const used = metas.find((m) => !m.media || matchMedia(m.media).matches)?.content;
+      const bg = getComputedStyle(document.documentElement).getPropertyValue("--color-bg").trim();
+      frames.push(`${used} = ${bg}`);
+      requestAnimationFrame(sample);
+    };
+    requestAnimationFrame(sample);
+  });
   await page.getByRole("link", { name: /stuck at the gate/ }).click();
   await expect(page.getByRole("heading", { name: "What happened at the gate?" })).toBeVisible();
+  // Next가 기기 밝기별 meta 둘을 다시 넣어 머리가 자리 잡을 때까지(고른 밝기 meta와 함께) 기다린 뒤 프레임 기록을 본다
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          document.querySelectorAll('meta[name="theme-color"][media]').length >= 2 &&
+          !!document.querySelector('meta[name="theme-color"][data-chosen]'),
+      ),
+    )
+    .toBe(true);
+  const frames = await page.evaluate(() => (window as unknown as { __tc: string[] }).__tc);
+  expect(
+    frames.filter((f) => !same(f)),
+    `in-app move, wrong frames of ${frames.length}`,
+  ).toEqual([]);
   expect(same(await matches()), `in-app move: ${await matches()}`).toBe(true);
   await page.goto("/en/");
   await page.getByRole("button", { name: "Switch to dark mode" }).click();
@@ -237,3 +265,54 @@ test.describe("320px phone", () => {
     }
   });
 });
+
+// 일본어 화면의 칸(버튼·카드·이름-값 줄) 안 글자는 오른쪽 끝(문장부호 포함)이 칸 안쪽 경계를 넘지 않고,
+// 칸도 화면 본문 폭을 넘지 않아야 한다. 구 경계(U+200B)가 없는 문장이 keep-all 칸에 들어가면 한 덩어리가 되어 밀려 나간 적이 있다
+for (const width of [320, 360]) {
+  test.describe(`${width}px phone, Japanese`, () => {
+    test.use({ viewport: { width, height: 800 } });
+
+    const outside = (page: Page, selector: string) =>
+      page.locator(selector).evaluateAll((els) => {
+        const main = document.querySelector("main")!;
+        const ms = getComputedStyle(main);
+        const mainRight = main.getBoundingClientRect().right - parseFloat(ms.paddingRight);
+        return els.flatMap((el) => {
+          const cs = getComputedStyle(el);
+          const box = el.getBoundingClientRect();
+          const inner = box.right - parseFloat(cs.borderRightWidth) - parseFloat(cs.paddingRight);
+          const range = document.createRange();
+          range.selectNodeContents(el);
+          const textRight = Math.max(...[...range.getClientRects()].map((r) => r.right));
+          const bad: string[] = [];
+          if (textRight > inner + 0.5)
+            bad.push(`text past card by ${(textRight - inner).toFixed(1)}px: ${el.textContent}`);
+          if (box.right > mainRight + 0.5)
+            bad.push(
+              `card past screen body by ${(box.right - mainRight).toFixed(1)}px: ${el.textContent}`,
+            );
+          return bad;
+        });
+      });
+
+    test("staff: phrase cards keep every character, end punctuation too, inside", async ({
+      page,
+    }) => {
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await page.goto("/ja/staff/");
+      await expect(page.locator("main ul button")).toHaveCount(12);
+      expect(await outside(page, "main ul button, main figure > *, main a")).toEqual([]);
+    });
+
+    test("card: figure rows keep the name and the amount inside", async ({ page }) => {
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await page.goto("/ja/card/");
+      await page.getByRole("button", { name: /仁川空港にいる/ }).click();
+      await expect(page.getByRole("heading", { name: /どのくらい乗りますか/ })).toBeVisible();
+      // 같은 자리 두 번째 탭은 흐름이 무시하므로(useFlowHistory) 키보드로 고른다
+      await page.getByRole("button", { name: /数回だけ/ }).press("Enter");
+      await expect(page.locator("main dl dt").first()).toBeVisible();
+      expect(await outside(page, "main dl dt, main dl dd")).toEqual([]);
+    });
+  });
+}

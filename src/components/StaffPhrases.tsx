@@ -26,7 +26,7 @@ export function StaffPhrases({ cards, options, initial, othersLabel }: Props) {
           <li key={o.id}>
             <button
               type="button"
-              className={styles.option}
+              className={`${styles.option} ${styles.fromContent}`}
               aria-pressed={o.id === current}
               onClick={() => {
                 setCurrent(o.id);

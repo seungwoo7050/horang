@@ -1,0 +1,42 @@
+/* 크기는 쓰는 자리에서 height로 정한다(width는 비율대로) */
+.lettering {
+  display: inline-flex;
+}
+
+.onLight,
+.onDark,
+.mascot {
+  display: block;
+  width: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.onLight,
+.onDark {
+  height: 100%;
+}
+
+/* 밝기마다 한 장: 기기 설정을 따르되 손으로 고른 data-theme이 이긴다(globals.css 색 토큰과 같은 규칙) */
+.onDark {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .onDark {
+    display: block;
+  }
+
+  :root:not([data-theme="light"]) .onLight {
+    display: none;
+  }
+}
+
+:root[data-theme="dark"] .onDark {
+  display: block;
+}
+
+:root[data-theme="dark"] .onLight {
+  display: none;
+}

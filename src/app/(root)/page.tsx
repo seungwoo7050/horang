@@ -1,4 +1,6 @@
+import { BrandLettering } from "@/components/Brand";
 import { defaultLocale, getMessages, LOCALE_STORAGE_KEY, locales, pickLocaleSource } from "@/i18n";
+import styles from "./root.module.css";
 
 // 저장된 선택 → 브라우저 언어 목록에서 먼저 나오는 지원 언어 → 기본(en) 순서로 언어 페이지로 보낸다.
 const pickLocale = `(function(){var l;try{l=localStorage.getItem(${JSON.stringify(LOCALE_STORAGE_KEY)})}catch(e){}
@@ -8,9 +10,16 @@ location.replace("/"+l+"/")})()`;
 
 export default function Root() {
   return (
-    <main>
+    <main className={styles.page}>
       <script dangerouslySetInnerHTML={{ __html: pickLocale }} />
-      <nav>
+      <h1 className={styles.logo}>
+        <BrandLettering
+          kind="logo"
+          alt={getMessages(defaultLocale).meta.title}
+          className={styles.lettering}
+        />
+      </h1>
+      <nav className={styles.langs}>
         {locales.map((lang) => (
           <a key={lang} href={`/${lang}/`} hrefLang={lang} lang={lang}>
             {getMessages(lang).langName}

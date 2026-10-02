@@ -35,8 +35,14 @@ export const canonicalPath = (path: string) =>
     })
     .join("/");
 
+/**
+ * 홈 화면 아이콘 PNG(manifest·apple-touch): 홈 화면에 추가할 때(온라인) 한 번 가져가 OS가 들고 있다.
+ * 마스코트 질감 그림이라 크다(512px 약 280KB). 탭의 파비콘(icons/icon.svg)은 미리 캐시한다
+ */
+const isHomeScreenIcon = (f: string) => f.startsWith("icons/") && f.endsWith(".png");
+
 /** 미리 캐시·버전 계산 대상 파일 */
-export const isAppFile = (f: string) => !SKIP.has(f) && !f.endsWith(".map");
+export const isAppFile = (f: string) => !SKIP.has(f) && !f.endsWith(".map") && !isHomeScreenIcon(f);
 
 export function listFiles(root: string, dir = root): string[] {
   return readdirSync(dir).flatMap((name) => {

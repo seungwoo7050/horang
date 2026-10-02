@@ -1,0 +1,47 @@
+/* 스크립트가 꺼진 브라우저에서만 머무는 언어 고르기: 로고 한 장과 언어 두 개 */
+.page {
+  min-height: 100dvh;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--gutter);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+}
+
+.logo {
+  margin: 0;
+  line-height: 0;
+}
+
+/* 로고 44px 높이(파생본은 2배) */
+.lettering {
+  height: 44px;
+}
+
+.langs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.langs a {
+  display: grid;
+  place-items: center;
+  min-height: var(--hit-primary);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--edge);
+  color: var(--color-ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (forced-colors: active) {
+  .langs a {
+    border: 1px solid CanvasText;
+  }
+}
