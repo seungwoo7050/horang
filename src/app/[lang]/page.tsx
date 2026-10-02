@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { LangSwitch } from "@/components/LangSwitch";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { MorphTitle, Screen } from "@/components/Screen";
+import { Boop } from "@/components/Boop";
 import { TigerSitting } from "@/components/Tiger";
 import { getMessages, isLocale } from "@/i18n";
 import styles from "./home.module.css";
@@ -37,7 +38,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       }
     >
       <div className={styles.hello}>
-        <TigerSitting mood="hi" size={104} />
+        <Boop>
+          <TigerSitting mood="hi" size={104} />
+        </Boop>
         <h1 className={styles.ask}>{t.home.ask}</h1>
       </div>
       <p className={styles.sub}>{t.home.sub}</p>
