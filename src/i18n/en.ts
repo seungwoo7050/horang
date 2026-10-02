@@ -13,6 +13,11 @@ export const en = {
     notOnSite: "Not yet checked on site.",
     sources: "Sources ({n})",
   },
+  notFound: {
+    title: "This page isn't here",
+    body: "The link may be old. Start again from the first screen.",
+    go: "Go to the first screen",
+  },
   home: {
     ask: "Do you need help?",
     sub: "Tap where you're stuck. I'll walk you through it.",

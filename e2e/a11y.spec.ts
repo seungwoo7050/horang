@@ -26,6 +26,11 @@ for (const scheme of ["dark", "light"] as const) {
       }
     });
 
+    test("the 404 page passes axe", async ({ page }) => {
+      await page.goto("/en/no-such-page/");
+      expect(await axe(page), "404").toEqual([]);
+    });
+
     test("later steps pass axe too", async ({ page }) => {
       await page.goto("/en/gate/");
       await page.getByRole("button", { name: "Not enough balance" }).click();

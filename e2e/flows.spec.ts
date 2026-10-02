@@ -109,3 +109,16 @@ test("theme: sun/moon button overrides the device setting and remembers it", asy
   await page.goto("/en/gate/");
   await expect(page.locator("html")).not.toHaveAttribute("data-theme", /./);
 });
+
+test("an unknown address shows Horang's 404 with a way back in both languages", async ({
+  page,
+}) => {
+  const res = await page.goto("/ja/no-such-page/");
+  expect(res?.status()).toBe(404);
+  await expect(page.getByRole("heading", { name: "This page isn't here" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Go to the first screen" })).toHaveAttribute(
+    "href",
+    "/en/",
+  );
+  await expect(page.getByRole("link", { name: "最初の画面へ" })).toHaveAttribute("href", "/ja/");
+});

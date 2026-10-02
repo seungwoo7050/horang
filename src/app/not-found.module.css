@@ -1,0 +1,68 @@
+.page {
+  min-height: 100dvh;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--gutter) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  text-align: center;
+}
+
+.block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.block + .block {
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-line);
+}
+
+.block :is(h1, h2) {
+  margin: 0;
+  font-size: var(--text-xl);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.block p {
+  margin: 0 0 var(--space-2);
+  color: var(--color-muted);
+  font-size: var(--text-md);
+  text-wrap: pretty;
+}
+
+.go {
+  display: grid;
+  place-items: center;
+  min-height: var(--hit-primary);
+  padding-inline: var(--space-4);
+  border-radius: var(--radius);
+  background: var(--color-ribbon-fill);
+  color: var(--color-on-ribbon);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* 같은 무게의 버튼 두 개는 경쟁한다: 두 번째 언어는 조용한 버튼으로 */
+.block + .block .go {
+  background: var(--color-surface);
+  box-shadow: var(--edge);
+  color: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .go {
+    transition: transform var(--dur-tap) ease-out;
+  }
+}
+
+.go:active {
+  transform: scale(0.98);
+}

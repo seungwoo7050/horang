@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   // 루트 CLAUDE.md는 project-docs 브랜치로 연결된 링크라 next dev가 덮어쓰지 않게 끈다.
   agentRules: false,
+  // 루트 레이아웃이 둘((root)·[lang])이라 없는 주소의 404를 한 파일로 만든다(app/global-not-found.tsx)
+  experimental: { globalNotFound: true },
 };
 
 export default nextConfig;
