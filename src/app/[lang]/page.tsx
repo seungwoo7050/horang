@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LangSwitch } from "@/components/LangSwitch";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { MorphTitle, Screen } from "@/components/Screen";
 import { TigerSitting } from "@/components/Tiger";
 import { getMessages, isLocale } from "@/i18n";
@@ -15,7 +16,12 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   return (
     <Screen
       lang={lang}
-      aside={<LangSwitch current={lang} />}
+      aside={
+        <span className={styles.tools}>
+          <ThemeToggle lang={lang} />
+          <LangSwitch current={lang} />
+        </span>
+      }
       actions={
         <>
           <Link href={`/${lang}/staff/`} className={styles.staff} transitionTypes={["nav-forward"]}>
