@@ -141,6 +141,7 @@ export const en = {
     title: "Seoul Station",
     ask: "From the AREX platform, where are you going?",
     schematic: "Elevator routes for luggage. Maps are schematic, not to scale.",
+    legend: { start: "Start", gate: "Ticket gate" },
     stepOf: "Step {n} of {total}",
     routes: {
       "arex-to-line-4": { label: "Line 4", hint: "Elevator route via B3 and B1", line: "Line 4" },

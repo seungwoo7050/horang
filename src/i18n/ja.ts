@@ -137,6 +137,7 @@ export const ja: Messages = {
     title: "ソウル駅",
     ask: "空港鉄道のホームから、どこへ行きますか？",
     schematic: "荷物があっても通れるエレベーター経路です。図は略図で、縮尺は正確ではありません。",
+    legend: { start: "出発", gate: "改札" },
     stepOf: "ステップ {n}／{total}",
     routes: {
       "arex-to-line-4": {
