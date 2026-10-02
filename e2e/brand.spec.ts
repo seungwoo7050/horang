@@ -144,4 +144,21 @@ test.describe("brand", () => {
       }
     }
   });
+
+  test("404: the waving mascot shows under the 404's own CSP", async ({ page }) => {
+    const violations: string[] = [];
+    page.on("console", (m) => {
+      if (/Content Security Policy/i.test(m.text())) violations.push(m.text());
+    });
+    for (const scheme of ["light", "dark"] as const) {
+      await page.emulateMedia({ colorScheme: scheme });
+      const res = await page.goto("/en/no-such-page/");
+      expect(res?.status()).toBe(404);
+      const mascot = page.locator("main img[src='/brand/mascot.webp']");
+      await expect(mascot).toHaveAttribute("alt", "");
+      await expect.poll(() => drawn(mascot), { message: scheme }).toBe(true);
+      expect((await mascot.boundingBox())!.height).toBe(168);
+    }
+    expect(violations).toEqual([]);
+  });
 });
