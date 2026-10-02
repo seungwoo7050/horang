@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import { pageMetadata } from "@/app/seo";
 import { ChoiceFlow } from "@/components/ChoiceFlow";
-import { FactGroup, FactList } from "@/components/Fact";
-import { Figures, type Figure } from "@/components/Figures";
+import { FactList } from "@/components/Fact";
+import { FactSheet } from "@/components/FactSheet";
+import type { Figure } from "@/components/Figures";
 import styles from "@/components/flow.module.css";
 import { SponsorSlot } from "@/components/SponsorSlot";
 import { getMessages, isLocale, type Locale } from "@/i18n";
@@ -90,16 +91,8 @@ function figures(id: CardId, lang: Locale): { rows: Figure[]; folded: string[] }
 
 function Pick({ id, lang }: { id: CardId; lang: Locale }) {
   const c = getMessages(lang).card.cards[id];
-  const { rows, folded } = figures(id, lang);
   return (
-    <section className={styles.pick}>
-      <header>
-        <h2>{c.name}</h2>
-        <p>{c.why}</p>
-      </header>
-      <Figures rows={rows} lang={lang} />
-      <FactGroup ids={CARDS[id]} folded={folded} lang={lang} />
-    </section>
+    <FactSheet title={c.name} sub={c.why} ids={CARDS[id]} lang={lang} {...figures(id, lang)} />
   );
 }
 
