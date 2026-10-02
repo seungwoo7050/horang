@@ -33,3 +33,23 @@ export type Baseline = Record<string, string>;
 /** 기준선 키: "claimId @ url : 숫자" */
 export const baselineKey = (claimId: string, url: string, token: string) =>
   `${claimId} @ ${url} : ${token}`;
+
+const urlOfKey = (key: string) => key.slice(key.indexOf(" @ ") + 3, key.lastIndexOf(" : "));
+
+/**
+ * --update-baseline이 쓸 기준선. 이번에 열리지 않은 페이지의 항목은 손으로 쓴 이유와 함께 그대로 옮긴다
+ * (열리지 않은 날 돌려도 기준선이 지워지지 않게). 다시 찾은 누락은 이유를 이어받고 새 누락은 TODO.
+ * removable: 열린 페이지인데 숫자가 다시 보여 기준선에서 지워도 되는 항목
+ */
+export function nextBaseline(
+  prev: Baseline,
+  missing: string[],
+  unchecked: Set<string>,
+): { baseline: Baseline; removable: string[] } {
+  const baseline: Baseline = {};
+  for (const [key, reason] of Object.entries(prev))
+    if (unchecked.has(urlOfKey(key))) baseline[key] = reason;
+  for (const key of missing) baseline[key] = prev[key] ?? "TODO: 왜 자동 확인이 안 되는지 적는다";
+  const removable = Object.keys(prev).filter((k) => !(k in baseline));
+  return { baseline, removable };
+}

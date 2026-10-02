@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { claimNumbers, pageHasNumber } from "./sources-lib.mts";
+import { baselineKey, claimNumbers, nextBaseline, pageHasNumber } from "./sources-lib.mts";
 
 describe("claimNumbers", () => {
   it("keeps amounts, clock times and percentages, not small counts", () => {
@@ -44,5 +44,30 @@ describe("pageHasNumber", () => {
     expect(pageHasNumber("13.7%", "3.7%")).toBe(false);
     expect(pageHasNumber("03.7%", "3.7%")).toBe(false);
     expect(pageHasNumber("3.75%", "3.7%")).toBe(false);
+  });
+});
+
+describe("nextBaseline (--update-baseline)", () => {
+  const fare = "https://example.com/fare";
+  const card = "https://example.com/card";
+  const k1 = baselineKey("arex.fare-t1", fare, "4,850");
+  const k2 = baselineKey("card.price", card, "6,000");
+  const prev = { [k1]: "운임표는 이미지라 숫자가 HTML에 없다", [k2]: "옛 이유" };
+
+  it("keeps entries (and their reasons) for pages that did not open this time", () => {
+    const { baseline } = nextBaseline(prev, [], new Set([fare]));
+    expect(baseline).toEqual({ [k1]: prev[k1] });
+  });
+
+  it("keeps reasons for misses found again and marks new ones TODO", () => {
+    const k3 = baselineKey("card.price", card, "5,500");
+    const { baseline } = nextBaseline(prev, [k2, k3], new Set());
+    expect(baseline[k2]).toBe("옛 이유");
+    expect(baseline[k3]).toMatch(/^TODO/);
+  });
+
+  it("reports entries whose numbers are back so they can be dropped", () => {
+    const { removable } = nextBaseline(prev, [], new Set([fare]));
+    expect(removable).toEqual([k2]);
   });
 });
