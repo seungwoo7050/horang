@@ -54,14 +54,19 @@ test("arex: Terminal 2 numbers come from the claims; leaving mode shows Seoul de
   await expect(page.getByText(/06:00 to 23:00/)).toBeVisible();
 });
 
-test("station: Line 1 warns about conflicting sources and walks three steps", async ({ page }) => {
+test("station: Line 1 flags unchecked steps where they happen and walks three steps", async ({
+  page,
+}) => {
   await page.goto("/en/station/");
   await page.getByRole("button", { name: /^Line 1/ }).click();
-  await expect(page.getByText(/Sources disagree/)).toBeVisible();
   await expect(page.getByText("Not yet checked on site.")).toBeVisible();
   await expect(page.getByRole("img", { name: /Route map for Line 1/ })).toBeVisible();
   await page.getByRole("button", { name: "Next" }).click();
+  await expect(page.getByText(/where exactly the transfer gate is/)).toBeVisible();
+  await page.getByRole("button", { name: "Can't find it?" }).click();
+  await expect(page.locator('blockquote[lang="ko"]')).toContainText("갈아타는 곳");
   await page.getByRole("button", { name: "Next" }).click();
+  await expect(page.getByText(/sources disagree about the elevator/)).toBeVisible();
   await page.getByRole("button", { name: "I'm there" }).click();
   await expect(page.getByRole("heading", { name: "You made it!" })).toBeVisible();
 });
