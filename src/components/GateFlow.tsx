@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
 import styles from "./flow.module.css";
 import { MorphLabel } from "./MorphLabel";
@@ -57,13 +57,12 @@ const Chevron = () => (
 export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }) {
   const t = getMessages(lang);
   const g = t.gate;
-  const { state, dir, push, back } = useFlowHistory(codecFor(causes));
+  const { state, dir, push, back, holdLink } = useFlowHistory(codecFor(causes));
   const { step, cause: causeId } = state;
   const cause = causes.find((c) => c.id === causeId);
 
-  const go = (next: Step) => () => {
-    push({ step: next, cause: causeId });
-    window.scrollTo({ top: 0 });
+  const go = (next: Step) => (e: MouseEvent) => {
+    if (push({ step: next, cause: causeId }, e)) window.scrollTo({ top: 0 });
   };
 
   const home = `/${lang}/`;
@@ -88,7 +87,7 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
       </div>
     );
     actions = (
-      <Link href={home} className={styles.primary}>
+      <Link href={home} className={styles.primary} onClick={holdLink}>
         {g.home}
       </Link>
     );
@@ -103,9 +102,9 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
                 type="button"
                 className={styles.option}
                 aria-pressed={c.id === causeId}
-                onClick={() => {
-                  push({ step: 1, cause: c.id }, { step: 0, cause: c.id });
-                  window.scrollTo({ top: 0 });
+                onClick={(e) => {
+                  if (push({ step: 1, cause: c.id }, e, { step: 0, cause: c.id }))
+                    window.scrollTo({ top: 0 });
                 }}
               >
                 {c.label}
@@ -146,7 +145,7 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
     );
     actions = (
       <div className={styles.row}>
-        <Link href={`/${lang}/staff/`} className={styles.secondary}>
+        <Link href={`/${lang}/staff/`} className={styles.secondary} onClick={holdLink}>
           <MorphLabel>{g.moreSentences}</MorphLabel>
         </Link>
         <button type="button" className={styles.primary} onClick={go("solved")}>

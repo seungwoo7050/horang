@@ -100,6 +100,8 @@ test("station: Line 1 flags unchecked steps where they happen and walks three st
   await expect(page.locator('blockquote[lang="ko"]')).toContainText("갈아타는 곳");
   await page.getByRole("button", { name: "Next" }).click();
   await expect(page.getByText(/sources disagree about the elevator/)).toBeVisible();
+  // 같은 자리 버튼을 300ms 안에 다시 누르면 두 번째 탭으로 보고 거른다(flow-steps.spec double tap). 읽는 간격을 둔다
+  await page.waitForTimeout(400);
   await page.getByRole("button", { name: "I'm there" }).click();
   await expect(page.getByRole("heading", { name: "You made it!" })).toBeVisible();
 });

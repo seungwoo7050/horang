@@ -76,7 +76,7 @@ const codecFor = (routes: RouteChoice[]): FlowCodec<State> => {
 export function RouteFlow({ lang, routes, places }: Props) {
   const t = getMessages(lang);
   const s = t.station;
-  const { state, dir, push, back } = useFlowHistory(codecFor(routes));
+  const { state, dir, push, back, holdLink } = useFlowHistory(codecFor(routes));
   const { route: routeId, step, arrived } = state;
   // "못 찾겠어요" 문장 카드는 단계를 바꾸지 않는다(기록에 넣지 않음). 펼친 단계가 지금 단계일 때만 보인다
   const here = `${routeId}-${step}-${arrived}`;
@@ -104,7 +104,7 @@ export function RouteFlow({ lang, routes, places }: Props) {
                 <button
                   type="button"
                   className={styles.option}
-                  onClick={() => push({ route: r.id, step: 0, arrived: false })}
+                  onClick={(e) => push({ route: r.id, step: 0, arrived: false }, e)}
                 >
                   <span className={styles.optionText}>
                     {r.label}
@@ -133,7 +133,7 @@ export function RouteFlow({ lang, routes, places }: Props) {
       header={<ScreenHeader left={left} title={route.label} />}
       actions={
         arrived ? (
-          <Link href={`/${lang}/`} className={styles.primary}>
+          <Link href={`/${lang}/`} className={styles.primary} onClick={holdLink}>
             {s.home}
           </Link>
         ) : (
@@ -148,8 +148,8 @@ export function RouteFlow({ lang, routes, places }: Props) {
             <button
               type="button"
               className={styles.primary}
-              onClick={() =>
-                push(last ? { ...state, arrived: true } : { ...state, step: step + 1 })
+              onClick={(e) =>
+                push(last ? { ...state, arrived: true } : { ...state, step: step + 1 }, e)
               }
             >
               <MorphLabel>{last ? s.done : s.next}</MorphLabel>

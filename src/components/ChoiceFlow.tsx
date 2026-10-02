@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
 import styles from "./flow.module.css";
 import { FlowNav } from "./FlowNav";
@@ -64,9 +64,8 @@ export function ChoiceFlow({
   const total = questions.length + 1;
   const done = step >= questions.length;
 
-  const choose = (id: string) => {
-    push([...answers, id]);
-    window.scrollTo({ top: 0 });
+  const choose = (id: string, e: MouseEvent) => {
+    if (push([...answers, id], e)) window.scrollTo({ top: 0 });
   };
 
   const left = (
@@ -87,7 +86,7 @@ export function ChoiceFlow({
       actionsFlow={done}
       actions={
         done ? (
-          <button type="button" className={styles.secondary} onClick={() => push([])}>
+          <button type="button" className={styles.secondary} onClick={(e) => push([], e)}>
             {restart}
           </button>
         ) : null
@@ -107,7 +106,7 @@ export function ChoiceFlow({
             <ul className={styles.options}>
               {q.options.map((o) => (
                 <li key={o.id}>
-                  <button type="button" className={styles.option} onClick={() => choose(o.id)}>
+                  <button type="button" className={styles.option} onClick={(e) => choose(o.id, e)}>
                     <span className={styles.optionText}>
                       {o.label}
                       {o.hint ? <small>{o.hint}</small> : null}

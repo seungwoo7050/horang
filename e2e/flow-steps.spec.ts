@@ -82,6 +82,8 @@ test.describe("browser history", () => {
     await expect(h1(fresh)).toHaveText("Show this to station staff");
     await fresh.getByRole("button", { name: "Back" }).click();
     await expect(h1(fresh)).toHaveText("Top up, then tap out");
+    // 같은 자리를 곧바로 다시 누르면 두 번째 탭으로 보고 거른다(아래 double tap). 사람이 다시 누르는 간격을 둔다
+    await fresh.waitForTimeout(400);
     await fresh.getByRole("button", { name: "Back" }).click();
     await expect(h1(fresh)).toHaveText("What happened at the gate?");
   });
@@ -120,5 +122,44 @@ test.describe("browser history", () => {
     await page.goBack();
     await expect(h1(page)).toHaveText("What happened at the gate?");
     await expect(stage).toHaveClass(/backward/);
+  });
+});
+
+test.describe("double tap", () => {
+  test("gate: a double tap on Still stuck stops at the staff sentence", async ({ page }) => {
+    await page.goto("/en/gate/");
+    await page.getByRole("button", { name: "Not enough balance" }).click();
+    await page.getByRole("button", { name: "Still stuck" }).dblclick();
+    await page.waitForTimeout(500);
+    await expect(page).toHaveURL(/\/en\/gate\//);
+    await expect(h1(page)).toHaveText("Show this to station staff");
+  });
+
+  test("station: a double tap on Next moves one step", async ({ page }) => {
+    await page.goto("/en/station/");
+    await page.getByRole("button", { name: /^Line 1/ }).click();
+    await page.getByRole("button", { name: "Next" }).dblclick();
+    await page.waitForTimeout(500);
+    await expect(page.getByText("Step 2 of 3")).toBeVisible();
+    await page.getByRole("button", { name: "Next" }).dblclick();
+    await page.waitForTimeout(500);
+    await expect(page.getByText("Step 3 of 3")).toBeVisible();
+  });
+
+  test("‹ double tap at step 2 goes back one step, not out of the flow", async ({ page }) => {
+    await page.goto("/en/gate/");
+    await page.getByRole("button", { name: "Not enough balance" }).click();
+    await page.getByRole("button", { name: "Back" }).dblclick();
+    await page.waitForTimeout(500);
+    await expect(h1(page)).toHaveText("What happened at the gate?");
+    await expect(page).toHaveURL(/\/en\/gate\//);
+  });
+
+  test("gate: a double tap on That worked does not leave for home", async ({ page }) => {
+    await page.goto("/en/gate/");
+    await page.getByRole("button", { name: "Not enough balance" }).click();
+    await page.getByRole("button", { name: "That worked" }).dblclick();
+    await page.waitForTimeout(500);
+    await expect(h1(page)).toHaveText(/You're through/);
   });
 });
