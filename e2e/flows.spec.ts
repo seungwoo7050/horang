@@ -194,3 +194,10 @@ test("theme: the address bar color (theme-color) follows the chosen brightness a
   await page.emulateMedia({ colorScheme: "light" });
   expect(same(await matches()), `device turned light: ${await matches()}`).toBe(true);
 });
+
+test("404: the Japanese note breaks only at phrase boundaries, like the app screens", async ({
+  page,
+}) => {
+  await page.goto("/en/no-such-page/");
+  await expect(page.locator('section[lang="ja"] p').first()).toHaveCSS("word-break", "keep-all");
+});
