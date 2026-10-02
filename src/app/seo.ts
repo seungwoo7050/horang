@@ -32,6 +32,9 @@ export function pageMetadata(lang: Locale, page: PagePath, title?: string): Meta
       title: title ?? t.meta.title,
       description: t.meta.description,
       locale: lang === "ja" ? "ja_JP" : "en_US",
+      // 글자 없는 그림 하나를 두 언어가 같이 쓴다(scripts/og.svg.mts). 제목은 og:title이 보여 준다
+      images: [{ url: "/og.png", width: 1200, height: 630, alt: t.meta.description }],
     },
+    twitter: { card: "summary_large_image" },
   };
 }

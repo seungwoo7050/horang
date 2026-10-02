@@ -4,7 +4,7 @@ import { readdirSync, statSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 
 /**
- * 배포에 들어가지만 서비스 워커가 미리 캐시하지 않는 파일: 빌드 후 생성물·호스트 설정, 그리고 404 화면
+ * 배포에 들어가지만 서비스 워커가 미리 캐시하지 않는 파일: 빌드 후 생성물·호스트 설정, 404 화면, 공유 미리보기 이미지
  * (Cloudflare가 /404.html을 /404로 307 보내서 미리 캐시가 통째로 실패한 적이 있다. 오프라인 대체 화면은 언어 첫 화면)
  */
 const SKIP = new Set([
@@ -14,6 +14,8 @@ const SKIP = new Set([
   "404.html",
   "404/index.html",
   "_not-found/index.html",
+  // 공유 미리보기 이미지: 메신저·SNS가 가져가는 것이라 오프라인에 필요 없다
+  "og.png",
 ]);
 
 /**
