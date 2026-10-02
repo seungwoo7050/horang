@@ -67,8 +67,18 @@
   transform: scale(0.98);
 }
 
-/* 일본어: ja.ts의 구 경계에서만 줄을 바꾼다(globals.css 짧은 줄 규칙과 같음) */
-:lang(ja) .block p {
+/*
+ * 일본어: ja.ts의 구 경계에서만 줄을 바꾼다(globals.css 짧은 줄 규칙과 같음).
+ * 404는 <html lang="en">이고 일본어 블록 자신이 lang="ja"라 ":lang(ja) .block"(조상)이 아니라 ".block:lang(ja)"
+ */
+.block:lang(ja) p {
   word-break: keep-all;
   overflow-wrap: break-word;
+}
+
+/* 강제 색상 모드는 box-shadow(edge)를 지운다: 경계를 시스템 색 테두리로 남긴다 */
+@media (forced-colors: active) {
+  .go {
+    border: 1px solid CanvasText;
+  }
 }

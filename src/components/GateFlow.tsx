@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, type ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
 import styles from "./flow.module.css";
 import { MorphLabel } from "./MorphLabel";
@@ -9,6 +9,7 @@ import { FlowNav } from "./FlowNav";
 import { Screen, ScreenHeader } from "./Screen";
 import { StepRibbon } from "./StepRibbon";
 import { TigerFace, TigerSitting } from "./Tiger";
+import { useFlowHistory, type FlowCodec } from "./useFlowHistory";
 
 export type GateCause = {
   id: string;
@@ -21,7 +22,30 @@ export type GateCause = {
 };
 
 type Step = 0 | 1 | 2 | "solved";
-type Dir = "forward" | "backward";
+type State = { step: Step; cause: string | null };
+
+const STEPS: Record<string, Step> = { "1": 1, "2": 2, solved: "solved" };
+const order = (s: State) => (s.step === "solved" ? 3 : s.step);
+
+/** 주소 검색어: ?cause=<원인>&step=1|2|solved (처음 단계는 고른 원인만 남길 수 있다) */
+const codecFor = (causes: GateCause[]): FlowCodec<State> => ({
+  initial: { step: 0, cause: null },
+  encode: (s) =>
+    s.cause === null
+      ? ""
+      : s.step === 0
+        ? `cause=${s.cause}`
+        : `cause=${s.cause}&step=${String(s.step)}`,
+  decode: (q) => {
+    const cause = q.get("cause");
+    if (!cause || !causes.some((c) => c.id === cause)) return null;
+    const step = q.get("step");
+    if (step === null) return { step: 0, cause };
+    return step in STEPS ? { step: STEPS[step]!, cause } : null;
+  },
+  order,
+  parent: (s) => (s.step === 2 ? { ...s, step: 1 } : s.step === 1 ? { ...s, step: 0 } : null),
+});
 
 const Chevron = () => (
   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -33,16 +57,12 @@ const Chevron = () => (
 export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }) {
   const t = getMessages(lang);
   const g = t.gate;
-  const [step, setStep] = useState(0 as Step);
-  const [dir, setDir] = useState("forward" as Dir);
-  const [causeId, setCauseId] = useState(null as string | null);
+  const { state, dir, push, back, holdLink } = useFlowHistory(codecFor(causes));
+  const { step, cause: causeId } = state;
   const cause = causes.find((c) => c.id === causeId);
 
-  const go = (next: Step) => {
-    const order = (s: Step) => (s === "solved" ? 3 : s);
-    setDir(order(next) >= order(step) ? "forward" : "backward");
-    setStep(next);
-    window.scrollTo({ top: 0 });
+  const go = (next: Step) => (e: MouseEvent) => {
+    if (push({ step: next, cause: causeId }, e)) window.scrollTo({ top: 0 });
   };
 
   const home = `/${lang}/`;
@@ -51,7 +71,7 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
     <FlowNav
       mode={leaving ? "close" : "back"}
       home={home}
-      onBack={() => go(step === 2 ? 1 : 0)}
+      onBack={back}
       label={leaving ? t.common.close : t.common.back}
     />
   );
@@ -67,7 +87,7 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
       </div>
     );
     actions = (
-      <Link href={home} className={styles.primary}>
+      <Link href={home} className={styles.primary} onClick={holdLink}>
         {g.home}
       </Link>
     );
@@ -82,9 +102,9 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
                 type="button"
                 className={styles.option}
                 aria-pressed={c.id === causeId}
-                onClick={() => {
-                  setCauseId(c.id);
-                  go(1);
+                onClick={(e) => {
+                  if (push({ step: 1, cause: c.id }, e, { step: 0, cause: c.id }))
+                    window.scrollTo({ top: 0 });
                 }}
               >
                 {c.label}
@@ -108,10 +128,10 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
     );
     actions = (
       <div className={styles.row}>
-        <button type="button" className={styles.secondary} onClick={() => go(2)}>
+        <button type="button" className={styles.secondary} onClick={go(2)}>
           <MorphLabel>{g.still}</MorphLabel>
         </button>
-        <button type="button" className={styles.primary} onClick={() => go("solved")}>
+        <button type="button" className={styles.primary} onClick={go("solved")}>
           <MorphLabel>{g.worked}</MorphLabel>
         </button>
       </div>
@@ -125,10 +145,10 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
     );
     actions = (
       <div className={styles.row}>
-        <Link href={`/${lang}/staff/`} className={styles.secondary}>
+        <Link href={`/${lang}/staff/`} className={styles.secondary} onClick={holdLink}>
           <MorphLabel>{g.moreSentences}</MorphLabel>
         </Link>
-        <button type="button" className={styles.primary} onClick={() => go("solved")}>
+        <button type="button" className={styles.primary} onClick={go("solved")}>
           <MorphLabel>{g.worked}</MorphLabel>
         </button>
       </div>

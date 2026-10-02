@@ -40,3 +40,23 @@ export function pageMetadata(lang: Locale, page: PagePath, rawTitle?: string): M
     twitter: { card: "summary_large_image" },
   };
 }
+
+/**
+ * "/"(언어 선택): 모든 첫 화면의 hreflang x-default가 가리키는 곳이라 되돌아가는 대체 링크와 정규 주소를 둔다.
+ * 스크립트가 꺼져 그대로 남아도 제목이 보이게 앱 이름만 쓴다
+ */
+export function rootMetadata(): Metadata {
+  const t = getMessages("en");
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: t.meta.title,
+    description: t.meta.description,
+    alternates: {
+      canonical: "/",
+      languages: {
+        ...Object.fromEntries(locales.map((l) => [l, pathFor(l, "")])),
+        "x-default": "/",
+      },
+    },
+  };
+}

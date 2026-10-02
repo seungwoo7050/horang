@@ -46,3 +46,48 @@ test("leaving Korea: next Express from Seoul Station with the Terminal 2 arrival
   await expect(first).toContainText("まもなく発車");
   await expect(first).toContainText(`${tt.toAirport[0]!.t2}着`);
 });
+
+// 매분 바뀌는 시계·남은 분은 화면 읽기 중에 끼어들지 않고, 첫 열차가 바뀔 때만 알린다
+test("screen readers hear when the next train changes, not every minute", async ({ page }) => {
+  await page.clock.install({ time: atKorea("13:13") });
+  await page.goto("/en/arex/");
+  const panel = page.locator("section", {
+    has: page.getByRole("heading", { name: "Next Express" }),
+  });
+  await expect(panel.getByText("Now 13:13 in Korea")).toBeVisible();
+  await expect(panel).not.toHaveAttribute("aria-live", /./);
+  const live = page.locator("main [aria-live]");
+  const quiet = await live.allTextContents();
+  expect(quiet.join("")).toBe("");
+
+  await page.clock.fastForward("01:00");
+  await expect(panel.getByText("Now 13:14 in Korea")).toBeVisible();
+  expect((await live.allTextContents()).join("")).toBe("");
+
+  const times = tt.toSeoul.map((r) => r.t1);
+  const first = firstAtOrAfter(times, "13:14")!;
+  const second = times[times.indexOf(first) + 1]!;
+  const [h, m] = first.split(":").map(Number) as [number, number];
+  const wait = h * 60 + m + 1 - (13 * 60 + 14);
+  await page.clock.fastForward(
+    `${String(Math.floor(wait / 60)).padStart(2, "0")}:${String(wait % 60).padStart(2, "0")}:00`,
+  );
+  await expect(panel.locator("li").first().locator("strong")).toHaveText(second);
+  await expect(live).toContainText(second);
+});
+
+test("after midnight, before the first train, it names today's first train", async ({ page }) => {
+  await page.clock.setFixedTime(atKorea("00:00"));
+  await page.goto("/en/arex/");
+  const first = tt.toSeoul[0]!.t1;
+  await expect(page.getByText(`Today's first Express leaves at ${first}.`)).toBeVisible();
+  await expect(page.getByText(/in \d+ min/)).toHaveCount(0);
+  await page.goto("/ja/arex/");
+  await expect(page.getByText(`今日の直通列車の始発は${first}です。`)).toBeVisible();
+});
+
+test("from the first train's minute it lists trains again", async ({ page }) => {
+  await page.clock.setFixedTime(atKorea(tt.toSeoul[0]!.t1));
+  await page.goto("/en/arex/");
+  await expect(page.locator("ol li").first().locator("strong")).toHaveText(tt.toSeoul[0]!.t1);
+});

@@ -34,6 +34,28 @@ describe("ClaimsFile", () => {
     expect(r.success).toBe(false);
   });
 
+  it("does not accept a screen number found only inside a bigger number", () => {
+    const prices = {
+      en: "1 day ₩6,000, 5 days ₩15,000.",
+      ja: "1日6,000ウォン、5日15,000ウォン。",
+    };
+    // 5,000은 15,000 안에만 있다(1일 요금이 문장과 어긋남)
+    expect(ClaimsFile.safeParse([claim({ text: prices, data: { d1: 5000 } })]).success).toBe(false);
+    expect(
+      ClaimsFile.safeParse([claim({ text: prices, data: { d1: 6000, d5: 15000 } })]).success,
+    ).toBe(true);
+    const time = {
+      en: "43 minutes to T1 and 51 minutes to T2.",
+      ja: "第1ターミナルまで43分、第2ターミナルまで51分です。",
+    };
+    expect(ClaimsFile.safeParse([claim({ text: time, data: { t1: 3, t2: 1 } })]).success).toBe(
+      false,
+    );
+    expect(ClaimsFile.safeParse([claim({ text: time, data: { t1: 43, t2: 51 } })]).success).toBe(
+      true,
+    );
+  });
+
   it("rejects a non-ISO verification date", () => {
     expect(ClaimsFile.safeParse([claim({ verifiedAt: "2026/10/01" })]).success).toBe(false);
   });

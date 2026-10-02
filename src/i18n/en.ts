@@ -134,6 +134,7 @@ export const en = {
       leaving: "leaving now",
       arrives: "arrives {time}",
       none: "No more Express trains today. Tomorrow's first one leaves at {time}.",
+      first: "Today's first Express leaves at {time}.",
       note: "From the official timetable. Be on the platform at least 3 minutes early.",
     },
   },

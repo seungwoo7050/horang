@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, type MouseEvent } from "react";
 import { NavIcon, type NavMode } from "./NavIcon";
 import styles from "./Screen.module.css";
 
@@ -17,7 +17,7 @@ export function FlowNav({
 }: {
   mode: NavMode;
   home: string;
-  onBack: () => void;
+  onBack: (e: MouseEvent) => void;
   label: string;
 }) {
   const router = useRouter();
@@ -27,8 +27,8 @@ export function FlowNav({
       type="button"
       className={styles.back}
       aria-label={label}
-      onClick={() =>
-        mode === "close" ? router.push(home, { transitionTypes: ["nav-back"] }) : onBack()
+      onClick={(e) =>
+        mode === "close" ? router.push(home, { transitionTypes: ["nav-back"] }) : onBack(e)
       }
     >
       <NavIcon mode={mode} />

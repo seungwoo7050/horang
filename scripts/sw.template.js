@@ -8,10 +8,17 @@ const NETWORK_TIMEOUT_MS = 4000;
 
 // Cloudflare가 서빙하는 정식 경로(경로 조각마다 퍼센트 인코딩, 예: "$" → "%24").
 // 미리 캐시 목록도 이 형태라서 브라우저가 "$" 그대로 요청해도 찾을 수 있다(postbuild-lib canonicalPath와 같음)
+// 잘못된 퍼센트 인코딩 조각은 그대로 둔다: 여기서 던지면 respondWith 전에 끝나 오프라인 대체 화면을 못 준다
 const canonical = (pathname) =>
   pathname
     .split("/")
-    .map((seg) => encodeURIComponent(decodeURIComponent(seg)))
+    .map((seg) => {
+      try {
+        return encodeURIComponent(decodeURIComponent(seg));
+      } catch {
+        return seg;
+      }
+    })
     .join("/");
 
 self.addEventListener("install", (event) => {
@@ -67,7 +74,8 @@ async function networkFirst(request, key, url) {
     const hit = await cache.match(key);
     if (hit) return hit;
     if (request.mode === "navigate") {
-      const lang = url.pathname.startsWith("/ja/") ? "/ja/" : "/en/";
+      // "/ja"(끝 슬래시 없음)도 일본어. 온라인이면 Cloudflare가 /ja/로 보내지만 오프라인에서는 여기서 고른다
+      const lang = /^\/ja(\/|$)/.test(url.pathname) ? "/ja/" : "/en/";
       const home = await cache.match(lang);
       if (home) return home;
     }

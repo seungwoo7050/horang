@@ -2,7 +2,13 @@
 // 실패(종료 코드 1)하는 것: ① 공식 직통 시각표가 timetables.json과 다름 ② 잘 열린 출처 페이지에서
 //   claim의 금액·시각·백분율이 사라짐(기준선에 없는 새 누락). 경고만: 열리지 않는 페이지(해외 CI에서 막히는 기관 사이트가 있다).
 import { appendFileSync, readFileSync, writeFileSync } from "node:fs";
-import { baselineKey, claimNumbers, pageHasNumber, type Baseline } from "./sources-lib.mts";
+import {
+  baselineKey,
+  claimNumbers,
+  nextBaseline,
+  pageHasNumber,
+  type Baseline,
+} from "./sources-lib.mts";
 import { parseExpressTimetable } from "./timetable-lib.mts";
 
 type Claim = { id: string; text: { en: string }; sources: { url: string }[] };
@@ -19,7 +25,7 @@ async function get(url: string): Promise<{ ok: boolean; status: string; body: st
   try {
     const res = await fetch(url, {
       headers: {
-        "user-agent": "Mozilla/5.0 (Horang source check; +https://github.com/woopinbell/horang)",
+        "user-agent": "Mozilla/5.0 (Horang source check; +https://github.com/seungwoo7050/horang)",
       },
       signal: AbortSignal.timeout(30_000),
     });
@@ -63,7 +69,7 @@ const pages = new Map<string, Awaited<ReturnType<typeof get>>>();
 for (const url of new Set(claims.flatMap((c) => c.sources.map((s) => s.url))))
   pages.set(url, await get(url));
 
-const newBaseline: Baseline = {};
+const missing: string[] = [];
 let checked = 0;
 for (const c of claims) {
   const tokens = claimNumbers(c.text.en);
@@ -80,7 +86,7 @@ for (const c of claims) {
       );
       if (elsewhere) continue;
       const key = baselineKey(c.id, url, token);
-      newBaseline[key] = baseline[key] ?? "TODO: 왜 자동 확인이 안 되는지 적는다";
+      missing.push(key);
       if (!(key in baseline)) failures.push(`${c.id}: "${token}"이(가) 출처에 없다 — ${url}`);
     }
   }
@@ -88,6 +94,9 @@ for (const c of claims) {
 report.push(
   `- claim 숫자 ${checked}건 확인, 기준선(자동 확인 불가) ${Object.keys(baseline).length}건`,
 );
+const unchecked = new Set([...pages].filter(([, p]) => !p.ok || !p.body).map(([url]) => url));
+const { baseline: newBaseline, removable } = nextBaseline(baseline, missing, unchecked);
+for (const key of removable) report.push(`- 기준선에서 지울 수 있음(숫자가 다시 보인다): ${key}`);
 
 // ③ 열리는지(경고)
 for (const [url, page] of pages)
@@ -99,7 +108,9 @@ for (const l of links.filter((l) => l.url.startsWith("https://"))) {
 
 if (update) {
   writeFileSync(BASELINE, JSON.stringify(newBaseline, null, 2) + "\n");
-  console.log(`기준선 ${Object.keys(newBaseline).length}건을 썼다 — 각 항목에 이유를 적는다`);
+  console.log(
+    `기준선 ${Object.keys(newBaseline).length}건을 썼다(열리지 않은 페이지 항목 유지) — 각 항목에 이유를 적는다`,
+  );
 }
 
 report.push("", `## 실패 ${failures.length}`, ...failures.map((f) => `- ✗ ${f}`));

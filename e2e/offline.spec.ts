@@ -10,6 +10,14 @@ test("after one visit, every screen opens offline", async ({ page, context }) =>
     return cached.some((r) => r.url.endsWith("/ja/staff/"));
   });
   await page.evaluate(() => navigator.serviceWorker.ready);
+  // 진짜 오프라인: 페이지와 서비스 워커의 fetch 모두 네트워크에 닿지 않게 한다.
+  // 서비스 워커의 요청까지 막히려면 PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS=1(playwright.config.ts)이 필요하다.
+  // 없으면 서비스 워커가 서버에서 받아 와 미리 캐시가 비어도 통과한다
+  let blockedFromWorker = 0;
+  await context.route("**", (route) => {
+    if (route.request().serviceWorker()) blockedFromWorker++;
+    return route.abort("internetdisconnected");
+  });
   await context.setOffline(true);
 
   await page.reload();
@@ -24,7 +32,18 @@ test("after one visit, every screen opens offline", async ({ page, context }) =>
     await expect(page.locator("h1").first()).toBeVisible();
   }
 
+  // 끝 슬래시 없이 입력한 언어 주소도 그 언어로
+  await page.goto("/ja");
+  await expect(page.locator("html")).toHaveAttribute("lang", "ja");
+
+  // 이상한 주소(잘못된 퍼센트 인코딩)도 그 언어 첫 화면으로 대신 연다
+  await page.goto("/ja/%E0%A4%A/");
+  await expect(page.locator("html")).toHaveAttribute("lang", "ja");
+
   // 언어 선택 페이지도
   await page.goto("/");
   await expect(page).toHaveURL(/\/(en|ja)\/$/);
+
+  // 서비스 워커가 네트워크 먼저 시도한 요청이 실제로 막혔다(막는 장치가 서비스 워커에도 걸렸다는 증거)
+  expect(blockedFromWorker).toBeGreaterThan(0);
 });

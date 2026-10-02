@@ -15,7 +15,8 @@ export function SmoothHeight({ children }: { children: ReactNode }) {
 
   useLayoutEffect(() => {
     const el = inner.current;
-    if (!el || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!el) return;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)");
     const ro = new ResizeObserver(() => {
       const next = el.offsetHeight;
       setHeight((prev) => {
@@ -23,8 +24,23 @@ export function SmoothHeight({ children }: { children: ReactNode }) {
         return next;
       });
     });
-    ro.observe(el);
-    return () => ro.disconnect();
+    // 쓰는 도중에 동작 줄이기를 켜면 transition이 없어져 transitionend가 오지 않는다:
+    // 그때는 높이 맞추기를 멈추고 잘림(data-moving)도 바로 푼다. 다시 끄면 이어서 맞춘다
+    const follow = () => {
+      if (reduce.matches) {
+        ro.disconnect();
+        setHeight(undefined);
+        setMoving(false);
+      } else {
+        ro.observe(el);
+      }
+    };
+    follow();
+    reduce.addEventListener("change", follow);
+    return () => {
+      reduce.removeEventListener("change", follow);
+      ro.disconnect();
+    };
   }, []);
 
   return (

@@ -4,6 +4,11 @@ import { defineConfig, devices } from "@playwright/test";
 // 먼저 `npm run build`가 필요하다(`npm run e2e`가 둘 다 한다).
 // E2E_BASE_URL을 주면 로컬 서버 없이 그 주소(배포본)를 검사한다.
 const PORT = 4173;
+
+// 서비스 워커가 내보내는 fetch도 context.route·setOffline이 막게 한다(Chromium, Playwright 1.56의 실험 플래그).
+// 없으면 오프라인 테스트에서 서비스 워커가 서버에 닿아 미리 캐시가 비어도 통과한다(e2e/offline.spec.ts).
+// 테스트 워커는 이 설정을 읽은 실행기에서 환경을 물려받는다. Playwright를 올릴 때 이 플래그가 아직 필요한지 다시 본다
+process.env.PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS = "1";
 const REMOTE = process.env.E2E_BASE_URL;
 
 export default defineConfig({

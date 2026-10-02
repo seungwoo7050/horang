@@ -2,20 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { getMessages, THEME_STORAGE_KEY, type Locale } from "@/i18n";
+import { syncThemeColor } from "./ThemeColor";
 import styles from "./ThemeToggle.module.css";
 
 type Theme = "light" | "dark";
 
 const systemTheme = (): Theme =>
   matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-
-/** 지금 보이는 밝기에 맞춰 주소창 색(theme-color)도 바꾼다 */
-function syncThemeColor() {
-  const bg = getComputedStyle(document.documentElement).getPropertyValue("--color-bg").trim();
-  document
-    .querySelectorAll('meta[name="theme-color"]')
-    .forEach((m) => m.setAttribute("content", bg));
-}
 
 /**
  * 해/달 버튼: 기본은 기기 설정을 따르고, 누르면 반대 밝기로 바꿔 브라우저에만 저장한다.
@@ -39,8 +32,9 @@ export function ThemeToggle({ lang }: { lang: Locale }) {
   const toggle = () => {
     const next: Theme = theme === "dark" ? "light" : "dark";
     const root = document.documentElement;
+    const follow = next === systemTheme();
     try {
-      if (next === systemTheme()) {
+      if (follow) {
         delete root.dataset.theme;
         localStorage.removeItem(THEME_STORAGE_KEY);
       } else {
@@ -52,7 +46,7 @@ export function ThemeToggle({ lang }: { lang: Locale }) {
       root.dataset.theme = next;
     }
     setTheme(next);
-    syncThemeColor();
+    syncThemeColor(root.dataset.theme === next ? next : null);
   };
 
   return (

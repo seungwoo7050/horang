@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
 import styles from "./flow.module.css";
 import { FlowNav } from "./FlowNav";
 import { Screen, ScreenHeader } from "./Screen";
 import { StepRibbon } from "./StepRibbon";
+import { useFlowHistory, type FlowCodec } from "./useFlowHistory";
 
 export type Question = {
   id: string;
@@ -32,6 +33,21 @@ const Chevron = () => (
   </svg>
 );
 
+/** 주소 검색어: ?a=<답1>.<답2> (처음 단계는 "") */
+const codecFor = (questions: Question[]): FlowCodec<string[]> => ({
+  initial: [],
+  encode: (answers) => (answers.length ? `a=${answers.join(".")}` : ""),
+  decode: (q) => {
+    const answers = (q.get("a") ?? "").split(".").filter(Boolean);
+    const valid =
+      answers.length <= questions.length &&
+      answers.every((id, i) => questions[i]!.options.some((o) => o.id === id));
+    return valid ? answers : null;
+  },
+  order: (answers) => answers.length,
+  parent: (answers) => (answers.length ? answers.slice(0, -1) : null),
+});
+
 /** 질문 몇 개에 답하면 맞는 결과를 보여 주는 흐름(교통카드 고르기 등) */
 export function ChoiceFlow({
   lang,
@@ -43,20 +59,13 @@ export function ChoiceFlow({
   restart,
 }: Props) {
   const t = getMessages(lang);
-  const [answers, setAnswers] = useState([] as string[]);
-  const [dir, setDir] = useState("forward" as "forward" | "backward");
+  const { state: answers, dir, push, back } = useFlowHistory(codecFor(questions));
   const step = answers.length;
   const total = questions.length + 1;
   const done = step >= questions.length;
 
-  const choose = (id: string) => {
-    setDir("forward");
-    setAnswers([...answers, id]);
-    window.scrollTo({ top: 0 });
-  };
-  const back = () => {
-    setDir("backward");
-    setAnswers(answers.slice(0, -1));
+  const choose = (id: string, e: MouseEvent) => {
+    if (push([...answers, id], e)) window.scrollTo({ top: 0 });
   };
 
   const left = (
@@ -77,14 +86,7 @@ export function ChoiceFlow({
       actionsFlow={done}
       actions={
         done ? (
-          <button
-            type="button"
-            className={styles.secondary}
-            onClick={() => {
-              setDir("backward");
-              setAnswers([]);
-            }}
-          >
+          <button type="button" className={styles.secondary} onClick={(e) => push([], e)}>
             {restart}
           </button>
         ) : null
@@ -104,7 +106,7 @@ export function ChoiceFlow({
             <ul className={styles.options}>
               {q.options.map((o) => (
                 <li key={o.id}>
-                  <button type="button" className={styles.option} onClick={() => choose(o.id)}>
+                  <button type="button" className={styles.option} onClick={(e) => choose(o.id, e)}>
                     <span className={styles.optionText}>
                       {o.label}
                       {o.hint ? <small>{o.hint}</small> : null}

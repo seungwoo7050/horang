@@ -1,5 +1,5 @@
 import AxeBuilder from "@axe-core/playwright";
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
 
 // WCAG 2.2 AA(DESIGN.md §4): axe 자동 검사 + axe가 보지 않는 그래픽 대비·동작 줄이기
 const SCREENS = ["", "gate/", "card/", "arex/", "station/", "staff/"];
@@ -80,6 +80,24 @@ test.describe("reduced motion", () => {
     await ctx.close();
   });
 
+  test("turning Reduce Motion on mid-visit leaves no clipped height behind", async ({
+    browser,
+  }) => {
+    const ctx = await browser.newContext({ reducedMotion: "no-preference" });
+    const page = await ctx.newPage();
+    await page.goto("/en/station/");
+    await page.getByRole("button", { name: /^Line 1/ }).click();
+    await expect(page.getByText("Step 1 of 3")).toBeVisible();
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.getByRole("button", { name: "Next" }).click();
+    await expect(page.getByText("Step 2 of 3")).toBeVisible();
+    // SmoothHeight 바깥 상자: 높이가 바뀌는 동안만 잘리고, 동작 줄이기에서는 높이를 건드리지 않는다
+    const outer = page.locator("main [class*=SmoothHeight-module][class*=outer]");
+    await expect(outer).not.toHaveAttribute("data-moving", /./);
+    await expect(outer).not.toHaveCSS("overflow-y", "clip");
+    await ctx.close();
+  });
+
   test("without it, the ribbon animates with the token duration", async ({ browser }) => {
     const ctx = await browser.newContext({ reducedMotion: "no-preference" });
     const page = await ctx.newPage();
@@ -90,5 +108,53 @@ test.describe("reduced motion", () => {
       "0.5s",
     );
     await ctx.close();
+  });
+});
+
+// 강제 색상 모드(Windows 고대비)는 box-shadow를 지운다. 포커스 링과 카드·버튼 경계는 그것만으로 그리면 안 된다(WCAG 2.4.7, 1.4.11)
+test.describe("forced colors", () => {
+  test.use({ contextOptions: { forcedColors: "active" } });
+
+  test("the keyboard focus ring stays visible", async ({ page }) => {
+    await page.goto("/en/");
+    await page.keyboard.press("Tab");
+    const ring = await page.evaluate(() => {
+      const s = getComputedStyle(document.activeElement!);
+      return { style: s.outlineStyle, width: parseFloat(s.outlineWidth) };
+    });
+    expect(ring.style).not.toBe("none");
+    expect(ring.width).toBeGreaterThanOrEqual(2);
+  });
+
+  test("cards, options and buttons keep a visible edge", async ({ page }) => {
+    const edge = (l: Locator) =>
+      l.first().evaluate((e) => {
+        const s = getComputedStyle(e);
+        return `${s.borderTopStyle} ${parseFloat(s.borderTopWidth) >= 1}`;
+      });
+    const seen: Record<string, string> = {};
+    await page.goto("/en/");
+    seen["home: speech bubble"] = await edge(page.locator("h1"));
+    seen["home: situation card"] = await edge(
+      page.getByRole("link", { name: /stuck at the gate/ }),
+    );
+    await page.goto("/en/gate/");
+    seen["gate: option"] = await edge(page.getByRole("button", { name: "Not enough balance" }));
+    await page.getByRole("button", { name: "Not enough balance" }).click();
+    seen["gate: fact card"] = await edge(page.locator("main li", { hasText: "top up" }));
+    seen["gate: secondary button"] = await edge(page.getByRole("button", { name: "Still stuck" }));
+    seen["gate: primary button"] = await edge(page.getByRole("button", { name: "That worked" }));
+    await page.goto("/en/arex/");
+    seen["arex: selected terminal"] = await edge(page.getByRole("button", { name: "Terminal 1" }));
+    seen["arex: compare column"] = await edge(page.locator("section", { hasText: "Buy a ticket" }));
+    seen["arex: next train panel"] = await edge(
+      page.locator("section", { has: page.getByRole("heading", { name: "Next Express" }) }),
+    );
+    seen["arex: fact sheet"] = await edge(
+      page.locator("section", { has: page.getByRole("heading", { name: "Express ticket" }) }),
+    );
+    await page.goto("/en/no-such-page/");
+    seen["404: buttons"] = await edge(page.getByRole("link", { name: "最初の画面へ" }));
+    expect(seen).toEqual(Object.fromEntries(Object.keys(seen).map((k) => [k, "solid true"])));
   });
 });

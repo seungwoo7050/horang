@@ -25,7 +25,14 @@ const SKIP = new Set([
 export const canonicalPath = (path: string) =>
   path
     .split("/")
-    .map((seg) => encodeURIComponent(decodeURIComponent(seg)))
+    .map((seg) => {
+      // 잘못된 퍼센트 인코딩("%E0%A4%A")은 풀 수 없으니 그 조각은 그대로 둔다(예외로 멈추지 않게)
+      try {
+        return encodeURIComponent(decodeURIComponent(seg));
+      } catch {
+        return seg;
+      }
+    })
     .join("/");
 
 /** 미리 캐시·버전 계산 대상 파일 */
@@ -103,6 +110,26 @@ export function contentSecurityPolicy(scriptHashes: string[]): string {
     "frame-ancestors 'none'",
     "upgrade-insecure-requests",
   ].join("; ");
+}
+
+/**
+ * 404 화면용 CSP: _headers 규칙은 요청 경로로만 붙어 "없는 주소 전체"에 맞는 규칙이 /*뿐이고,
+ * /*에 CSP를 두면 페이지 규칙과 쉼표로 합쳐진다. 그래서 404 HTML 안에 meta로 넣는다.
+ * meta CSP는 frame-ancestors를 무시하므로 뺀다(/*의 X-Frame-Options: DENY가 맡는다). 스크립트보다 앞에 둔다
+ */
+export function injectMetaCsp(html: string): string {
+  if (html.includes('http-equiv="Content-Security-Policy"')) {
+    throw new Error("이미 CSP meta가 있다");
+  }
+  const policy = contentSecurityPolicy(inlineScriptHashes(html))
+    .split("; ")
+    .filter((d) => !d.startsWith("frame-ancestors"))
+    .join("; ");
+  const meta = `<meta http-equiv="Content-Security-Policy" content="${policy}"/>`;
+  const anchor = html.match(/<meta charSet="utf-8"\/>|<head>/i);
+  if (!anchor || anchor.index === undefined) throw new Error("404 HTML에 <head>가 없다");
+  const at = anchor.index + anchor[0].length;
+  return html.slice(0, at) + meta + html.slice(at);
 }
 
 /** HTML 파일 경로 → 요청 경로("en/gate/index.html" → "/en/gate/"). index가 아닌 HTML은 그대로 */

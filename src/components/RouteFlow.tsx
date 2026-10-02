@@ -11,6 +11,7 @@ import { SmoothHeight } from "./SmoothHeight";
 import { FlowNav } from "./FlowNav";
 import { Screen, ScreenHeader } from "./Screen";
 import { TigerSitting } from "./Tiger";
+import { useFlowHistory, type FlowCodec } from "./useFlowHistory";
 
 export type RouteChoice = {
   id: string;
@@ -41,35 +42,53 @@ const Chevron = () => (
   </svg>
 );
 
+type State = { route: string | null; step: number; arrived: boolean };
+
+/** 주소 검색어: ?route=<경로>&step=1…n|done (처음 단계는 "") */
+const codecFor = (routes: RouteChoice[]): FlowCodec<State> => {
+  const stepsOf = (id: string | null) => routes.find((r) => r.id === id)?.steps.length ?? 0;
+  return {
+    initial: { route: null, step: 0, arrived: false },
+    encode: (s) =>
+      s.route === null ? "" : `route=${s.route}&step=${s.arrived ? "done" : String(s.step + 1)}`,
+    decode: (q) => {
+      const route = q.get("route");
+      const n = stepsOf(route);
+      if (!route || n === 0) return null;
+      const step = q.get("step");
+      if (step === "done") return { route, step: n - 1, arrived: true };
+      const i = Number(step) - 1;
+      return Number.isInteger(i) && i >= 0 && i < n ? { route, step: i, arrived: false } : null;
+    },
+    order: (s) => (s.route === null ? 0 : 1 + s.step + (s.arrived ? 1 : 0)),
+    parent: (s) =>
+      s.route === null
+        ? null
+        : s.arrived
+          ? { ...s, arrived: false }
+          : s.step > 0
+            ? { ...s, step: s.step - 1 }
+            : { route: null, step: 0, arrived: false },
+  };
+};
+
 /** 서울역 경로: 목적지 고르기 → 리본을 따라 한 단계씩 */
 export function RouteFlow({ lang, routes, places }: Props) {
   const t = getMessages(lang);
   const s = t.station;
-  const [routeId, setRouteId] = useState(null as string | null);
-  const [step, setStep] = useState(0);
-  const [dir, setDir] = useState("forward" as "forward" | "backward");
-  const [arrived, setArrived] = useState(false);
-  const [help, setHelp] = useState(false);
+  const { state, dir, push, back, holdLink } = useFlowHistory(codecFor(routes));
+  const { route: routeId, step, arrived } = state;
+  // "못 찾겠어요" 문장 카드는 단계를 바꾸지 않는다(기록에 넣지 않음). 펼친 단계가 지금 단계일 때만 보인다
+  const here = `${routeId}-${step}-${arrived}`;
+  const [helpAt, setHelpAt] = useState(null as string | null);
+  const help = helpAt === here;
   const route = routes.find((r) => r.id === routeId);
-
-  const move = (next: number) => {
-    setDir(next >= step ? "forward" : "backward");
-    setStep(next);
-    setHelp(false);
-  };
-  const reset = () => {
-    setDir("backward");
-    setRouteId(null);
-    setStep(0);
-    setArrived(false);
-    setHelp(false);
-  };
 
   const left = (
     <FlowNav
       mode={route ? "back" : "close"}
       home={`/${lang}/`}
-      onBack={() => (step > 0 && !arrived ? move(step - 1) : reset())}
+      onBack={back}
       label={route ? t.common.back : t.common.close}
     />
   );
@@ -85,11 +104,7 @@ export function RouteFlow({ lang, routes, places }: Props) {
                 <button
                   type="button"
                   className={styles.option}
-                  onClick={() => {
-                    setDir("forward");
-                    setRouteId(r.id);
-                    setStep(0);
-                  }}
+                  onClick={(e) => push({ route: r.id, step: 0, arrived: false }, e)}
                 >
                   <span className={styles.optionText}>
                     {r.label}
@@ -118,18 +133,24 @@ export function RouteFlow({ lang, routes, places }: Props) {
       header={<ScreenHeader left={left} title={route.label} />}
       actions={
         arrived ? (
-          <Link href={`/${lang}/`} className={styles.primary}>
+          <Link href={`/${lang}/`} className={styles.primary} onClick={holdLink}>
             {s.home}
           </Link>
         ) : (
           <div className={styles.row}>
-            <button type="button" className={styles.secondary} onClick={() => setHelp(!help)}>
+            <button
+              type="button"
+              className={styles.secondary}
+              onClick={() => setHelpAt(help ? null : here)}
+            >
               {s.cantFind}
             </button>
             <button
               type="button"
               className={styles.primary}
-              onClick={() => (last ? setArrived(true) : move(step + 1))}
+              onClick={(e) =>
+                push(last ? { ...state, arrived: true } : { ...state, step: step + 1 }, e)
+              }
             >
               <MorphLabel>{last ? s.done : s.next}</MorphLabel>
             </button>

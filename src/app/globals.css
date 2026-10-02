@@ -181,8 +181,13 @@ body {
   word-break: keep-all;
 }
 
+/*
+ * 포커스 링은 box-shadow로 그린다. 강제 색상 모드(Windows 고대비)는 box-shadow를 지우므로
+ * 투명한 outline을 같은 자리에 남겨 둔다: 평소엔 안 보이고, 강제 색상 모드에서는 시스템 색으로 그려진다
+ */
 :focus-visible {
-  outline: none;
+  outline: 2px solid transparent;
+  outline-offset: 3px;
   box-shadow:
     0 0 0 3px var(--color-bg),
     0 0 0 5px var(--color-ribbon);

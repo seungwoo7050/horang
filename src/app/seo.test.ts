@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { pageMetadata, PAGES } from "./seo";
+import { pageMetadata, PAGES, rootMetadata } from "./seo";
 
 describe("pageMetadata", () => {
   it("links each language version of the same screen", () => {
@@ -28,5 +28,14 @@ describe("pageMetadata", () => {
 
   it("covers every screen route", () => {
     expect(PAGES).toEqual(["", "gate/", "card/", "arex/", "station/", "staff/"]);
+  });
+});
+
+describe("rootMetadata (the language picker at /)", () => {
+  it("is titled Horang and links back to every language (hreflang is mutual)", () => {
+    const m = rootMetadata();
+    expect(m.title).toBe("Horang");
+    expect(m.alternates?.canonical).toBe("/");
+    expect(m.alternates?.languages).toEqual({ en: "/en/", ja: "/ja/", "x-default": "/" });
   });
 });
