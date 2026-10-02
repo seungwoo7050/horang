@@ -151,8 +151,13 @@ export const en = {
       "exit-15": "Exit 15",
     },
     mapLabel: "Route map for {route}, from the AREX platform. Schematic, not to scale.",
-    disagree:
-      "Sources disagree about the elevator route to Line 1. If the elevator isn't where this says, ask staff.",
+    unconfirmed: {
+      label: "Not checked on site yet:",
+      "transfer-gate":
+        "where exactly the transfer gate is. Follow the Lines 1 and 4 transfer signs. If you can't find it, tap \"Can't find it?\".",
+      "line-1-elevator":
+        "sources disagree about the elevator to the Line 1 platform. If it isn't here, tap \"Can't find it?\" and show staff.",
+    },
     next: "Next",
     done: "I'm there",
     cantFind: "Can't find it?",

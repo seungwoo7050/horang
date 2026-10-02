@@ -14,18 +14,22 @@ export type RouteChoice = {
   label: string;
   hint: string;
   layout: RouteLayout;
-  steps: { title: string; body: string }[];
+  steps: {
+    title: string;
+    body: string;
+    /** 이 단계에서 현장 확인되지 않은 것(문장) */
+    unconfirmed?: string;
+    /** 길을 못 찾을 때 보여 줄 직원 문장 카드(서버에서 그림) */
+    phrase: ReactNode;
+  }[];
   /** 근거 줄과 현장 미확인 표시(서버에서 그림) */
   evidence: ReactNode;
-  sourcesDisagree: boolean;
 };
 
 type Props = {
   lang: Locale;
   routes: RouteChoice[];
   places: Record<string, string>;
-  /** 길을 못 찾을 때 직원에게 보여 줄 문장(서버에서 그림) */
-  phrase: ReactNode;
 };
 
 const Chevron = () => (
@@ -35,7 +39,7 @@ const Chevron = () => (
 );
 
 /** 서울역 경로: 목적지 고르기 → 리본을 따라 한 단계씩 */
-export function RouteFlow({ lang, routes, places, phrase }: Props) {
+export function RouteFlow({ lang, routes, places }: Props) {
   const t = getMessages(lang);
   const s = t.station;
   const [routeId, setRouteId] = useState(null as string | null);
@@ -146,10 +150,14 @@ export function RouteFlow({ lang, routes, places, phrase }: Props) {
           <p className={styles.kicker}>{stepLabel}</p>
           <h1 className={styles.heading}>{current.title}</h1>
           <p className={styles.body}>{current.body}</p>
-          {help ? phrase : null}
+          {current.unconfirmed ? (
+            <p className={styles.caution}>
+              <strong>{s.unconfirmed.label}</strong> {current.unconfirmed}
+            </p>
+          ) : null}
+          {help ? current.phrase : null}
         </div>
       )}
-      {route.sourcesDisagree ? <p className={styles.caution}>{s.disagree}</p> : null}
       {route.evidence}
     </Screen>
   );

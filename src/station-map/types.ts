@@ -21,8 +21,18 @@ export type EdgeKind = "elevator" | "walk" | "gate";
 
 export type StationEdge = { from: string; to: string; kind: EdgeKind };
 
+/** 현장에서 아직 확인하지 못한 점(research/SOURCE_CONFLICTS.md). 화면은 그 단계에 표시한다 */
+export type Unconfirmed = "transfer-gate" | "line-1-elevator";
+
 /** 단계 하나 = 경로 위의 한 점(to)까지 */
-export type RouteStep = { id: string; to: string };
+export type RouteStep = {
+  id: string;
+  to: string;
+  /** 이 단계에서 확인되지 않은 것 */
+  unconfirmed?: Unconfirmed;
+  /** 길을 못 찾을 때 보여 줄 직원 문장(phrases.json id). 없으면 엘리베이터 문장 */
+  phrase?: string;
+};
 
 export type StationRoute = {
   id: string;
@@ -31,8 +41,6 @@ export type StationRoute = {
   steps: RouteStep[];
   /** 이 경로를 뒷받침하는 claim id. 하나라도 A등급이 아니면 현장 미확인으로 표시한다 */
   claims: string[];
-  /** 출처끼리 어긋나는 경로(화면에 주의 문구) */
-  sourcesDisagree?: boolean;
 };
 
 export type Station = {

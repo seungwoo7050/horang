@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { claims } from "@/content";
+import { claims, phrases } from "@/content";
 import { layoutRoute, MAP, validateStation } from "./graph";
 import { seoulStation } from "./seoul-station";
 import type { Station } from "./types";
@@ -49,6 +49,13 @@ describe("Seoul Station graph", () => {
       stepEnds.forEach((v, i) => expect(v).toBeGreaterThan(stepEnds[i - 1] ?? 0));
       expect(stepEnds.at(-1)).toBe(1);
       expect(stops).toHaveLength(r.steps.length + 1);
+    }
+  });
+
+  it("every step's staff phrase exists", () => {
+    const ids = new Set(phrases.map((p) => p.id));
+    for (const r of seoulStation.routes) {
+      for (const s of r.steps) expect(ids).toContain(s.phrase ?? "station.where-elevator");
     }
   });
 

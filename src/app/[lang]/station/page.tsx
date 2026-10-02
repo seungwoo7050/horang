@@ -22,6 +22,8 @@ function choices(lang: Locale): RouteChoice[] {
         return {
           title: text.title.replace("{line}", m.line),
           body: text.body.replace("{line}", m.line),
+          unconfirmed: step.unconfirmed ? s.unconfirmed[step.unconfirmed] : undefined,
+          phrase: <PhraseCard id={step.phrase ?? "station.where-elevator"} lang={lang} />,
         };
       }),
       evidence: (
@@ -30,7 +32,6 @@ function choices(lang: Locale): RouteChoice[] {
           <FactMeta ids={r.claims} lang={lang} />
         </>
       ),
-      sourcesDisagree: !!r.sourcesDisagree,
     };
   });
 }
@@ -43,12 +44,5 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/station">)
 export default async function StationPage({ params }: PageProps<"/[lang]/station">) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
-  return (
-    <RouteFlow
-      lang={lang}
-      routes={choices(lang)}
-      places={getMessages(lang).station.places}
-      phrase={<PhraseCard id="station.where-elevator" lang={lang} />}
-    />
-  );
+  return <RouteFlow lang={lang} routes={choices(lang)} places={getMessages(lang).station.places} />;
 }

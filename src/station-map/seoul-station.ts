@@ -52,7 +52,12 @@ export const seoulStation: Station = {
       ],
       steps: [
         { id: "up-to-b3", to: "arex-concourse" },
-        { id: "transfer-corridor", to: "lines-1-4-concourse" },
+        {
+          id: "transfer-corridor",
+          to: "lines-1-4-concourse",
+          unconfirmed: "transfer-gate",
+          phrase: "station.where-transfer",
+        },
         { id: "down-to-platform", to: "line-4-platform" },
       ],
       claims: [
@@ -76,8 +81,14 @@ export const seoulStation: Station = {
       ],
       steps: [
         { id: "up-to-b3", to: "arex-concourse" },
-        { id: "transfer-corridor", to: "lines-1-4-concourse" },
-        { id: "down-to-platform", to: "line-1-platform" },
+        {
+          id: "transfer-corridor",
+          to: "lines-1-4-concourse",
+          unconfirmed: "transfer-gate",
+          phrase: "station.where-transfer",
+        },
+        // 1호선 쪽 KRIC 자료는 지상 2층 KTX 맞이방을 거친다고 적는다(§2-1, 현장 확인 대상)
+        { id: "down-to-platform", to: "line-1-platform", unconfirmed: "line-1-elevator" },
       ],
       claims: [
         "seoul-station.route.arex-to-lines-1-4",
@@ -85,8 +96,6 @@ export const seoulStation: Station = {
         "seoul-station.arex.floors",
         "seoul-station.lines-1-4.floors",
       ],
-      // 1호선 쪽 KRIC 자료는 지상 2층 KTX 맞이방을 거친다고 적는다(§2-1, 현장 확인 대상)
-      sourcesDisagree: true,
     },
     {
       id: "arex-to-exit-15",
