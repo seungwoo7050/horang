@@ -6,6 +6,7 @@ import { getMessages, type Locale } from "@/i18n";
 import type { RouteLayout } from "@/station-map/graph";
 import styles from "./flow.module.css";
 import { RouteMap } from "./RouteMap";
+import { MorphLabel } from "./MorphLabel";
 import { BackButton, BackLink, Screen, ScreenHeader } from "./Screen";
 import { TigerSitting } from "./Tiger";
 
@@ -128,7 +129,7 @@ export function RouteFlow({ lang, routes, places }: Props) {
               className={styles.primary}
               onClick={() => (last ? setArrived(true) : move(step + 1))}
             >
-              {last ? s.done : s.next}
+              <MorphLabel>{last ? s.done : s.next}</MorphLabel>
             </button>
           </div>
         )

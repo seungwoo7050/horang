@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
 import styles from "./flow.module.css";
+import { MorphLabel } from "./MorphLabel";
 import { BackButton, BackLink, Screen, ScreenHeader } from "./Screen";
 import { StepRibbon } from "./StepRibbon";
 import { TigerFace, TigerSitting } from "./Tiger";
@@ -104,10 +105,10 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
     actions = (
       <div className={styles.row}>
         <button type="button" className={styles.secondary} onClick={() => go(2)}>
-          {g.still}
+          <MorphLabel>{g.still}</MorphLabel>
         </button>
         <button type="button" className={styles.primary} onClick={() => go("solved")}>
-          {g.worked}
+          <MorphLabel>{g.worked}</MorphLabel>
         </button>
       </div>
     );
@@ -121,10 +122,10 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
     actions = (
       <div className={styles.row}>
         <Link href={`/${lang}/staff/`} className={styles.secondary}>
-          {g.moreSentences}
+          <MorphLabel>{g.moreSentences}</MorphLabel>
         </Link>
         <button type="button" className={styles.primary} onClick={() => go("solved")}>
-          {g.worked}
+          <MorphLabel>{g.worked}</MorphLabel>
         </button>
       </div>
     );
