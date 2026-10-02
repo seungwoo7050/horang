@@ -201,3 +201,39 @@ test("404: the Japanese note breaks only at phrase boundaries, like the app scre
   await page.goto("/en/no-such-page/");
   await expect(page.locator('section[lang="ja"] p').first()).toHaveCSS("word-break", "keep-all");
 });
+
+// 공항철도 비교 칸의 큰 숫자+단위("約59分")는 가장 좁은 폰(320px)에서도 한 줄로 칸 안에 들어가야 한다
+test.describe("320px phone", () => {
+  test.use({ viewport: { width: 320, height: 700 } });
+
+  test("arex: big numbers stay on one line inside their column", async ({ page }) => {
+    for (const lang of ["en", "ja"]) {
+      await page.goto(`/${lang}/arex/`);
+      for (const terminal of [0, 1]) {
+        await page.locator('[role="group"] button').nth(terminal).click();
+        const cells = await page.locator("section p:has(> small)").evaluateAll((ps) =>
+          ps.map((p) => {
+            const s = getComputedStyle(p);
+            const range = document.createRange();
+            range.selectNodeContents(p);
+            const col = p.parentElement!;
+            const cs = getComputedStyle(col);
+            const inner =
+              col.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+            return {
+              text: p.textContent,
+              lines: Math.round(p.getBoundingClientRect().height / parseFloat(s.lineHeight)),
+              fits: range.getBoundingClientRect().width <= inner + 0.5,
+            };
+          }),
+        );
+        expect(cells.length, `/${lang}/arex/ terminal ${terminal}`).toBeGreaterThanOrEqual(2);
+        for (const c of cells) expect(c, `/${lang}/arex/`).toMatchObject({ lines: 1, fits: true });
+      }
+      const overflow = await page.evaluate(
+        () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      );
+      expect(overflow, `/${lang}/arex/`).toBeLessThanOrEqual(0);
+    }
+  });
+});
