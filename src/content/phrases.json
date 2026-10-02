@@ -75,5 +75,12 @@
     "en": "I'd like to buy a child's ticket.",
     "ja": "子ども用の切符を買いたいです。",
     "reviewed": false
+  },
+  {
+    "id": "station.where-transfer",
+    "ko": "1호선, 4호선 갈아타는 곳이 어디예요?",
+    "en": "Where do I transfer to Lines 1 and 4?",
+    "ja": "1号線・4号線への乗り換えはどこですか。",
+    "reviewed": false
   }
 ]
