@@ -63,6 +63,7 @@ export default async function ArexPage({ params }: PageProps<"/[lang]/arex">) {
         arrive={
           <FactList
             ids={[
+              "arex.express.airport-departures",
               "arex.express.no-transit-card",
               "arex.express.qr-gate",
               "arex.allstop.fare-seoul-t1",
