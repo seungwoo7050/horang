@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 test.describe("language", () => {
   test("/ sends a Japanese browser to /ja/", async ({ browser }) => {
@@ -265,3 +265,54 @@ test.describe("320px phone", () => {
     }
   });
 });
+
+// 일본어 화면의 칸(버튼·카드·이름-값 줄) 안 글자는 오른쪽 끝(문장부호 포함)이 칸 안쪽 경계를 넘지 않고,
+// 칸도 화면 본문 폭을 넘지 않아야 한다. 구 경계(U+200B)가 없는 문장이 keep-all 칸에 들어가면 한 덩어리가 되어 밀려 나간 적이 있다
+for (const width of [320, 360]) {
+  test.describe(`${width}px phone, Japanese`, () => {
+    test.use({ viewport: { width, height: 800 } });
+
+    const outside = (page: Page, selector: string) =>
+      page.locator(selector).evaluateAll((els) => {
+        const main = document.querySelector("main")!;
+        const ms = getComputedStyle(main);
+        const mainRight = main.getBoundingClientRect().right - parseFloat(ms.paddingRight);
+        return els.flatMap((el) => {
+          const cs = getComputedStyle(el);
+          const box = el.getBoundingClientRect();
+          const inner = box.right - parseFloat(cs.borderRightWidth) - parseFloat(cs.paddingRight);
+          const range = document.createRange();
+          range.selectNodeContents(el);
+          const textRight = Math.max(...[...range.getClientRects()].map((r) => r.right));
+          const bad: string[] = [];
+          if (textRight > inner + 0.5)
+            bad.push(`text past card by ${(textRight - inner).toFixed(1)}px: ${el.textContent}`);
+          if (box.right > mainRight + 0.5)
+            bad.push(
+              `card past screen body by ${(box.right - mainRight).toFixed(1)}px: ${el.textContent}`,
+            );
+          return bad;
+        });
+      });
+
+    test("staff: phrase cards keep every character, end punctuation too, inside", async ({
+      page,
+    }) => {
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await page.goto("/ja/staff/");
+      await expect(page.locator("main ul button")).toHaveCount(12);
+      expect(await outside(page, "main ul button, main figure > *, main a")).toEqual([]);
+    });
+
+    test("card: figure rows keep the name and the amount inside", async ({ page }) => {
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await page.goto("/ja/card/");
+      await page.getByRole("button", { name: /仁川空港にいる/ }).click();
+      await expect(page.getByRole("heading", { name: /どのくらい乗りますか/ })).toBeVisible();
+      // 같은 자리 두 번째 탭은 흐름이 무시하므로(useFlowHistory) 키보드로 고른다
+      await page.getByRole("button", { name: /数回だけ/ }).press("Enter");
+      await expect(page.locator("main dl dt").first()).toBeVisible();
+      expect(await outside(page, "main dl dt, main dl dd")).toEqual([]);
+    });
+  });
+}

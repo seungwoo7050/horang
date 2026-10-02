@@ -91,7 +91,7 @@ export const ja: Messages = {
     figures: {
       deposit: `保証金${B}（降りたあと${B}戻る）`,
       arexExtra: `空港鉄道は${B}運賃に${B}加えて`,
-      tmoney: "Tmoneyカード",
+      tmoney: `Tmoney${B}カード`,
       tmoneyFrom: "約{n}ウォンから",
       travelCard: "Tmoney Travel Card",
       wowpass: "カード",

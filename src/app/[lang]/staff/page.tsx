@@ -33,8 +33,16 @@ export default async function StaffPage({ params }: PageProps<"/[lang]/staff">) 
       <h2 className={styles.section}>{t.helpline}</h2>
       <Fact id="helpline.1330" lang={lang} />
       <div className={styles.row}>
-        <OutLink id="helpline-1330-chat" lang={lang} className={styles.secondary} />
-        <OutLink id="helpline-1330-call" lang={lang} className={styles.primary} />
+        <OutLink
+          id="helpline-1330-chat"
+          lang={lang}
+          className={`${styles.secondary} ${styles.fromContent}`}
+        />
+        <OutLink
+          id="helpline-1330-call"
+          lang={lang}
+          className={`${styles.primary} ${styles.fromContent}`}
+        />
       </div>
     </Screen>
   );
