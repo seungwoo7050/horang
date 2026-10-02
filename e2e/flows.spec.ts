@@ -10,6 +10,23 @@ test.describe("language", () => {
     await ctx.close();
   });
 
+  test("/ follows the order of the browser's languages", async ({ browser }) => {
+    for (const [languages, expected] of [
+      [["en-US", "en", "ja"], "/en/"],
+      [["fr-FR", "ja", "en"], "/ja/"],
+      [["ko-KR"], "/en/"],
+    ] as const) {
+      const ctx = await browser.newContext();
+      await ctx.addInitScript((l) => {
+        Object.defineProperty(navigator, "languages", { get: () => l });
+      }, languages);
+      const page = await ctx.newPage();
+      await page.goto("/");
+      await expect(page, languages.join(",")).toHaveURL(new RegExp(`${expected}$`));
+      await ctx.close();
+    }
+  });
+
   test("the chosen language is remembered", async ({ page }) => {
     await page.goto("/en/");
     await page.getByRole("link", { name: "日本語" }).click();

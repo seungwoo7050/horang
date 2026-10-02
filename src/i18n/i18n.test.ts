@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { en } from "./en";
 import { ja } from "./ja";
+import { defaultLocale, locales, pickLocaleSource } from ".";
 
 const SRC = join(process.cwd(), "src");
 const UI_DIRS = ["app", "components"].map((d) => join(SRC, d));
@@ -76,5 +77,28 @@ describe("message files", () => {
 
   it("Japanese copy uses full-width question marks and colons", () => {
     expect(values(ja).filter((v) => /[?:]/.test(String(v)))).toEqual([]);
+  });
+});
+
+describe("first-visit language (inline script on /)", () => {
+  // 브라우저에서 도는 원문 그대로 실행한다
+  const pick = new Function(`return ${pickLocaleSource}`)() as (
+    languages: string[],
+    supported: readonly string[],
+    fallback: string,
+  ) => string;
+  const first = (languages: string[]) => pick(languages, locales, defaultLocale);
+
+  it("follows the browser's priority order", () => {
+    expect(first(["en-US", "en", "ja"])).toBe("en");
+    expect(first(["ja-JP", "en"])).toBe("ja");
+    expect(first(["fr-FR", "ja", "en"])).toBe("ja");
+    expect(first(["JA"])).toBe("ja");
+  });
+
+  it("falls back to English when no language matches", () => {
+    expect(first(["ko-KR"])).toBe("en");
+    expect(first([])).toBe("en");
+    expect(first([""])).toBe("en");
   });
 });
