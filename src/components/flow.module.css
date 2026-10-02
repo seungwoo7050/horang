@@ -200,3 +200,9 @@
   border-radius: var(--radius-sm);
   font-size: var(--text-sm);
 }
+
+/* 일본어: ja.ts의 구 경계에서만 줄을 바꾼다(globals.css 짧은 줄 규칙과 같음) */
+:lang(ja) .hint {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}

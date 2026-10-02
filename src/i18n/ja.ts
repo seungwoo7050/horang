@@ -1,6 +1,12 @@
 // 日本語の文言。원어민 검수 전 초안(V0-4에서 검수).
 import type { Messages } from "./en";
 
+/**
+ * 구 경계(ゼロ幅スペース). 제목·버튼 같은 짧은 줄은 :lang(ja)에서 keep-all이라 여기서만 줄이 바뀐다
+ * (iPhone Safari에 word-break: auto-phrase가 없어서, DESIGN.md §7). 원어민 검수 때 경계도 함께 본다
+ */
+const B = "\u200b";
+
 export const ja: Messages = {
   langName: "日本語",
   meta: {
@@ -16,57 +22,63 @@ export const ja: Messages = {
     sources: "出典（{n}）",
   },
   notFound: {
-    title: "このページは見つかりません",
-    body: "リンクが古いのかもしれません。最初の画面からもう一度どうぞ。",
+    title: `このページは${B}見つかりません`,
+    body: `リンクが${B}古いのかもしれません。${B}最初の画面から${B}もう一度どうぞ。`,
     go: "最初の画面へ",
   },
   home: {
-    ask: "お困りですか？",
-    sub: "困っている場面をタップしてください。一緒に解決します。",
+    ask: `お困り${B}ですか？`,
+    sub: `困っている場面を${B}タップしてください。${B}一緒に${B}解決します。`,
     situations: {
       gate: { title: "改札から出られない", hint: "入れない・出られない" },
       card: { title: "どのカードを使う？", hint: "1回用・Tmoney・Climate Card" },
-      arex: { title: "AREX：直通列車と一般列車", hint: "空港 ↔ ソウル駅" },
-      station: { title: "ソウル駅：出口と乗り換え", hint: "1号線・4号線・KTX・15番出口" },
+      arex: { title: `AREX：${B}直通列車と${B}一般列車`, hint: "空港 ↔ ソウル駅" },
+      station: { title: `ソウル駅：${B}出口と${B}乗り換え`, hint: "1号線・4号線・KTX・15番出口" },
     },
     staff: "スタッフに見せる",
     staffKo: "직원에게 보여 주기",
-    footer: "非公式のお助けアプリです。鉄道会社の運営ではありません。",
+    footer: `非公式の${B}お助けアプリです。${B}鉄道会社の${B}運営では${B}ありません。`,
   },
   gate: {
     title: "改札から出られない",
-    ask: "改札で何が起きましたか？",
+    ask: `改札で${B}何が${B}起きましたか？`,
     causes: {
-      lowBalance: { label: "残高が足りない", headline: "チャージしてから出ましょう" },
-      cardError: { label: "エラー音・エラー表示が出た", headline: "カード1枚で、同じ読み取り機に" },
-      wrongDirection: {
-        label: "反対方向の改札に入った",
-        headline: "すぐ出れば1回は無料です",
+      lowBalance: { label: "残高が足りない", headline: `チャージしてから${B}出ましょう` },
+      cardError: {
+        label: `エラー音・${B}エラー表示が${B}出た`,
+        headline: `カード1枚で、${B}同じ${B}読み取り機に`,
       },
-      expressTicket: { label: "直通列車の乗車券を持っている", headline: "QR読み取り機を使います" },
-      other: { label: "その他", headline: "駅員が助けてくれます" },
+      wrongDirection: {
+        label: `反対方向の${B}改札に${B}入った`,
+        headline: `すぐ出れば${B}1回は${B}無料です`,
+      },
+      expressTicket: {
+        label: `直通列車の${B}乗車券を${B}持っている`,
+        headline: `QR読み取り機を${B}使います`,
+      },
+      other: { label: "その他", headline: `駅員が${B}助けてくれます` },
     },
-    calm: "大丈夫。よくあることです。急がなくていいですよ。",
+    calm: `大丈夫。${B}よくある${B}ことです。${B}急がなくて${B}いいですよ。`,
     worked: "解決した",
     still: "まだ出られない",
-    staffHead: "この画面を駅員さんに見せてください",
+    staffHead: `この画面を${B}駅員さんに${B}見せてください`,
     moreSentences: "ほかの文",
-    solved: "通れました。よかった！",
+    solved: `通れました。${B}よかった！`,
     home: "最初に戻る",
   },
   card: {
     title: "どのカードを使う？",
     where: {
-      ask: "いまどこにいますか？",
-      airport: { label: "仁川空港にいる", hint: "これからソウルへ向かう" },
+      ask: `いま${B}どこに${B}いますか？`,
+      airport: { label: "仁川空港にいる", hint: `これから${B}ソウルへ${B}向かう` },
       seoul: { label: "もうソウルにいる", hint: "市内を移動する" },
     },
     rides: {
-      ask: "どのくらい乗りますか？",
+      ask: `どのくらい${B}乗りますか？`,
       few: { label: "数回だけ", hint: "1〜2回の移動" },
-      lots: { label: "何日もたくさん乗る", hint: "ほぼ毎日、地下鉄やバス" },
+      lots: { label: `何日も${B}たくさん${B}乗る`, hint: "ほぼ毎日、地下鉄やバス" },
     },
-    result: "あなたに合うカード",
+    result: `あなたに${B}合う${B}カード`,
     later: "あとでソウルで",
     note: "知っておくと安心",
     restart: "最初から",
@@ -77,13 +89,13 @@ export const ja: Messages = {
       climate: { name: "Climate Card 短期券", why: "ソウル市内を1〜7日間移動するためのパスです。" },
     },
     figures: {
-      deposit: "保証金（降りたあと戻る）",
-      arexExtra: "空港鉄道は運賃に加えて",
+      deposit: `保証金${B}（降りたあと${B}戻る）`,
+      arexExtra: `空港鉄道は${B}運賃に${B}加えて`,
       tmoney: "Tmoneyカード",
       tmoneyFrom: "約{n}ウォンから",
       travelCard: "Tmoney Travel Card",
       wowpass: "カード",
-      wowpassOnline: "オンライン事前予約",
+      wowpassOnline: `オンライン${B}事前予約`,
       days: "{n}日",
       day: "1日",
       cardItself: "カード本体",
@@ -92,7 +104,7 @@ export const ja: Messages = {
   },
   arex: {
     title: "AREX",
-    heading: "直通列車と一般列車、どっち？",
+    heading: `直通列車と${B}一般列車、${B}どっち？`,
     terminal: "ターミナル",
     t1: "第1ターミナル",
     t2: "第2ターミナル",
@@ -101,24 +113,24 @@ export const ja: Messages = {
     allstop: "一般列車",
     about: "約{n}",
     min: "分",
-    won: "{n}ウォン",
-    expressNote: "乗車券を買います。交通カードは使えません。",
-    allstopNote: "交通カードでタッチ。表示は交通カードの運賃です。",
-    atSeoul: "ソウル駅に着いたら（直通列車）",
+    won: `{n}${B}ウォン`,
+    expressNote: `乗車券を${B}買います。${B}交通カードは${B}使えません。`,
+    allstopNote: `交通カードで${B}タッチ。${B}表示は${B}交通カードの${B}運賃です。`,
+    atSeoul: `ソウル駅に${B}着いたら${B}（直通列車）`,
     details: "乗る前に",
     groups: {
-      express: "直通列車の乗車券",
-      allstop: "一般列車と交通カード",
+      express: `直通列車の${B}乗車券`,
+      allstop: `一般列車と${B}交通カード`,
       allstopSub: "ソウル駅→空港、大人",
     },
     figures: {
-      t1Card: "第1ターミナル・交通カード",
-      t1Single: "第1ターミナル・1回用カード",
-      t2Card: "第2ターミナル・交通カード",
-      t2Single: "第2ターミナル・1回用カード",
-      deposit: "1回用カードの保証金",
+      t1Card: `第1ターミナル・${B}交通カード`,
+      t1Single: `第1ターミナル・${B}1回用カード`,
+      t2Card: `第2ターミナル・${B}交通カード`,
+      t2Single: `第2ターミナル・${B}1回用カード`,
+      deposit: `1回用カードの${B}保証金`,
     },
-    hurry: "空港へ向かいますか？",
+    hurry: `空港へ${B}向かいますか？`,
     hurryBack: "比較に戻る",
     departHeading: "ソウル駅から出発",
     next: {
@@ -135,38 +147,38 @@ export const ja: Messages = {
   },
   station: {
     title: "ソウル駅",
-    ask: "空港鉄道のホームから、どこへ行きますか？",
+    ask: `空港鉄道の${B}ホームから、${B}どこへ${B}行きますか？`,
     schematic: "荷物があっても通れるエレベーター経路です。図は略図で、縮尺は正確ではありません。",
     legend: { start: "出発", gate: "改札" },
     stepOf: "ステップ {n}／{total}",
     routes: {
       "arex-to-line-4": {
         label: "4号線",
-        hint: "地下3階・地下1階を通るエレベーター経路",
+        hint: `地下3階・${B}地下1階を${B}通る${B}エレベーター経路`,
         line: "4号線",
       },
       "arex-to-line-1": {
         label: "1号線",
-        hint: "地下3階・地下1階を通るエレベーター経路",
+        hint: `地下3階・${B}地下1階を${B}通る${B}エレベーター経路`,
         line: "1号線",
       },
       "arex-to-exit-15": {
         label: "15番出口（KTX側）",
-        hint: "1階へのエレベーター経路",
+        hint: `1階への${B}エレベーター経路`,
         line: "15番出口",
       },
     },
     steps: {
       "up-to-b3": {
-        title: "エレベーターで地下3階へ",
+        title: `エレベーターで${B}地下3階へ`,
         body: "地下7階の空港鉄道ホームから、エレベーターで地下3階の空港鉄道コンコースへ上がります。",
       },
       "transfer-corridor": {
-        title: "乗り換え改札を通って地下1階へ",
+        title: `乗り換え改札を${B}通って${B}地下1階へ`,
         body: "出口の改札ではなく、乗り換え改札でカードをタッチします。乗り換え通路を進み、エレベーターで地下1階の1・4号線コンコースへ上がります。",
       },
       "down-to-platform": {
-        title: "{line}のホームへ下りる",
+        title: `{line}の${B}ホームへ${B}下りる`,
         body: "エレベーターで地下2階の{line}ホームへ下ります。",
       },
       "exit-gate": {
@@ -174,7 +186,7 @@ export const ja: Messages = {
         body: "地下3階で改札にカードをタッチして出ます。",
       },
       "up-to-exit": {
-        title: "15番出口へ上がる",
+        title: `15番出口へ${B}上がる`,
         body: "エレベーターで1階の15番出口へ上がります。15番出口はソウル駅（KTX・一般列車）の案内です。",
       },
     },
@@ -202,9 +214,9 @@ export const ja: Messages = {
   },
   staff: {
     title: "スタッフに見せる",
-    lead: "この画面を駅員さんに見せてください。",
+    lead: `この画面を${B}駅員さんに${B}見せてください。`,
     others: "ほかの文",
-    helpline: "日本語で話せる人が必要なら",
+    helpline: `日本語で${B}話せる人が${B}必要なら`,
   },
   phrase: { draft: "翻訳はネイティブ確認前の下書きです。" },
   langSwitch: { label: "言語" },

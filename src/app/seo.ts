@@ -13,8 +13,10 @@ export type PagePath = (typeof PAGES)[number];
 export const pathFor = (lang: Locale, page: PagePath) => `/${lang}/${page}`;
 
 /** 화면마다: 제목, 정규 주소, 언어별 대체 주소(hreflang), 공유 미리보기 기본값 */
-export function pageMetadata(lang: Locale, page: PagePath, title?: string): Metadata {
+export function pageMetadata(lang: Locale, page: PagePath, rawTitle?: string): Metadata {
   const t = getMessages(lang);
+  // 화면 문구의 구 경계(U+200B, ja.ts)는 문서 제목·미리보기에 남기지 않는다
+  const title = rawTitle?.replaceAll("\u200b", "");
   return {
     metadataBase: new URL(SITE_URL),
     title: title ? `${title} · ${t.meta.title}` : t.meta.title,

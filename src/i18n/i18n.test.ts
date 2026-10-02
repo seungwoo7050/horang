@@ -68,6 +68,12 @@ describe("message files", () => {
     expect([...values(en), ...values(ja)].filter((v) => !String(v).trim())).toEqual([]);
   });
 
+  it("phrase breaks (U+200B) only sit between words in Japanese copy", () => {
+    expect(values(en).filter((v) => String(v).includes("\u200b"))).toEqual([]);
+    const bad = /^\u200b|\u200b$|\u200b\u200b|\s\u200b|\u200b\s/;
+    expect(values(ja).filter((v) => bad.test(String(v)))).toEqual([]);
+  });
+
   it("Japanese copy uses full-width question marks and colons", () => {
     expect(values(ja).filter((v) => /[?:]/.test(String(v)))).toEqual([]);
   });

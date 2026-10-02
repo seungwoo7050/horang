@@ -66,3 +66,9 @@
 .go:active {
   transform: scale(0.98);
 }
+
+/* 일본어: ja.ts의 구 경계에서만 줄을 바꾼다(globals.css 짧은 줄 규칙과 같음) */
+:lang(ja) .block p {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
