@@ -27,6 +27,20 @@ test.describe("language", () => {
     }
   });
 
+  test("/ has a title and language links even without JavaScript", async ({ browser }) => {
+    const ctx = await browser.newContext({ javaScriptEnabled: false });
+    const page = await ctx.newPage();
+    await page.goto("/");
+    await expect(page).toHaveTitle("Horang");
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/$/);
+    await expect(page.locator('link[rel="alternate"][hreflang="ja"]')).toHaveAttribute(
+      "href",
+      /\/ja\/$/,
+    );
+    await expect(page.locator('link[rel="alternate"][hreflang="x-default"]')).toHaveCount(1);
+    await ctx.close();
+  });
+
   test("the chosen language is remembered", async ({ page }) => {
     await page.goto("/en/");
     await page.getByRole("link", { name: "日本語" }).click();
