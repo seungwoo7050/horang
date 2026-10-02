@@ -1,8 +1,10 @@
+/* 키 큰 화면에서 남는 높이는 위로 보낸다: 고를 목록이 엄지 쪽(아래)으로 내려온다(Rauno 손가락·엄지 영역) */
 .hello {
   display: flex;
   align-items: flex-end;
   gap: var(--space-3);
-  margin-top: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-2);
 }
 
 /* 말풍선: 호랑이가 먼저 말을 건다 */
