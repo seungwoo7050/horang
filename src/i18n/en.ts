@@ -93,6 +93,17 @@ export const en = {
     hurry: "Going to the airport?",
     hurryBack: "Back to the comparison",
     departHeading: "Leaving from Seoul Station",
+    next: {
+      title: "Next Express",
+      seoul: "Seoul Station",
+      route: "{from} → {to}",
+      now: "Now {time} in Korea",
+      in: "in {m} min",
+      leaving: "leaving now",
+      arrives: "arrives {time}",
+      none: "No more Express trains today. Tomorrow's first one leaves at {time}.",
+      note: "From the official timetable. Be on the platform at least 3 minutes early.",
+    },
   },
   station: {
     title: "Seoul Station",

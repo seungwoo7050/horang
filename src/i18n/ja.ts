@@ -89,6 +89,17 @@ export const ja: Messages = {
     hurry: "空港へ向かいますか？",
     hurryBack: "比較に戻る",
     departHeading: "ソウル駅から出発",
+    next: {
+      title: "次の直通列車",
+      seoul: "ソウル駅",
+      route: "{from} → {to}",
+      now: "韓国時間 {time}",
+      in: "{m}分後",
+      leaving: "まもなく発車",
+      arrives: "{time}着",
+      none: "今日の直通列車は終わりました。明日の始発は{time}です。",
+      note: "公式時刻表より。発車の3分前までにホームに着いてください。",
+    },
   },
   station: {
     title: "ソウル駅",
