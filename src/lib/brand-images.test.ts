@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { BRAND_BUDGET_BYTES, BRAND_IMAGES } from "./brand-images";
+import { BRAND_BUDGET_BYTES, BRAND_COLORS, BRAND_IMAGES } from "./brand-images";
 
 /** WebP 머리에서 픽셀 크기를 읽는다(VP8X·VP8L·VP8) */
 function webpSize(buf: Buffer): [number, number] {
@@ -41,5 +41,18 @@ describe("brand images (public/brand)", () => {
   it("all together stay small enough for the offline precache", () => {
     const total = files.reduce((n, f) => n + f.buf.length, 0);
     expect(total).toBeLessThan(BRAND_BUDGET_BYTES);
+  });
+});
+
+describe("brand tokens", () => {
+  const css = readFileSync("src/app/globals.css", "utf8");
+
+  it("globals.css has the same brand colors the derivative script paints, once each", () => {
+    expect(css.match(/--brand-cream:\s*(#[0-9a-f]{6})/g)).toEqual([
+      `--brand-cream: ${BRAND_COLORS.cream}`,
+    ]);
+    expect(css.match(/--brand-navy:\s*(#[0-9a-f]{6})/g)).toEqual([
+      `--brand-navy: ${BRAND_COLORS.navy}`,
+    ]);
   });
 });

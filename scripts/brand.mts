@@ -4,6 +4,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { chromium, type Page } from "@playwright/test";
+import { BRAND_COLORS } from "../src/lib/brand-images.ts";
 
 /** 원본 폴더(01-mascot/, 02-logo/가 있는 곳). 첫 인자 또는 HORANG_BRAND_SRC */
 export function brandSource(): string {
@@ -24,9 +25,10 @@ export const FILES = {
   wordmark: "02-logo/horang-wordmark.png",
 } as const;
 
-/** 브랜드 색(globals.css --brand-cream, --brand-navy와 같은 값. 제공 안내문의 워드마크 색) */
-export const CREAM = [0xf7, 0xf1, 0xe8] as const;
-export const NAVY = [0x0f, 0x17, 0x2a] as const;
+/** 브랜드 색(제공 안내문의 워드마크 색 = globals.css --brand-cream, --brand-navy)을 [r, g, b]로 */
+const rgb = (hex: string) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+export const CREAM = rgb(BRAND_COLORS.cream);
+export const NAVY = rgb(BRAND_COLORS.navy);
 
 /**
  * 마스코트 원본의 배경 제거 흠(원본 좌표, 1600×1600). 사람이 눈으로 확인해 고른 자리다.

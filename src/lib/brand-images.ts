@@ -15,5 +15,8 @@ export const BRAND_IMAGES = {
 
 export type BrandImage = keyof typeof BRAND_IMAGES;
 
+/** 브랜드 색(globals.css --brand-cream·--brand-navy). 파생본 스크립트가 워드마크 글자를 이 두 색으로 바꾼다 */
+export const BRAND_COLORS = { cream: "#f7f1e8", navy: "#0f172a" } as const;
+
 /** 오프라인 미리 캐시에 더해지는 브랜드 이미지 전체 상한(바이트). 넘으면 테스트가 알린다 */
 export const BRAND_BUDGET_BYTES = 100 * 1024;
