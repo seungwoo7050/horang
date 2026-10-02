@@ -19,9 +19,14 @@ export function pageHasNumber(html: string, token: string): boolean {
     const hour = String(Number(h));
     return new RegExp(`(?<!\\d)0?${hour}:${m}(?!\\d)`).test(html);
   }
-  if (token.endsWith("%")) return html.includes(token) || html.includes(token.replace("%", " %"));
+  // 앞이 숫자나 소수점이면 더 큰 수의 일부(13.7% 안의 3.7%)
+  if (token.endsWith("%")) {
+    const n = token.slice(0, -1).replace(".", "\\.");
+    return new RegExp(`(?<![\\d.])${n}\\s?%`).test(html);
+  }
   const plain = digits(token);
-  return new RegExp(`(?<![\\d,])(${token.replace(/,/g, ",")}|${plain})(?![\\d,])`).test(html);
+  // 뒤에 "쉼표+숫자"가 오면 더 큰 수(13,000,000). 문장 부호 쉼표("₩5,000, ₩8,000")는 괜찮다
+  return new RegExp(`(?<![\\d,])(${token}|${plain})(?!\\d|,\\d)`).test(html);
 }
 
 export type Baseline = Record<string, string>;

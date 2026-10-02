@@ -28,7 +28,21 @@ describe("pageHasNumber", () => {
     expect(pageHasNumber("16:00", "06:00")).toBe(false);
   });
 
+  it("matches an amount followed by a comma in a list", () => {
+    expect(pageHasNumber("₩5,000, ₩8,000 and ₩10,000", "5,000")).toBe(true);
+    expect(pageHasNumber("₩5,000, ₩8,000 and ₩10,000", "10,000")).toBe(true);
+    expect(pageHasNumber("5,000원, 8,000원", "5,000")).toBe(true);
+    expect(pageHasNumber("13,000,000", "13,000")).toBe(false);
+  });
+
   it("matches percentages", () => {
     expect(pageHasNumber("평균 3.7%의 수수료", "3.7%")).toBe(true);
+    expect(pageHasNumber("3.7 %", "3.7%")).toBe(true);
+  });
+
+  it("does not match a percentage inside a bigger number", () => {
+    expect(pageHasNumber("13.7%", "3.7%")).toBe(false);
+    expect(pageHasNumber("03.7%", "3.7%")).toBe(false);
+    expect(pageHasNumber("3.75%", "3.7%")).toBe(false);
   });
 });
