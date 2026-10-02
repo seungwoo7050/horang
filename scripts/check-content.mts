@@ -1,7 +1,13 @@
 // 빌드 전에 콘텐츠를 검사한다(`npm run content:check`, `prebuild`에서 실행).
 // 스키마 위반이면 실패하고, 최신성은 실패시키지 않고 보고만 한다(CONTENT_OPS.md §3).
 import { readFileSync } from "node:fs";
-import { ClaimsFile, LinksFile, PhrasesFile, staleness } from "../src/content/schema.ts";
+import {
+  ClaimsFile,
+  LinksFile,
+  PhrasesFile,
+  staleness,
+  TimetablesFile,
+} from "../src/content/schema.ts";
 
 const read = (path: string): unknown => JSON.parse(readFileSync(path, "utf8"));
 
@@ -9,6 +15,7 @@ const results = [
   ["src/content/claims.json", ClaimsFile.safeParse(read("src/content/claims.json"))],
   ["src/content/phrases.json", PhrasesFile.safeParse(read("src/content/phrases.json"))],
   ["src/content/links.json", LinksFile.safeParse(read("src/content/links.json"))],
+  ["src/content/timetables.json", TimetablesFile.safeParse(read("src/content/timetables.json"))],
 ] as const;
 
 let failed = false;

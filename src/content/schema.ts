@@ -109,3 +109,34 @@ export function staleness(claim: Pick<Claim, "kind" | "verifiedAt">, today: stri
   if (age > policy.recheck) return "due";
   return "fresh";
 }
+
+// ---- 시각표(timetables.json) — 스크립트가 공식 페이지에서 만든다(scripts/fetch-arex-timetable.mts) ----
+
+const HHMM = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, "HH:MM");
+
+const increasing = (times: string[]) => times.every((t, i) => i === 0 || t > times[i - 1]!);
+
+export const ExpressTimetable = z
+  .object({
+    toSeoul: z.array(z.object({ t2: HHMM, t1: HHMM, seoul: HHMM })).min(1),
+    toAirport: z.array(z.object({ seoul: HHMM, t1: HHMM, t2: HHMM })).min(1),
+    sameOnHolidays: z.literal(true),
+    source: Source,
+    evidence: Evidence,
+    verifiedAt: IsoDate,
+    verifiedBy: z.string().min(1),
+  })
+  .superRefine((tt, ctx) => {
+    const checks: [string, string[]][] = [
+      ["toSeoul.t2", tt.toSeoul.map((r) => r.t2)],
+      ["toSeoul.t1", tt.toSeoul.map((r) => r.t1)],
+      ["toAirport.seoul", tt.toAirport.map((r) => r.seoul)],
+    ];
+    for (const [name, times] of checks) {
+      if (!increasing(times))
+        ctx.addIssue({ code: "custom", message: `${name} 시각이 오름차순이 아니다` });
+    }
+  });
+export type ExpressTimetable = z.infer<typeof ExpressTimetable>;
+
+export const TimetablesFile = z.object({ "arex-express": ExpressTimetable });
