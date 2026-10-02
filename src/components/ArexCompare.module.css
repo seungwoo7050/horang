@@ -76,6 +76,8 @@
   line-height: 1.1;
   letter-spacing: var(--tracking-display);
   font-variant-numeric: tabular-nums;
+  /* 숫자와 단위("約59分")가 갈라지지 않게. 320px 폭에서도 칸 안에 들어간다(e2e) */
+  white-space: nowrap;
 }
 
 .big small {
