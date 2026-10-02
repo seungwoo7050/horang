@@ -176,4 +176,5 @@ export const ja: Messages = {
   },
   phrase: { draft: "翻訳はネイティブ確認前の下書きです。" },
   langSwitch: { label: "言語" },
+  theme: { toLight: "ライトモードにする", toDark: "ダークモードにする" },
 };

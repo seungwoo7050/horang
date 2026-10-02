@@ -92,3 +92,18 @@ test("no screen scrolls sideways on a phone", async ({ page }) => {
     }
   }
 });
+
+test("theme: sun/moon button overrides the device setting and remembers it", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: "dark" });
+  await page.goto("/en/");
+  await page.getByRole("button", { name: "Switch to light mode" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await expect(page.getByRole("button", { name: "Switch to dark mode" })).toBeVisible();
+  // 기기 설정과 같은 쪽으로 돌아오면 저장을 지우고 다시 기기 설정을 따른다
+  await page.getByRole("button", { name: "Switch to dark mode" }).click();
+  await expect(page.locator("html")).not.toHaveAttribute("data-theme", /./);
+  await page.goto("/en/gate/");
+  await expect(page.locator("html")).not.toHaveAttribute("data-theme", /./);
+});

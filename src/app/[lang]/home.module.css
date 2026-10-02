@@ -135,3 +135,8 @@
 .staff:active {
   transform: scale(0.98);
 }
+
+.tools {
+  display: flex;
+  align-items: center;
+}

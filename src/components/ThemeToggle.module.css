@@ -1,0 +1,71 @@
+.toggle {
+  display: grid;
+  place-items: center;
+  width: var(--hit-min);
+  height: var(--hit-min);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--color-muted);
+  cursor: pointer;
+}
+
+.toggle svg {
+  overflow: visible;
+}
+
+.disc {
+  fill: currentColor;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.bite {
+  transform-box: view-box;
+  transform-origin: 12px 12px;
+  /* 해: 물린 자국이 원 밖 오른쪽 위로 비켜 있다 */
+  transform: translate(11px, -11px);
+}
+
+.rays path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.rays {
+  transform-box: view-box;
+  transform-origin: 12px 12px;
+}
+
+/* 달(지금 다크 → 누르면 라이트): 원이 커지고 한쪽이 물려 초승달, 빛줄기는 사라진다 */
+.toggle[data-theme-icon="light"] .disc {
+  transform: scale(1.5);
+}
+
+.toggle[data-theme-icon="light"] .bite {
+  transform: translate(4px, -4px);
+}
+
+.toggle[data-theme-icon="light"] .rays {
+  transform: rotate(-45deg) scale(0.5);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .disc,
+  .bite,
+  .rays {
+    transition:
+      transform var(--dur-base) var(--ease-enter),
+      opacity var(--dur-fast) var(--ease-enter);
+  }
+}
+
+@media (hover: hover) {
+  .toggle:hover {
+    color: var(--color-ink);
+  }
+}

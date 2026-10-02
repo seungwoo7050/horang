@@ -14,5 +14,7 @@ export const getMessages = (locale: Locale): Messages => messages[locale];
 
 /** 언어 선택을 브라우저에만 저장할 때 쓰는 키(CLAUDE.md: 설정은 브라우저에만) */
 export const LOCALE_STORAGE_KEY = "horang.lang";
+/** 손으로 고른 화면 밝기(light·dark). 없으면 기기 설정을 따른다 */
+export const THEME_STORAGE_KEY = "horang.theme";
 
 export type { Messages };

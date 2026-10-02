@@ -172,6 +172,7 @@ export const en = {
   },
   phrase: { draft: "Draft translation, not yet checked by a native speaker." },
   langSwitch: { label: "Language" },
+  theme: { toLight: "Switch to light mode", toDark: "Switch to dark mode" },
 } as const;
 
 type Widen<T> = { [K in keyof T]: T[K] extends string ? string : Widen<T[K]> };
