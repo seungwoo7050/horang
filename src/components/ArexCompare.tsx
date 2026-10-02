@@ -15,6 +15,8 @@ type Props = {
   /** 터미널별 근거 줄(서버에서 그림) */
   meta: Record<Terminal, ReactNode>;
   arrive: ReactNode;
+  /** 직통으로 서울역에 내린 뒤(서버에서 그림) */
+  atSeoul: ReactNode;
   depart: ReactNode;
   /** 공식 직통 시각표: 공항→서울역(터미널별 출발), 서울역→공항(터미널별 도착) */
   trains: { toSeoul: Record<Terminal, TrainRow[]>; toAirport: Record<Terminal, TrainRow[]> };
@@ -23,7 +25,16 @@ type Props = {
 };
 
 /** 직통/일반 비교. 숫자는 claim의 data에서만 온다. 출국일 모드는 서울역 출발 정보 */
-export function ArexCompare({ lang, numbers, meta, arrive, depart, trains, trainMeta }: Props) {
+export function ArexCompare({
+  lang,
+  numbers,
+  meta,
+  arrive,
+  atSeoul,
+  depart,
+  trains,
+  trainMeta,
+}: Props) {
   const t = getMessages(lang).arex;
   const [terminal, setTerminal] = useState("t1" as Terminal);
   const [leaving, setLeaving] = useState(false);
@@ -94,6 +105,8 @@ export function ArexCompare({ lang, numbers, meta, arrive, depart, trains, train
       />
       <h2 className={flow.section}>{t.details}</h2>
       {arrive}
+      <h2 className={flow.section}>{t.atSeoul}</h2>
+      {atSeoul}
       <button type="button" className={flow.primary} onClick={() => setLeaving(true)}>
         {t.hurry}
       </button>
