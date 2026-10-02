@@ -80,6 +80,24 @@ test.describe("reduced motion", () => {
     await ctx.close();
   });
 
+  test("turning Reduce Motion on mid-visit leaves no clipped height behind", async ({
+    browser,
+  }) => {
+    const ctx = await browser.newContext({ reducedMotion: "no-preference" });
+    const page = await ctx.newPage();
+    await page.goto("/en/station/");
+    await page.getByRole("button", { name: /^Line 1/ }).click();
+    await expect(page.getByText("Step 1 of 3")).toBeVisible();
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.getByRole("button", { name: "Next" }).click();
+    await expect(page.getByText("Step 2 of 3")).toBeVisible();
+    // SmoothHeight 바깥 상자: 높이가 바뀌는 동안만 잘리고, 동작 줄이기에서는 높이를 건드리지 않는다
+    const outer = page.locator("main [class*=SmoothHeight-module][class*=outer]");
+    await expect(outer).not.toHaveAttribute("data-moving", /./);
+    await expect(outer).not.toHaveCSS("overflow-y", "clip");
+    await ctx.close();
+  });
+
   test("without it, the ribbon animates with the token duration", async ({ browser }) => {
     const ctx = await browser.newContext({ reducedMotion: "no-preference" });
     const page = await ctx.newPage();
