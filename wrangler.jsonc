@@ -1,0 +1,13 @@
+// Cloudflare Workers 정적 자산 배포(ARCHITECTURE.md §1 호스팅, Q-HOST 권장안).
+// Worker 스크립트 없이 out/만 올린다 → 정적 요청은 무료·무제한(static-assets/billing-and-limitations).
+// 보안 헤더(CSP 등)는 빌드가 만드는 out/_headers로 적용된다.
+{
+  "name": "horang",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./out",
+    // 폴더 index.html은 "/en/gate/"처럼 슬래시 주소로(next.config trailingSlash와 같게)
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+  },
+}

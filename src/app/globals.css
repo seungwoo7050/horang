@@ -1,0 +1,152 @@
+/*
+ * 디자인 토큰 — B · Night arrival (DESIGN.md §3-1·§3-2).
+ * 값은 후보이며 실기기 확인 후 확정한다. dur-ribbon 500ms·ease-enter는 권장값으로 먼저 넣었다(2026-10-01).
+ * 토큰 밖의 색·폰트·모션을 화면에서 직접 쓰지 않는다(CLAUDE.md).
+ */
+
+:root {
+  /* 색: 라이트 */
+  --color-bg: #f6f4ee;
+  --color-surface: #ffffff;
+  --color-ink: #0e1424;
+  --color-muted: #5a6278;
+  --color-line: #dcd8cc;
+  --color-ribbon: #b57400; /* 선·그래픽 전용(bg 3.5:1) */
+  --color-ribbon-text: #9a6200; /* 호박색 글자(bg 4.63:1) */
+  --color-ribbon-fill: #ffb547; /* 버튼 바탕 전용 */
+  --color-on-ribbon: #0e1424;
+  /* 호랑이(design/character-2026-10-01 시안 색). 장식이며 정보 전달에 쓰지 않는다 */
+  --color-tiger: #ffb547;
+  --color-tiger-face: #ffffff;
+  --color-tiger-ink: #0e1424;
+  color-scheme: light;
+
+  /* 간격 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --gutter: 20px;
+
+  /* 반경·터치 */
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-pill: 999px;
+  --hit-min: 44px;
+  --hit-primary: 52px;
+
+  /* 글자 */
+  --font-latin: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-ja:
+    "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Noto Sans CJK JP", system-ui,
+    sans-serif;
+  --font-ko: "Apple SD Gothic Neo", "Noto Sans KR", "Noto Sans CJK KR", system-ui, sans-serif;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-md: 15px;
+  --text-base: 16px;
+  --text-lg: 21px;
+  --text-xl: 24px;
+  --text-display: 40px;
+  --text-staff: 34px;
+
+  /* 모션: 기본은 "움직임 없음". 아래 미디어 쿼리에서만 켠다 */
+  --dur-tap: 0ms;
+  --dur-fast: 0ms;
+  --dur-base: 0ms;
+  --dur-sheet: 0ms;
+  --dur-ribbon: 0ms;
+  --dur-boop: 0ms;
+  --ease-enter: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-exit: ease-in;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    --dur-tap: 100ms;
+    --dur-fast: 150ms;
+    --dur-base: 200ms;
+    --dur-sheet: 400ms;
+    --dur-ribbon: 500ms;
+    --dur-boop: 200ms;
+  }
+}
+
+/* 색: 다크 — 기기 설정을 따르되, 사용자가 고른 data-theme이 이긴다 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #0e1424;
+    --color-surface: #18213a;
+    --color-ink: #f4f1e8;
+    --color-muted: #a7aec2;
+    --color-line: #27314f;
+    --color-ribbon: #ffb547;
+    --color-ribbon-text: #ffb547;
+    --color-ribbon-fill: #ffb547;
+    --color-on-ribbon: #0e1424;
+    --color-tiger-face: #fff4e0;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-bg: #0e1424;
+  --color-surface: #18213a;
+  --color-ink: #f4f1e8;
+  --color-muted: #a7aec2;
+  --color-line: #27314f;
+  --color-ribbon: #ffb547;
+  --color-ribbon-text: #ffb547;
+  --color-ribbon-fill: #ffb547;
+  --color-on-ribbon: #0e1424;
+  --color-tiger-face: #fff4e0;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-latin);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 일본어: ベタ組, 행두 금칙, 지원 브라우저에서만 구 단위 줄바꿈(DESIGN.md §7) */
+:lang(ja) {
+  font-family: var(--font-ja);
+  letter-spacing: 0;
+  line-break: strict;
+  word-break: auto-phrase;
+  text-autospace: normal;
+}
+
+:lang(ja) :is(p, li) {
+  line-height: 1.7;
+}
+
+/* 한국어(직원에게 보여 줄 문장): 어절 단위 줄바꿈 */
+:lang(ko) {
+  font-family: var(--font-ko);
+  word-break: keep-all;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px var(--color-bg),
+    0 0 0 5px var(--color-ribbon);
+}

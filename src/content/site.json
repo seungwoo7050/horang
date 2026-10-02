@@ -1,0 +1,4 @@
+{
+  "url": "https://horang.seungwoo7050.workers.dev",
+  "note": "공개 주소. 첫 배포(Cloudflare workers.dev, 2026-10-02). 도메인을 붙이면 바꾼다(Q-DOMAIN). 빌드 환경변수 SITE_URL이 이 값을 덮는다."
+}

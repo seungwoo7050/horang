@@ -1,0 +1,100 @@
+/* 역 개념도. 색·간격·모션은 globals.css 토큰만 쓴다 */
+.map {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: inherit;
+}
+
+.floor rect {
+  fill: var(--color-bg);
+  stroke: var(--color-line);
+}
+
+.floor text {
+  dominant-baseline: central;
+  font-size: var(--text-sm);
+  fill: var(--color-ink);
+}
+
+.floor .level {
+  font-weight: 700;
+  fill: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.skip {
+  stroke: var(--color-line);
+  stroke-width: 2;
+  stroke-dasharray: 2 5;
+  stroke-linecap: round;
+}
+
+.track,
+.ribbon {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.track {
+  stroke: var(--color-line);
+}
+
+.ribbon {
+  stroke: var(--color-ribbon);
+}
+
+/* 게이트: 리본을 가로지르는 짧은 막대 */
+.gate {
+  stroke: var(--color-ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.stop circle,
+.stopDone circle {
+  stroke-width: 2;
+}
+
+.stop circle {
+  fill: var(--color-surface);
+  stroke: var(--color-line);
+}
+
+.stopDone circle {
+  fill: var(--color-ribbon-fill);
+  stroke: var(--color-ribbon);
+}
+
+.stop text,
+.stopDone text {
+  dominant-baseline: central;
+  text-anchor: middle;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.stop text {
+  fill: var(--color-muted);
+}
+
+.stopDone text {
+  fill: var(--color-on-ribbon);
+}
+
+/* 동작 줄이기가 아니면: 처음엔 0에서 그려지고, 단계가 바뀌면 이어서 그린다(끊고 방향 전환 가능) */
+@media (prefers-reduced-motion: no-preference) {
+  .ribbon {
+    transition: stroke-dashoffset var(--dur-ribbon) var(--ease-enter);
+    animation: draw var(--dur-ribbon) var(--ease-enter) both;
+  }
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}

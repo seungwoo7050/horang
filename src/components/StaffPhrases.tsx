@@ -1,0 +1,43 @@
+"use client";
+
+import { useState, type ReactNode } from "react";
+import styles from "./flow.module.css";
+
+type Props = {
+  /** 문장 id → 카드(서버에서 그림) */
+  cards: Record<string, ReactNode>;
+  /** 고를 문장 목록(현재 언어 번역을 이름으로) */
+  options: { id: string; label: string }[];
+  initial: string;
+  othersLabel: string;
+};
+
+/** 직원에게 보여 줄 문장: 위에 크게 한 장, 아래에서 다른 문장 고르기. 급한 화면이라 SponsorSlot 없음 */
+export function StaffPhrases({ cards, options, initial, othersLabel }: Props) {
+  const [current, setCurrent] = useState(initial);
+  return (
+    <>
+      <div key={current} className={`${styles.stage} ${styles.forward}`}>
+        {cards[current]}
+      </div>
+      <h2 className={styles.section}>{othersLabel}</h2>
+      <ul className={styles.options}>
+        {options.map((o) => (
+          <li key={o.id}>
+            <button
+              type="button"
+              className={styles.option}
+              aria-pressed={o.id === current}
+              onClick={() => {
+                setCurrent(o.id);
+                window.scrollTo({ top: 0 });
+              }}
+            >
+              {o.label}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}

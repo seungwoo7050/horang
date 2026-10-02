@@ -1,0 +1,50 @@
+# PR과 main 푸시마다: 정적 검사·단위 테스트 → 빌드 → e2e(Cloudflare처럼 서빙한 빌드 결과).
+# 배포는 하지 않는다(Cloudflare API 토큰이 필요해 사용자 결정 후, PROGRESS.md).
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check-build-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint · typecheck · format · unit tests
+        run: npm run check
+
+      - name: Build (content check → next build → sw.js·_headers)
+        run: npm run build
+
+      # @playwright/test 버전(package.json에 고정)에 맞는 Chromium만 설치
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: E2E (flows · offline · CSP · a11y)
+        run: npx playwright test
+
+      - name: Upload Playwright traces on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-results
+          path: test-results/
+          retention-days: 7

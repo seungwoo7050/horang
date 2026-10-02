@@ -1,0 +1,162 @@
+// 日本語の文言。원어민 검수 전 초안(V0-4에서 검수).
+import type { Messages } from "./en";
+
+export const ja: Messages = {
+  langName: "日本語",
+  meta: {
+    title: "Horang",
+    description: "仁川空港からソウル駅までの初日を助ける、非公式のお助けアプリです。",
+  },
+  common: { back: "戻る", stepOf: "ステップ {n}／3" },
+  fact: {
+    evidence: { A: "現地で確認", B: "公式情報", C: "旅行者の報告" },
+    checked: "{date}確認",
+    stale: "要再確認",
+    notOnSite: "現地ではまだ確認していません。",
+  },
+  home: {
+    ask: "お困りですか？",
+    sub: "困っている場面をタップしてください。一緒に解決します。",
+    situations: {
+      gate: { title: "改札から出られない", hint: "入れない・出られない" },
+      card: { title: "どのカードを使う？", hint: "1回用・Tmoney・Climate Card" },
+      arex: { title: "AREX：直通列車と一般列車", hint: "空港 ↔ ソウル駅" },
+      station: { title: "ソウル駅：出口と乗り換え", hint: "1号線・4号線・KTX・15番出口" },
+    },
+    staff: "スタッフに見せる",
+    staffKo: "직원에게 보여 주기",
+    footer: "非公式のお助けアプリです。鉄道会社の運営ではありません。",
+  },
+  gate: {
+    title: "改札から出られない",
+    ask: "改札で何が起きましたか？",
+    causes: {
+      lowBalance: { label: "残高が足りない", headline: "チャージしてから出ましょう" },
+      cardError: { label: "エラー音・エラー表示が出た", headline: "カード1枚で、同じ読み取り機に" },
+      wrongDirection: {
+        label: "反対方向の改札に入った",
+        headline: "すぐ出れば1回は無料です",
+      },
+      expressTicket: { label: "直通列車の乗車券を持っている", headline: "QR読み取り機を使います" },
+      other: { label: "その他", headline: "駅員が助けてくれます" },
+    },
+    calm: "大丈夫。よくあることです。急がなくていいですよ。",
+    worked: "解決した",
+    still: "まだ出られない",
+    staffHead: "この画面を駅員さんに見せてください",
+    moreSentences: "ほかの文",
+    solved: "通れました。よかった！",
+    home: "最初に戻る",
+  },
+  card: {
+    title: "どのカードを使う？",
+    where: {
+      ask: "いまどこにいますか？",
+      airport: { label: "仁川空港にいる", hint: "これからソウルへ向かう" },
+      seoul: { label: "もうソウルにいる", hint: "市内を移動する" },
+    },
+    rides: {
+      ask: "どのくらい乗りますか？",
+      few: { label: "数回だけ", hint: "1〜2回の移動" },
+      lots: { label: "何日もたくさん乗る", hint: "ほぼ毎日、地下鉄やバス" },
+    },
+    result: "あなたに合うカード",
+    later: "あとでソウルで",
+    note: "知っておくと安心",
+    restart: "最初から",
+    cards: {
+      single: { name: "1回用交通カード", why: "1回ずつ払います。登録はいりません。" },
+      tmoney: { name: "Tmoney", why: "電車・バスにくり返し使える交通カードです。" },
+      wowpass: { name: "WOWPASS", why: "交通カードと支払いカードが1枚に。" },
+      climate: { name: "Climate Card 短期券", why: "ソウル市内を1〜7日間移動するためのパスです。" },
+    },
+  },
+  arex: {
+    title: "AREX",
+    heading: "直通列車と一般列車、どっち？",
+    terminal: "ターミナル",
+    t1: "第1ターミナル",
+    t2: "第2ターミナル",
+    route: "ソウル駅と{t}、大人",
+    express: "直通列車",
+    allstop: "一般列車",
+    about: "約{n}",
+    min: "分",
+    won: "{n}ウォン",
+    expressNote: "乗車券を買います。交通カードは使えません。",
+    allstopNote: "交通カードでタッチ。表示は交通カードの運賃です。",
+    details: "乗る前に",
+    hurry: "空港へ向かいますか？",
+    hurryBack: "比較に戻る",
+    departHeading: "ソウル駅から出発",
+  },
+  station: {
+    title: "ソウル駅",
+    ask: "空港鉄道のホームから、どこへ行きますか？",
+    schematic: "荷物があっても通れるエレベーター経路です。図は略図で、縮尺は正確ではありません。",
+    stepOf: "ステップ {n}／{total}",
+    routes: {
+      "arex-to-line-4": {
+        label: "4号線",
+        hint: "地下3階・地下1階を通るエレベーター経路",
+        line: "4号線",
+      },
+      "arex-to-line-1": {
+        label: "1号線",
+        hint: "地下3階・地下1階を通るエレベーター経路",
+        line: "1号線",
+      },
+      "arex-to-exit-15": {
+        label: "15番出口（KTX側）",
+        hint: "1階へのエレベーター経路",
+        line: "15番出口",
+      },
+    },
+    steps: {
+      "up-to-b3": {
+        title: "エレベーターで地下3階へ",
+        body: "地下7階の空港鉄道ホームから、エレベーターで地下3階の空港鉄道コンコースへ上がります。",
+      },
+      "transfer-corridor": {
+        title: "乗り換え改札を通って地下1階へ",
+        body: "出口の改札ではなく、乗り換え改札でカードをタッチします。乗り換え通路を進み、エレベーターで地下1階の1・4号線コンコースへ上がります。",
+      },
+      "down-to-platform": {
+        title: "{line}のホームへ下りる",
+        body: "エレベーターで地下2階の{line}ホームへ下ります。",
+      },
+      "exit-gate": {
+        title: "改札を出る",
+        body: "地下3階で改札にカードをタッチして出ます。",
+      },
+      "up-to-exit": {
+        title: "15番出口へ上がる",
+        body: "エレベーターで1階の15番出口へ上がります。15番出口はソウル駅（KTX・一般列車）の案内です。",
+      },
+    },
+    places: {
+      "arex-platform": "空港鉄道ホーム",
+      "arex-concourse": "空港鉄道コンコース",
+      "lines-1-4-concourse": "1・4号線コンコース",
+      "line-4-platform": "4号線ホーム",
+      "line-1-platform": "1号線ホーム",
+      "exit-15": "15番出口",
+    },
+    mapLabel: "{route}への経路図（空港鉄道ホームから）。略図で、縮尺は正確ではありません。",
+    disagree:
+      "1号線へのエレベーター経路は資料によって違います。エレベーターが見つからないときは駅員に聞いてください。",
+    next: "次へ",
+    done: "着いた",
+    cantFind: "見つからない",
+    arrived: "着きました！",
+    home: "最初に戻る",
+  },
+  staff: {
+    title: "スタッフに見せる",
+    lead: "この画面を駅員さんに見せてください。",
+    others: "ほかの文",
+    helpline: "日本語で話せる人が必要なら",
+  },
+  phrase: { draft: "翻訳はネイティブ確認前の下書きです。" },
+  langSwitch: { label: "言語" },
+};
