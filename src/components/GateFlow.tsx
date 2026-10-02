@@ -62,7 +62,7 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
   if (step === "solved") {
     body = (
       <div className={styles.center}>
-        <TigerSitting mood="solved" size={120} />
+        <TigerSitting mood="solved" size={120} celebrate />
         <h1 className={styles.heading}>{g.solved}</h1>
       </div>
     );

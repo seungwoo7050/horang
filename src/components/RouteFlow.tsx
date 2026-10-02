@@ -146,7 +146,7 @@ export function RouteFlow({ lang, routes, places }: Props) {
       <SmoothHeight>
         {arrived ? (
           <div className={styles.center}>
-            <TigerSitting mood="solved" size={112} />
+            <TigerSitting mood="solved" size={112} celebrate />
             <h1 className={styles.heading}>{s.arrived}</h1>
           </div>
         ) : (
