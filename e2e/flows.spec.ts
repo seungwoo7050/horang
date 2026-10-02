@@ -155,3 +155,12 @@ test("an unknown address shows Horang's 404 with a way back in both languages", 
   );
   await expect(page.getByRole("link", { name: "最初の画面へ" })).toHaveAttribute("href", "/ja/");
 });
+
+test("a malformed address gets an error page, and the server keeps serving", async ({
+  request,
+}) => {
+  const bad = await request.get("/en/%E0%A4%A/", { maxRedirects: 0 });
+  expect(bad.status()).toBeGreaterThanOrEqual(400);
+  expect(bad.status()).toBeLessThan(500);
+  expect((await request.get("/en/")).status()).toBe(200);
+});

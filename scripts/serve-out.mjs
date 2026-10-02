@@ -59,11 +59,26 @@ function send(res, status, file, pathname = "") {
   createReadStream(file).pipe(res);
 }
 
+// postbuild-lib canonicalPath와 같다(잘못된 퍼센트 인코딩 조각은 그대로)
 const canonical = (pathname) =>
   pathname
     .split("/")
-    .map((seg) => encodeURIComponent(decodeURIComponent(seg)))
+    .map((seg) => {
+      try {
+        return encodeURIComponent(decodeURIComponent(seg));
+      } catch {
+        return seg;
+      }
+    })
     .join("/");
+
+const decodePath = (pathname) => {
+  try {
+    return decodeURIComponent(pathname);
+  } catch {
+    return null;
+  }
+};
 
 function redirect(res, location) {
   res.writeHead(307, { location });
@@ -76,7 +91,16 @@ createServer((req, res) => {
   if (canonical(rawPath) !== rawPath) return redirect(res, canonical(rawPath) + url.search);
   if (url.pathname.endsWith("/index.html")) return redirect(res, url.pathname.slice(0, -10));
   if (url.pathname.endsWith(".html")) return redirect(res, url.pathname.slice(0, -5));
-  const path = normalize(decodeURIComponent(url.pathname)).replace(/^(\.\.[/\\])+/, "");
+  const decoded = decodePath(url.pathname);
+  // 풀 수 없는 주소는 서버를 죽이지 않고 400(이 서버가 죽으면 뒤 e2e가 전부 연결 거부로 실패한다)
+  if (decoded === null) {
+    res.writeHead(400, {
+      "content-type": "text/plain; charset=utf-8",
+      ...headersFor(url.pathname),
+    });
+    return res.end("Bad Request");
+  }
+  const path = normalize(decoded).replace(/^(\.\.[/\\])+/, "");
   let file = join(ROOT, path);
   if (existsSync(file) && statSync(file).isDirectory()) {
     if (!url.pathname.endsWith("/")) {

@@ -32,6 +32,10 @@ test("after one visit, every screen opens offline", async ({ page, context }) =>
     await expect(page.locator("h1").first()).toBeVisible();
   }
 
+  // 이상한 주소(잘못된 퍼센트 인코딩)도 그 언어 첫 화면으로 대신 연다
+  await page.goto("/ja/%E0%A4%A/");
+  await expect(page.locator("html")).toHaveAttribute("lang", "ja");
+
   // 언어 선택 페이지도
   await page.goto("/");
   await expect(page).toHaveURL(/\/(en|ja)\/$/);

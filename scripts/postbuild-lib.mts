@@ -25,7 +25,14 @@ const SKIP = new Set([
 export const canonicalPath = (path: string) =>
   path
     .split("/")
-    .map((seg) => encodeURIComponent(decodeURIComponent(seg)))
+    .map((seg) => {
+      // 잘못된 퍼센트 인코딩("%E0%A4%A")은 풀 수 없으니 그 조각은 그대로 둔다(예외로 멈추지 않게)
+      try {
+        return encodeURIComponent(decodeURIComponent(seg));
+      } catch {
+        return seg;
+      }
+    })
     .join("/");
 
 /** 미리 캐시·버전 계산 대상 파일 */

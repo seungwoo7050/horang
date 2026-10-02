@@ -92,9 +92,15 @@ describe("renderServiceWorker", () => {
       "/en/gate/__next.%24d%24lang.gate.__PAGE__.txt",
       "/ja/",
       "/__next.!KHJvb3Qp.__PAGE__.txt",
+      "/en/%E0%A4%A/",
     ]) {
       expect(canonical(p)).toBe(canonicalPath(p));
     }
+  });
+
+  it("keeps a malformed percent-encoded segment as it is instead of throwing", () => {
+    expect(canonicalPath("/en/%E0%A4%A/")).toBe("/en/%E0%A4%A/");
+    expect(canonicalPath("/en/%E0%A4%A/$x")).toBe("/en/%E0%A4%A/%24x");
   });
 
   it("turns the real template into valid JavaScript", () => {
