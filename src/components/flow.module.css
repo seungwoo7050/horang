@@ -206,3 +206,17 @@
   word-break: keep-all;
   overflow-wrap: break-word;
 }
+
+/* 강제 색상 모드는 box-shadow(edge)를 지운다: 경계를 시스템 색 테두리로 남긴다 */
+@media (forced-colors: active) {
+  .option,
+  .primary,
+  .secondary {
+    border: 1px solid CanvasText;
+  }
+
+  /* 고른 항목은 배경·안쪽 그림자로만 구분돼 강제 색상 모드에서 같아진다 */
+  .option[aria-pressed="true"] {
+    border: 3px solid Highlight;
+  }
+}

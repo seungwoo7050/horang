@@ -26,3 +26,10 @@
   color: var(--color-muted);
   font-size: var(--text-md);
 }
+
+/* 강제 색상 모드는 box-shadow(edge)를 지운다: 경계를 시스템 색 테두리로 남긴다 */
+@media (forced-colors: active) {
+  .sheet {
+    border: 1px solid CanvasText;
+  }
+}
