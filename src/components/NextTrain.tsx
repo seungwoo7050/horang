@@ -25,18 +25,35 @@ const pad = (n: number) => String(n).padStart(2, "0");
 export function NextTrain({ lang, rows, from, to, meta }: Props) {
   const t = getMessages(lang).arex.next;
   const [now, setNow] = useState(null as number | null);
+  // 스크린 리더에 알릴 말. 첫 열차가 바뀌거나 막차 뒤로 넘어갈 때만 채운다(처음 그릴 때는 비워 둔다)
+  const [news, setNews] = useState("");
 
   useEffect(() => {
-    const tick = () => setNow(koreaMinutes(new Date()));
+    const say = (m: number) => {
+      const first = nextDepartures(rows, (r) => r.depart, m, 1)[0];
+      return first ? `${t.title} ${first.time}` : t.none.replace("{time}", rows[0]?.depart ?? "");
+    };
+    let said: string | null = null;
+    const tick = () => {
+      const m = koreaMinutes(new Date());
+      setNow(m);
+      const next = say(m);
+      if (said !== null && next !== said) setNews(next);
+      said = next;
+    };
     tick();
     const id = setInterval(tick, 30_000);
     return () => clearInterval(id);
-  }, []);
+  }, [rows, t]);
 
   const next = now === null ? [] : nextDepartures(rows, (r) => r.depart, now, 3);
 
   return (
-    <section className={styles.panel} aria-live="polite">
+    // 패널 전체를 live로 두면 매분 바뀌는 시계·남은 분이 읽는 중에 끼어든다. 알릴 것만 아래 숨은 줄에
+    <section className={styles.panel}>
+      <p className={styles.announce} aria-live="polite">
+        {news}
+      </p>
       <div className={styles.head}>
         <h2>{t.title}</h2>
         {now !== null ? (

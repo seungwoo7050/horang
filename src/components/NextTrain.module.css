@@ -9,6 +9,17 @@
   border-radius: var(--radius);
 }
 
+/* 스크린 리더 전용(보이지 않음) */
+.announce {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .head {
   display: flex;
   align-items: baseline;
