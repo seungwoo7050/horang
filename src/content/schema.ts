@@ -18,6 +18,15 @@ export const Source = z.object({
   title: z.string().min(1),
 });
 
+/**
+ * 문장에 그 숫자가 하나의 수로 있는지(더 큰 수의 일부는 안 된다: 15,000 안의 5,000, 43 안의 3).
+ * 뒤에 오는 문장 부호 쉼표·마침표("₩5,000, 2 days")는 괜찮다
+ */
+export function hasNumber(text: string, shown: string): boolean {
+  const escaped = shown.replace(/[.,]/g, "\\$&");
+  return new RegExp(`(?<![\\d])(?<!\\d[.,])${escaped}(?![\\d]|[.,]\\d)`).test(text);
+}
+
 export const Claim = z
   .object({
     id: Id,
@@ -37,7 +46,7 @@ export const Claim = z
     for (const [key, n] of Object.entries(claim.data ?? {})) {
       const shown = n.toLocaleString("en-US");
       for (const lang of ["en", "ja"] as const) {
-        if (!claim.text[lang].includes(shown)) {
+        if (!hasNumber(claim.text[lang], shown)) {
           ctx.addIssue({
             code: "custom",
             message: `data.${key}(${shown})가 ${lang} 문장에 없다`,
