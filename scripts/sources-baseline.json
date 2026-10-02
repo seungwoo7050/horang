@@ -1,0 +1,4 @@
+{
+  "arex.allstop.fare-seoul-t1 @ https://www.airportrailroad.com/train/normal/fare : 4,850": "계산값: 운임표는 교통카드 운임만 싣고 '1회용 교통카드를 구매하시면 일반은 100원이 추가'라고 적는다(같은 페이지 주석, 2026-10-02 확인). 교통카드 운임(4,750·5,350)은 따로 감시된다",
+  "arex.allstop.fare-seoul-t2 @ https://www.airportrailroad.com/train/normal/fare : 5,450": "계산값: 운임표는 교통카드 운임만 싣고 '1회용 교통카드를 구매하시면 일반은 100원이 추가'라고 적는다(같은 페이지 주석, 2026-10-02 확인). 교통카드 운임(4,750·5,350)은 따로 감시된다"
+}
