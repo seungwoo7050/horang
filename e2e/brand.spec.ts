@@ -202,4 +202,16 @@ test.describe("brand", () => {
     }
     await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href", /\/icons\/icon\.svg/);
   });
+
+  test("share preview: og:image is the 1200×630 mascot picture and is not in the offline precache", async ({
+    page,
+    request,
+  }) => {
+    await page.goto("/ja/");
+    const url = await page.locator('meta[property="og:image"]').getAttribute("content");
+    const png = await (await request.get(new URL(url!).pathname)).body();
+    expect(`${png.readUInt32BE(16)}x${png.readUInt32BE(20)}`).toBe("1200x630");
+    const sw = await (await request.get("/sw.js")).text();
+    expect(sw).not.toContain('"/og.png"');
+  });
 });
