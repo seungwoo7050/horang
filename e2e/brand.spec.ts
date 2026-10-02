@@ -180,4 +180,26 @@ test.describe("brand", () => {
       await ctx.close();
     }
   });
+
+  test("home-screen icons are the mascot PNGs at their declared sizes; the favicon stays the small SVG face", async ({
+    page,
+    request,
+  }) => {
+    const manifest = await (await request.get("/manifest.webmanifest")).json();
+    const icons = manifest.icons as { src: string; sizes: string; type: string }[];
+    expect(icons.map((i) => i.type)).toEqual(["image/png", "image/png", "image/png"]);
+    await page.goto("/en/");
+    const apple = await page.locator('link[rel="apple-touch-icon"]').getAttribute("href");
+    for (const [src, size] of [
+      ...icons.map((i) => [i.src, i.sizes] as const),
+      [apple!, "180x180"] as const,
+    ]) {
+      const res = await request.get(src);
+      expect(res.status(), src).toBe(200);
+      const png = await res.body();
+      expect(png.subarray(1, 4).toString("ascii"), src).toBe("PNG");
+      expect(`${png.readUInt32BE(16)}x${png.readUInt32BE(20)}`, src).toBe(size);
+    }
+    await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href", /\/icons\/icon\.svg/);
+  });
 });

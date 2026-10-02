@@ -22,16 +22,31 @@ describe("precacheUrls", () => {
         "en/gate/index.html",
         "en/gate/__next._tree.txt",
         "_next/static/chunks/a.js",
-        "icons/icon-192.png",
+        "icons/icon.svg",
+        "brand/mascot.webp",
       ]),
     ).toEqual([
       "/",
       "/_next/static/chunks/a.js",
+      "/brand/mascot.webp",
       "/en/",
       "/en/gate/",
       "/en/gate/__next._tree.txt",
-      "/icons/icon-192.png",
+      "/icons/icon.svg",
     ]);
+  });
+
+  it("leaves out home-screen icon PNGs and the share preview: taken once, online, by the OS or a messenger", () => {
+    expect(
+      precacheUrls([
+        "icons/icon-192.png",
+        "icons/icon-512.png",
+        "icons/icon-maskable-512.png",
+        "icons/apple-touch-icon.png",
+        "og.png",
+        "icons/icon.svg",
+      ]),
+    ).toEqual(["/icons/icon.svg"]);
   });
 
   it("skips the worker, host config files and 404 screens", () => {

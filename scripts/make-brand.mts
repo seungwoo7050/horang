@@ -35,11 +35,9 @@ const report = await page.evaluate(
     const w = window as unknown as Record<string, OffscreenCanvas>;
     const out: Record<string, unknown> = {};
 
-    // 마스코트: 눈 구멍 → 깎인 홈 순서로 고친다
+    // 마스코트: 눈 구멍 → 깎인 홈 → 잘린 앞발 순서로 고친다
     const m = await b.load(files.mascot);
-    out.mascotEyes = b.fillHoles(m, fix.eye, fix.eyeBox);
-    out.mascotNotches = b.patchUnder(m, fix.notches, fix.stripe);
-    out.mascotPaw = b.roundCut(m, fix.paw.x, fix.paw.reach);
+    out.mascotFix = b.fixMascot(m, fix);
     const mb = b.bbox(m);
     out.mascotBox = mb;
     const [x0, y0, x1, y1] = mb;

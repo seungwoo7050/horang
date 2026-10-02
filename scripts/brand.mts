@@ -65,6 +65,11 @@ export type BrandPixels = {
   fillHoles(img: ImageData, rgb: readonly number[], box?: readonly number[]): number;
   patchUnder(img: ImageData, paths: readonly string[], rgb: readonly number[]): number;
   roundCut(img: ImageData, x: number, reach: number): [number, number, number];
+  fixMascot(
+    img: ImageData,
+    fix: typeof MASCOT_FIX,
+  ): { eyes: number; notches: number; paw: [number, number, number] };
+  iconCanvas(img: ImageData, crop: readonly number[], size: number, bg: string): OffscreenCanvas;
   swapColors(
     img: ImageData,
     pairs: readonly (readonly [readonly number[], readonly number[]])[],

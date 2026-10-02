@@ -169,6 +169,26 @@ globalThis.brand = (() => {
     return [y0, y1, n];
   }
 
+  /** 마스코트 원본 보수 세 가지(눈 구멍 → 깎인 줄무늬 → 잘린 앞발). fix는 brand.mts의 MASCOT_FIX */
+  function fixMascot(img, fix) {
+    return {
+      eyes: fillHoles(img, fix.eye, fix.eyeBox),
+      notches: patchUnder(img, fix.notches, fix.stripe),
+      paw: roundCut(img, fix.paw.x, fix.paw.reach),
+    };
+  }
+
+  /** 정사각형 아이콘: 배경색을 깔고 원본의 crop [x, y, 한 변]을 size 크기로 */
+  function iconCanvas(img, crop, size, bg) {
+    const art = resized(img, [crop[0], crop[1], crop[2], crop[2]], [size, size]);
+    const c = new OffscreenCanvas(size, size);
+    const x = c.getContext("2d");
+    x.fillStyle = bg;
+    x.fillRect(0, 0, size, size);
+    x.drawImage(art, 0, 0);
+    return c;
+  }
+
   /**
    * 정확히 그 색인 픽셀만 바꾼다(불투명도는 그대로). pairs: [[from, to], ...], tol: 채널당 허용 차이.
    * minX: 이 x부터만(로고에서 호랑이 마크의 크림 입 주변·남색 배낭을 건드리지 않게)
@@ -249,5 +269,16 @@ globalThis.brand = (() => {
     return { type: blob.type, base64: btoa(s) };
   }
 
-  return { load, fillHoles, patchUnder, roundCut, swapColors, bbox, resized, encode };
+  return {
+    load,
+    fillHoles,
+    patchUnder,
+    roundCut,
+    fixMascot,
+    iconCanvas,
+    swapColors,
+    bbox,
+    resized,
+    encode,
+  };
 })();
