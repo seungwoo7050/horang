@@ -6,9 +6,12 @@ export const appIcons: Metadata["icons"] = {
   apple: "/icons/apple-touch-icon.png",
 };
 
+/** 밝기별 화면 배경(globals.css --color-bg와 같은 값). 주소창 색 */
+export const THEME_BG = { dark: "#0b1020", light: "#f5f3ee" } as const;
+
 export const appViewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0b1020" },
-    { media: "(prefers-color-scheme: light)", color: "#f5f3ee" },
+    { media: "(prefers-color-scheme: dark)", color: THEME_BG.dark },
+    { media: "(prefers-color-scheme: light)", color: THEME_BG.light },
   ],
 };

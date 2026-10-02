@@ -164,3 +164,33 @@ test("a malformed address gets an error page, and the server keeps serving", asy
   expect(bad.status()).toBeLessThan(500);
   expect((await request.get("/en/")).status()).toBe(200);
 });
+
+test("theme: the address bar color (theme-color) follows the chosen brightness after reloads", async ({
+  page,
+}) => {
+  // 지금 적용되는 theme-color(media가 맞는 meta)가 화면 배경 토큰과 같은지
+  const matches = () =>
+    page.evaluate(() => {
+      const metas = [...document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')];
+      const used = metas.find((m) => !m.media || matchMedia(m.media).matches)?.content;
+      const bg = getComputedStyle(document.documentElement).getPropertyValue("--color-bg").trim();
+      return `${used} = ${bg}`;
+    });
+  const same = (s: string) => s.split(" = ")[0] === s.split(" = ")[1];
+  await page.emulateMedia({ colorScheme: "dark" });
+  await page.goto("/en/");
+  await page.getByRole("button", { name: "Switch to light mode" }).click();
+  expect(same(await matches()), await matches()).toBe(true);
+  await page.reload();
+  expect(same(await matches()), `after reload: ${await matches()}`).toBe(true);
+  await page.goto("/en/gate/");
+  expect(same(await matches()), `another screen: ${await matches()}`).toBe(true);
+  await page.goto("/en/");
+  await page.getByRole("link", { name: /stuck at the gate/ }).click();
+  await expect(page.getByRole("heading", { name: "What happened at the gate?" })).toBeVisible();
+  expect(same(await matches()), `in-app move: ${await matches()}`).toBe(true);
+  await page.goto("/en/");
+  await page.getByRole("button", { name: "Switch to dark mode" }).click();
+  await page.emulateMedia({ colorScheme: "light" });
+  expect(same(await matches()), `device turned light: ${await matches()}`).toBe(true);
+});
