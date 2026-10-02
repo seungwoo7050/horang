@@ -17,6 +17,7 @@
 
 .fill {
   stroke: var(--color-ribbon);
+  filter: var(--ribbon-glow);
 }
 
 .done circle,

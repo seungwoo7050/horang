@@ -44,6 +44,7 @@
 
 .ribbon {
   stroke: var(--color-ribbon);
+  filter: var(--ribbon-glow);
 }
 
 /* 게이트: 리본을 가로지르는 짧은 막대 */
