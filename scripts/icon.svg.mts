@@ -1,7 +1,7 @@
 // 앱 아이콘(T1 얼굴, DESIGN.md §3-2). 색은 globals.css 토큰 값(다크 bg, tiger, tiger-face, tiger-ink)과 같다.
 // scale: 얼굴 크기(마스커블 아이콘은 안전 영역 안에 들어가도록 작게)
 export function iconSvg(scale = 0.78) {
-  const bg = "#0e1424";
+  const bg = "#0b1020";
   const tiger = "#ffb547";
   const face = "#fff4e0";
   const ink = "#0e1424";
