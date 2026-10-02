@@ -17,9 +17,8 @@
   --color-ribbon-text: #a85a00; /* 호박색 글자(bg 4.59:1, surface 5.09:1) */
   --color-ribbon-fill: #ffb547; /* 버튼 바탕 전용 */
   --color-on-ribbon: #0e1424;
-  /* 호랑이(design/character-2026-10-01 시안 색). 장식이며 정보 전달에 쓰지 않는다 */
+  /* 호랑이 SVG(장식, 정보 전달에 쓰지 않는다). 크림 부분은 마스코트와 같은 --brand-cream */
   --color-tiger: #ffb547;
-  --color-tiger-face: #ffffff;
   --color-tiger-ink: #0e1424;
   /*
    * 브랜드(사용자 제공 로고·워드마크 색, 2026-10-02). 두 밝기에서 같은 값이다.
@@ -109,7 +108,6 @@
     --color-ribbon-text: #ffb547;
     --color-ribbon-fill: #ffb547;
     --color-on-ribbon: #0e1424;
-    --color-tiger-face: #fff4e0;
     /* 다크: 그림자 대신 위쪽 빛 한 줄과 옅은 테두리 */
     --edge: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 0 0 1px rgb(255 255 255 / 0.05);
     /* 다크: 리본(선)에만 아주 옅은 빛. 다른 곳에는 쓰지 않는다 */
@@ -130,7 +128,6 @@
   --color-ribbon-text: #ffb547;
   --color-ribbon-fill: #ffb547;
   --color-on-ribbon: #0e1424;
-  --color-tiger-face: #fff4e0;
   /* 다크: 그림자 대신 위쪽 빛 한 줄과 옅은 테두리 */
   --edge: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 0 0 1px rgb(255 255 255 / 0.05);
   --ribbon-glow: drop-shadow(0 0 4px rgb(255 181 71 / 0.45));
