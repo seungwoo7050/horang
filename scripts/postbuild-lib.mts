@@ -3,8 +3,28 @@ import { createHash } from "node:crypto";
 import { readdirSync, statSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 
-/** 배포에 들어가지만 서비스 워커가 미리 캐시하지 않는 파일(빌드 후 생성물·호스트 설정) */
-const SKIP = new Set(["sw.js", "_headers", "_redirects"]);
+/**
+ * 배포에 들어가지만 서비스 워커가 미리 캐시하지 않는 파일: 빌드 후 생성물·호스트 설정, 그리고 404 화면
+ * (Cloudflare가 /404.html을 /404로 307 보내서 미리 캐시가 통째로 실패한 적이 있다. 오프라인 대체 화면은 언어 첫 화면)
+ */
+const SKIP = new Set([
+  "sw.js",
+  "_headers",
+  "_redirects",
+  "404.html",
+  "404/index.html",
+  "_not-found/index.html",
+]);
+
+/**
+ * Cloudflare가 서빙하는 정식 경로: 경로 조각마다 퍼센트 인코딩("$" → "%24").
+ * 그대로 두면 Cloudflare가 307로 보내 미리 캐시(cache.addAll)가 실패한다. sw.template.js의 canonical()과 같아야 한다
+ */
+export const canonicalPath = (path: string) =>
+  path
+    .split("/")
+    .map((seg) => encodeURIComponent(decodeURIComponent(seg)))
+    .join("/");
 
 /** 미리 캐시·버전 계산 대상 파일 */
 export const isAppFile = (f: string) => !SKIP.has(f) && !f.endsWith(".map");
@@ -23,8 +43,8 @@ export function precacheUrls(files: string[]): string[] {
     .filter(isAppFile)
     .map((f) => {
       if (f === "index.html") return "/";
-      if (f.endsWith("/index.html")) return `/${f.slice(0, -"index.html".length)}`;
-      return `/${f}`;
+      if (f.endsWith("/index.html")) return canonicalPath(`/${f.slice(0, -"index.html".length)}`);
+      return canonicalPath(`/${f}`);
     })
     .sort();
 }

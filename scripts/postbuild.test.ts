@@ -3,6 +3,7 @@ import { Script } from "node:vm";
 import { describe, expect, it } from "vitest";
 import {
   buildVersion,
+  canonicalPath,
   contentSecurityPolicy,
   headersFile,
   htmlRoute,
@@ -32,8 +33,16 @@ describe("precacheUrls", () => {
     ]);
   });
 
-  it("skips the worker itself and host config files", () => {
-    expect(precacheUrls(["sw.js", "_headers", "a.js.map", "404.html"])).toEqual(["/404.html"]);
+  it("skips the worker, host config files and 404 screens", () => {
+    expect(
+      precacheUrls(["sw.js", "_headers", "a.js.map", "404.html", "404/index.html", "a.txt"]),
+    ).toEqual(["/a.txt"]);
+  });
+
+  it("uses the percent-encoded paths Cloudflare serves without redirecting", () => {
+    expect(
+      precacheUrls(["en/gate/__next.$d$lang.gate.__PAGE__.txt", "__next.!KHJvb3Qp.__PAGE__.txt"]),
+    ).toEqual(["/__next.!KHJvb3Qp.__PAGE__.txt", "/en/gate/__next.%24d%24lang.gate.__PAGE__.txt"]);
   });
 });
 
@@ -68,6 +77,23 @@ describe("renderServiceWorker", () => {
   it("refuses a template where a mark is missing or repeated", () => {
     expect(() => renderServiceWorker("__VERSION__ __VERSION__ __PRECACHE__", "v", [])).toThrow();
     expect(() => renderServiceWorker("__VERSION__", "v", [])).toThrow();
+  });
+
+  it("normalizes paths in the worker the same way as the precache list", () => {
+    const template = readFileSync("scripts/sw.template.js", "utf8");
+    const body = template.slice(
+      template.indexOf("const canonical"),
+      template.indexOf('.join("/");') + 12,
+    );
+    const canonical = new Function(`${body}; return canonical;`)() as (p: string) => string;
+    for (const p of [
+      "/en/gate/__next.$d$lang.gate.__PAGE__.txt",
+      "/en/gate/__next.%24d%24lang.gate.__PAGE__.txt",
+      "/ja/",
+      "/__next.!KHJvb3Qp.__PAGE__.txt",
+    ]) {
+      expect(canonical(p)).toBe(canonicalPath(p));
+    }
   });
 
   it("turns the real template into valid JavaScript", () => {

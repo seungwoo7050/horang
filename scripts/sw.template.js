@@ -6,6 +6,14 @@ const PRECACHE = __PRECACHE__;
 const CACHE = `horang-${VERSION}`;
 const NETWORK_TIMEOUT_MS = 4000;
 
+// Cloudflare가 서빙하는 정식 경로(경로 조각마다 퍼센트 인코딩, 예: "$" → "%24").
+// 미리 캐시 목록도 이 형태라서 브라우저가 "$" 그대로 요청해도 찾을 수 있다(postbuild-lib canonicalPath와 같음)
+const canonical = (pathname) =>
+  pathname
+    .split("/")
+    .map((seg) => encodeURIComponent(decodeURIComponent(seg)))
+    .join("/");
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
@@ -33,16 +41,15 @@ self.addEventListener("fetch", (event) => {
   if (request.method !== "GET") return;
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
+  const key = url.origin + canonical(url.pathname);
   if (url.pathname.startsWith("/_next/static/")) {
-    event.respondWith(
-      caches.match(request, { ignoreSearch: true }).then((hit) => hit || fetch(request)),
-    );
+    event.respondWith(caches.match(key).then((hit) => hit || fetch(request)));
     return;
   }
-  event.respondWith(networkFirst(request, url));
+  event.respondWith(networkFirst(request, key, url));
 });
 
-async function networkFirst(request, url) {
+async function networkFirst(request, key, url) {
   const cache = await caches.open(CACHE);
   try {
     const response = await Promise.race([
@@ -51,13 +58,13 @@ async function networkFirst(request, url) {
         setTimeout(() => reject(new Error("timeout")), NETWORK_TIMEOUT_MS),
       ),
     ]);
-    // 검색어(_rsc 등) 없이 저장해 캐시가 불어나지 않게 한다
+    // 검색어(_rsc 등) 없이 정식 경로로 저장해 캐시가 불어나지 않게 한다
     if (response.ok && response.type === "basic" && !response.redirected) {
-      cache.put(url.origin + url.pathname, response.clone());
+      cache.put(key, response.clone());
     }
     return response;
   } catch {
-    const hit = await cache.match(request, { ignoreSearch: true });
+    const hit = await cache.match(key);
     if (hit) return hit;
     if (request.mode === "navigate") {
       const lang = url.pathname.startsWith("/ja/") ? "/ja/" : "/en/";
