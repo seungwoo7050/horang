@@ -161,4 +161,23 @@ test.describe("brand", () => {
     }
     expect(violations).toEqual([]);
   });
+
+  test("/ without JavaScript: the logo matches the brightness above the two languages", async ({
+    browser,
+  }) => {
+    for (const scheme of ["light", "dark"] as const) {
+      const ctx = await browser.newContext({ javaScriptEnabled: false, colorScheme: scheme });
+      const page = await ctx.newPage();
+      await page.goto("/");
+      const logo = page.getByRole("heading", { level: 1 }).getByRole("img", { name: "Horang" });
+      await expect(logo).toHaveCount(1);
+      await expect(logo).toHaveAttribute(
+        "src",
+        scheme === "light" ? "/brand/logo-navy.webp" : "/brand/logo-cream.webp",
+      );
+      await expect.poll(() => drawn(logo), { message: scheme }).toBe(true);
+      await expect(page.getByRole("link", { name: "日本語" })).toHaveAttribute("href", "/ja/");
+      await ctx.close();
+    }
+  });
 });
