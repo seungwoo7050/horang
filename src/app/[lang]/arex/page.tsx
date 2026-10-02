@@ -5,7 +5,7 @@ import { FactList, FactMeta } from "@/components/Fact";
 import { PhraseCard } from "@/components/PhraseCard";
 import { Screen } from "@/components/Screen";
 import { SponsorSlot } from "@/components/SponsorSlot";
-import { getClaim } from "@/content";
+import { getClaim, timetables } from "@/content";
 import { getMessages, isLocale, type Locale } from "@/i18n";
 
 /** claim의 화면용 숫자(data). 없으면 빌드 실패 */
@@ -42,6 +42,17 @@ const metaIds = (tm: Terminal) => [
   "arex.express.no-transit-card",
 ];
 
+/** 공식 직통 시각표를 터미널·방향별 출발/도착 쌍으로 */
+function trains() {
+  const tt = timetables["arex-express"];
+  const toSeoul = (tm: Terminal) => tt.toSeoul.map((r) => ({ depart: r[tm], arrive: r.seoul }));
+  const toAirport = (tm: Terminal) => tt.toAirport.map((r) => ({ depart: r.seoul, arrive: r[tm] }));
+  return {
+    toSeoul: { t1: toSeoul("t1"), t2: toSeoul("t2") },
+    toAirport: { t1: toAirport("t1"), t2: toAirport("t2") },
+  };
+}
+
 export async function generateMetadata({ params }: PageProps<"/[lang]/arex">) {
   const { lang } = await params;
   return isLocale(lang) ? pageMetadata(lang, "arex/", getMessages(lang).arex.heading) : {};
@@ -56,6 +67,18 @@ export default async function ArexPage({ params }: PageProps<"/[lang]/arex">) {
       <ArexCompare
         lang={lang}
         numbers={numbers(lang)}
+        trains={trains()}
+        trainMeta={{
+          toSeoul: (
+            <FactMeta
+              ids={["arex.express.airport-departures", "arex.express.qr-gate"]}
+              lang={lang}
+            />
+          ),
+          toAirport: (
+            <FactMeta ids={["arex.express.seoul-departures", "arex.express.qr-gate"]} lang={lang} />
+          ),
+        }}
         meta={{
           t1: <FactMeta ids={metaIds("t1")} lang={lang} />,
           t2: <FactMeta ids={metaIds("t2")} lang={lang} />,

@@ -4,6 +4,7 @@ import { useState, type ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
 import styles from "./ArexCompare.module.css";
 import flow from "./flow.module.css";
+import { NextTrain, type TrainRow } from "./NextTrain";
 
 export type Terminal = "t1" | "t2";
 type Numbers = { expressMin: string; expressFare: string; allstopMin: string; allstopFare: string };
@@ -15,10 +16,14 @@ type Props = {
   meta: Record<Terminal, ReactNode>;
   arrive: ReactNode;
   depart: ReactNode;
+  /** 공식 직통 시각표: 공항→서울역(터미널별 출발), 서울역→공항(터미널별 도착) */
+  trains: { toSeoul: Record<Terminal, TrainRow[]>; toAirport: Record<Terminal, TrainRow[]> };
+  /** 다음 열차 근거 줄(서버에서 그림) */
+  trainMeta: { toSeoul: ReactNode; toAirport: ReactNode };
 };
 
 /** 직통/일반 비교. 숫자는 claim의 data에서만 온다. 출국일 모드는 서울역 출발 정보 */
-export function ArexCompare({ lang, numbers, meta, arrive, depart }: Props) {
+export function ArexCompare({ lang, numbers, meta, arrive, depart, trains, trainMeta }: Props) {
   const t = getMessages(lang).arex;
   const [terminal, setTerminal] = useState("t1" as Terminal);
   const [leaving, setLeaving] = useState(false);
@@ -28,6 +33,13 @@ export function ArexCompare({ lang, numbers, meta, arrive, depart }: Props) {
     return (
       <div className={`${flow.stage} ${flow.forward}`}>
         <h1 className={flow.heading}>{t.departHeading}</h1>
+        <NextTrain
+          lang={lang}
+          rows={trains.toAirport[terminal]}
+          from={t.next.seoul}
+          to={t[terminal]}
+          meta={trainMeta.toAirport}
+        />
         {depart}
         <button type="button" className={flow.secondary} onClick={() => setLeaving(false)}>
           {t.hurryBack}
@@ -73,6 +85,13 @@ export function ArexCompare({ lang, numbers, meta, arrive, depart }: Props) {
         </section>
       </div>
       {meta[terminal]}
+      <NextTrain
+        lang={lang}
+        rows={trains.toSeoul[terminal]}
+        from={t[terminal]}
+        to={t.next.seoul}
+        meta={trainMeta.toSeoul}
+      />
       <h2 className={flow.section}>{t.details}</h2>
       {arrive}
       <button type="button" className={flow.primary} onClick={() => setLeaving(true)}>
