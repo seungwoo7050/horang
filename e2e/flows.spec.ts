@@ -51,7 +51,7 @@ test("arex: Terminal 2 numbers come from the claims; leaving mode shows Seoul de
   await expect(page.locator("p", { hasText: /^~66min$/ })).toBeVisible();
   await expect(page.getByText("₩5,350", { exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Going to the airport?" }).click();
-  await expect(page.getByText(/06:10 to 22:50/)).toBeVisible();
+  await expect(page.getByText(/06:00 to 23:00/)).toBeVisible();
 });
 
 test("station: Line 1 warns about conflicting sources and walks three steps", async ({ page }) => {

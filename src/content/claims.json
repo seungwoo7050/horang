@@ -605,18 +605,18 @@
     "id": "arex.express.seoul-departures",
     "kind": "schedule",
     "text": {
-      "en": "Express trains leave Seoul Station for the airport from 06:10 to 22:50, every 30–40 minutes.",
-      "ja": "直通列車はソウル駅から空港へ6:10〜22:50、30〜40分おきに出ます。"
+      "en": "Express trains leave Seoul Station for the airport from 06:00 to 23:00, 26 a day, about every 35–55 minutes. Weekday and holiday timetables are the same.",
+      "ja": "直通列車はソウル駅から空港へ6:00〜23:00、1日26本、約35〜55分おきに出ます。平日と休日の時刻表は同じです。"
     },
     "evidence": "B",
     "sources": [
       {
-        "url": "https://www.airport.kr/ap_en/1420/subview.do",
-        "title": "Incheon Airport official: Airport Railroad"
+        "url": "https://www.airportrailroad.com/train/express/info",
+        "title": "AREX Express timetable (official, weekday and holiday)"
       }
     ],
     "verifiedAt": "2026-10-02",
-    "verifiedBy": "User desk check of official page (not reachable from build container)"
+    "verifiedBy": "Official timetable page opened in session (2026-10-02 KST)"
   },
   {
     "id": "seoul-station.arex.express-gate",
@@ -655,5 +655,22 @@
     ],
     "verifiedAt": "2026-10-01",
     "verifiedBy": "Phase R desk research"
+  },
+  {
+    "id": "arex.express.airport-departures",
+    "kind": "schedule",
+    "evidence": "B",
+    "text": {
+      "en": "Express trains leave Incheon Airport for Seoul Station from 05:16 to 22:40 at Terminal 2 and 05:24 to 22:48 at Terminal 1, 26 a day. Weekday and holiday timetables are the same.",
+      "ja": "直通列車は仁川空港からソウル駅へ、第2ターミナル発5:16〜22:40、第1ターミナル発5:24〜22:48、1日26本です。平日と休日の時刻表は同じです。"
+    },
+    "sources": [
+      {
+        "url": "https://www.airportrailroad.com/train/express/info",
+        "title": "AREX Express timetable (official, weekday and holiday)"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official timetable page opened in session (2026-10-02 KST)"
   }
 ]
