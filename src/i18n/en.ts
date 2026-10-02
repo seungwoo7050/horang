@@ -5,7 +5,7 @@ export const en = {
     title: "Horang",
     description: "Unofficial helper for your first trip from Incheon Airport to Seoul Station.",
   },
-  common: { back: "Back", stepOf: "Step {n} of 3" },
+  common: { back: "Back", close: "Close", stepOf: "Step {n} of 3" },
   fact: {
     evidence: { A: "Checked on site", B: "Official source", C: "Traveler report" },
     checked: "checked {date}",

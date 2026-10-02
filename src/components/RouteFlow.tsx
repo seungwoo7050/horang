@@ -7,7 +7,8 @@ import type { RouteLayout } from "@/station-map/graph";
 import styles from "./flow.module.css";
 import { RouteMap } from "./RouteMap";
 import { MorphLabel } from "./MorphLabel";
-import { BackButton, BackLink, Screen, ScreenHeader } from "./Screen";
+import { FlowNav } from "./FlowNav";
+import { Screen, ScreenHeader } from "./Screen";
 import { TigerSitting } from "./Tiger";
 
 export type RouteChoice = {
@@ -63,13 +64,13 @@ export function RouteFlow({ lang, routes, places }: Props) {
     setHelp(false);
   };
 
-  const left = route ? (
-    <BackButton
-      onClick={() => (step > 0 && !arrived ? move(step - 1) : reset())}
-      label={t.common.back}
+  const left = (
+    <FlowNav
+      mode={route ? "back" : "close"}
+      home={`/${lang}/`}
+      onBack={() => (step > 0 && !arrived ? move(step - 1) : reset())}
+      label={route ? t.common.back : t.common.close}
     />
-  ) : (
-    <BackLink href={`/${lang}/`} label={t.common.back} />
   );
 
   if (!route) {

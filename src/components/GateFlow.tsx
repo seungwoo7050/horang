@@ -5,7 +5,8 @@ import { useState, type ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
 import styles from "./flow.module.css";
 import { MorphLabel } from "./MorphLabel";
-import { BackButton, BackLink, Screen, ScreenHeader } from "./Screen";
+import { FlowNav } from "./FlowNav";
+import { Screen, ScreenHeader } from "./Screen";
 import { StepRibbon } from "./StepRibbon";
 import { TigerFace, TigerSitting } from "./Tiger";
 
@@ -45,12 +46,15 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
   };
 
   const home = `/${lang}/`;
-  const left =
-    step === 0 || step === "solved" ? (
-      <BackLink href={home} label={t.common.back} />
-    ) : (
-      <BackButton onClick={() => go(step === 2 ? 1 : 0)} label={t.common.back} />
-    );
+  const leaving = step === 0 || step === "solved";
+  const left = (
+    <FlowNav
+      mode={leaving ? "close" : "back"}
+      home={home}
+      onBack={() => go(step === 2 ? 1 : 0)}
+      label={leaving ? t.common.close : t.common.back}
+    />
+  );
   const n = step === "solved" ? 2 : step;
 
   let body: ReactNode;

@@ -1,0 +1,33 @@
+/* 길이 17짜리 가로선 두 개를 옮기고 늘이고 줄여 ×와 ‹를 만든다. 각도는 그대로라 회전 없이 이어진다 */
+.icon line {
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  transform-box: view-box;
+  transform-origin: 0 0;
+}
+
+/* ×: 가운데(12,12)에서 엇갈리는 두 선 */
+.close .a {
+  transform: translate(12px, 12px) rotate(-45deg) scaleX(0.9);
+}
+
+.close .b {
+  transform: translate(12px, 12px) rotate(45deg) scaleX(0.9);
+}
+
+/* ‹: (8,12)에서 만나는 두 선. 위 선 (15,5)→(8,12), 아래 선 (8,12)→(15,19) */
+.back .a {
+  transform: translate(11.5px, 8.5px) rotate(-45deg) scaleX(0.58);
+}
+
+.back .b {
+  transform: translate(11.5px, 15.5px) rotate(45deg) scaleX(0.58);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .icon line {
+    transition: transform var(--dur-base) var(--ease-enter);
+  }
+}

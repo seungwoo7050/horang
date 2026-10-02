@@ -3,7 +3,8 @@
 import { useState, type ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
 import styles from "./flow.module.css";
-import { BackButton, BackLink, Screen, ScreenHeader } from "./Screen";
+import { FlowNav } from "./FlowNav";
+import { Screen, ScreenHeader } from "./Screen";
 import { StepRibbon } from "./StepRibbon";
 
 export type Question = {
@@ -58,12 +59,14 @@ export function ChoiceFlow({
     setAnswers(answers.slice(0, -1));
   };
 
-  const left =
-    step === 0 ? (
-      <BackLink href={`/${lang}/`} label={t.common.back} />
-    ) : (
-      <BackButton onClick={back} label={t.common.back} />
-    );
+  const left = (
+    <FlowNav
+      mode={step === 0 ? "close" : "back"}
+      home={`/${lang}/`}
+      onBack={back}
+      label={step === 0 ? t.common.close : t.common.back}
+    />
+  );
   const stepLabel = t.common.stepOf.replace("{n}", String(step + 1));
   const q = questions[step];
 

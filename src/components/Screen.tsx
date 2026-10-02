@@ -1,29 +1,15 @@
 import Link from "next/link";
 import { ViewTransition, type ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
+import { NavIcon } from "./NavIcon";
 import styles from "./Screen.module.css";
 
-const Chevron = () => (
-  <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-    <path d="M15 5l-7 7 7 7" />
-  </svg>
-);
-
-/** 왼쪽 위 뒤로 가기(링크) */
-export function BackLink({ href, label }: { href: string; label: string }) {
+/** 왼쪽 위 닫기(첫 화면으로). 단계 없는 화면용 — 흐름 화면은 FlowNav */
+export function CloseLink({ href, label }: { href: string; label: string }) {
   return (
     <Link href={href} className={styles.back} aria-label={label} transitionTypes={["nav-back"]}>
-      <Chevron />
+      <NavIcon mode="close" />
     </Link>
-  );
-}
-
-/** 왼쪽 위 뒤로 가기(같은 화면 안 이전 단계) */
-export function BackButton({ onClick, label }: { onClick: () => void; label: string }) {
-  return (
-    <button type="button" onClick={onClick} className={styles.back} aria-label={label}>
-      <Chevron />
-    </button>
   );
 }
 
@@ -71,7 +57,7 @@ type Props = {
   title?: string;
   /** 첫 화면 카드와 이어질 이름 */
   morph?: string;
-  /** 뒤로 가기 링크. 없으면 앱 이름 */
+  /** 닫기(첫 화면으로) 링크. 없으면 앱 이름 */
   back?: string;
   aside?: ReactNode;
   /** 기본 헤더 대신(흐름 화면이 단계에 따라 뒤로 가기를 바꿀 때) */
@@ -84,7 +70,7 @@ type Props = {
 export function Screen({ lang, title, morph, back, aside, header, actions, children }: Props) {
   const t = getMessages(lang);
   const left = back ? (
-    <BackLink href={back} label={t.common.back} />
+    <CloseLink href={back} label={t.common.close} />
   ) : (
     <span className={styles.brand}>{t.meta.title}</span>
   );
