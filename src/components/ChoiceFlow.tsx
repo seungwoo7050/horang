@@ -3,7 +3,8 @@
 import { useState, type ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
 import styles from "./flow.module.css";
-import { BackButton, BackLink, Screen, ScreenHeader } from "./Screen";
+import { FlowNav } from "./FlowNav";
+import { Screen, ScreenHeader } from "./Screen";
 import { StepRibbon } from "./StepRibbon";
 
 export type Question = {
@@ -15,6 +16,8 @@ export type Question = {
 type Props = {
   lang: Locale;
   title: string;
+  /** 첫 화면 카드와 이어질 이름 */
+  morph?: string;
   /** 질문 순서대로. 마지막 단계는 결과 */
   questions: Question[];
   /** 답 id를 "-"로 이은 키 → 결과(서버에서 그림) */
@@ -30,7 +33,15 @@ const Chevron = () => (
 );
 
 /** 질문 몇 개에 답하면 맞는 결과를 보여 주는 흐름(교통카드 고르기 등) */
-export function ChoiceFlow({ lang, title, questions, results, resultHeading, restart }: Props) {
+export function ChoiceFlow({
+  lang,
+  title,
+  morph,
+  questions,
+  results,
+  resultHeading,
+  restart,
+}: Props) {
   const t = getMessages(lang);
   const [answers, setAnswers] = useState([] as string[]);
   const [dir, setDir] = useState("forward" as "forward" | "backward");
@@ -48,19 +59,21 @@ export function ChoiceFlow({ lang, title, questions, results, resultHeading, res
     setAnswers(answers.slice(0, -1));
   };
 
-  const left =
-    step === 0 ? (
-      <BackLink href={`/${lang}/`} label={t.common.back} />
-    ) : (
-      <BackButton onClick={back} label={t.common.back} />
-    );
+  const left = (
+    <FlowNav
+      mode={step === 0 ? "close" : "back"}
+      home={`/${lang}/`}
+      onBack={back}
+      label={step === 0 ? t.common.close : t.common.back}
+    />
+  );
   const stepLabel = t.common.stepOf.replace("{n}", String(step + 1));
   const q = questions[step];
 
   return (
     <Screen
       lang={lang}
-      header={<ScreenHeader left={left} title={title} />}
+      header={<ScreenHeader left={left} title={title} morph={morph} />}
       actions={
         done ? (
           <button

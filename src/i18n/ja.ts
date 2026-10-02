@@ -7,7 +7,7 @@ export const ja: Messages = {
     title: "Horang",
     description: "仁川空港からソウル駅までの初日を助ける、非公式のお助けアプリです。",
   },
-  common: { back: "戻る", stepOf: "ステップ {n}／3" },
+  common: { back: "戻る", close: "閉じる", stepOf: "ステップ {n}／3" },
   fact: {
     evidence: { A: "現地で確認", B: "公式情報", C: "旅行者の報告" },
     checked: "{date}確認",

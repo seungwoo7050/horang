@@ -1,0 +1,10 @@
+@media (prefers-reduced-motion: no-preference) {
+  .outer {
+    transition: height var(--dur-base) var(--ease-enter);
+  }
+}
+
+/* 높이가 바뀌는 동안만 위아래를 자른다(평소엔 포커스 링이 잘리지 않게 그대로 둔다) */
+.outer[data-moving] {
+  overflow-y: clip;
+}

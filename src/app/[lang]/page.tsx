@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LangSwitch } from "@/components/LangSwitch";
-import { Screen } from "@/components/Screen";
+import { MorphTitle, Screen } from "@/components/Screen";
 import { TigerSitting } from "@/components/Tiger";
 import { getMessages, isLocale } from "@/i18n";
 import styles from "./home.module.css";
@@ -18,8 +18,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       aside={<LangSwitch current={lang} />}
       actions={
         <>
-          <Link href={`/${lang}/staff/`} className={styles.staff}>
-            {t.home.staff}
+          <Link href={`/${lang}/staff/`} className={styles.staff} transitionTypes={["nav-forward"]}>
+            <MorphTitle name="staff">
+              <span>{t.home.staff}</span>
+            </MorphTitle>
             <span lang="ko" className={styles.staffKo}>
               {t.home.staffKo}
             </span>
@@ -38,12 +40,18 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           const s = t.home.situations[key];
           return (
             <li key={key}>
-              <Link href={`/${lang}/${key}/`} className={styles.situation}>
+              <Link
+                href={`/${lang}/${key}/`}
+                className={styles.situation}
+                transitionTypes={["nav-forward"]}
+              >
                 <span className={styles.num} aria-hidden="true">
                   {i + 1}
                 </span>
                 <span className={styles.text}>
-                  <strong>{s.title}</strong>
+                  <MorphTitle name={key}>
+                    <strong>{s.title}</strong>
+                  </MorphTitle>
                   <small>{s.hint}</small>
                 </span>
                 <svg className={styles.chev} viewBox="0 0 24 24" aria-hidden="true">

@@ -63,7 +63,7 @@ export default async function ArexPage({ params }: PageProps<"/[lang]/arex">) {
   if (!isLocale(lang)) notFound();
   const t = getMessages(lang).arex;
   return (
-    <Screen lang={lang} back={`/${lang}/`} title={t.title}>
+    <Screen lang={lang} back={`/${lang}/`} title={t.title} morph="arex">
       <ArexCompare
         lang={lang}
         numbers={numbers(lang)}

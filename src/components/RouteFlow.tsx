@@ -6,7 +6,10 @@ import { getMessages, type Locale } from "@/i18n";
 import type { RouteLayout } from "@/station-map/graph";
 import styles from "./flow.module.css";
 import { RouteMap } from "./RouteMap";
-import { BackButton, BackLink, Screen, ScreenHeader } from "./Screen";
+import { MorphLabel } from "./MorphLabel";
+import { SmoothHeight } from "./SmoothHeight";
+import { FlowNav } from "./FlowNav";
+import { Screen, ScreenHeader } from "./Screen";
 import { TigerSitting } from "./Tiger";
 
 export type RouteChoice = {
@@ -62,18 +65,18 @@ export function RouteFlow({ lang, routes, places }: Props) {
     setHelp(false);
   };
 
-  const left = route ? (
-    <BackButton
-      onClick={() => (step > 0 && !arrived ? move(step - 1) : reset())}
-      label={t.common.back}
+  const left = (
+    <FlowNav
+      mode={route ? "back" : "close"}
+      home={`/${lang}/`}
+      onBack={() => (step > 0 && !arrived ? move(step - 1) : reset())}
+      label={route ? t.common.back : t.common.close}
     />
-  ) : (
-    <BackLink href={`/${lang}/`} label={t.common.back} />
   );
 
   if (!route) {
     return (
-      <Screen lang={lang} header={<ScreenHeader left={left} title={s.title} />}>
+      <Screen lang={lang} header={<ScreenHeader left={left} title={s.title} morph="station" />}>
         <div className={`${styles.stage} ${styles[dir]}`}>
           <h1 className={styles.heading}>{s.ask}</h1>
           <ul className={styles.options}>
@@ -128,7 +131,7 @@ export function RouteFlow({ lang, routes, places }: Props) {
               className={styles.primary}
               onClick={() => (last ? setArrived(true) : move(step + 1))}
             >
-              {last ? s.done : s.next}
+              <MorphLabel>{last ? s.done : s.next}</MorphLabel>
             </button>
           </div>
         )
@@ -140,24 +143,26 @@ export function RouteFlow({ lang, routes, places }: Props) {
         label={s.mapLabel.replace("{route}", route.label)}
         step={arrived ? route.steps.length - 1 : step}
       />
-      {arrived ? (
-        <div className={styles.center}>
-          <TigerSitting mood="solved" size={112} />
-          <h1 className={styles.heading}>{s.arrived}</h1>
-        </div>
-      ) : (
-        <div key={`${route.id}-${step}`} className={`${styles.stage} ${styles[dir]}`}>
-          <p className={styles.kicker}>{stepLabel}</p>
-          <h1 className={styles.heading}>{current.title}</h1>
-          <p className={styles.body}>{current.body}</p>
-          {current.unconfirmed ? (
-            <p className={styles.caution}>
-              <strong>{s.unconfirmed.label}</strong> {current.unconfirmed}
-            </p>
-          ) : null}
-          {help ? current.phrase : null}
-        </div>
-      )}
+      <SmoothHeight>
+        {arrived ? (
+          <div className={styles.center}>
+            <TigerSitting mood="solved" size={112} celebrate />
+            <h1 className={styles.heading}>{s.arrived}</h1>
+          </div>
+        ) : (
+          <div key={`${route.id}-${step}`} className={`${styles.stage} ${styles[dir]}`}>
+            <p className={styles.kicker}>{stepLabel}</p>
+            <h1 className={styles.heading}>{current.title}</h1>
+            <p className={styles.body}>{current.body}</p>
+            {current.unconfirmed ? (
+              <p className={styles.caution}>
+                <strong>{s.unconfirmed.label}</strong> {current.unconfirmed}
+              </p>
+            ) : null}
+            {help ? current.phrase : null}
+          </div>
+        )}
+      </SmoothHeight>
       {route.evidence}
     </Screen>
   );

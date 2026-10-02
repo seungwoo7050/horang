@@ -4,7 +4,9 @@ import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
 import styles from "./flow.module.css";
-import { BackButton, BackLink, Screen, ScreenHeader } from "./Screen";
+import { MorphLabel } from "./MorphLabel";
+import { FlowNav } from "./FlowNav";
+import { Screen, ScreenHeader } from "./Screen";
 import { StepRibbon } from "./StepRibbon";
 import { TigerFace, TigerSitting } from "./Tiger";
 
@@ -44,12 +46,15 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
   };
 
   const home = `/${lang}/`;
-  const left =
-    step === 0 || step === "solved" ? (
-      <BackLink href={home} label={t.common.back} />
-    ) : (
-      <BackButton onClick={() => go(step === 2 ? 1 : 0)} label={t.common.back} />
-    );
+  const leaving = step === 0 || step === "solved";
+  const left = (
+    <FlowNav
+      mode={leaving ? "close" : "back"}
+      home={home}
+      onBack={() => go(step === 2 ? 1 : 0)}
+      label={leaving ? t.common.close : t.common.back}
+    />
+  );
   const n = step === "solved" ? 2 : step;
 
   let body: ReactNode;
@@ -57,7 +62,7 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
   if (step === "solved") {
     body = (
       <div className={styles.center}>
-        <TigerSitting mood="solved" size={120} />
+        <TigerSitting mood="solved" size={120} celebrate />
         <h1 className={styles.heading}>{g.solved}</h1>
       </div>
     );
@@ -104,10 +109,10 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
     actions = (
       <div className={styles.row}>
         <button type="button" className={styles.secondary} onClick={() => go(2)}>
-          {g.still}
+          <MorphLabel>{g.still}</MorphLabel>
         </button>
         <button type="button" className={styles.primary} onClick={() => go("solved")}>
-          {g.worked}
+          <MorphLabel>{g.worked}</MorphLabel>
         </button>
       </div>
     );
@@ -121,17 +126,21 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
     actions = (
       <div className={styles.row}>
         <Link href={`/${lang}/staff/`} className={styles.secondary}>
-          {g.moreSentences}
+          <MorphLabel>{g.moreSentences}</MorphLabel>
         </Link>
         <button type="button" className={styles.primary} onClick={() => go("solved")}>
-          {g.worked}
+          <MorphLabel>{g.worked}</MorphLabel>
         </button>
       </div>
     );
   }
 
   return (
-    <Screen lang={lang} header={<ScreenHeader left={left} title={g.title} />} actions={actions}>
+    <Screen
+      lang={lang}
+      header={<ScreenHeader left={left} title={g.title} morph="gate" />}
+      actions={actions}
+    >
       <StepRibbon total={3} current={n} label={t.common.stepOf.replace("{n}", String(n + 1))} />
       <div key={`${step}-${causeId}`} className={`${styles.stage} ${styles[dir]}`}>
         {step === "solved" ? null : (

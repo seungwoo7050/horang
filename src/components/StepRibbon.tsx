@@ -26,7 +26,7 @@ export function StepRibbon({
       />
       {Array.from({ length: total }, (_, i) => (
         <g key={i} className={i <= current ? styles.done : styles.todo}>
-          <circle cx={x(i)} cy={12} r={i <= current ? 9 : 7} />
+          <circle cx={x(i)} cy={12} r={9} />
           <text x={x(i)} y={12}>
             {i + 1}
           </text>

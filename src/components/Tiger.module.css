@@ -35,3 +35,42 @@
   stroke-width: 8;
   stroke-linecap: round;
 }
+
+/*
+ * 해결·도착 순간에만: 살짝 웅크렸다가 한 번 깡충, 그 사이 꼬리 리본이 몸쪽에서부터 그려진다.
+ * 드문 순간이라 dur-ribbon(500ms)을 쓴다. 동작 줄이기면 아무 일도 없다
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .celebrate {
+    transform-origin: 50% 100%;
+    animation: hop var(--dur-ribbon) var(--ease-enter) var(--dur-fast) both;
+  }
+
+  .celebrate .tail {
+    animation: tail-draw var(--dur-ribbon) var(--ease-enter) var(--dur-base) backwards;
+  }
+}
+
+@keyframes hop {
+  0% {
+    transform: none;
+  }
+  20% {
+    transform: scale(1.05, 0.92);
+  }
+  55% {
+    transform: translateY(-12%) scale(0.97, 1.04);
+  }
+  80% {
+    transform: scale(1.03, 0.97);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes tail-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}

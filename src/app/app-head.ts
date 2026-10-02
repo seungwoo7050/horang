@@ -8,7 +8,7 @@ export const appIcons: Metadata["icons"] = {
 
 export const appViewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0e1424" },
-    { media: "(prefers-color-scheme: light)", color: "#f6f4ee" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b1020" },
+    { media: "(prefers-color-scheme: light)", color: "#f5f3ee" },
   ],
 };

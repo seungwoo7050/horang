@@ -61,18 +61,34 @@ function Face({ mood, cx, cy, s }: { mood: Mood; cx: number; cy: number; s: numb
   );
 }
 
-/** T2 · Ribbon tail — 첫 화면, 해결 화면, 오류 안내처럼 크게 보이는 자리 */
-export function TigerSitting({ mood = "hi", size = 96 }: { mood?: Mood; size?: number }) {
+/**
+ * T2 · Ribbon tail — 첫 화면, 해결 화면, 오류 안내처럼 크게 보이는 자리.
+ * celebrate: 해결·도착처럼 드문 순간에만 한 번 깡충 뛰고, 꼬리 리본이 그려진다(Benji 즐거움-영향 곡선)
+ */
+export function TigerSitting({
+  mood = "hi",
+  size = 96,
+  celebrate = false,
+}: {
+  mood?: Mood;
+  size?: number;
+  celebrate?: boolean;
+}) {
   return (
     <svg
-      className={styles.tiger}
+      className={celebrate ? `${styles.tiger} ${styles.celebrate}` : styles.tiger}
       viewBox="0 0 120 120"
       width={size}
       height={size}
       aria-hidden="true"
       focusable="false"
     >
-      <path className={styles.tail} d="M78 98 C100 100 108 84 98 74 S112 50 116 44" />
+      <path
+        className={styles.tail}
+        d="M78 98 C100 100 108 84 98 74 S112 50 116 44"
+        pathLength={1}
+        strokeDasharray="1 1"
+      />
       <g className={styles.body}>
         <path d="M34 100 Q30 64 60 62 Q90 64 86 100 Z" />
         <ellipse cx="48" cy="100" rx="9" ry="5" />

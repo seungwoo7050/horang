@@ -3,8 +3,7 @@
   grid-template-columns: 1fr 1fr;
   gap: var(--space-1);
   padding: var(--space-1);
-  background: var(--color-surface);
-  border: 1px solid var(--color-line);
+  background: var(--color-surface-2);
   border-radius: var(--radius);
 }
 
@@ -20,8 +19,9 @@
 }
 
 .seg button[aria-pressed="true"] {
-  background: var(--color-ink);
-  color: var(--color-bg);
+  background: var(--color-raised);
+  box-shadow: var(--edge);
+  color: var(--color-ink);
 }
 
 .route {
@@ -43,7 +43,8 @@
   gap: var(--space-1);
   padding: var(--space-4);
   background: var(--color-surface);
-  border: 1px solid var(--color-line);
+  border: 0;
+  box-shadow: var(--edge);
   border-radius: var(--radius);
 }
 
