@@ -7,6 +7,7 @@ import type { RouteLayout } from "@/station-map/graph";
 import styles from "./flow.module.css";
 import { RouteMap } from "./RouteMap";
 import { MorphLabel } from "./MorphLabel";
+import { SmoothHeight } from "./SmoothHeight";
 import { FlowNav } from "./FlowNav";
 import { Screen, ScreenHeader } from "./Screen";
 import { TigerSitting } from "./Tiger";
@@ -142,24 +143,26 @@ export function RouteFlow({ lang, routes, places }: Props) {
         label={s.mapLabel.replace("{route}", route.label)}
         step={arrived ? route.steps.length - 1 : step}
       />
-      {arrived ? (
-        <div className={styles.center}>
-          <TigerSitting mood="solved" size={112} />
-          <h1 className={styles.heading}>{s.arrived}</h1>
-        </div>
-      ) : (
-        <div key={`${route.id}-${step}`} className={`${styles.stage} ${styles[dir]}`}>
-          <p className={styles.kicker}>{stepLabel}</p>
-          <h1 className={styles.heading}>{current.title}</h1>
-          <p className={styles.body}>{current.body}</p>
-          {current.unconfirmed ? (
-            <p className={styles.caution}>
-              <strong>{s.unconfirmed.label}</strong> {current.unconfirmed}
-            </p>
-          ) : null}
-          {help ? current.phrase : null}
-        </div>
-      )}
+      <SmoothHeight>
+        {arrived ? (
+          <div className={styles.center}>
+            <TigerSitting mood="solved" size={112} />
+            <h1 className={styles.heading}>{s.arrived}</h1>
+          </div>
+        ) : (
+          <div key={`${route.id}-${step}`} className={`${styles.stage} ${styles[dir]}`}>
+            <p className={styles.kicker}>{stepLabel}</p>
+            <h1 className={styles.heading}>{current.title}</h1>
+            <p className={styles.body}>{current.body}</p>
+            {current.unconfirmed ? (
+              <p className={styles.caution}>
+                <strong>{s.unconfirmed.label}</strong> {current.unconfirmed}
+              </p>
+            ) : null}
+            {help ? current.phrase : null}
+          </div>
+        )}
+      </SmoothHeight>
       {route.evidence}
     </Screen>
   );
