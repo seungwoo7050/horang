@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ViewTransition, type ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
+import { BrandLettering } from "./Brand";
 import { NavIcon } from "./NavIcon";
 import styles from "./Screen.module.css";
 
@@ -59,7 +60,7 @@ type Props = {
   title?: string;
   /** 첫 화면 카드와 이어질 이름 */
   morph?: string;
-  /** 닫기(첫 화면으로) 링크. 없으면 앱 이름 */
+  /** 닫기(첫 화면으로) 링크. 없으면 앱 이름(워드마크) */
   back?: string;
   aside?: ReactNode;
   /** 기본 헤더 대신(흐름 화면이 단계에 따라 뒤로 가기를 바꿀 때) */
@@ -86,7 +87,7 @@ export function Screen({
   const left = back ? (
     <CloseLink href={back} label={t.common.close} />
   ) : (
-    <span className={styles.brand}>{t.meta.title}</span>
+    <BrandLettering kind="wordmark" alt={t.meta.title} className={styles.brand} />
   );
   // 앞으로 가면 화면이 오른쪽에서, 뒤로 가면 왼쪽에서 들어온다. 헤더는 이름이 따로 있어 제자리(DESIGN.md §6-1)
   return (
