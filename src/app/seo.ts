@@ -13,8 +13,10 @@ export type PagePath = (typeof PAGES)[number];
 export const pathFor = (lang: Locale, page: PagePath) => `/${lang}/${page}`;
 
 /** 화면마다: 제목, 정규 주소, 언어별 대체 주소(hreflang), 공유 미리보기 기본값 */
-export function pageMetadata(lang: Locale, page: PagePath, title?: string): Metadata {
+export function pageMetadata(lang: Locale, page: PagePath, rawTitle?: string): Metadata {
   const t = getMessages(lang);
+  // 화면 문구의 구 경계(U+200B, ja.ts)는 문서 제목·미리보기에 남기지 않는다
+  const title = rawTitle?.replaceAll("\u200b", "");
   return {
     metadataBase: new URL(SITE_URL),
     title: title ? `${title} · ${t.meta.title}` : t.meta.title,
@@ -32,6 +34,9 @@ export function pageMetadata(lang: Locale, page: PagePath, title?: string): Meta
       title: title ?? t.meta.title,
       description: t.meta.description,
       locale: lang === "ja" ? "ja_JP" : "en_US",
+      // 글자 없는 그림 하나를 두 언어가 같이 쓴다(scripts/og.svg.mts). 제목은 og:title이 보여 준다
+      images: [{ url: "/og.png", width: 1200, height: 630, alt: t.meta.description }],
     },
+    twitter: { card: "summary_large_image" },
   };
 }

@@ -142,6 +142,7 @@ export function RouteFlow({ lang, routes, places }: Props) {
         places={places}
         label={s.mapLabel.replace("{route}", route.label)}
         step={arrived ? route.steps.length - 1 : step}
+        legend={s.legend}
       />
       <SmoothHeight>
         {arrived ? (

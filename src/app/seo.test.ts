@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { pageMetadata, PAGES } from "./seo";
 
@@ -15,6 +16,14 @@ describe("pageMetadata", () => {
 
   it("points x-default of the home screen at the language picker", () => {
     expect(pageMetadata("en", "").alternates?.languages).toMatchObject({ "x-default": "/" });
+  });
+
+  it("gives every screen the shared preview image, which exists in public/", () => {
+    for (const page of PAGES) {
+      const og = pageMetadata("en", page).openGraph as { images: { url: string }[] };
+      expect(og.images[0]?.url).toBe("/og.png");
+    }
+    expect(existsSync("public/og.png")).toBe(true);
   });
 
   it("covers every screen route", () => {

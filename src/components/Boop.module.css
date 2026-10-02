@@ -1,0 +1,26 @@
+.boop {
+  display: block;
+  flex: none;
+  transform-origin: 50% 100%;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* 한 번 갸웃했다 돌아온다: 전체 dur-boop×2, 40% 지점에서 가장 기울고 천천히 내려앉는다. 두 구간 모두 ease-enter */
+.go {
+  animation: boop calc(var(--dur-boop) * 2) both;
+}
+
+@keyframes boop {
+  0% {
+    transform: none;
+    animation-timing-function: var(--ease-enter);
+  }
+  40% {
+    transform: translateY(-4px) rotate(-6deg);
+    animation-timing-function: var(--ease-enter);
+  }
+  100% {
+    transform: none;
+  }
+}

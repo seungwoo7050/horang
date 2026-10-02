@@ -1,8 +1,10 @@
+/* 키 큰 화면에서 남는 높이는 위로 보낸다: 고를 목록이 엄지 쪽(아래)으로 내려온다(Rauno 손가락·엄지 영역) */
 .hello {
   display: flex;
   align-items: flex-end;
   gap: var(--space-3);
-  margin-top: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-2);
 }
 
 /* 말풍선: 호랑이가 먼저 말을 건다 */
@@ -18,7 +20,7 @@
   border-bottom-left-radius: var(--space-1);
   font-size: var(--text-xl);
   line-height: 1.2;
-  letter-spacing: -0.015em;
+  letter-spacing: var(--tracking-tighter);
   text-wrap: balance;
 }
 
@@ -139,4 +141,11 @@
 .tools {
   display: flex;
   align-items: center;
+}
+
+/* 일본어: ja.ts의 구 경계에서만 줄을 바꾼다(globals.css 짧은 줄 규칙과 같음) */
+:lang(ja) .sub,
+:lang(ja) .footer {
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }

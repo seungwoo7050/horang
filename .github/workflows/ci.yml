@@ -1,46 +1,61 @@
 # PR과 main 푸시마다: 정적 검사·단위 테스트 → 빌드 → e2e(Cloudflare처럼 서빙한 빌드 결과).
-# 배포는 하지 않는다(Cloudflare API 토큰이 필요해 사용자 결정 후, PROGRESS.md).
+# main 푸시(머지)에서 모두 통과하면 같은 빌드 결과(out/)를 Cloudflare Workers 정적 자산으로 배포한다.
+# 시크릿: CLOUDFLARE_API_TOKEN(Edit Cloudflare Workers 템플릿, 이 계정만), CLOUDFLARE_ACCOUNT_ID — GitHub 저장소 시크릿.
+# PR(포크 포함)에서는 배포 단계가 돌지 않고 시크릿도 쓰지 않는다. 수동 실행(workflow_dispatch)은 main에서만 배포한다.
 name: CI
 
 on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  # main에서는 배포 도중에 끊지 않는다(다음 실행이 기다렸다가 새 빌드를 올린다)
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 permissions:
   contents: read
 
 jobs:
-  check-build-e2e:
+  check:
+    name: 린트·타입·포맷·단위 테스트
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
-
       - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
-
       - run: npm ci
+      - run: npm run check
 
-      - name: Lint · typecheck · format · unit tests
-        run: npm run check
-
+  e2e:
+    name: 빌드·e2e
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
       - name: Build (content check → next build → sw.js·_headers)
         run: npm run build
-
       # @playwright/test 버전(package.json에 고정)에 맞는 Chromium만 설치
-      - name: Install Chromium for Playwright
-        run: npx playwright install --with-deps chromium
-
+      - run: npx playwright install --with-deps chromium
       - name: E2E (flows · offline · CSP · a11y)
         run: npx playwright test
-
+      # 배포 job이 다시 빌드하지 않고, e2e가 검사한 이 out/을 그대로 올리게 넘긴다
+      - name: 빌드 결과 넘기기
+        uses: actions/upload-artifact@v4
+        with:
+          name: out
+          path: out/
+          retention-days: 1
       - name: Upload Playwright traces on failure
         if: failure()
         uses: actions/upload-artifact@v4
@@ -48,3 +63,29 @@ jobs:
           name: playwright-results
           path: test-results/
           retention-days: 7
+
+  deploy:
+    name: Cloudflare 배포
+    needs: [check, e2e]
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # 이 블록이 저장소 첫 화면의 Deployments와 Actions의 배포 링크를 만든다(environment는 첫 실행 때 자동 생성)
+    environment:
+      name: production
+      url: https://horang.seungwoo7050.workers.dev
+    steps:
+      # wrangler.jsonc를 읽으려고 체크아웃한다(빌드는 하지 않는다)
+      - uses: actions/checkout@v5
+      - name: 빌드 결과 받기
+        uses: actions/download-artifact@v4
+        with:
+          name: out
+          path: out/
+      # package.json의 deploy와 같은 wrangler 버전
+      - name: Deploy to Cloudflare
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          WRANGLER_SEND_METRICS: "false"
+        run: npx --yes wrangler@4.146.0 deploy

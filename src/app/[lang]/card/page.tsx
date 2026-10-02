@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { pageMetadata } from "@/app/seo";
 import { ChoiceFlow } from "@/components/ChoiceFlow";
 import { FactList } from "@/components/Fact";
+import { FactSheet } from "@/components/FactSheet";
+import type { Figure } from "@/components/Figures";
 import styles from "@/components/flow.module.css";
 import { SponsorSlot } from "@/components/SponsorSlot";
 import { getMessages, isLocale, type Locale } from "@/i18n";
@@ -36,14 +38,61 @@ const RESULTS: Record<string, { now: CardId[]; later?: CardId[]; note?: string[]
   "seoul-lots": { now: ["climate", "tmoney"] },
 };
 
+/** 카드마다 요점 숫자(claim data). 표가 문장을 다 보여 주는 claim은 접는다 */
+function figures(id: CardId, lang: Locale): { rows: Figure[]; folded: string[] } {
+  const f = getMessages(lang).card.figures;
+  switch (id) {
+    case "climate": {
+      const c = "climate-card.tourist.prices";
+      return {
+        rows: [
+          { label: f.day, claim: c, key: "d1" },
+          ...[2, 3, 5, 7].map((d) => ({
+            label: f.days.replace("{n}", String(d)),
+            claim: c,
+            key: `d${d}`,
+          })),
+          { label: f.cardItself, claim: c, key: "card" },
+        ],
+        folded: [c],
+      };
+    }
+    case "wowpass":
+      return {
+        rows: [
+          { label: f.wowpass, claim: "wowpass.card", key: "card" },
+          { label: f.wowpassOnline, claim: "wowpass.card", key: "online" },
+        ],
+        folded: [],
+      };
+    case "tmoney":
+      return {
+        rows: [
+          { label: f.tmoney, claim: "tmoney.card.price", key: "from", format: f.tmoneyFrom },
+          { label: f.travelCard, claim: "tmoney.travel-card", key: "card" },
+        ],
+        folded: [],
+      };
+    case "single":
+      return {
+        rows: [
+          { label: f.deposit, claim: "seoul-metro.single-journey.deposit", key: "deposit" },
+          {
+            label: f.arexExtra,
+            claim: "arex.single-journey.deposit",
+            key: "extra",
+            format: f.plus,
+          },
+        ],
+        folded: [],
+      };
+  }
+}
+
 function Pick({ id, lang }: { id: CardId; lang: Locale }) {
   const c = getMessages(lang).card.cards[id];
   return (
-    <section className={styles.pick}>
-      <h2>{c.name}</h2>
-      <p>{c.why}</p>
-      <FactList ids={CARDS[id]} lang={lang} />
-    </section>
+    <FactSheet title={c.name} sub={c.why} ids={CARDS[id]} lang={lang} {...figures(id, lang)} />
   );
 }
 

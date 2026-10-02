@@ -49,9 +49,11 @@ test("arex: Terminal 2 numbers come from the claims; leaving mode shows Seoul de
   // 큰 숫자 칸은 "51" + "min"
   await expect(page.locator("p", { hasText: /^51min$/ })).toBeVisible();
   await expect(page.locator("p", { hasText: /^~66min$/ })).toBeVisible();
-  await expect(page.getByText("₩5,350", { exact: true })).toBeVisible();
+  // 비교 카드의 요금 칸(아래 요금 표에도 같은 숫자가 있어 비교 카드로 좁힌다)
+  await expect(page.locator("p", { hasText: /^₩5,350$/ })).toBeVisible();
   await page.getByRole("button", { name: "Going to the airport?" }).click();
-  await expect(page.getByText(/06:00 to 23:00/)).toBeVisible();
+  // 접힌 출처 안에도 같은 원문이 있어 보이는 첫 문장으로 좁힌다
+  await expect(page.getByText(/06:00 to 23:00/).first()).toBeVisible();
 });
 
 test("station: Line 1 flags unchecked steps where they happen and walks three steps", async ({
@@ -106,4 +108,17 @@ test("theme: sun/moon button overrides the device setting and remembers it", asy
   await expect(page.locator("html")).not.toHaveAttribute("data-theme", /./);
   await page.goto("/en/gate/");
   await expect(page.locator("html")).not.toHaveAttribute("data-theme", /./);
+});
+
+test("an unknown address shows Horang's 404 with a way back in both languages", async ({
+  page,
+}) => {
+  const res = await page.goto("/ja/no-such-page/");
+  expect(res?.status()).toBe(404);
+  await expect(page.getByRole("heading", { name: "This page isn't here" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Go to the first screen" })).toHaveAttribute(
+    "href",
+    "/en/",
+  );
+  await expect(page.getByRole("link", { name: "最初の画面へ" })).toHaveAttribute("href", "/ja/");
 });

@@ -6,9 +6,16 @@
   font-family: inherit;
 }
 
-.floor rect {
-  fill: var(--color-bg);
+.figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.slab {
   stroke: var(--color-line);
+  stroke-width: 1;
 }
 
 .floor text {
@@ -128,4 +135,36 @@
   from {
     stroke-dashoffset: 1;
   }
+}
+
+/* 기호 설명: 지도 아래 한 줄. 같은 토큰으로 그린 작은 기호 + 이름 */
+.legend {
+  display: flex;
+  gap: var(--space-4);
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+}
+
+.legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.key {
+  width: var(--space-4);
+  height: var(--space-4);
+}
+
+.keyStart {
+  fill: var(--color-ribbon-fill);
+  stroke: var(--color-ribbon);
+  stroke-width: 2;
+}
+
+/* 지도와 같은 모양: 회색 길 위를 가로지르는 짧은 막대 */
+.keyTrack {
+  stroke: var(--color-line);
+  stroke-width: 4;
+  stroke-linecap: round;
 }

@@ -74,8 +74,10 @@
   font-size: var(--text-display);
   font-weight: 800;
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tracking-display);
   font-variant-numeric: tabular-nums;
+  /* 숫자와 단위("約59分")가 갈라지지 않게. 320px 폭에서도 칸 안에 들어간다(e2e) */
+  white-space: nowrap;
 }
 
 .big small {
@@ -95,4 +97,11 @@
 .note {
   color: var(--color-muted);
   font-size: var(--text-sm);
+}
+
+/* 일본어: ja.ts의 구 경계에서만 줄을 바꾼다(globals.css 짧은 줄 규칙과 같음) */
+:lang(ja) .note,
+:lang(ja) .fare {
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }

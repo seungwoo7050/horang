@@ -46,8 +46,10 @@ export function ScreenHeader({
 }
 
 /** 엄지 닿는 아래쪽 동작(DESIGN.md §6-1) */
-export function Actions({ children }: { children: ReactNode }) {
-  return <div className={styles.actions}>{children}</div>;
+export function Actions({ children, flow = false }: { children: ReactNode; flow?: boolean }) {
+  return (
+    <div className={flow ? `${styles.actions} ${styles.flow}` : styles.actions}>{children}</div>
+  );
 }
 
 const SLIDE = { "nav-forward": "nav-forward", "nav-back": "nav-back", default: "none" };
@@ -63,11 +65,23 @@ type Props = {
   /** 기본 헤더 대신(흐름 화면이 단계에 따라 뒤로 가기를 바꿀 때) */
   header?: ReactNode;
   actions?: ReactNode;
+  /** 긴 읽을거리(결과) 아래에서는 동작 줄을 고정하지 않고 글 끝에 둔다 */
+  actionsFlow?: boolean;
   children: ReactNode;
 };
 
 /** 한 화면 한 상황: 위 헤더, 가운데 내용, 아래 동작 */
-export function Screen({ lang, title, morph, back, aside, header, actions, children }: Props) {
+export function Screen({
+  lang,
+  title,
+  morph,
+  back,
+  aside,
+  header,
+  actions,
+  actionsFlow,
+  children,
+}: Props) {
   const t = getMessages(lang);
   const left = back ? (
     <CloseLink href={back} label={t.common.close} />
@@ -82,7 +96,7 @@ export function Screen({ lang, title, morph, back, aside, header, actions, child
           <ScreenHeader left={left} title={back ? title : undefined} morph={morph} aside={aside} />
         )}
         <main className={styles.main}>{children}</main>
-        {actions ? <Actions>{actions}</Actions> : null}
+        {actions ? <Actions flow={actionsFlow}>{actions}</Actions> : null}
       </div>
     </ViewTransition>
   );
