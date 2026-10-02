@@ -61,6 +61,11 @@
   --text-xl: 24px;
   --text-display: 40px;
   --text-staff: 34px;
+  /* 자간: 라틴 제목만 살짝 조인다. 일본어는 ベタ組라 아래 :lang(ja)에서 0(DESIGN.md §7) */
+  --tracking-tight: -0.01em;
+  --tracking-tighter: -0.015em;
+  --tracking-display: -0.02em;
+  --tracking-caps: 0.04em;
 
   /* 모션: 기본은 "움직임 없음". 아래 미디어 쿼리에서만 켠다 */
   --dur-tap: 0ms;
@@ -146,6 +151,10 @@ body {
 
 /* 일본어: ベタ組, 행두 금칙, 지원 브라우저에서만 구 단위 줄바꿈(DESIGN.md §7) */
 :lang(ja) {
+  --tracking-tight: 0;
+  --tracking-tighter: 0;
+  --tracking-display: 0;
+  --tracking-caps: 0;
   font-family: var(--font-ja);
   letter-spacing: 0;
   line-break: strict;

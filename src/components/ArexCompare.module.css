@@ -74,7 +74,7 @@
   font-size: var(--text-display);
   font-weight: 800;
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tracking-display);
   font-variant-numeric: tabular-nums;
 }
 

@@ -18,7 +18,7 @@
   border-bottom-left-radius: var(--space-1);
   font-size: var(--text-xl);
   line-height: 1.2;
-  letter-spacing: -0.015em;
+  letter-spacing: var(--tracking-tighter);
   text-wrap: balance;
 }
 

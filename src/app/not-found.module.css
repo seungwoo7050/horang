@@ -27,7 +27,7 @@
   margin: 0;
   font-size: var(--text-xl);
   line-height: 1.25;
-  letter-spacing: -0.015em;
+  letter-spacing: var(--tracking-tighter);
   text-wrap: balance;
 }
 
