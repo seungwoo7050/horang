@@ -137,6 +137,39 @@ globalThis.brand = (() => {
   }
 
   /**
+   * 그림 틀에서 평평하게 잘린 팔 끝을 둥근 앞발로 잇는다. 세로 열 x에서 불투명한 구간을 찾아
+   * 그 열의 색을 오른쪽으로 반타원(가로 reach) 모양만큼 늘린다: 줄마다 원래 음영이 그대로 이어지고,
+   * 끝으로 갈수록 조금 어둡게 해 둥근 면처럼 보이게 한다. 반환: [y0, y1, 늘린 픽셀 수]
+   */
+  function roundCut(img, x, reach) {
+    const { width: w, height: h, data: d } = img;
+    let y0 = -1;
+    let y1 = -1;
+    for (let y = 0; y < h; y++)
+      if (d[(y * w + x) * 4 + 3] >= 128) {
+        if (y0 < 0) y0 = y;
+        y1 = y;
+      }
+    const c = (y0 + y1) / 2;
+    const half = (y1 - y0) / 2 + 1;
+    let n = 0;
+    for (let y = y0; y <= y1; y++) {
+      const t = (y - c) / half;
+      const len = reach * Math.sqrt(Math.max(0, 1 - t * t));
+      const src = (y * w + x) * 4;
+      for (let dx = 1; dx <= Math.ceil(len) + 1 && x + dx < w; dx++) {
+        const cover = Math.max(0, Math.min(1, len - dx + 1));
+        const i = (y * w + x + dx) * 4;
+        const shade = 1 - 0.1 * (dx / reach) ** 2;
+        for (let k = 0; k < 3; k++) d[i + k] = Math.round(d[src + k] * shade);
+        d[i + 3] = Math.round(d[src + 3] * cover);
+        if (cover > 0) n++;
+      }
+    }
+    return [y0, y1, n];
+  }
+
+  /**
    * 정확히 그 색인 픽셀만 바꾼다(불투명도는 그대로). pairs: [[from, to], ...], tol: 채널당 허용 차이.
    * minX: 이 x부터만(로고에서 호랑이 마크의 크림 입 주변·남색 배낭을 건드리지 않게)
    */
@@ -216,5 +249,5 @@ globalThis.brand = (() => {
     return { type: blob.type, base64: btoa(s) };
   }
 
-  return { load, fillHoles, patchUnder, swapColors, bbox, resized, encode };
+  return { load, fillHoles, patchUnder, roundCut, swapColors, bbox, resized, encode };
 })();

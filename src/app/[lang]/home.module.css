@@ -6,10 +6,7 @@
   padding-top: var(--space-2);
 }
 
-/*
- * 마스코트 136px(파생본은 2배). 원본 그림 틀에서 평평하게 잘린 손끝이 오른쪽 가장자리 40~64px 높이에 있다:
- * 말풍선이 그 자리를 8px 덮는다. 위 32px에서 시작하고 모서리가 둥글어도 한 줄 말풍선(약 61px)이 다 가린다
- */
+/* 마스코트 136px(파생본은 2배). 들어 올린 앞발(오른쪽 끝, 위에서 40~64px)이 말풍선 쪽으로 손을 흔든다 */
 .mascot {
   height: 136px;
 }
@@ -17,9 +14,8 @@
 /* 말풍선: 호랑이가 먼저 말을 건다. 뾰족한 모서리(왼쪽 위)가 얼굴 쪽을 향한다 */
 .ask {
   position: relative;
-  z-index: 1;
   flex: 1;
-  margin: var(--space-7) 0 0 calc(var(--space-2) * -1);
+  margin: var(--space-7) 0 0 var(--space-2);
   padding: var(--space-4) var(--space-5);
   background: var(--color-surface);
   border: 0;
@@ -32,14 +28,15 @@
   text-wrap: balance;
 }
 
-/* 320px 폰: 말풍선 글자 자리를 남긴다("Do you / need help?" 두 줄). 손끝(34~55px)은 그대로 말풍선 뒤 */
+/* 320px 폰: 말풍선 글자 자리를 남긴다("Do you / need help?" 두 줄) */
 @media (max-width: 359px) {
   .mascot {
-    height: 116px;
+    height: 108px;
   }
 
   .ask {
     margin-top: var(--space-6);
+    padding-inline: var(--space-4);
   }
 }
 

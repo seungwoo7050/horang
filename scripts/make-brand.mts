@@ -39,6 +39,7 @@ const report = await page.evaluate(
     const m = await b.load(files.mascot);
     out.mascotEyes = b.fillHoles(m, fix.eye, fix.eyeBox);
     out.mascotNotches = b.patchUnder(m, fix.notches, fix.stripe);
+    out.mascotPaw = b.roundCut(m, fix.paw.x, fix.paw.reach);
     const mb = b.bbox(m);
     out.mascotBox = mb;
     const [x0, y0, x1, y1] = mb;
@@ -48,9 +49,8 @@ const report = await page.evaluate(
     const [hw, hh] = sizes.mascot;
     const cw = (bh * hw) / hh;
     w.mascot = b.resized(m, [x0 + bw / 2 - cw / 2, y0, cw, bh], [hw, hh]);
-    // 머리와 어깨: 귀 위에 조금 여백을 두고 정사각형(아래는 패널 가장자리가 가린다)
-    const side = Math.round(bw * 0.86);
-    w["mascot-bust"] = b.resized(m, [x0 + bw * 0.03, y0 - 24, side, side], sizes["mascot-bust"]);
+    // 머리와 어깨: 귀 위에 조금 여백을 두고 정사각형(아래는 패널 가장자리가 가린다). 원본 좌표
+    w["mascot-bust"] = b.resized(m, [221, -24, 1058, 1058], sizes["mascot-bust"]);
 
     // 워드마크·로고: 크림 원본 그대로 / 라이트용은 글자 크림→네이비, 비행기 네이비→크림(서로 바꿔 모양을 지킨다).
     // 위아래 여백 6px, 가로는 출력 비율에 맞춰 양쪽으로 같게 늘린다(늘어나 보이지 않게)

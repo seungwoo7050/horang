@@ -47,39 +47,37 @@ test.describe("brand", () => {
     await expect(wordmark(page)).toHaveAttribute("src", "/brand/wordmark-navy.webp");
   });
 
-  test("home hero: the mascot keeps its box before it loads and hides the cut hand behind the bubble", async ({
+  test("home hero: the mascot keeps its box before it loads and waves its paw next to the bubble", async ({
     page,
   }) => {
     for (const width of [320, 360, 412]) {
       await page.setViewportSize({ width, height: 800 });
       for (const lang of ["en", "ja"]) {
         await page.goto(`/${lang}/`);
+        const where = `${lang} ${width}px`;
         const hero = page.locator("main img[src='/brand/mascot.webp']");
-        await expect(hero).toHaveAttribute("width", "258");
+        await expect(hero).toHaveAttribute("width", "276");
         await expect(hero).toHaveAttribute("height", "336");
         await expect(hero).toHaveAttribute("alt", "");
         await expect.poll(() => drawn(hero)).toBe(true);
         const img = (await hero.boundingBox())!;
         // 비율 그대로(늘어나지 않게)
-        expect(Math.abs(img.width / img.height - 258 / 336)).toBeLessThan(0.01);
-        // 원본 그림 틀에서 잘린 손끝: 이미지 오른쪽 가장자리, 높이 472~753/1600 자리. 말풍선이 덮는다
+        expect(Math.abs(img.width / img.height - 276 / 336), where).toBeLessThan(0.01);
+        // 말풍선은 마스코트 옆: 들어 올린 앞발(오른쪽 끝, 높이 471~757/1600)을 가리지 않는다
         const bubble = (await page.getByRole("heading", { level: 1 }).boundingBox())!;
-        const cut = {
-          x: img.x + img.width,
-          top: img.y + img.height * 0.295,
-          bottom: img.y + img.height * 0.471,
-        };
-        const where = `${lang} ${width}px`;
-        expect(bubble.x, where).toBeLessThan(cut.x - 4);
-        // 모서리가 둥근 곳(radius)이 아닌 곧은 왼쪽 변이 덮는지: 위아래로 radius만큼 여유
-        expect(bubble.y + 4, where).toBeLessThanOrEqual(cut.top);
-        expect(bubble.y + bubble.height - 18, where).toBeGreaterThanOrEqual(cut.bottom);
-        // 말풍선이 마스코트보다 위에 그려진다
-        const onTop = await page.evaluate(
-          ([x, y]) => document.elementFromPoint(x!, y!)?.closest("h1") !== null,
-          [cut.x - 2, (cut.top + cut.bottom) / 2],
+        expect(bubble.x, where).toBeGreaterThanOrEqual(img.x + img.width);
+        const paw = await page.evaluate(
+          ([x, y]) => document.elementFromPoint(x!, y!)?.getAttribute("src"),
+          [img.x + img.width - 3, img.y + img.height * (614 / 1600)],
         );
-        expect(onTop, where).toBe(true);
+        expect(paw, where).toBe("/brand/mascot.webp");
+        // 말풍선 글자는 두 줄 이하(320px에서도 "Do you / need help?")
+        const lines = await page.getByRole("heading", { level: 1 }).evaluate((h) => {
+          const cs = getComputedStyle(h);
+          const inner = h.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+          return Math.round(inner / parseFloat(cs.lineHeight));
+        });
+        expect(lines, where).toBeLessThanOrEqual(2);
       }
     }
   });

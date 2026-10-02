@@ -35,6 +35,8 @@ export const NAVY = rgb(BRAND_COLORS.navy);
  * - 눈: 검은 눈이 배경과 함께 투명하게 뚫렸다 → 바깥과 이어지지 않은 구멍을 코 색으로 채운다
  * - 홈: 테두리에 닿은 줄무늬가 깎였다(오른쪽 뺨, 오른쪽 몸통) → 윤곽을 이어 그린 모양을 줄무늬 색으로 아래에 덧댄다
  * 머리와 팔 사이, 꼬리와 배낭 사이 같은 원래 틈은 건드리지 않는다
+ * - 손: 들어 올린 팔이 그림 틀(x≈1405)에서 평평하게 잘렸다 → x 1402 열의 색을 둥근 앞발 모양으로 늘린다
+ *   (다른 쪽 앞발도 손가락 없는 둥근 끝이다)
  */
 export const MASCOT_FIX = {
   eyeBox: [560, 340, 1060, 560] as const,
@@ -51,6 +53,7 @@ export const MASCOT_FIX = {
     // 오른쪽 몸통 아래(발 위)
     "M1096 1424 L1114 1412 C1118 1428 1117 1444 1111 1458 L1096 1446 Z",
   ],
+  paw: { x: 1402, reach: 96 },
 };
 
 /** 로고 원본(2400×800) 호랑이 마크의 눈 구멍 상자 */
@@ -61,6 +64,7 @@ export type BrandPixels = {
   load(src: string): Promise<ImageData>;
   fillHoles(img: ImageData, rgb: readonly number[], box?: readonly number[]): number;
   patchUnder(img: ImageData, paths: readonly string[], rgb: readonly number[]): number;
+  roundCut(img: ImageData, x: number, reach: number): [number, number, number];
   swapColors(
     img: ImageData,
     pairs: readonly (readonly [readonly number[], readonly number[]])[],
