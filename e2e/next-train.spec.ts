@@ -75,3 +75,19 @@ test("screen readers hear when the next train changes, not every minute", async 
   await expect(panel.locator("li").first().locator("strong")).toHaveText(second);
   await expect(live).toContainText(second);
 });
+
+test("after midnight, before the first train, it names today's first train", async ({ page }) => {
+  await page.clock.setFixedTime(atKorea("00:00"));
+  await page.goto("/en/arex/");
+  const first = tt.toSeoul[0]!.t1;
+  await expect(page.getByText(`Today's first Express leaves at ${first}.`)).toBeVisible();
+  await expect(page.getByText(/in \d+ min/)).toHaveCount(0);
+  await page.goto("/ja/arex/");
+  await expect(page.getByText(`今日の直通列車の始発は${first}です。`)).toBeVisible();
+});
+
+test("from the first train's minute it lists trains again", async ({ page }) => {
+  await page.clock.setFixedTime(atKorea(tt.toSeoul[0]!.t1));
+  await page.goto("/en/arex/");
+  await expect(page.locator("ol li").first().locator("strong")).toHaveText(tt.toSeoul[0]!.t1);
+});

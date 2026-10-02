@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
-import { koreaMinutes, nextDepartures } from "@/lib/next-departures";
+import { koreaMinutes, minutesOf, nextDepartures } from "@/lib/next-departures";
 import styles from "./NextTrain.module.css";
 
 export type TrainRow = { depart: string; arrive: string };
@@ -19,6 +19,13 @@ type Props = {
 const pad = (n: number) => String(n).padStart(2, "0");
 
 /**
+ * 자정이 지나고 첫차 전: "324분 뒤"처럼 큰 분 수 대신 오늘 첫차 시각을 문장으로 알린다
+ * (23:59까지는 막차 이후 문구, 00:00부터 첫차 전까지 이 문구, 첫차 시각부터 목록)
+ */
+const beforeFirst = (rows: TrainRow[], now: number) =>
+  rows.length > 0 && now < minutesOf(rows[0]!.depart);
+
+/**
  * 다음 직통열차 3편(공식 시각표, 한국 시각). 정적 HTML에는 시각을 굽지 않고
  * 기기에서 처음 그린 뒤 30초마다 다시 계산한다(빌드 시각이 화면에 남지 않게).
  */
@@ -31,7 +38,10 @@ export function NextTrain({ lang, rows, from, to, meta }: Props) {
   useEffect(() => {
     const say = (m: number) => {
       const first = nextDepartures(rows, (r) => r.depart, m, 1)[0];
-      return first ? `${t.title} ${first.time}` : t.none.replace("{time}", rows[0]?.depart ?? "");
+      if (!first) return t.none.replace("{time}", rows[0]?.depart ?? "");
+      return beforeFirst(rows, m)
+        ? t.first.replace("{time}", first.time)
+        : `${t.title} ${first.time}`;
     };
     let said: string | null = null;
     const tick = () => {
@@ -47,6 +57,7 @@ export function NextTrain({ lang, rows, from, to, meta }: Props) {
   }, [rows, t]);
 
   const next = now === null ? [] : nextDepartures(rows, (r) => r.depart, now, 3);
+  const early = now !== null && beforeFirst(rows, now);
 
   return (
     // 패널 전체를 live로 두면 매분 바뀌는 시계·남은 분이 읽는 중에 끼어든다. 알릴 것만 아래 숨은 줄에
@@ -65,6 +76,8 @@ export function NextTrain({ lang, rows, from, to, meta }: Props) {
       <p className={styles.route}>{t.route.replace("{from}", from).replace("{to}", to)}</p>
       {now === null ? null : next.length === 0 ? (
         <p className={styles.none}>{t.none.replace("{time}", rows[0]?.depart ?? "")}</p>
+      ) : early ? (
+        <p className={styles.none}>{t.first.replace("{time}", rows[0]!.depart)}</p>
       ) : (
         <ol className={styles.list}>
           {next.map((d, i) => (

@@ -142,6 +142,7 @@ export const ja: Messages = {
       leaving: "まもなく発車",
       arrives: "{time}着",
       none: "今日の直通列車は終わりました。明日の始発は{time}です。",
+      first: "今日の直通列車の始発は{time}です。",
       note: "公式時刻表より。発車の3分前までにホームに着いてください。",
     },
   },
