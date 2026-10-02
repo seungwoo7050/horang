@@ -85,11 +85,41 @@
   fill: var(--color-on-ribbon);
 }
 
-/* 동작 줄이기가 아니면: 처음엔 0에서 그려지고, 단계가 바뀌면 이어서 그린다(끊고 방향 전환 가능) */
+/* 아직 닿지 않은 정류점은 조금 작게. 리본이 닿으면 제 크기로 커지며 칠해진다 */
+.stop circle,
+.stopDone circle {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.stop circle {
+  transform: scale(0.78);
+}
+
+/*
+ * 동작 줄이기가 아니면: 처음엔 0에서 그려지고, 단계가 바뀌면 이어서 그린다(끊고 방향 전환 가능).
+ * 첫 그리기 animation은 backwards로만 채운다. both면 끝난 뒤에도 animation이 값을 쥐고 있어
+ * 다음 단계의 transition이 묻히고 리본이 순간이동한다(2026-10-02 사용자 발견).
+ */
 @media (prefers-reduced-motion: no-preference) {
   .ribbon {
     transition: stroke-dashoffset var(--dur-ribbon) var(--ease-enter);
-    animation: draw var(--dur-ribbon) var(--ease-enter) both;
+    animation: draw var(--dur-ribbon) var(--ease-enter) backwards;
+  }
+
+  /* 앞으로: 리본이 거의 닿을 때 정류점이 커지며 칠해진다. 뒤로: 바로 비워진다 */
+  .stop circle,
+  .stop text,
+  .stopDone circle,
+  .stopDone text {
+    transition-property: transform, fill, stroke;
+    transition-duration: var(--dur-base);
+    transition-timing-function: var(--ease-enter);
+  }
+
+  .stopDone circle,
+  .stopDone text {
+    transition-delay: calc(var(--dur-ribbon) * 0.45);
   }
 }
 

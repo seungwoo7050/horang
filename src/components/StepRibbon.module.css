@@ -51,8 +51,34 @@
   fill: var(--color-muted);
 }
 
+/* 아직인 단계는 조금 작게. 리본이 닿으면 제 크기로 커지며 칠해진다(RouteMap과 같은 규칙) */
+.done circle,
+.todo circle {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.todo circle {
+  transform: scale(0.78);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .fill {
     transition: stroke-dashoffset var(--dur-ribbon) var(--ease-enter);
+  }
+
+  /* 앞으로: 리본이 거의 닿을 때 커지며 칠해진다. 뒤로: 바로 비워진다 */
+  .todo circle,
+  .todo text,
+  .done circle,
+  .done text {
+    transition-property: transform, fill, stroke;
+    transition-duration: var(--dur-base);
+    transition-timing-function: var(--ease-enter);
+  }
+
+  .done circle,
+  .done text {
+    transition-delay: calc(var(--dur-ribbon) * 0.45);
   }
 }
