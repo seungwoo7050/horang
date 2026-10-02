@@ -89,6 +89,7 @@ export default async function CardPage({ params }: PageProps<"/[lang]/card">) {
     <ChoiceFlow
       lang={lang}
       title={t.title}
+      morph="card"
       questions={[
         {
           id: "where",

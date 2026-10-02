@@ -164,3 +164,81 @@ body {
     0 0 0 3px var(--color-bg),
     0 0 0 5px var(--color-ribbon);
 }
+
+/*
+ * 화면 사이 연속성(Benji, DESIGN.md §6-1). React <ViewTransition>이 이름 붙인 요소끼리 잇는다.
+ * - title-*: 첫 화면 카드 제목 ↔ 다음 화면 제목(모핑)
+ * - nav-forward / nav-back: 내용이 오른쪽/왼쪽에서 들어온다. 헤더(screen-header)는 제자리
+ * 시간은 모션 토큰을 쓴다. 동작 줄이기면 토큰이 0이라 그냥 바뀐다.
+ */
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-group(*) {
+  animation-duration: var(--dur-sheet);
+  animation-timing-function: var(--ease-enter);
+}
+
+::view-transition-group(.morph) {
+  animation-duration: var(--dur-sheet);
+}
+
+::view-transition-image-pair(.morph) {
+  animation-name: morph-blur;
+}
+
+::view-transition-group(screen-header) {
+  animation: none;
+  z-index: 1;
+}
+
+::view-transition-old(screen-header) {
+  display: none;
+}
+
+::view-transition-new(screen-header) {
+  animation: none;
+}
+
+::view-transition-old(.nav-forward),
+::view-transition-old(.nav-back) {
+  animation:
+    var(--dur-fast) var(--ease-exit) both vt-fade reverse,
+    var(--dur-sheet) var(--ease-enter) both vt-slide reverse;
+}
+
+::view-transition-new(.nav-forward),
+::view-transition-new(.nav-back) {
+  animation:
+    var(--dur-base) var(--ease-enter) var(--dur-fast) both vt-fade,
+    var(--dur-sheet) var(--ease-enter) both vt-slide;
+}
+
+::view-transition-old(.nav-forward),
+::view-transition-new(.nav-back) {
+  --vt-offset: calc(var(--space-7) * -1);
+}
+
+::view-transition-new(.nav-forward),
+::view-transition-old(.nav-back) {
+  --vt-offset: var(--space-7);
+}
+
+@keyframes vt-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-slide {
+  from {
+    translate: var(--vt-offset) 0;
+  }
+}
+
+@keyframes morph-blur {
+  40% {
+    filter: blur(2px);
+  }
+}

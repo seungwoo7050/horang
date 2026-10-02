@@ -73,7 +73,7 @@ export function RouteFlow({ lang, routes, places }: Props) {
 
   if (!route) {
     return (
-      <Screen lang={lang} header={<ScreenHeader left={left} title={s.title} />}>
+      <Screen lang={lang} header={<ScreenHeader left={left} title={s.title} morph="station" />}>
         <div className={`${styles.stage} ${styles[dir]}`}>
           <h1 className={styles.heading}>{s.ask}</h1>
           <ul className={styles.options}>

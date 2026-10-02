@@ -15,6 +15,8 @@ export type Question = {
 type Props = {
   lang: Locale;
   title: string;
+  /** 첫 화면 카드와 이어질 이름 */
+  morph?: string;
   /** 질문 순서대로. 마지막 단계는 결과 */
   questions: Question[];
   /** 답 id를 "-"로 이은 키 → 결과(서버에서 그림) */
@@ -30,7 +32,15 @@ const Chevron = () => (
 );
 
 /** 질문 몇 개에 답하면 맞는 결과를 보여 주는 흐름(교통카드 고르기 등) */
-export function ChoiceFlow({ lang, title, questions, results, resultHeading, restart }: Props) {
+export function ChoiceFlow({
+  lang,
+  title,
+  morph,
+  questions,
+  results,
+  resultHeading,
+  restart,
+}: Props) {
   const t = getMessages(lang);
   const [answers, setAnswers] = useState([] as string[]);
   const [dir, setDir] = useState("forward" as "forward" | "backward");
@@ -60,7 +70,7 @@ export function ChoiceFlow({ lang, title, questions, results, resultHeading, res
   return (
     <Screen
       lang={lang}
-      header={<ScreenHeader left={left} title={title} />}
+      header={<ScreenHeader left={left} title={title} morph={morph} />}
       actions={
         done ? (
           <button

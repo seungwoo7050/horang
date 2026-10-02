@@ -19,7 +19,7 @@ export default async function StaffPage({ params }: PageProps<"/[lang]/staff">) 
   if (!isLocale(lang)) notFound();
   const t = getMessages(lang).staff;
   return (
-    <Screen lang={lang} back={`/${lang}/`} title={t.title}>
+    <Screen lang={lang} back={`/${lang}/`} title={t.title} morph="staff">
       <h1 className={styles.heading}>{t.lead}</h1>
       <StaffPhrases
         cards={Object.fromEntries(

@@ -131,7 +131,11 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
   }
 
   return (
-    <Screen lang={lang} header={<ScreenHeader left={left} title={g.title} />} actions={actions}>
+    <Screen
+      lang={lang}
+      header={<ScreenHeader left={left} title={g.title} morph="gate" />}
+      actions={actions}
+    >
       <StepRibbon total={3} current={n} label={t.common.stepOf.replace("{n}", String(n + 1))} />
       <div key={`${step}-${causeId}`} className={`${styles.stage} ${styles[dir]}`}>
         {step === "solved" ? null : (
