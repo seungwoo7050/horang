@@ -60,3 +60,46 @@ export function FactList({ ids, lang }: { ids: readonly string[]; lang: Locale }
     </ul>
   );
 }
+
+/**
+ * 한 묶음(카드 하나 등)의 사실을 한 장에: 문장은 구분선으로만 나누고, 근거는 한 줄로 모은다.
+ * 숫자 표가 이미 다 보여 준 claim(folded)은 문장을 접어 둔다. 접힌 곳에서 모든 원문과 출처를 볼 수 있다.
+ */
+export function FactGroup({
+  ids,
+  folded = [],
+  lang,
+}: {
+  ids: readonly string[];
+  folded?: readonly string[];
+  lang: Locale;
+}) {
+  const t = getMessages(lang).fact;
+  const shown = ids.filter((id) => !folded.includes(id));
+  return (
+    <>
+      {shown.length ? (
+        <ul className={styles.group}>
+          {shown.map((id) => (
+            <li key={id}>{getClaim(id).text[lang]}</li>
+          ))}
+        </ul>
+      ) : null}
+      <details className={styles.sources}>
+        <summary>
+          <FactMeta ids={[...ids]} lang={lang} />
+          <span className={styles.open}>
+            <span className={styles.hidden}>{t.sources.replace("{n}", String(ids.length))}</span>
+          </span>
+        </summary>
+        <ul className={styles.full}>
+          {ids.map((id) => (
+            <li key={id}>
+              <Fact id={id} lang={lang} />
+            </li>
+          ))}
+        </ul>
+      </details>
+    </>
+  );
+}

@@ -13,6 +13,7 @@ export const ja: Messages = {
     checked: "{date}確認",
     stale: "要再確認",
     notOnSite: "現地ではまだ確認していません。",
+    sources: "出典（{n}）",
   },
   home: {
     ask: "お困りですか？",
@@ -69,6 +70,19 @@ export const ja: Messages = {
       tmoney: { name: "Tmoney", why: "電車・バスにくり返し使える交通カードです。" },
       wowpass: { name: "WOWPASS", why: "交通カードと支払いカードが1枚に。" },
       climate: { name: "Climate Card 短期券", why: "ソウル市内を1〜7日間移動するためのパスです。" },
+    },
+    figures: {
+      deposit: "保証金（降りたあと戻る）",
+      arexExtra: "空港鉄道は運賃に加えて",
+      tmoney: "Tmoneyカード",
+      tmoneyFrom: "約{n}ウォンから",
+      travelCard: "Tmoney Travel Card",
+      wowpass: "カード",
+      wowpassOnline: "オンライン事前予約",
+      days: "{n}日",
+      day: "1日",
+      cardItself: "カード本体",
+      plus: "+{n}ウォン",
     },
   },
   arex: {

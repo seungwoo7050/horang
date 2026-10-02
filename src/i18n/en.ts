@@ -11,6 +11,7 @@ export const en = {
     checked: "checked {date}",
     stale: "Needs recheck",
     notOnSite: "Not yet checked on site.",
+    sources: "Sources ({n})",
   },
   home: {
     ask: "Do you need help?",
@@ -73,6 +74,19 @@ export const en = {
         name: "Climate Card Tourist Pass",
         why: "A 1 to 7 day pass for getting around Seoul.",
       },
+    },
+    figures: {
+      deposit: "Deposit, returned after you exit",
+      arexExtra: "On AREX, on top of the fare",
+      tmoney: "Tmoney card",
+      tmoneyFrom: "from about ₩{n}",
+      travelCard: "Tmoney Travel Card",
+      wowpass: "Card",
+      wowpassOnline: "Booked online in advance",
+      days: "{n} days",
+      day: "1 day",
+      cardItself: "Card itself",
+      plus: "+₩{n}",
     },
   },
   arex: {
