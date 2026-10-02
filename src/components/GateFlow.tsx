@@ -8,6 +8,7 @@ import { MorphLabel } from "./MorphLabel";
 import { FlowNav } from "./FlowNav";
 import { Screen, ScreenHeader } from "./Screen";
 import { StepRibbon } from "./StepRibbon";
+import { HelpPanel } from "./HelpPanel";
 import { TigerFace, TigerSitting } from "./Tiger";
 import { useFlowHistory, type FlowCodec } from "./useFlowHistory";
 
@@ -139,7 +140,7 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
   } else {
     body = (
       <>
-        <h1 className={styles.heading}>{g.staffHead}</h1>
+        <HelpPanel>{g.staffHead}</HelpPanel>
         {cause.phrase}
       </>
     );

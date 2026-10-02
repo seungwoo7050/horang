@@ -6,6 +6,22 @@ import { expect, test, type Locator, type Page } from "@playwright/test";
 const drawn = (img: Locator) =>
   img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0);
 
+/** WCAG 대비(계산된 색 "rgb(r, g, b)" 두 개) */
+function contrast(a: string, b: string) {
+  const lum = (c: string) => {
+    const [r, g, bl] = c
+      .match(/\d+/g)!
+      .slice(0, 3)
+      .map((v) => {
+        const x = Number(v) / 255;
+        return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4;
+      }) as [number, number, number];
+    return 0.2126 * r + 0.7152 * g + 0.0722 * bl;
+  };
+  const [hi, lo] = [lum(a), lum(b)].sort((p, q) => q - p) as [number, number];
+  return (hi + 0.05) / (lo + 0.05);
+}
+
 /** 지금 보이는 워드마크 한 장(숨긴 쪽은 display:none이라 접근성 트리에 없다) */
 const wordmark = (page: Page) => page.getByRole("banner").getByRole("img", { name: "Horang" });
 
@@ -92,6 +108,42 @@ test.describe("brand", () => {
         .poll(() => drawn(page.locator("main img[src='/brand/mascot.webp']")), { message: scheme })
         .toBe(true);
       await expect.poll(() => drawn(wordmark(page)), { message: scheme }).toBe(true);
+    }
+  });
+
+  test("help panel: the mascot leans in next to the staff heading, on the brand color, readable", async ({
+    page,
+  }) => {
+    const expected = { light: "rgb(247, 241, 232)", dark: "rgb(15, 23, 42)" };
+    for (const scheme of ["light", "dark"] as const) {
+      await page.emulateMedia({ colorScheme: scheme });
+      for (const open of [
+        async () => page.goto("/en/staff/"),
+        async () => {
+          await page.goto("/en/gate/");
+          await page.getByRole("button", { name: "Not enough balance" }).click();
+          await page.getByRole("button", { name: "Still stuck" }).click();
+        },
+      ]) {
+        await open();
+        const heading = page.getByRole("heading", { level: 1 });
+        const panel = heading.locator("..");
+        const bust = panel.locator("img[src='/brand/mascot-bust.webp']");
+        await expect(bust).toHaveAttribute("alt", "");
+        await expect(bust).toHaveAttribute("width", "144");
+        await expect.poll(() => drawn(bust)).toBe(true);
+        const [bg, ink] = await heading.evaluate((h) => [
+          getComputedStyle(h.parentElement!).backgroundColor,
+          getComputedStyle(h).color,
+        ]);
+        expect(bg, `${scheme} ${page.url()}`).toBe(expected[scheme]);
+        expect(contrast(ink!, bg!)).toBeGreaterThanOrEqual(4.5);
+        // 어깨 아래(잘린 자리)는 패널 아래 가장자리에 붙어 가려진다
+        const p = (await panel.boundingBox())!;
+        const b = (await bust.boundingBox())!;
+        expect(Math.abs(b.y + b.height - (p.y + p.height))).toBeLessThanOrEqual(1);
+        expect(b.y).toBeGreaterThanOrEqual(p.y);
+      }
     }
   });
 });

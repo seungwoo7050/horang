@@ -1,0 +1,54 @@
+/*
+ * 마스코트(머리와 어깨) 72px이 패널 아래 가장자리에 붙는다: 잘린 어깨 아래는 패널 밖이라 보이지 않는다.
+ * 바탕은 브랜드 색. 밝은 화면 크림(ink 16.35:1), 어두운 화면 네이비(ink 15.31:1)
+ */
+.panel {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+  min-height: calc(72px + var(--space-3));
+  padding-inline: var(--space-3) var(--space-4);
+  background: var(--brand-cream);
+  box-shadow: var(--edge);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .panel {
+    background: var(--brand-navy);
+  }
+}
+
+:root[data-theme="dark"] .panel {
+  background: var(--brand-navy);
+}
+
+.bust {
+  flex: none;
+  height: 72px;
+}
+
+.text {
+  flex: 1;
+  align-self: center;
+  margin: 0;
+  padding-block: var(--space-4);
+  font-size: var(--text-lg);
+  line-height: 1.25;
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+
+/* 단계가 바뀌면 스크립트가 제목으로 포커스를 옮긴다(스크린 리더 낭독용). 누를 수 있는 것이 아니라 링은 그리지 않는다 */
+.text:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* 강제 색상 모드는 box-shadow(edge)를 지운다: 경계를 시스템 색 테두리로 남긴다 */
+@media (forced-colors: active) {
+  .panel {
+    border: 1px solid CanvasText;
+  }
+}
