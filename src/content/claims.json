@@ -143,7 +143,11 @@
       }
     ],
     "verifiedAt": "2026-10-01",
-    "verifiedBy": "Phase R desk research"
+    "verifiedBy": "Phase R desk research",
+    "data": {
+      "extra": 100,
+      "deposit": 500
+    }
   },
   {
     "id": "climate-card.tourist.prices",
@@ -164,7 +168,15 @@
       }
     ],
     "verifiedAt": "2026-10-01",
-    "verifiedBy": "Phase R desk research"
+    "verifiedBy": "Phase R desk research",
+    "data": {
+      "d1": 5000,
+      "d2": 8000,
+      "d3": 10000,
+      "d5": 15000,
+      "d7": 20000,
+      "card": 3000
+    }
   },
   {
     "id": "climate-card.no-airport-boarding",
@@ -523,7 +535,10 @@
       }
     ],
     "verifiedAt": "2026-10-02",
-    "verifiedBy": "Official page opened in session (2026-10-02 KST)"
+    "verifiedBy": "Official page opened in session (2026-10-02 KST)",
+    "data": {
+      "from": 3000
+    }
   },
   {
     "id": "tmoney.travel-card",
@@ -540,7 +555,10 @@
       }
     ],
     "verifiedAt": "2026-10-02",
-    "verifiedBy": "Official page opened in session (2026-10-02 KST)"
+    "verifiedBy": "Official page opened in session (2026-10-02 KST)",
+    "data": {
+      "card": 4000
+    }
   },
   {
     "id": "wowpass.card",
@@ -561,7 +579,11 @@
       }
     ],
     "verifiedAt": "2026-10-02",
-    "verifiedBy": "Official page opened in session (2026-10-02 KST)"
+    "verifiedBy": "Official page opened in session (2026-10-02 KST)",
+    "data": {
+      "card": 6000,
+      "online": 5500
+    }
   },
   {
     "id": "wowpass.transit-balance",
@@ -654,7 +676,10 @@
       }
     ],
     "verifiedAt": "2026-10-01",
-    "verifiedBy": "Phase R desk research"
+    "verifiedBy": "Phase R desk research",
+    "data": {
+      "deposit": 500
+    }
   },
   {
     "id": "arex.express.airport-departures",
