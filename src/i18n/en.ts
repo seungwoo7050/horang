@@ -89,6 +89,7 @@ export const en = {
     won: "₩{n}",
     expressNote: "Buy a ticket. Transit cards don't work.",
     allstopNote: "Tap a transit card. Shown fare is with a transit card.",
+    atSeoul: "At Seoul Station (Express)",
     details: "Before you board",
     hurry: "Going to the airport?",
     hurryBack: "Back to the comparison",

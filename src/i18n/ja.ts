@@ -85,6 +85,7 @@ export const ja: Messages = {
     won: "{n}ウォン",
     expressNote: "乗車券を買います。交通カードは使えません。",
     allstopNote: "交通カードでタッチ。表示は交通カードの運賃です。",
+    atSeoul: "ソウル駅に着いたら（直通列車）",
     details: "乗る前に",
     hurry: "空港へ向かいますか？",
     hurryBack: "比較に戻る",

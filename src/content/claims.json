@@ -622,18 +622,18 @@
     "id": "seoul-station.arex.express-gate",
     "kind": "route",
     "text": {
-      "en": "At Seoul Station, Express passengers go through the Express gate on B2 and board on the B7 platform.",
-      "ja": "ソウル駅では、直通列車の乗客は地下2階の直通列車改札を通り、地下7階のホームで乗車します。"
+      "en": "At Seoul Station, Express tickets are sold on B2. Go through the Express gate on B2, then take the elevator or escalator down to the B7 platform.",
+      "ja": "ソウル駅では、直通列車の乗車券は地下2階で買えます。地下2階の直通列車改札を通り、エレベーターかエスカレーターで地下7階のホームへ下ります。"
     },
     "evidence": "B",
     "sources": [
       {
-        "url": "https://www.airport.kr/ap_en/1420/subview.do",
-        "title": "Incheon Airport official: Airport Railroad"
+        "url": "https://www.airportrailroad.com/train/express/guide",
+        "title": "AREX Express Train guide (official): payment, directions, station maps"
       }
     ],
     "verifiedAt": "2026-10-02",
-    "verifiedBy": "User desk check of official page (not reachable from build container)"
+    "verifiedBy": "Official page opened in session (2026-10-02 KST)"
   },
   {
     "id": "seoul-metro.single-journey.deposit",
@@ -672,5 +672,56 @@
     ],
     "verifiedAt": "2026-10-02",
     "verifiedBy": "Official timetable page opened in session (2026-10-02 KST)"
+  },
+  {
+    "id": "arex.express.foreign-cards",
+    "kind": "card-rule",
+    "evidence": "B",
+    "text": {
+      "en": "AREX says Express tickets can be paid with overseas credit cards: Visa, Mastercard, JCB, Diners Club, American Express and UnionPay.",
+      "ja": "空港鉄道によると、直通列車の乗車券は海外発行のクレジットカード（Visa・Mastercard・JCB・ダイナースクラブ・アメリカン・エキスプレス・銀聯）で払えます。"
+    },
+    "sources": [
+      {
+        "url": "https://www.airportrailroad.com/train/express/guide",
+        "title": "AREX Express Train guide (official): payment, directions, station maps"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official page opened in session (2026-10-02 KST)"
+  },
+  {
+    "id": "seoul-station.arex.express-arrival",
+    "kind": "route",
+    "evidence": "B",
+    "text": {
+      "en": "Arriving at Seoul Station by Express, go up from the B7 platform to B3 and out through the gate. For KTX, go up to 2F. For the subway, you can buy a single-journey card at the ticket machines there.",
+      "ja": "直通列車でソウル駅に着いたら、地下7階のホームから地下3階へ上がり、改札を出ます。KTXは地上2階へ。地下鉄に乗るなら、そこの券売機で1回用交通カードを買えます。"
+    },
+    "sources": [
+      {
+        "url": "https://www.airportrailroad.com/train/express/guide",
+        "title": "AREX Express Train guide (official): payment, directions, station maps"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official page opened in session (2026-10-02 KST)"
+  },
+  {
+    "id": "seoul-station.arex.to-express",
+    "kind": "route",
+    "evidence": "B",
+    "text": {
+      "en": "To reach the Express at Seoul Station: from KTX, go up to 2F, through the KTX concourse, then down to B2. From Exit 15, take the escalator down to B2. From Lines 1 and 4, go from B1 down to B3, out through the gate, then up to B2 to buy your ticket.",
+      "ja": "ソウル駅で直通列車へ行くには：KTXからは2階へ上がりKTX待合室を通って地下2階へ。15番出口からはエスカレーターで地下2階へ。1・4号線からは地下1階から地下3階へ下りて改札を出て、地下2階へ上がって乗車券を買います。"
+    },
+    "sources": [
+      {
+        "url": "https://www.airportrailroad.com/train/express/guide",
+        "title": "AREX Express Train guide (official): payment, directions, station maps"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official page opened in session (2026-10-02 KST)"
   }
 ]

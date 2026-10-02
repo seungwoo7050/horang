@@ -88,6 +88,7 @@ export default async function ArexPage({ params }: PageProps<"/[lang]/arex">) {
             ids={[
               "arex.express.airport-departures",
               "arex.express.no-transit-card",
+              "arex.express.foreign-cards",
               "arex.express.qr-gate",
               "arex.allstop.fare-seoul-t1",
               "arex.allstop.fare-seoul-t2",
@@ -97,12 +98,15 @@ export default async function ArexPage({ params }: PageProps<"/[lang]/arex">) {
             lang={lang}
           />
         }
+        atSeoul={<FactList ids={["seoul-station.arex.express-arrival"]} lang={lang} />}
         depart={
           <>
             <FactList
               ids={[
                 "arex.express.seoul-departures",
+                "seoul-station.arex.to-express",
                 "seoul-station.arex.express-gate",
+                "arex.express.foreign-cards",
                 "arex.express.qr-gate",
                 "arex.express.no-transit-card",
               ]}
