@@ -14,8 +14,20 @@ export function formatDay(iso: string, lang: Locale) {
   );
 }
 
-/** 여러 claim의 근거를 한 줄로(가장 약한 등급, 가장 오래된 검증일) */
-export function FactMeta({ ids, lang }: { ids: string[]; lang: Locale }) {
+/**
+ * 여러 claim의 근거를 한 줄로(가장 약한 등급, 가장 오래된 검증일).
+ * compact: 펼치면 사실마다 전체 근거가 나오는 접힌 출처(FactGroup)의 머리 줄. 등급 글자와 날짜만 보이고
+ * 등급 이름("Official source")은 스크린 리더에만 준다 — 한 화면에 같은 말이 카드 수만큼 되풀이되지 않게
+ */
+export function FactMeta({
+  ids,
+  lang,
+  compact = false,
+}: {
+  ids: string[];
+  lang: Locale;
+  compact?: boolean;
+}) {
   const t = getMessages(lang).fact;
   const list = ids.map(getClaim);
   const weakest = list
@@ -27,7 +39,12 @@ export function FactMeta({ ids, lang }: { ids: string[]; lang: Locale }) {
   return (
     <span className={styles.meta} data-evidence={weakest}>
       <span className={styles.grade}>{weakest}</span>
-      {t.evidence[weakest]} · {t.checked.replace("{date}", formatDay(oldest, lang))}
+      {compact ? (
+        <span className={styles.hidden}>{t.evidence[weakest]} · </span>
+      ) : (
+        <>{t.evidence[weakest]} · </>
+      )}
+      {t.checked.replace("{date}", formatDay(oldest, lang))}
       {stale ? <strong className={styles.stale}> · {t.stale}</strong> : null}
     </span>
   );
@@ -87,7 +104,7 @@ export function FactGroup({
       ) : null}
       <details className={styles.sources}>
         <summary>
-          <FactMeta ids={[...ids]} lang={lang} />
+          <FactMeta ids={[...ids]} lang={lang} compact />
           <span className={styles.open}>
             <span className={styles.hidden}>{t.sources.replace("{n}", String(ids.length))}</span>
           </span>
