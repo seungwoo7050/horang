@@ -59,3 +59,28 @@ export function Mascot({
     />
   );
 }
+
+/** 상황별 호랑이(2차 에셋). 기호(물음표·음표)가 흰색인 그림은 밝은 화면에서 네이비로 칠한 짝(-ink)을 보인다 */
+const SCENES = {
+  help: ["scene-help-ink", "scene-help"],
+  explore: ["scene-explore", "scene-explore"],
+  travel: ["scene-travel-ink", "scene-travel"],
+  welcome: ["scene-welcome", "scene-welcome"],
+  calm: ["face-calm", "face-calm"],
+} as const satisfies Record<string, readonly [BrandImage, BrandImage]>;
+
+/**
+ * 화면의 상황에 맞는 호랑이 한 장(화면 하나에 하나). 404 = 생각하는 호랑이, 서울역 경로 고르기 = 지도, 서울역 출발 =
+ * 캐리어, 해결·도착 = 손 흔들기, 안심 칩 = 눈 감은 얼굴. 옆의 제목·말이 뜻을 전하므로 장식(alt="")
+ */
+export function Scene({ name, className }: { name: keyof typeof SCENES; className?: string }) {
+  const [light, dark] = SCENES[name];
+  const cls = (c: string) => [styles.mascot, c, className].filter(Boolean).join(" ");
+  if (light === dark) return <BrandImg name={light} alt="" className={cls("")} />;
+  return (
+    <>
+      <BrandImg name={light} alt="" className={cls(styles.sceneLight!)} />
+      <BrandImg name={dark} alt="" className={cls(styles.sceneDark!)} />
+    </>
+  );
+}

@@ -8,8 +8,9 @@ import { MorphLabel } from "./MorphLabel";
 import { FlowNav } from "./FlowNav";
 import { Screen, ScreenHeader } from "./Screen";
 import { StepRibbon } from "./StepRibbon";
+import { Scene } from "./Brand";
 import { HelpPanel } from "./HelpPanel";
-import { TigerFace, TigerSitting } from "./Tiger";
+import { PhraseShow } from "./PhraseShow";
 import { useFlowHistory, type FlowCodec } from "./useFlowHistory";
 
 export type GateCause = {
@@ -18,8 +19,10 @@ export type GateCause = {
   headline: string;
   /** 해결 방법(claim 문장들, 서버에서 그림) */
   help: ReactNode;
-  /** 직원에게 보여 줄 문장 카드(서버에서 그림) */
+  /** 직원에게 보여 줄 문장 카드(서버에서 그림)와 화면 가득 보기에 쓸 한국어·번역 */
   phrase: ReactNode;
+  phraseKo: string;
+  phraseLabel: string;
 };
 
 type Step = 0 | 1 | 2 | "solved";
@@ -83,7 +86,7 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
   if (step === "solved") {
     body = (
       <div className={styles.center}>
-        <TigerSitting mood="solved" size={120} celebrate />
+        <Scene name="welcome" className={`${styles.sceneCenter} ${styles.celebrate}`} />
         <h1 className={styles.heading}>{g.solved}</h1>
       </div>
     );
@@ -135,7 +138,7 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
         <h1 className={styles.heading}>{cause.headline}</h1>
         {cause.help}
         <p className={styles.hint}>
-          <TigerFace mood="calm" size={32} />
+          <Scene name="calm" />
           {g.calm}
         </p>
       </>
@@ -154,7 +157,13 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
     body = (
       <>
         <HelpPanel>{g.staffHead}</HelpPanel>
-        {cause.phrase}
+        <PhraseShow
+          card={cause.phrase}
+          ko={cause.phraseKo}
+          label={cause.phraseLabel}
+          showLabel={t.staff.show}
+          closeLabel={t.common.close}
+        />
       </>
     );
     actions = (

@@ -10,7 +10,7 @@ import { MorphLabel } from "./MorphLabel";
 import { SmoothHeight } from "./SmoothHeight";
 import { FlowNav } from "./FlowNav";
 import { Screen, ScreenHeader } from "./Screen";
-import { TigerSitting } from "./Tiger";
+import { Scene } from "./Brand";
 import { useFlowHistory, type FlowCodec } from "./useFlowHistory";
 
 export type RouteChoice = {
@@ -97,7 +97,10 @@ export function RouteFlow({ lang, routes, places }: Props) {
     return (
       <Screen lang={lang} header={<ScreenHeader left={left} title={s.title} morph="station" />}>
         <div className={`${styles.stage} ${styles[dir]}`}>
-          <h1 className={styles.heading}>{s.ask}</h1>
+          <div className={styles.sceneHead}>
+            <h1 className={styles.heading}>{s.ask}</h1>
+            <Scene name="explore" />
+          </div>
           <ul className={styles.options}>
             {routes.map((r) => (
               <li key={r.id}>
@@ -168,7 +171,7 @@ export function RouteFlow({ lang, routes, places }: Props) {
       <SmoothHeight>
         {arrived ? (
           <div className={styles.center}>
-            <TigerSitting mood="solved" size={112} celebrate />
+            <Scene name="welcome" className={`${styles.sceneCenter} ${styles.celebrate}`} />
             <h1 className={styles.heading}>{s.arrived}</h1>
           </div>
         ) : (

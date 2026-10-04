@@ -40,3 +40,26 @@
 :root[data-theme="dark"] .onLight {
   display: none;
 }
+
+/* 상황별 호랑이의 밝기 짝(-ink): 위 글자와 같은 규칙. 높이는 쓰는 자리에서 정한다 */
+.sceneDark {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .sceneDark {
+    display: block;
+  }
+
+  :root:not([data-theme="light"]) .sceneLight {
+    display: none;
+  }
+}
+
+:root[data-theme="dark"] .sceneDark {
+  display: block;
+}
+
+:root[data-theme="dark"] .sceneLight {
+  display: none;
+}

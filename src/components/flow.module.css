@@ -265,3 +265,59 @@
     border: 3px solid Highlight;
   }
 }
+
+/* 제목 옆 상황별 호랑이(서울역 경로 고르기·서울역 출발): 제목이 먼저 읽히고 그림은 오른쪽 아래에 선다 */
+.sceneHead {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+
+.sceneHead > h1 {
+  flex: 1;
+}
+
+.sceneHead img {
+  flex: none;
+  height: 104px;
+}
+
+/* 해결·도착의 손 흔드는 호랑이(120px) */
+.sceneCenter {
+  height: 120px;
+}
+
+/* 안심 칩의 얼굴(32px) */
+.hint img {
+  flex: none;
+  height: var(--space-7);
+}
+
+/*
+ * 해결·도착처럼 드문 순간에만 한 번 깡충(웅크렸다 뛰고 내려앉는다). 드문 순간이라 dur-ribbon(500ms).
+ * 동작 줄이기면 아무 일도 없다
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .celebrate {
+    transform-origin: 50% 100%;
+    animation: hop var(--dur-ribbon) var(--ease-enter) var(--dur-fast) both;
+  }
+}
+
+@keyframes hop {
+  0% {
+    transform: none;
+  }
+  20% {
+    transform: scale(1.05, 0.92);
+  }
+  55% {
+    transform: translateY(-12%) scale(0.97, 1.04);
+  }
+  80% {
+    transform: scale(1.03, 0.97);
+  }
+  100% {
+    transform: none;
+  }
+}
