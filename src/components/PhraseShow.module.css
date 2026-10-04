@@ -1,6 +1,9 @@
 /* 카드 전체가 "크게 보기" 버튼의 누를 자리다: 버튼의 ::after가 카드 묶음을 덮는다 */
 .cardWrap {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
 }
 
 .open {
