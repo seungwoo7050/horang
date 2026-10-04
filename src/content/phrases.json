@@ -82,5 +82,12 @@
     "en": "Where do I transfer to Lines 1 and 4?",
     "ja": "1号線・4号線への乗り換えはどこですか。",
     "reviewed": false
+  },
+  {
+    "id": "staff.point",
+    "ko": "한국어를 잘 몰라요. 손가락으로 가리켜 주세요.",
+    "en": "I don't understand much Korean. Could you point for me?",
+    "ja": "韓国語があまりわかりません。指でさして教えてください。",
+    "reviewed": false
   }
 ]

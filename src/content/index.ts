@@ -21,3 +21,15 @@ export function getLink(id: string) {
   if (!link) throw new Error(`link 없음: ${id}`);
   return link;
 }
+
+/**
+ * 크게 보기 아래에 늘 붙는 답하는 법 문장(직원에게: 말 대신 손가락으로 가리켜 달라).
+ * 고르는 문장 목록에는 넣지 않는다(크게 보기마다 이미 보인다)
+ */
+export const POINT_PHRASE = "staff.point";
+
+export function getPhrase(id: string) {
+  const phrase = phrases.find((p) => p.id === id);
+  if (!phrase) throw new Error(`phrase 없음: ${id}`);
+  return phrase;
+}

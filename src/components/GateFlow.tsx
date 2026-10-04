@@ -58,7 +58,16 @@ const Chevron = () => (
 );
 
 /** 개찰구 막힘: 원인 고르기 → 해결 → 직원에게 보여 주기(3단계). 급한 화면이라 SponsorSlot 없음 */
-export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }) {
+export function GateFlow({
+  lang,
+  causes,
+  reply,
+}: {
+  lang: Locale;
+  causes: GateCause[];
+  /** 크게 보기 아래에 붙는 "가리켜 주세요"(한국어와 현재 언어 번역) */
+  reply: { ko: string; label: string };
+}) {
   const t = getMessages(lang);
   const g = t.gate;
   const { state, dir, push, back, holdLink } = useFlowHistory(codecFor(causes));
@@ -163,6 +172,7 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
           label={cause.phraseLabel}
           showLabel={t.staff.show}
           closeLabel={t.common.close}
+          reply={reply}
         />
       </>
     );

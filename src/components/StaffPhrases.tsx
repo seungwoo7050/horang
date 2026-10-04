@@ -14,6 +14,8 @@ type Props = {
   /** 카드를 화면 가득 키우는 버튼 이름 */
   showLabel: string;
   closeLabel: string;
+  /** 크게 보기 아래에 붙는 "가리켜 주세요"(한국어와 현재 언어 번역) */
+  reply: { ko: string; label: string };
 };
 
 /**
@@ -27,6 +29,7 @@ export function StaffPhrases({
   othersLabel,
   showLabel,
   closeLabel,
+  reply,
 }: Props) {
   const [current, setCurrent] = useState(initial);
   const phrase = options.find((o) => o.id === current)!;
@@ -39,6 +42,7 @@ export function StaffPhrases({
           label={phrase.label}
           showLabel={showLabel}
           closeLabel={closeLabel}
+          reply={reply}
         />
       </div>
       <h2 className={styles.section}>{othersLabel}</h2>
