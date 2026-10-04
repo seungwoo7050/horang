@@ -7,7 +7,7 @@ import { OutLink } from "@/components/OutLink";
 import { PhraseCard } from "@/components/PhraseCard";
 import { Screen } from "@/components/Screen";
 import { StaffPhrases } from "@/components/StaffPhrases";
-import { phrases } from "@/content";
+import { POINT_PHRASE, phrases } from "@/content";
 import { getMessages, isLocale } from "@/i18n";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/staff">) {
@@ -19,14 +19,16 @@ export default async function StaffPage({ params }: PageProps<"/[lang]/staff">) 
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   const t = getMessages(lang).staff;
+  // 고르는 목록에는 "가리켜 주세요"를 넣지 않는다(크게 보기마다 아래에 붙는다)
+  const choices = phrases.filter((p) => p.id !== POINT_PHRASE);
   return (
     <Screen lang={lang} back={`/${lang}/`} title={t.title} morph="staff">
       <HelpPanel>{t.lead}</HelpPanel>
       <StaffPhrases
         cards={Object.fromEntries(
-          phrases.map((p) => [p.id, <PhraseCard key={p.id} id={p.id} lang={lang} />]),
+          choices.map((p) => [p.id, <PhraseCard key={p.id} id={p.id} lang={lang} />]),
         )}
-        options={phrases.map((p) => ({ id: p.id, label: p[lang], ko: p.ko }))}
+        options={choices.map((p) => ({ id: p.id, label: p[lang], ko: p.ko }))}
         initial="gate.cant-exit"
         othersLabel={t.others}
         showLabel={t.show}
