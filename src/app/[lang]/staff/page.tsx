@@ -26,9 +26,11 @@ export default async function StaffPage({ params }: PageProps<"/[lang]/staff">) 
         cards={Object.fromEntries(
           phrases.map((p) => [p.id, <PhraseCard key={p.id} id={p.id} lang={lang} />]),
         )}
-        options={phrases.map((p) => ({ id: p.id, label: p[lang] }))}
+        options={phrases.map((p) => ({ id: p.id, label: p[lang], ko: p.ko }))}
         initial="gate.cant-exit"
         othersLabel={t.others}
+        showLabel={t.show}
+        closeLabel={getMessages(lang).common.close}
       />
       <h2 className={styles.section}>{t.helpline}</h2>
       <Fact id="helpline.1330" lang={lang} />

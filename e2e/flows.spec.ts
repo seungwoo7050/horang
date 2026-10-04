@@ -116,6 +116,39 @@ test("staff: switching sentences and calling 1330", async ({ page }) => {
   );
 });
 
+test("staff: the sentence goes full screen, and ×, Esc and system back all close it", async ({
+  page,
+}) => {
+  await page.goto("/en/staff/");
+  await page.getByRole("button", { name: "Where is the elevator?" }).click();
+  const show = page.getByRole("button", { name: "Full screen" });
+  const dialog = page.getByRole("dialog", { name: "Where is the elevator?" });
+
+  await show.click();
+  await expect(dialog.locator('blockquote[lang="ko"]')).toHaveText("엘리베이터가 어디예요?");
+  await expect(dialog.getByRole("button", { name: "Close" })).toBeFocused();
+  // 초점은 닫기 버튼에 머문다
+  await page.keyboard.press("Tab");
+  await expect(dialog.getByRole("button", { name: "Close" })).toBeFocused();
+  await dialog.getByRole("button", { name: "Close" }).click();
+  await expect(dialog).toHaveCount(0);
+  await expect(show).toBeFocused();
+
+  await show.click();
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
+  await expect(show).toBeFocused();
+
+  // 시스템 뒤로는 화면을 떠나지 않고 닫기만 한다. 고른 문장도 그대로
+  await show.click();
+  await expect(dialog).toBeVisible();
+  await page.goBack();
+  await expect(dialog).toHaveCount(0);
+  await expect(page).toHaveURL(/\/en\/staff\/$/);
+  await expect(page.locator('blockquote[lang="ko"]')).toHaveText("엘리베이터가 어디예요?");
+});
+
 test("no screen scrolls sideways on a phone", async ({ page }) => {
   for (const lang of ["en", "ja"]) {
     for (const path of ["", "gate/", "card/", "arex/", "station/", "staff/"]) {
