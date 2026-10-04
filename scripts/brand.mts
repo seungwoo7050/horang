@@ -76,6 +76,13 @@ export type BrandPixels = {
     tol: number,
     minX?: number,
   ): number[];
+  clearFaint(img: ImageData, threshold: number, fromX?: number): number;
+  inkGlyphs(
+    img: ImageData,
+    rgb: readonly number[],
+    maxFrac?: number,
+    minLum?: number,
+  ): { glyphs: number; sizes: number[]; pixels: number };
   bbox(img: ImageData, threshold?: number): [number, number, number, number];
   resized(img: ImageData, crop: readonly number[], out: readonly number[]): OffscreenCanvas;
   encode(

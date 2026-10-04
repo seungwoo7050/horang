@@ -11,6 +11,20 @@ export const BRAND_IMAGES = {
   // 언어 고르기 첫 주소(/)의 로고(44px 높이). 호랑이 마크의 뚫린 눈을 채웠다
   "logo-cream": { src: "/brand/logo-cream.webp", width: 456, height: 88 },
   "logo-navy": { src: "/brand/logo-navy.webp", width: 456, height: 88 },
+  // 2차 에셋(2026-10-04, scripts/make-scenes.mts): 상황마다 다른 호랑이. 화면 하나에 하나만 쓴다.
+  // -ink = 밝은 화면용(흰 물음표·음표를 네이비로). 짝은 크기가 같다
+  // 404(120px 높이): 물음표를 띄우고 생각하는 호랑이
+  "scene-help": { src: "/brand/scene-help.webp", width: 162, height: 240 },
+  "scene-help-ink": { src: "/brand/scene-help-ink.webp", width: 162, height: 240 },
+  // 서울역 경로 고르기(104px 높이): 지도를 펼친 호랑이
+  "scene-explore": { src: "/brand/scene-explore.webp", width: 174, height: 208 },
+  // 공항철도 서울역 출발(104px 높이): 캐리어를 끄는 호랑이
+  "scene-travel": { src: "/brand/scene-travel.webp", width: 182, height: 208 },
+  "scene-travel-ink": { src: "/brand/scene-travel-ink.webp", width: 182, height: 208 },
+  // 해결·도착(120px 높이): 손 흔드는 호랑이
+  "scene-welcome": { src: "/brand/scene-welcome.webp", width: 206, height: 240 },
+  // 안심 칩(32px): 눈 감고 웃는 얼굴
+  "face-calm": { src: "/brand/face-calm.webp", width: 70, height: 64 },
 } as const;
 
 export type BrandImage = keyof typeof BRAND_IMAGES;
@@ -18,5 +32,8 @@ export type BrandImage = keyof typeof BRAND_IMAGES;
 /** 브랜드 색(globals.css --brand-cream·--brand-navy). 파생본 스크립트가 워드마크 글자를 이 두 색으로 바꾼다 */
 export const BRAND_COLORS = { cream: "#f7f1e8", navy: "#0f172a" } as const;
 
-/** 오프라인 미리 캐시에 더해지는 브랜드 이미지 전체 상한(바이트). 넘으면 테스트가 알린다 */
-export const BRAND_BUDGET_BYTES = 100 * 1024;
+/**
+ * 오프라인 미리 캐시에 더해지는 브랜드 이미지 전체 상한(바이트). 넘으면 테스트가 알린다.
+ * 2026-10-04 상황별 호랑이 7장(약 91KB)을 더하며 100KB에서 올렸다(미리 캐시 전체 약 2.1MB의 4%대)
+ */
+export const BRAND_BUDGET_BYTES = 160 * 1024;

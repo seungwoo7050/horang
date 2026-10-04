@@ -216,6 +216,90 @@ globalThis.brand = (() => {
     return counts;
   }
 
+  /**
+   * 거의 투명한 픽셀(불투명도 threshold 미만)을 완전히 투명하게. 2차 에셋(2026-10-04)은 배경 제거가 남긴
+   * 불투명도 1~3의 노랑·빨강 점이 윤곽 둘레에 깔려 있다. 눈에는 안 보여도 줄일 때 섞여 테두리 색을 흐린다.
+   * fromX가 있으면 그 열부터 오른쪽은 모두 지운다(옆 그림이 함께 잘려 들어온 조각)
+   */
+  function clearFaint(img, threshold, fromX = img.width) {
+    const { width: w, data: d } = img;
+    let n = 0;
+    for (let i = 0; i < d.length; i += 4) {
+      if (d[i + 3] === 0) continue;
+      if (d[i + 3] < threshold || (i / 4) % w >= fromX) {
+        d[i] = d[i + 1] = d[i + 2] = d[i + 3] = 0;
+        n++;
+      }
+    }
+    return n;
+  }
+
+  /**
+   * 몸과 떨어진 작고 밝은 조각(물음표·음표 같은 기호)만 rgb로 칠한다(불투명도는 그대로). 밝은 화면에서는
+   * 흰 기호가 바탕에 묻히므로 밝은 화면용 파생본에 쓴다. 조각 = 불투명도 128 이상 픽셀이 8방향으로 이어진 덩어리,
+   * 작다 = 전체 불투명 픽셀의 maxFrac 이하, 밝다 = 평균 밝기 minLum 이상. 반투명 가장자리는 가장 가까운 조각을 따른다
+   */
+  function inkGlyphs(img, rgb, maxFrac = 0.03, minLum = 0.85) {
+    const { width: w, height: h, data: d } = img;
+    const label = new Int32Array(w * h).fill(-1);
+    const parts = [];
+    let total = 0;
+    for (let i = 0; i < w * h; i++) {
+      if (d[i * 4 + 3] < 128 || label[i] !== -1) continue;
+      const id = parts.length;
+      const px = [];
+      const stack = [i];
+      label[i] = id;
+      while (stack.length) {
+        const j = stack.pop();
+        px.push(j);
+        const x = j % w;
+        const y = (j - x) / w;
+        for (let dy = -1; dy <= 1; dy++)
+          for (let dx = -1; dx <= 1; dx++) {
+            const nx = x + dx;
+            const ny = y + dy;
+            if (nx < 0 || ny < 0 || nx >= w || ny >= h) continue;
+            const k = ny * w + nx;
+            if (label[k] === -1 && d[k * 4 + 3] >= 128) {
+              label[k] = id;
+              stack.push(k);
+            }
+          }
+      }
+      total += px.length;
+      parts.push(px);
+    }
+    const lum = (k) => (0.2126 * d[k * 4] + 0.7152 * d[k * 4 + 1] + 0.0722 * d[k * 4 + 2]) / 255;
+    const glyphs = parts.filter(
+      (px) =>
+        px.length <= total * maxFrac && px.reduce((s, k) => s + lum(k), 0) / px.length >= minLum,
+    );
+    let n = 0;
+    for (const px of glyphs) {
+      // 조각 둘레 2px의 반투명 가장자리까지 같은 색으로
+      const xs = px.map((k) => k % w);
+      const ys = px.map((k) => (k - (k % w)) / w);
+      const [x0, x1, y0, y1] = [
+        Math.min(...xs) - 2,
+        Math.max(...xs) + 2,
+        Math.min(...ys) - 2,
+        Math.max(...ys) + 2,
+      ];
+      for (let y = Math.max(0, y0); y <= Math.min(h - 1, y1); y++)
+        for (let x = Math.max(0, x0); x <= Math.min(w - 1, x1); x++) {
+          const k = y * w + x;
+          if (d[k * 4 + 3] === 0 || (label[k] !== -1 && !px.includes(k))) continue;
+          if (label[k] === -1 && lum(k) < minLum) continue;
+          d[k * 4] = rgb[0];
+          d[k * 4 + 1] = rgb[1];
+          d[k * 4 + 2] = rgb[2];
+          n++;
+        }
+    }
+    return { glyphs: glyphs.length, sizes: glyphs.map((px) => px.length), pixels: n };
+  }
+
   /** 불투명도 threshold 이상인 픽셀의 경계 상자 [x0, y0, x1, y1] */
   function bbox(img, threshold = 8) {
     const { width: w, height: h, data: d } = img;
@@ -277,6 +361,8 @@ globalThis.brand = (() => {
     fixMascot,
     iconCanvas,
     swapColors,
+    clearFaint,
+    inkGlyphs,
     bbox,
     resized,
     encode,
