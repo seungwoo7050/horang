@@ -40,6 +40,11 @@ export function ArexCompare({
   const [terminal, setTerminal] = useState("t1" as Terminal);
   const [leaving, setLeaving] = useState(false);
   const n = numbers[terminal];
+  // 비교 ↔ 서울역 출발은 다른 화면이다: 누른 버튼(맨 아래) 자리에 머물지 않고 새 화면 처음부터 보인다
+  const switchTo = (next: boolean) => {
+    setLeaving(next);
+    window.scrollTo({ top: 0 });
+  };
 
   if (leaving) {
     return (
@@ -56,7 +61,7 @@ export function ArexCompare({
           meta={trainMeta.toAirport}
         />
         {depart}
-        <button type="button" className={flow.secondary} onClick={() => setLeaving(false)}>
+        <button type="button" className={flow.secondary} onClick={() => switchTo(false)}>
           {t.hurryBack}
         </button>
       </div>
@@ -111,7 +116,7 @@ export function ArexCompare({
       {arrive}
       <h2 className={flow.section}>{t.atSeoul}</h2>
       {atSeoul}
-      <button type="button" className={flow.primary} onClick={() => setLeaving(true)}>
+      <button type="button" className={flow.primary} onClick={() => switchTo(true)}>
         {t.hurry}
       </button>
     </div>

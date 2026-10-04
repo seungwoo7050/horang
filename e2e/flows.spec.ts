@@ -235,6 +235,16 @@ test("staff: full screen keeps the screen awake, again after coming back to the 
   await expect.poll(count).toEqual({ req: 2, rel: 1 });
 });
 
+test("arex: switching to and from the departure mode starts at the top of the new view", async ({
+  page,
+}) => {
+  await page.goto("/en/arex/");
+  await page.getByRole("button", { name: "Going to the airport?" }).click();
+  await expect(page.getByRole("heading", { name: "Leaving from Seoul Station" })).toBeInViewport();
+  await page.getByRole("button", { name: "Back to the comparison" }).click();
+  await expect(page.getByRole("heading", { name: "Express or All-stop?" })).toBeInViewport();
+});
+
 test("no screen scrolls sideways on a phone", async ({ page }) => {
   for (const lang of ["en", "ja"]) {
     for (const path of ["", "gate/", "card/", "arex/", "station/", "staff/"]) {
