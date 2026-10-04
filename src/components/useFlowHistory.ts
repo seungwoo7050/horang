@@ -109,6 +109,8 @@ export function useFlowHistory<S>(codec: FlowCodec<S>) {
   // 시스템 뒤로·앞으로: 방향은 단계 순서로 정한다
   useEffect(() => {
     const onPop = () => {
+      // 단계는 그대로인 기록 이동(직원 문장 화면 가득 보기를 닫는 뒤로 등)은 단계 이동이 아니다: 초점·방향을 건드리지 않는다
+      if (window.location.search === shown.current) return;
       const c = codecRef.current;
       const read = (q: string | null) => c.decode(new URLSearchParams(q ?? "")) ?? c.initial;
       const before = read(shown.current);
