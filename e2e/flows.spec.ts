@@ -170,6 +170,40 @@ test("arex: folded source lines show the grade and date, the grade name only whe
   await expect(sources.getByText("Official source · checked").first()).toBeVisible();
 });
 
+test("staff: full screen keeps the screen awake, again after coming back to the tab", async ({
+  page,
+}) => {
+  // 실제 잠금 대신 요청·해제 수를 세는 가짜(헤드리스 브라우저는 화면이 없다)
+  await page.addInitScript(() => {
+    const w = window as unknown as { wl: { req: number; rel: number } };
+    w.wl = { req: 0, rel: 0 };
+    Object.defineProperty(navigator, "wakeLock", {
+      value: {
+        request: async () => {
+          w.wl.req++;
+          return { release: async () => void w.wl.rel++ };
+        },
+      },
+    });
+  });
+  const count = () => page.evaluate(() => (window as unknown as { wl: object }).wl);
+  const visibility = (state: "visible" | "hidden") =>
+    page.evaluate((s) => {
+      Object.defineProperty(document, "visibilityState", { value: s, configurable: true });
+      document.dispatchEvent(new Event("visibilitychange"));
+    }, state);
+
+  await page.goto("/en/staff/");
+  await page.getByRole("button", { name: "Full screen" }).click();
+  await expect.poll(count).toEqual({ req: 1, rel: 0 });
+  await visibility("hidden");
+  await visibility("visible");
+  await expect.poll(count).toEqual({ req: 2, rel: 0 });
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await expect.poll(count).toEqual({ req: 2, rel: 1 });
+});
+
 test("no screen scrolls sideways on a phone", async ({ page }) => {
   for (const lang of ["en", "ja"]) {
     for (const path of ["", "gate/", "card/", "arex/", "station/", "staff/"]) {

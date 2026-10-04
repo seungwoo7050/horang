@@ -79,20 +79,28 @@ export function StaffPhrases({
     };
     window.addEventListener("popstate", onPop);
     window.addEventListener("keydown", onEsc);
-    // 직원이 읽는 동안 화면이 어두워지지 않게. 못 받으면(지원 안 함·배터리 절약) 그냥 둔다
+    // 직원이 읽는 동안 화면이 어두워지지 않게. 못 받으면(지원 안 함·배터리 절약) 그냥 둔다.
+    // 브라우저는 탭이 가려지면 잠금을 스스로 푼다: 다시 보이면 새로 받는다
     let lock: WakeLockSentinel | undefined;
     let alive = true;
-    navigator.wakeLock
-      ?.request("screen")
-      .then((l) => {
-        if (alive) lock = l;
-        else void l.release();
-      })
-      .catch(() => {});
+    const acquire = () =>
+      navigator.wakeLock
+        ?.request("screen")
+        .then((l) => {
+          if (alive) lock = l;
+          else void l.release();
+        })
+        .catch(() => {});
+    const onVisible = () => {
+      if (document.visibilityState === "visible") void acquire();
+    };
+    void acquire();
+    document.addEventListener("visibilitychange", onVisible);
     return () => {
       alive = false;
       window.removeEventListener("popstate", onPop);
       window.removeEventListener("keydown", onEsc);
+      document.removeEventListener("visibilitychange", onVisible);
       lock?.release().catch(() => {});
       returnFocus.current = true;
     };
