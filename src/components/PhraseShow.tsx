@@ -26,6 +26,30 @@ type Props = {
   reply: { ko: string; label: string };
 };
 
+/**
+ * 크게 보기 글자를 남은 높이에 맞춘다: 보여 주는 문장·번역·답하는 줄이 스크롤 없이 다 들어가는 가장 큰 크기(이분 탐색).
+ * 아래 끝은 --text-xl(답하는 줄과 같은 크기, 보여 주는 문장이 그보다 작아지지 않게), 위 끝은 --text-staff-max.
+ * 아래 끝에서도 넘치는 아주 작은 화면이면 답하는 줄을 한 단계 줄인다(보여 주는 문장이 먼저다)
+ */
+function fitSheet(sheet: HTMLElement) {
+  const text = sheet.querySelector<HTMLElement>("blockquote");
+  if (!text) return;
+  const root = getComputedStyle(document.documentElement);
+  const token = (name: string) => parseFloat(root.getPropertyValue(name));
+  const fits = () => sheet.scrollHeight <= sheet.clientHeight + 1;
+  sheet.removeAttribute("data-tight");
+  let lo = token("--text-xl");
+  let hi = token("--text-staff-max");
+  for (let i = 0; i < 12; i++) {
+    const mid = (lo + hi) / 2;
+    text.style.setProperty("--fit", `${mid}px`);
+    if (fits()) lo = mid;
+    else hi = mid;
+  }
+  text.style.setProperty("--fit", `${Math.floor(lo)}px`);
+  if (!fits()) sheet.setAttribute("data-tight", "");
+}
+
 /** history.state 안에서 "크게 보여 주는 중"을 표시하는 키(시스템 뒤로 = 닫기) */
 export const SHOWING = "horangPhraseShow";
 
@@ -53,6 +77,7 @@ export function PhraseShow({ card, ko, label, showLabel, closeLabel, reply }: Pr
   const returnFocus = useRef(false);
   /** 연 순간(누른 그 자리)부터 닫힐 때까지 참. 화면에 붙기 전(모핑 대기 중)에도 닫기 신호를 받으려고 상태와 따로 둔다 */
   const opened = useRef(false);
+  const sheet = useRef<HTMLDivElement>(null);
 
   // 크게 보던 중 새로고침하면 기록에 표시만 남는다: 지워 두어야 다음 뒤로가 빈 걸음이 되지 않는다
   useEffect(() => {
@@ -112,6 +137,17 @@ export function PhraseShow({ card, ko, label, showLabel, closeLabel, reply }: Pr
     };
   }, [showing]);
 
+  // 글자 크기는 화면에 붙는 그 커밋 안에서 맞춘다(모핑의 새 스냅숏이 맞춘 크기로 찍힌다). 화면을 돌리거나 주소창이
+  // 접혀 높이가 바뀌면 다시 맞춘다
+  useLayoutEffect(() => {
+    const el = sheet.current;
+    if (!showing || !el) return;
+    fitSheet(el);
+    const ro = new ResizeObserver(() => fitSheet(el));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [showing, ko]);
+
   // 닫히면 초점을 "크게 보기" 버튼으로 돌린다(버튼은 자리 지킴 안에 그대로 있다, 닫힌 뒤 inert가 풀린 다음에 옮긴다)
   useLayoutEffect(() => {
     if (showing || !returnFocus.current) return;
@@ -159,6 +195,7 @@ export function PhraseShow({ card, ko, label, showLabel, closeLabel, reply }: Pr
       {showing
         ? createPortal(
             <div
+              ref={sheet}
               className={show.sheet}
               role="dialog"
               aria-modal="true"

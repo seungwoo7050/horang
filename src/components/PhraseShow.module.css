@@ -119,7 +119,8 @@
 
 .big blockquote {
   margin: 0;
-  font-size: clamp(var(--text-staff), min(14vw, 12dvh), var(--text-staff-max));
+  /* --fit: 스크립트가 남은 높이에 맞춰 정한 크기(PhraseShow fitSheet). 정하기 전에는 폭·높이로 어림한 크기 */
+  font-size: var(--fit, clamp(var(--text-staff), min(14vw, 12dvh), var(--text-staff-max)));
   font-weight: 700;
   line-height: 1.3;
   word-break: keep-all;
@@ -148,6 +149,29 @@
   line-height: 1.35;
   word-break: keep-all;
   text-wrap: balance;
+}
+
+/* 보여 주는 문장을 가장 작게 줄여도 넘치는 아주 작은 화면: 답하는 줄을 한 단계 줄인다 */
+.sheet[data-tight] .reply p[lang="ko"] {
+  font-size: var(--text-base);
+}
+
+/*
+ * 먼저 문장, 그다음 답하는 법: 카드가 커지는 모핑(--dur-sheet)이 끝난 뒤 답하는 줄이 흐릿했다가 또렷해진다
+ * (MorphLabel과 같은 말투). 자리를 옮기는 transform은 쓰지 않는다: 스크롤 영역에 들어가 글자 맞춤이 그만큼 덜 키운다.
+ * 동작 줄이기면 토큰이 0이라 처음부터 보인다
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .reply {
+    animation: reply-in var(--dur-base) var(--ease-enter) var(--dur-sheet) both;
+  }
+}
+
+@keyframes reply-in {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+  }
 }
 
 .big figcaption {

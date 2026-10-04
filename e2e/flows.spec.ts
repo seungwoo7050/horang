@@ -265,6 +265,56 @@ for (const path of ["/en/staff/", "/en/gate/?cause=lowBalance&step=2"]) {
   });
 }
 
+// 브라우저 바를 뺀, 화면에 실제로 보이는 높이(대략). 작은 폰·가로 화면이 넘치기 쉽다
+const SHOW_BIG_SIZES = [
+  { name: "iPhone SE", width: 375, height: 548 },
+  { name: "320px phone", width: 320, height: 460 },
+  { name: "landscape", width: 844, height: 340 },
+];
+for (const lang of ["en", "ja"] as const) {
+  test(`staff (${lang}): every sentence shown big fits the screen without scrolling, the sentence larger than the reply`, async ({
+    page,
+  }) => {
+    test.slow();
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    const showBig = lang === "en" ? "Show big" : "大きく見せる";
+    for (const size of SHOW_BIG_SIZES) {
+      await page.setViewportSize(size);
+      await page.goto(`/${lang}/staff/`);
+      const options = page.locator("main ul button");
+      const count = await options.count();
+      for (let i = 0; i < count; i++) {
+        await options.nth(i).click();
+        await page.getByRole("button", { name: showBig }).click();
+        const dialog = page.getByRole("dialog");
+        await expect(dialog).toBeVisible();
+        const m = await dialog.evaluate((d) => {
+          const px = (q: string) => parseFloat(getComputedStyle(d.querySelector(q)!).fontSize);
+          return {
+            over: d.scrollHeight - d.clientHeight,
+            sentence: px("blockquote"),
+            reply: px('p[lang="ko"]'),
+          };
+        });
+        const where = `${size.name} #${i}`;
+        expect(m.over, where).toBeLessThanOrEqual(1);
+        expect(m.sentence, where).toBeGreaterThan(m.reply);
+        await page.keyboard.press("Escape");
+        await expect(dialog).toHaveCount(0);
+      }
+    }
+  });
+}
+
+test("gate: step 3 shown big fits an iPhone SE screen too", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 548 });
+  await page.goto("/en/gate/?cause=lowBalance&step=2");
+  await page.getByRole("button", { name: "Show big" }).click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toBeVisible();
+  expect(await dialog.evaluate((d) => d.scrollHeight - d.clientHeight)).toBeLessThanOrEqual(1);
+});
+
 test("staff: full screen keeps the screen awake, again after coming back to the tab", async ({
   page,
 }) => {
