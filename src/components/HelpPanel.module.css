@@ -1,27 +1,13 @@
 /*
- * 마스코트(머리와 어깨) 72px이 패널 아래 가장자리에 붙는다: 잘린 어깨 아래는 패널 밖이라 보이지 않는다.
- * 바탕은 브랜드 색. 밝은 화면 크림(ink 16.35:1), 어두운 화면 네이비(ink 15.96:1)
+ * 마스코트(머리와 어깨) 72px이 아래 가는 선 위로 고개를 내민다: 상자(브랜드 색 바탕·그림자) 없이 선 하나가 바닥이다.
+ * 바로 아래 문장 카드가 이미 테두리 상자라, 제목까지 상자에 넣으면 상자가 두 겹으로 쌓인다
  */
 .panel {
   display: flex;
   align-items: flex-end;
   gap: var(--space-3);
   min-height: calc(72px + var(--space-3));
-  padding-inline: var(--space-3) var(--space-4);
-  background: var(--brand-cream);
-  box-shadow: var(--edge);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .panel {
-    background: var(--brand-navy);
-  }
-}
-
-:root[data-theme="dark"] .panel {
-  background: var(--brand-navy);
+  border-bottom: 1px solid var(--color-line);
 }
 
 .bust {
@@ -46,9 +32,8 @@
   box-shadow: none;
 }
 
-/* 강제 색상 모드는 box-shadow(edge)를 지운다: 경계를 시스템 색 테두리로 남긴다 */
 @media (forced-colors: active) {
   .panel {
-    border: 1px solid CanvasText;
+    border-color: CanvasText;
   }
 }

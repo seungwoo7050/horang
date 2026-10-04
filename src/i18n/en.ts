@@ -20,7 +20,6 @@ export const en = {
   },
   home: {
     ask: "Do you need help?",
-    sub: "Tap where you're stuck. I'll walk you through it.",
     situations: {
       gate: { title: "I'm stuck at the gate", hint: "Can't get in or out" },
       card: { title: "Which card?", hint: "Single-journey, Tmoney, Climate Card" },
@@ -44,7 +43,7 @@ export const en = {
       expressTicket: { label: "I have an Express train ticket", headline: "Use the QR reader" },
       other: { label: "Something else", headline: "Station staff can help" },
     },
-    calm: "It's okay. This happens a lot, and nobody will rush you.",
+    ifStuck: "Didn't work? Tap “{still}” for a sentence to show station staff.",
     worked: "That worked",
     still: "Still stuck",
     staffHead: "Show this to station staff",

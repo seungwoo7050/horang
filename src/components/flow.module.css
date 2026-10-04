@@ -1,10 +1,15 @@
 /* 단계 흐름 화면 공통(개찰구·카드 등) */
-.kicker {
-  margin: 0;
-  color: var(--color-ribbon-text);
-  font-weight: 700;
-  font-size: var(--text-sm);
-  font-variant-numeric: tabular-nums;
+
+/*
+ * 보이지 않고 읽히기만 하는 글(서울역 길 안내의 "n단계 중 m"): 화면에는 지도의 번호가 이미 있다
+ */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .heading {
@@ -63,7 +68,7 @@
  * 구 하나가 칸보다 길 때(320px 두 칸 줄의 "オンラインチャット")도 칸 안에서 끊기게 anywhere:
  * break-word는 최소 폭(min-content)을 줄이지 않아 플렉스·그리드 칸이 글자만큼 넓어진다
  */
-:is(.option, .primary, .secondary).fromContent {
+:is(.option, .line, .primary, .secondary).fromContent {
   word-break: normal;
   word-break: auto-phrase;
   overflow-wrap: anywhere;
@@ -84,28 +89,70 @@
 }
 
 /*
- * 고른 항목: 테두리를 두르지 않고 눌려 들어간 자리(surface-2, 그림자 없음)로 둔다. 위에 크게 보이는 카드가 이미
- * 호박색 테두리라, 목록에서도 같은 테두리를 두르면 한 화면에 같은 강조가 두 번 된다. 직원 문장 목록은 체크 표시를 더한다
+ * 직원 문장처럼 같은 무게의 문장이 많이 이어지는 목록은 카드가 아니라 줄이다: 열두 장의 흰 카드가 쌓이면
+ * 앱 생성기의 목록처럼 보인다. 줄 사이 가는 선, 고른 줄은 굵은 글자와 체크
  */
+.lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.lines li {
+  border-top: 1px solid var(--color-line);
+}
+
+.line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: var(--hit-primary);
+  padding: var(--space-3) 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: var(--text-base);
+  text-align: start;
+  cursor: pointer;
+}
+
+.line[aria-pressed="true"] {
+  font-weight: 700;
+}
+
+/* 단계 고르기에서 앞서 고른 항목(뒤로 왔을 때): 테두리 없이 눌려 들어간 자리(surface-2, 그림자 없음) */
 .option[aria-pressed="true"] {
   background: var(--color-surface-2);
   box-shadow: none;
 }
 
-.option[aria-pressed="true"] .check path {
-  stroke: var(--color-ribbon-text);
-  stroke-width: 2.5;
+.line svg {
+  flex: none;
+  width: var(--space-5);
+  height: var(--space-5);
 }
 
+.line path {
+  fill: none;
+  stroke: var(--color-ribbon-text);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/*
+ * 해 보고 안 되면 갈 길: 상자 없이 호랑이 얼굴 옆 한 줄(위로하는 말 대신 다음 행동). 아래 "아직 안 돼요" 버튼을 이름으로 가리킨다
+ */
 .hint {
   display: flex;
   align-items: center;
   gap: var(--space-3);
   margin: 0;
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  color: var(--color-ink);
+  color: var(--color-muted);
   font-size: var(--text-md);
 }
 
@@ -263,6 +310,15 @@
   /* 고른 항목은 배경·안쪽 그림자로만 구분돼 강제 색상 모드에서 같아진다 */
   .option[aria-pressed="true"] {
     border: 3px solid Highlight;
+  }
+
+  .lines,
+  .lines li {
+    border-color: CanvasText;
+  }
+
+  .line[aria-pressed="true"] {
+    color: Highlight;
   }
 }
 

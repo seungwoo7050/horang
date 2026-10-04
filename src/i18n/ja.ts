@@ -28,7 +28,6 @@ export const ja: Messages = {
   },
   home: {
     ask: `お困り${B}ですか？`,
-    sub: `困っている場面を${B}タップしてください。${B}一緒に${B}解決します。`,
     situations: {
       gate: { title: "改札から出られない", hint: "入れない・出られない" },
       card: { title: "どのカードを使う？", hint: "1回用・Tmoney・Climate Card" },
@@ -58,7 +57,7 @@ export const ja: Messages = {
       },
       other: { label: "その他", headline: `駅員が${B}助けてくれます` },
     },
-    calm: `大丈夫。${B}よくある${B}ことです。${B}急がなくて${B}いいですよ。`,
+    ifStuck: `だめなら${B}「{still}」を${B}押すと、${B}駅員さんに${B}見せる文が${B}出ます。`,
     worked: "解決した",
     still: "まだ出られない",
     staffHead: `この画面を${B}駅員さんに${B}見せてください`,
