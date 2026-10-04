@@ -126,7 +126,9 @@ test.describe("forced colors", () => {
     expect(ring.width).toBeGreaterThanOrEqual(2);
   });
 
-  test("cards, options, buttons and fact dividers keep a visible edge", async ({ page }) => {
+  test("cards, options, buttons, list lines and fact dividers keep a visible edge", async ({
+    page,
+  }) => {
     const edge = (l: Locator) =>
       l.first().evaluate((e) => {
         const s = getComputedStyle(e);
@@ -134,10 +136,12 @@ test.describe("forced colors", () => {
       });
     const seen: Record<string, string> = {};
     await page.goto("/en/");
-    seen["home: speech bubble"] = await edge(page.locator("h1"));
-    seen["home: situation card"] = await edge(
-      page.getByRole("link", { name: /stuck at the gate/ }),
+    // 처음 화면의 상황과 직원 문장 목록은 카드가 아니라 줄 목록: 줄 위 선이 남아야 한다
+    seen["home: situation line"] = await edge(
+      page.locator("main li", { has: page.getByRole("link", { name: /stuck at the gate/ }) }),
     );
+    await page.goto("/en/staff/");
+    seen["staff: sentence line"] = await edge(page.locator("main li", { hasText: "elevator" }));
     await page.goto("/en/gate/");
     seen["gate: option"] = await edge(page.getByRole("button", { name: "Not enough balance" }));
     await page.getByRole("button", { name: "Not enough balance" }).click();

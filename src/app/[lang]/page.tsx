@@ -43,7 +43,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </Boop>
         <h1 className={styles.ask}>{t.home.ask}</h1>
       </div>
-      <p className={styles.sub}>{t.home.sub}</p>
       <ul className={styles.list}>
         {SITUATIONS.map((key) => {
           const s = t.home.situations[key];

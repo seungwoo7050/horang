@@ -176,7 +176,7 @@ export function RouteFlow({ lang, routes, places }: Props) {
           </div>
         ) : (
           <div key={`${route.id}-${step}`} className={`${styles.stage} ${styles[dir]}`}>
-            <p className={styles.kicker}>{stepLabel}</p>
+            <p className={styles.srOnly}>{stepLabel}</p>
             <h1 className={styles.heading}>{current.title}</h1>
             <p className={styles.body}>{current.body}</p>
             {current.unconfirmed ? (

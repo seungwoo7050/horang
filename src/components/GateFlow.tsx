@@ -148,7 +148,7 @@ export function GateFlow({
         {cause.help}
         <p className={styles.hint}>
           <Scene name="calm" />
-          {g.calm}
+          {g.ifStuck.replace("{still}", g.still)}
         </p>
       </>
     );

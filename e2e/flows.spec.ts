@@ -559,3 +559,38 @@ for (const width of [320, 360]) {
     });
   });
 }
+
+test.describe("fewer template signs", () => {
+  test("home starts right under the header: no empty band above the tiger", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    for (const lang of ["en", "ja"]) {
+      await page.goto(`/${lang}/`);
+      const header = (await page.locator("header").first().boundingBox())!;
+      const hero = (await page.locator("main img[src='/brand/mascot.webp']").boundingBox())!;
+      expect(hero.y - (header.y + header.height), lang).toBeLessThanOrEqual(40);
+    }
+  });
+
+  test("gate step 2 says what to do next and names the Still stuck button", async ({ page }) => {
+    await page.goto("/en/gate/");
+    await page.getByRole("button", { name: "Not enough balance" }).click();
+    await expect(
+      page.getByText("Tap “Still stuck” for a sentence to show station staff."),
+    ).toBeVisible();
+    await expect(page.getByText(/It's okay/)).toHaveCount(0);
+    await page.goto("/ja/gate/");
+    await page.getByRole("button", { name: "残高が足りない" }).click();
+    await expect(page.locator("main p", { hasText: "「まだ出られない」" })).toBeVisible();
+  });
+
+  test("station route: the step count is read out, not printed under the numbered map", async ({
+    page,
+  }) => {
+    await page.goto("/en/station/");
+    await page.getByRole("button", { name: /^Line 4/ }).click();
+    const label = page.getByText("Step 1 of 3");
+    await expect(label).toHaveCount(1);
+    const box = (await label.boundingBox())!;
+    expect(box.width).toBeLessThanOrEqual(1);
+  });
+});

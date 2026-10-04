@@ -46,12 +46,12 @@ export function StaffPhrases({
         />
       </div>
       <h2 className={styles.section}>{othersLabel}</h2>
-      <ul className={styles.options}>
+      <ul className={styles.lines}>
         {options.map((o) => (
           <li key={o.id}>
             <button
               type="button"
-              className={`${styles.option} ${styles.fromContent}`}
+              className={`${styles.line} ${styles.fromContent}`}
               aria-pressed={o.id === current}
               onClick={() => {
                 setCurrent(o.id);
@@ -60,7 +60,7 @@ export function StaffPhrases({
             >
               {o.label}
               {o.id === current ? (
-                <svg className={styles.check} viewBox="0 0 24 24" aria-hidden="true">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M5 12.5l4.5 4.5L19 7.5" />
                 </svg>
               ) : null}

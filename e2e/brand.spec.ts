@@ -47,7 +47,7 @@ test.describe("brand", () => {
     await expect(wordmark(page)).toHaveAttribute("src", "/brand/wordmark-navy.webp");
   });
 
-  test("home hero: the mascot keeps its box before it loads and waves its paw next to the bubble", async ({
+  test("home hero: the mascot keeps its box before it loads and waves its paw next to the heading", async ({
     page,
   }) => {
     for (const width of [320, 360, 412]) {
@@ -63,21 +63,16 @@ test.describe("brand", () => {
         const img = (await hero.boundingBox())!;
         // 비율 그대로(늘어나지 않게)
         expect(Math.abs(img.width / img.height - 276 / 336), where).toBeLessThan(0.01);
-        // 말풍선은 마스코트 옆: 들어 올린 앞발(오른쪽 끝, 높이 471~757/1600)을 가리지 않는다
-        const bubble = (await page.getByRole("heading", { level: 1 }).boundingBox())!;
-        expect(bubble.x, where).toBeGreaterThanOrEqual(img.x + img.width);
+        // 묻는 말(제목)은 마스코트 옆: 들어 올린 앞발(오른쪽 끝, 높이 471~757/1600)을 가리지 않는다
+        const ask = (await page.getByRole("heading", { level: 1 }).boundingBox())!;
+        expect(ask.x, where).toBeGreaterThanOrEqual(img.x + img.width);
         const paw = await page.evaluate(
           ([x, y]) => document.elementFromPoint(x!, y!)?.getAttribute("src"),
           [img.x + img.width - 3, img.y + img.height * (614 / 1600)],
         );
         expect(paw, where).toBe("/brand/mascot.webp");
-        // 말풍선 글자는 두 줄 이하(320px에서도 "Do you / need help?")
-        const lines = await page.getByRole("heading", { level: 1 }).evaluate((h) => {
-          const cs = getComputedStyle(h);
-          const inner = h.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
-          return Math.round(inner / parseFloat(cs.lineHeight));
-        });
-        expect(lines, where).toBeLessThanOrEqual(2);
+        // 큰 제목은 마스코트 키 안에 들어간다(줄이 넘쳐 목록을 밀어내지 않게)
+        expect(ask.height, where).toBeLessThanOrEqual(img.height);
       }
     }
   });
@@ -109,10 +104,9 @@ test.describe("brand", () => {
     }
   });
 
-  test("help panel: the mascot leans in next to the staff heading, on the brand color, readable", async ({
+  test("help panel: the mascot leans in over a line next to the staff heading, readable", async ({
     page,
   }) => {
-    const expected = { light: "rgb(247, 241, 232)", dark: "rgb(15, 23, 42)" };
     for (const scheme of ["light", "dark"] as const) {
       await page.emulateMedia({ colorScheme: scheme });
       for (const open of [
@@ -130,13 +124,17 @@ test.describe("brand", () => {
         await expect(bust).toHaveAttribute("alt", "");
         await expect(bust).toHaveAttribute("width", "144");
         await expect.poll(() => drawn(bust)).toBe(true);
-        const [bg, ink] = await heading.evaluate((h) => [
+        // 상자 없이 화면 바탕 위: 바탕을 칠하지 않고 아래 가는 선 하나
+        const [bg, ink, page_, line] = await heading.evaluate((h) => [
           getComputedStyle(h.parentElement!).backgroundColor,
           getComputedStyle(h).color,
+          getComputedStyle(document.body).backgroundColor,
+          getComputedStyle(h.parentElement!).borderBottomStyle,
         ]);
-        expect(bg, `${scheme} ${page.url()}`).toBe(expected[scheme]);
-        expect(contrast(ink!, bg!)).toBeGreaterThanOrEqual(4.5);
-        // 어깨 아래(잘린 자리)는 패널 아래 가장자리에 붙어 가려진다
+        expect(bg, `${scheme} ${page.url()}`).toBe("rgba(0, 0, 0, 0)");
+        expect(line).toBe("solid");
+        expect(contrast(ink!, page_!)).toBeGreaterThanOrEqual(4.5);
+        // 어깨 아래(잘린 자리)는 선 위에 선다
         const p = (await panel.boundingBox())!;
         const b = (await bust.boundingBox())!;
         expect(Math.abs(b.y + b.height - (p.y + p.height))).toBeLessThanOrEqual(1);
