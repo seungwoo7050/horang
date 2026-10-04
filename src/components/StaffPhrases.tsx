@@ -34,6 +34,11 @@ export function StaffPhrases({ cards, options, initial, othersLabel }: Props) {
               }}
             >
               {o.label}
+              {o.id === current ? (
+                <svg className={styles.check} viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 12.5l4.5 4.5L19 7.5" />
+                </svg>
+              ) : null}
             </button>
           </li>
         ))}
