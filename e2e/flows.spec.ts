@@ -248,6 +248,23 @@ test("staff: showing big stays inside the page (no browser full screen), and a b
   await expect(page).toHaveURL(/\/en\/staff\/$/);
 });
 
+// 대부분의 폰은 동작 줄이기가 꺼져 있다: 그 상태에서 크게 보기가 정말 화면 전체를 덮는지
+for (const path of ["/en/staff/", "/en/gate/?cause=lowBalance&step=2"]) {
+  test(`${path}: with motion on, the big view covers the whole screen, not just the card's box`, async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    await page.goto(path);
+    await page.getByRole("button", { name: "Show big" }).click();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog).toBeVisible();
+    await page.waitForTimeout(800);
+    const box = (await dialog.boundingBox())!;
+    const view = page.viewportSize()!;
+    expect(box).toEqual({ x: 0, y: 0, width: view.width, height: view.height });
+  });
+}
+
 test("staff: full screen keeps the screen awake, again after coming back to the tab", async ({
   page,
 }) => {

@@ -10,6 +10,7 @@ import {
   type KeyboardEvent,
   type ReactNode,
 } from "react";
+import { createPortal } from "react-dom";
 import show from "./PhraseShow.module.css";
 
 type Props = {
@@ -151,33 +152,40 @@ export function PhraseShow({ card, ko, label, showLabel, closeLabel, reply }: Pr
           {showLabel}
         </button>
       </div>
-      {showing ? (
-        <div
-          className={show.sheet}
-          role="dialog"
-          aria-modal="true"
-          aria-label={label}
-          onKeyDown={onKey}
-        >
-          <button ref={closer} type="button" className={show.close} onClick={close}>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 6l12 12M18 6L6 18" />
-            </svg>
-            <span className={show.hidden}>{closeLabel}</span>
-          </button>
-          <ViewTransition name="staff-phrase" share="morph" default="none">
-            <figure className={show.big}>
-              <blockquote lang="ko">{ko}</blockquote>
-              <figcaption>{label}</figcaption>
-            </figure>
-          </ViewTransition>
-          {/* 직원이 길게 설명하면 여행자가 못 알아듣는다: 말 대신 가리켜 달라고 같이 보여 준다(보여 주는 문장보다 작게) */}
-          <div className={show.reply}>
-            <p lang="ko">{reply.ko}</p>
-            <p>{reply.label}</p>
-          </div>
-        </div>
-      ) : null}
+      {/*
+       * 덮개는 문서 맨 바깥(body)에 그린다. 카드를 감싼 단계 상자에 들어오기 애니메이션(transform)이 걸려 있으면
+       * position: fixed가 화면이 아니라 그 상자를 기준으로 잡혀, 덮개가 카드 자리 안에서만 열린다
+       */}
+      {showing
+        ? createPortal(
+            <div
+              className={show.sheet}
+              role="dialog"
+              aria-modal="true"
+              aria-label={label}
+              onKeyDown={onKey}
+            >
+              <button ref={closer} type="button" className={show.close} onClick={close}>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 6l12 12M18 6L6 18" />
+                </svg>
+                <span className={show.hidden}>{closeLabel}</span>
+              </button>
+              <ViewTransition name="staff-phrase" share="morph" default="none">
+                <figure className={show.big}>
+                  <blockquote lang="ko">{ko}</blockquote>
+                  <figcaption>{label}</figcaption>
+                </figure>
+              </ViewTransition>
+              {/* 직원이 길게 설명하면 여행자가 못 알아듣는다: 말 대신 가리켜 달라고 같이 보여 준다(보여 주는 문장보다 작게) */}
+              <div className={show.reply}>
+                <p lang="ko">{reply.ko}</p>
+                <p>{reply.label}</p>
+              </div>
+            </div>,
+            document.body,
+          )
+        : null}
     </>
   );
 }
