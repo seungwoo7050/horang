@@ -21,8 +21,6 @@ export function brandSource(): string {
 
 export const FILES = {
   mascot: "01-mascot/tiger-guide-mascot.png",
-  logo: "02-logo/horang-logo.png",
-  wordmark: "02-logo/horang-wordmark.png",
 } as const;
 
 /** 브랜드 색(제공 안내문의 워드마크 색 = globals.css --brand-cream, --brand-navy)을 [r, g, b]로 */
@@ -56,9 +54,6 @@ export const MASCOT_FIX = {
   paw: { x: 1402, reach: 96 },
 };
 
-/** 로고 원본(2400×800) 호랑이 마크의 눈 구멍 상자 */
-export const LOGO_EYE_BOX = [250, 330, 520, 450] as const;
-
 /** scripts/brand-pixels.js가 페이지에 만드는 window.brand(브라우저 안에서만 부른다) */
 export type BrandPixels = {
   load(src: string): Promise<ImageData>;
@@ -70,12 +65,6 @@ export type BrandPixels = {
     fix: typeof MASCOT_FIX,
   ): { eyes: number; notches: number; paw: [number, number, number] };
   iconCanvas(img: ImageData, crop: readonly number[], size: number, bg: string): OffscreenCanvas;
-  swapColors(
-    img: ImageData,
-    pairs: readonly (readonly [readonly number[], readonly number[]])[],
-    tol: number,
-    minX?: number,
-  ): number[];
   clearFaint(img: ImageData, threshold: number, fromX?: number): number;
   inkGlyphs(
     img: ImageData,
@@ -83,6 +72,11 @@ export type BrandPixels = {
     maxFrac?: number,
     minLum?: number,
   ): { glyphs: number; sizes: number[]; pixels: number };
+  twoTone(img: ImageData, dark: readonly number[], light: readonly number[]): [number, number];
+  compose(
+    parts: readonly { canvas: OffscreenCanvas; x: number; y: number }[],
+    size: readonly number[],
+  ): OffscreenCanvas;
   bbox(img: ImageData, threshold?: number): [number, number, number, number];
   resized(img: ImageData, crop: readonly number[], out: readonly number[]): OffscreenCanvas;
   encode(

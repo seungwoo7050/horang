@@ -190,33 +190,6 @@ globalThis.brand = (() => {
   }
 
   /**
-   * 정확히 그 색인 픽셀만 바꾼다(불투명도는 그대로). pairs: [[from, to], ...], tol: 채널당 허용 차이.
-   * minX: 이 x부터만(로고에서 호랑이 마크의 크림 입 주변·남색 배낭을 건드리지 않게)
-   */
-  function swapColors(img, pairs, tol, minX = 0) {
-    const d = img.data;
-    const counts = pairs.map(() => 0);
-    for (let i = 0; i < d.length; i += 4) {
-      if (d[i + 3] === 0 || (i / 4) % img.width < minX) continue;
-      for (let p = 0; p < pairs.length; p++) {
-        const [from, to] = pairs[p];
-        if (
-          Math.abs(d[i] - from[0]) <= tol &&
-          Math.abs(d[i + 1] - from[1]) <= tol &&
-          Math.abs(d[i + 2] - from[2]) <= tol
-        ) {
-          d[i] = to[0];
-          d[i + 1] = to[1];
-          d[i + 2] = to[2];
-          counts[p]++;
-          break;
-        }
-      }
-    }
-    return counts;
-  }
-
-  /**
    * 거의 투명한 픽셀(불투명도 threshold 미만)을 완전히 투명하게. 2차 에셋(2026-10-04)은 배경 제거가 남긴
    * 불투명도 1~3의 노랑·빨강 점이 윤곽 둘레에 깔려 있다. 눈에는 안 보여도 줄일 때 섞여 테두리 색을 흐린다.
    * fromX가 있으면 그 열부터 오른쪽은 모두 지운다(옆 그림이 함께 잘려 들어온 조각)
@@ -300,6 +273,41 @@ globalThis.brand = (() => {
     return { glyphs: glyphs.length, sizes: glyphs.map((px) => px.length), pixels: n };
   }
 
+  /**
+   * 두 색으로 된 그림(2차 워드마크: 크림 글자 + 네이비 비행기)을 밝기에 따라 정확한 두 색 사이로 다시 칠한다.
+   * 원본은 정확히 두 색이 아니라 음영과 경계 번짐이 섞여 있어(크림 #FEF4E6 근처, 네이비 #2B3550 근처) 같은 색 바꾸기가
+   * 맞지 않는다. 불투명 픽셀을 밝기 128로 어두운 무리(비행기)와 밝은 무리(글자)로 나눠 각 무리의 중앙값을 어두운 끝·밝은 끝으로
+   * 보고, 그 사이를 dark→light로 잇는다(비행기는 전체의 몇 %뿐이라 백분위로 끝을 잡으면 글자 음영이 어두운 끝이 된다).
+   * 불투명도는 그대로. 밝은 화면용 짝은 dark·light를 서로 바꿔 부른다(글자 네이비, 비행기 크림)
+   */
+  function twoTone(img, dark, light) {
+    const d = img.data;
+    const lum = (i) => 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2];
+    const darkLs = [];
+    const lightLs = [];
+    for (let i = 0; i < d.length; i += 4)
+      if (d[i + 3] >= 128) (lum(i) < 128 ? darkLs : lightLs).push(lum(i));
+    const median = (a) => a.sort((x, y) => x - y)[Math.floor(a.length / 2)];
+    const lo = median(darkLs);
+    const hi = median(lightLs);
+    for (let i = 0; i < d.length; i += 4) {
+      if (d[i + 3] === 0) continue;
+      const t = Math.min(1, Math.max(0, (lum(i) - lo) / (hi - lo)));
+      for (let c = 0; c < 3; c++) d[i + c] = Math.round(dark[c] + (light[c] - dark[c]) * t);
+    }
+    return [Math.round(lo), Math.round(hi)];
+  }
+
+  /**
+   * 여러 캔버스를 한 줄로 붙인 투명 캔버스(로고 = 호랑이 얼굴 + 워드마크). parts: [{ canvas, x, y }]
+   */
+  function compose(parts, size) {
+    const o = new OffscreenCanvas(size[0], size[1]);
+    const x = o.getContext("2d");
+    for (const p of parts) x.drawImage(p.canvas, p.x, p.y);
+    return o;
+  }
+
   /** 불투명도 threshold 이상인 픽셀의 경계 상자 [x0, y0, x1, y1] */
   function bbox(img, threshold = 8) {
     const { width: w, height: h, data: d } = img;
@@ -360,9 +368,10 @@ globalThis.brand = (() => {
     roundCut,
     fixMascot,
     iconCanvas,
-    swapColors,
     clearFaint,
     inkGlyphs,
+    twoTone,
+    compose,
     bbox,
     resized,
     encode,

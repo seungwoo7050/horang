@@ -6,11 +6,11 @@ export const BRAND_IMAGES = {
   // 도움 맥락 패널의 머리·어깨(72px)
   "mascot-bust": { src: "/brand/mascot-bust.webp", width: 144, height: 144 },
   // 첫 화면 머리의 워드마크(18px 높이). cream = 어두운 화면, navy = 밝은 화면
-  "wordmark-cream": { src: "/brand/wordmark-cream.webp", width: 208, height: 36 },
-  "wordmark-navy": { src: "/brand/wordmark-navy.webp", width: 208, height: 36 },
+  "wordmark-cream": { src: "/brand/wordmark-cream.webp", width: 180, height: 36 },
+  "wordmark-navy": { src: "/brand/wordmark-navy.webp", width: 180, height: 36 },
   // 언어 고르기 첫 주소(/)의 로고(44px 높이). 호랑이 마크의 뚫린 눈을 채웠다
-  "logo-cream": { src: "/brand/logo-cream.webp", width: 456, height: 88 },
-  "logo-navy": { src: "/brand/logo-navy.webp", width: 456, height: 88 },
+  "logo-cream": { src: "/brand/logo-cream.webp", width: 356, height: 88 },
+  "logo-navy": { src: "/brand/logo-navy.webp", width: 356, height: 88 },
   // 2차 에셋(2026-10-04, scripts/make-scenes.mts): 상황마다 다른 호랑이. 화면 하나에 하나만 쓴다.
   // -ink = 밝은 화면용(흰 물음표·음표를 네이비로). 짝은 크기가 같다
   // 404(120px 높이): 물음표를 띄우고 생각하는 호랑이
