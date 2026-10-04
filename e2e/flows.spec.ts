@@ -170,6 +170,37 @@ test("arex: folded source lines show the grade and date, the grade name only whe
   await expect(sources.getByText("Official source · checked").first()).toBeVisible();
 });
 
+test("gate: step 3 sentence also goes full screen, and system back closes it without leaving the step", async ({
+  page,
+}) => {
+  await page.goto("/en/gate/");
+  await page.getByRole("button", { name: "Not enough balance" }).click();
+  await page.getByRole("button", { name: "Still stuck" }).click();
+  await expect(page.locator("main h1")).toHaveText("Show this to station staff");
+  const show = page.getByRole("button", { name: "Full screen" });
+  await show.click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog.locator('blockquote[lang="ko"]')).toContainText("잔액이 부족해요");
+  // 단계 흐름은 단계가 바뀌면 새 제목으로 초점을 옮긴다(스크린 리더가 새 단계를 읽음). 닫기는 단계 이동이 아니다
+  await page.evaluate(() => {
+    const w = window as unknown as { h1Focus: number };
+    w.h1Focus = 0;
+    document.querySelector("main h1")!.addEventListener("focus", () => w.h1Focus++);
+  });
+  await page.goBack();
+  await expect(dialog).toHaveCount(0);
+  await expect(page).toHaveURL(/cause=lowBalance&step=2/);
+  await expect(page.locator("main h1")).toHaveText("Show this to station staff");
+  // 같은 단계로 돌아온 뒤로는 단계 이동이 아니다: 초점은 제목이 아니라 크게 보기 버튼에 남는다
+  // (모핑이 끝난 뒤 늦게 도는 effect가 초점을 옮기지 않는지 보려고 전환 시간보다 오래 기다린다)
+  await page.waitForTimeout(800);
+  await expect(show).toBeFocused();
+  expect(await page.evaluate(() => (window as unknown as { h1Focus: number }).h1Focus)).toBe(0);
+  // 한 번 더 뒤로 = 이전 단계
+  await page.goBack();
+  await expect(page.locator("main h1")).toHaveText("Top up, then tap out");
+});
+
 test("staff: full screen keeps the screen awake, again after coming back to the tab", async ({
   page,
 }) => {

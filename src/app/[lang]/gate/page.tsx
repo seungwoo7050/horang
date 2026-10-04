@@ -3,6 +3,7 @@ import { pageMetadata } from "@/app/seo";
 import { FactList } from "@/components/Fact";
 import { GateFlow, type GateCause } from "@/components/GateFlow";
 import { PhraseCard } from "@/components/PhraseCard";
+import { phrases } from "@/content";
 import { getMessages, isLocale, type Locale } from "@/i18n";
 
 // 원인 → 해결 claim → 직원 문장. 사실은 claim으로만 낸다(research/PHASE_R_AIRPORT_GATE.md B-1).
@@ -24,13 +25,19 @@ const CAUSES = [
 
 function causes(lang: Locale): GateCause[] {
   const t = getMessages(lang).gate.causes;
-  return CAUSES.map((c) => ({
-    id: c.id,
-    label: t[c.id].label,
-    headline: t[c.id].headline,
-    help: <FactList ids={c.claims} lang={lang} />,
-    phrase: <PhraseCard id={c.phrase} lang={lang} />,
-  }));
+  return CAUSES.map((c) => {
+    const phrase = phrases.find((p) => p.id === c.phrase);
+    if (!phrase) throw new Error(`phrase 없음: ${c.phrase}`);
+    return {
+      id: c.id,
+      label: t[c.id].label,
+      headline: t[c.id].headline,
+      help: <FactList ids={c.claims} lang={lang} />,
+      phrase: <PhraseCard id={c.phrase} lang={lang} />,
+      phraseKo: phrase.ko,
+      phraseLabel: phrase[lang],
+    };
+  });
 }
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/gate">) {

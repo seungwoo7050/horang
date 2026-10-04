@@ -9,6 +9,7 @@ import { FlowNav } from "./FlowNav";
 import { Screen, ScreenHeader } from "./Screen";
 import { StepRibbon } from "./StepRibbon";
 import { HelpPanel } from "./HelpPanel";
+import { PhraseShow } from "./PhraseShow";
 import { TigerFace, TigerSitting } from "./Tiger";
 import { useFlowHistory, type FlowCodec } from "./useFlowHistory";
 
@@ -18,8 +19,10 @@ export type GateCause = {
   headline: string;
   /** 해결 방법(claim 문장들, 서버에서 그림) */
   help: ReactNode;
-  /** 직원에게 보여 줄 문장 카드(서버에서 그림) */
+  /** 직원에게 보여 줄 문장 카드(서버에서 그림)와 화면 가득 보기에 쓸 한국어·번역 */
   phrase: ReactNode;
+  phraseKo: string;
+  phraseLabel: string;
 };
 
 type Step = 0 | 1 | 2 | "solved";
@@ -154,7 +157,13 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
     body = (
       <>
         <HelpPanel>{g.staffHead}</HelpPanel>
-        {cause.phrase}
+        <PhraseShow
+          card={cause.phrase}
+          ko={cause.phraseKo}
+          label={cause.phraseLabel}
+          showLabel={t.staff.show}
+          closeLabel={t.common.close}
+        />
       </>
     );
     actions = (
