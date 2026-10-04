@@ -149,6 +149,27 @@ test("staff: the sentence goes full screen, and ×, Esc and system back all clos
   await expect(page.locator('blockquote[lang="ko"]')).toHaveText("엘리베이터가 어디예요?");
 });
 
+test("gate: before choosing a cause, staff is one tap away", async ({ page }) => {
+  await page.goto("/en/gate/");
+  await page.getByRole("link", { name: /Show this to staff/ }).click();
+  await expect(page).toHaveURL(/\/en\/staff\/$/);
+  await expect(page.locator('blockquote[lang="ko"]')).toHaveText("개찰구에서 나갈 수가 없어요.");
+});
+
+test("arex: folded source lines show the grade and date, the grade name only when opened", async ({
+  page,
+}) => {
+  await page.goto("/en/arex/");
+  const sources = page.locator("main details").first();
+  const head = sources.locator("summary");
+  await expect(head).toContainText("checked Oct");
+  // 등급 이름은 스크린 리더용으로 남아 있지만 1px로 잘려 보이지 않는다
+  const name = await head.getByText("Official source").boundingBox();
+  expect(name!.width).toBeLessThanOrEqual(1);
+  await head.click();
+  await expect(sources.getByText("Official source · checked").first()).toBeVisible();
+});
+
 test("no screen scrolls sideways on a phone", async ({ page }) => {
   for (const lang of ["en", "ja"]) {
     for (const path of ["", "gate/", "card/", "arex/", "station/", "staff/"]) {
