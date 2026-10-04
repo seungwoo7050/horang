@@ -61,7 +61,7 @@ export function PhraseShow({ card, ko, label, showLabel, closeLabel, reply }: Pr
     window.history.replaceState(rest, "");
   }, []);
 
-  // 닫기 신호(시스템 뒤로, Esc, 브라우저 쪽 전체 화면 끝)는 늘 듣는다. 열린 크게 보기는 모핑(view transition)이 끝나야
+  // 닫기 신호(시스템 뒤로, Esc)는 늘 듣는다. 열린 크게 보기는 모핑(view transition)이 끝나야
   // 화면에 붙어서, 열 때만 들으면 그 사이(--dur-sheet)의 신호를 놓치고 크게 보기가 열린 채 남는다
   useEffect(() => {
     const onPop = () => {
@@ -73,17 +73,11 @@ export function PhraseShow({ card, ko, label, showLabel, closeLabel, reply }: Pr
     const onEsc = (e: globalThis.KeyboardEvent) => {
       if (opened.current && e.key === "Escape") leave(setShowing, opened);
     };
-    // 브라우저 쪽에서 전체 화면이 끝나면(Android 뒤로·Esc가 먼저 전체 화면을 끝낸다) 크게 보기도 닫는다: 한 번에 닫히게
-    const onFullscreen = () => {
-      if (opened.current && !document.fullscreenElement) leave(setShowing, opened);
-    };
     window.addEventListener("popstate", onPop);
     window.addEventListener("keydown", onEsc);
-    document.addEventListener("fullscreenchange", onFullscreen);
     return () => {
       window.removeEventListener("popstate", onPop);
       window.removeEventListener("keydown", onEsc);
-      document.removeEventListener("fullscreenchange", onFullscreen);
     };
   }, []);
 
@@ -111,8 +105,6 @@ export function PhraseShow({ card, ko, label, showLabel, closeLabel, reply }: Pr
     document.addEventListener("visibilitychange", onVisible);
     return () => {
       alive = false;
-      // 크게 보기를 닫으면(×·시스템 뒤로) 연 전체 화면도 함께 끝낸다
-      if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
       document.removeEventListener("visibilitychange", onVisible);
       lock?.release().catch(() => {});
       returnFocus.current = true;
@@ -127,10 +119,6 @@ export function PhraseShow({ card, ko, label, showLabel, closeLabel, reply }: Pr
   }, [showing]);
 
   const open = () => {
-    // 되는 브라우저(Android Chrome 등)에서는 주소창·상태 표시줄까지 숨긴다. 누른 그 순간(사용자 동작 안)에만 요청할 수 있다.
-    // iPhone Safari는 요소 전체 화면이 없어(fullscreenEnabled 거짓) 앱 안에서만 덮는다
-    if (document.fullscreenEnabled && !document.fullscreenElement)
-      document.documentElement.requestFullscreen({ navigationUI: "hide" }).catch(() => {});
     window.history.pushState({ ...window.history.state, [SHOWING]: true }, "");
     opened.current = true;
     startTransition(() => setShowing(true));

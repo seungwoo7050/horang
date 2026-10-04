@@ -224,28 +224,22 @@ test("staff and gate: the big view also asks staff, in Korean, to point instead 
   await expect(page.getByRole("button", { name: /Could you point/ })).toHaveCount(0);
 });
 
-test("staff: where the browser allows it, showing big also hides the browser bars, and leaving that closes it", async ({
+test("staff: showing big stays inside the page (no browser full screen), and a back during the morph still closes it", async ({
   page,
 }) => {
   await page.goto("/en/staff/");
   const show = page.getByRole("button", { name: "Show big" });
   const dialog = page.getByRole("dialog");
-  const fullscreen = () => page.evaluate(() => document.fullscreenElement !== null);
-  expect(await page.evaluate(() => document.fullscreenEnabled)).toBe(true);
-
-  // × 로 닫으면 전체 화면도 풀린다
   await show.click();
   await expect(dialog).toBeVisible();
-  await expect.poll(fullscreen).toBe(true);
-  await dialog.getByRole("button", { name: "Close" }).click();
+  // 브라우저 전체 화면은 쓰지 않는다(iPhone Safari에서 안 되는 동작을 기기마다 다르게 두지 않는다)
+  expect(await page.evaluate(() => document.fullscreenElement)).toBeNull();
+  await page.keyboard.press("Escape");
   await expect(dialog).toHaveCount(0);
-  await expect.poll(fullscreen).toBe(false);
 
-  // 브라우저 쪽에서 전체 화면을 끝내면(Android 뒤로가 먼저 전체 화면을 끝낸다) 크게 보기도 닫힌다. 화면은 그대로
+  // 모핑(크게 보기가 화면에 붙기 전)이 끝나기 전에 뒤로를 눌러도 놓치지 않는다: 전환 시간보다 기다려 늦게 열리지 않는지도 본다
   await show.click();
-  await expect.poll(fullscreen).toBe(true);
-  // 모핑(크게 보기가 화면에 붙기 전)이 끝나기 전에 끝내도 놓치지 않는다: 전환 시간보다 기다려 늦게 열리지 않는지도 본다
-  await page.evaluate(() => document.exitFullscreen());
+  await page.evaluate(() => history.back());
   await expect
     .poll(() => page.evaluate(() => "horangPhraseShow" in (history.state ?? {})))
     .toBe(false);
