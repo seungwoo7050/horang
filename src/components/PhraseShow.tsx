@@ -21,6 +21,8 @@ type Props = {
   /** 카드를 화면 가득 키우는 버튼 이름 */
   showLabel: string;
   closeLabel: string;
+  /** 크게 보기 아래에 늘 붙는 답하는 법(직원에게: 손가락으로 가리켜 달라)과 그 번역 */
+  reply: { ko: string; label: string };
 };
 
 /** history.state 안에서 "크게 보여 주는 중"을 표시하는 키(시스템 뒤로 = 닫기) */
@@ -43,7 +45,7 @@ function leave(setShowing: (v: boolean) => void, opened: { current: boolean }) {
  * DESIGN.md §6-1 연속성). 직원 문장 화면과 개찰구 3단계가 같이 쓴다.
  * 크게 보여 주는 동안은 화면이 꺼지지 않게 하고(지원 브라우저), 시스템 뒤로·Esc·×가 모두 닫기다
  */
-export function PhraseShow({ card, ko, label, showLabel, closeLabel }: Props) {
+export function PhraseShow({ card, ko, label, showLabel, closeLabel, reply }: Props) {
   const [showing, setShowing] = useState(false);
   const opener = useRef<HTMLButtonElement>(null);
   const closer = useRef<HTMLButtonElement>(null);
@@ -181,6 +183,11 @@ export function PhraseShow({ card, ko, label, showLabel, closeLabel }: Props) {
               <figcaption>{label}</figcaption>
             </figure>
           </ViewTransition>
+          {/* 직원이 길게 설명하면 여행자가 못 알아듣는다: 말 대신 가리켜 달라고 같이 보여 준다(보여 주는 문장보다 작게) */}
+          <div className={show.reply}>
+            <p lang="ko">{reply.ko}</p>
+            <p>{reply.label}</p>
+          </div>
         </div>
       ) : null}
     </>

@@ -201,6 +201,29 @@ test("gate: step 3 sentence also goes full screen, and system back closes it wit
   await expect(page.locator("main h1")).toHaveText("Top up, then tap out");
 });
 
+test("staff and gate: the big view also asks staff, in Korean, to point instead of explaining", async ({
+  page,
+}) => {
+  for (const path of ["/en/staff/", "/en/gate/?cause=lowBalance&step=2"]) {
+    await page.goto(path);
+    await page.getByRole("button", { name: "Show big" }).click();
+    const dialog = page.getByRole("dialog");
+    const ask = dialog.locator('p[lang="ko"]');
+    await expect(ask).toHaveText("한국어를 잘 몰라요. 손가락으로 가리켜 주세요.");
+    await expect(
+      dialog.getByText("I don't understand much Korean. Could you point for me?"),
+    ).toBeVisible();
+    // 보여 주는 문장보다 작게: 눈은 먼저 큰 문장으로 간다
+    const size = (l: typeof ask) => l.evaluate((e) => parseFloat(getComputedStyle(e).fontSize));
+    expect(await size(ask)).toBeLessThan(await size(dialog.locator('blockquote[lang="ko"]')));
+    await page.keyboard.press("Escape");
+    await expect(dialog).toHaveCount(0);
+  }
+  // 고르는 목록에는 없다
+  await page.goto("/en/staff/");
+  await expect(page.getByRole("button", { name: /Could you point/ })).toHaveCount(0);
+});
+
 test("staff: where the browser allows it, showing big also hides the browser bars, and leaving that closes it", async ({
   page,
 }) => {

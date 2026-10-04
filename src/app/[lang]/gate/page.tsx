@@ -3,7 +3,7 @@ import { pageMetadata } from "@/app/seo";
 import { FactList } from "@/components/Fact";
 import { GateFlow, type GateCause } from "@/components/GateFlow";
 import { PhraseCard } from "@/components/PhraseCard";
-import { phrases } from "@/content";
+import { POINT_PHRASE, getPhrase, phrases } from "@/content";
 import { getMessages, isLocale, type Locale } from "@/i18n";
 
 // 원인 → 해결 claim → 직원 문장. 사실은 claim으로만 낸다(research/PHASE_R_AIRPORT_GATE.md B-1).
@@ -48,5 +48,8 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/gate">) {
 export default async function GatePage({ params }: PageProps<"/[lang]/gate">) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
-  return <GateFlow lang={lang} causes={causes(lang)} />;
+  const point = getPhrase(POINT_PHRASE);
+  return (
+    <GateFlow lang={lang} causes={causes(lang)} reply={{ ko: point.ko, label: point[lang] }} />
+  );
 }

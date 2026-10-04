@@ -7,7 +7,7 @@ import { OutLink } from "@/components/OutLink";
 import { PhraseCard } from "@/components/PhraseCard";
 import { Screen } from "@/components/Screen";
 import { StaffPhrases } from "@/components/StaffPhrases";
-import { POINT_PHRASE, phrases } from "@/content";
+import { POINT_PHRASE, getPhrase, phrases } from "@/content";
 import { getMessages, isLocale } from "@/i18n";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/staff">) {
@@ -21,6 +21,7 @@ export default async function StaffPage({ params }: PageProps<"/[lang]/staff">) 
   const t = getMessages(lang).staff;
   // 고르는 목록에는 "가리켜 주세요"를 넣지 않는다(크게 보기마다 아래에 붙는다)
   const choices = phrases.filter((p) => p.id !== POINT_PHRASE);
+  const point = getPhrase(POINT_PHRASE);
   return (
     <Screen lang={lang} back={`/${lang}/`} title={t.title} morph="staff">
       <HelpPanel>{t.lead}</HelpPanel>
@@ -33,6 +34,7 @@ export default async function StaffPage({ params }: PageProps<"/[lang]/staff">) 
         othersLabel={t.others}
         showLabel={t.show}
         closeLabel={getMessages(lang).common.close}
+        reply={{ ko: point.ko, label: point[lang] }}
       />
       <h2 className={styles.section}>{t.helpline}</h2>
       <Fact id="helpline.1330" lang={lang} />
