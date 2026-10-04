@@ -116,6 +116,94 @@ test("staff: switching sentences and calling 1330", async ({ page }) => {
   );
 });
 
+test("staff: the sentence goes full screen, and ×, Esc and system back all close it", async ({
+  page,
+}) => {
+  await page.goto("/en/staff/");
+  await page.getByRole("button", { name: "Where is the elevator?" }).click();
+  const show = page.getByRole("button", { name: "Full screen" });
+  const dialog = page.getByRole("dialog", { name: "Where is the elevator?" });
+
+  await show.click();
+  await expect(dialog.locator('blockquote[lang="ko"]')).toHaveText("엘리베이터가 어디예요?");
+  await expect(dialog.getByRole("button", { name: "Close" })).toBeFocused();
+  // 초점은 닫기 버튼에 머문다
+  await page.keyboard.press("Tab");
+  await expect(dialog.getByRole("button", { name: "Close" })).toBeFocused();
+  await dialog.getByRole("button", { name: "Close" }).click();
+  await expect(dialog).toHaveCount(0);
+  await expect(show).toBeFocused();
+
+  await show.click();
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
+  await expect(show).toBeFocused();
+
+  // 시스템 뒤로는 화면을 떠나지 않고 닫기만 한다. 고른 문장도 그대로
+  await show.click();
+  await expect(dialog).toBeVisible();
+  await page.goBack();
+  await expect(dialog).toHaveCount(0);
+  await expect(page).toHaveURL(/\/en\/staff\/$/);
+  await expect(page.locator('blockquote[lang="ko"]')).toHaveText("엘리베이터가 어디예요?");
+});
+
+test("gate: before choosing a cause, staff is one tap away", async ({ page }) => {
+  await page.goto("/en/gate/");
+  await page.getByRole("link", { name: /Show this to staff/ }).click();
+  await expect(page).toHaveURL(/\/en\/staff\/$/);
+  await expect(page.locator('blockquote[lang="ko"]')).toHaveText("개찰구에서 나갈 수가 없어요.");
+});
+
+test("arex: folded source lines show the grade and date, the grade name only when opened", async ({
+  page,
+}) => {
+  await page.goto("/en/arex/");
+  const sources = page.locator("main details").first();
+  const head = sources.locator("summary");
+  await expect(head).toContainText("checked Oct");
+  // 등급 이름은 스크린 리더용으로 남아 있지만 1px로 잘려 보이지 않는다
+  const name = await head.getByText("Official source").boundingBox();
+  expect(name!.width).toBeLessThanOrEqual(1);
+  await head.click();
+  await expect(sources.getByText("Official source · checked").first()).toBeVisible();
+});
+
+test("staff: full screen keeps the screen awake, again after coming back to the tab", async ({
+  page,
+}) => {
+  // 실제 잠금 대신 요청·해제 수를 세는 가짜(헤드리스 브라우저는 화면이 없다)
+  await page.addInitScript(() => {
+    const w = window as unknown as { wl: { req: number; rel: number } };
+    w.wl = { req: 0, rel: 0 };
+    Object.defineProperty(navigator, "wakeLock", {
+      value: {
+        request: async () => {
+          w.wl.req++;
+          return { release: async () => void w.wl.rel++ };
+        },
+      },
+    });
+  });
+  const count = () => page.evaluate(() => (window as unknown as { wl: object }).wl);
+  const visibility = (state: "visible" | "hidden") =>
+    page.evaluate((s) => {
+      Object.defineProperty(document, "visibilityState", { value: s, configurable: true });
+      document.dispatchEvent(new Event("visibilitychange"));
+    }, state);
+
+  await page.goto("/en/staff/");
+  await page.getByRole("button", { name: "Full screen" }).click();
+  await expect.poll(count).toEqual({ req: 1, rel: 0 });
+  await visibility("hidden");
+  await visibility("visible");
+  await expect.poll(count).toEqual({ req: 2, rel: 0 });
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await expect.poll(count).toEqual({ req: 2, rel: 1 });
+});
+
 test("no screen scrolls sideways on a phone", async ({ page }) => {
   for (const lang of ["en", "ja"]) {
     for (const path of ["", "gate/", "card/", "arex/", "station/", "staff/"]) {

@@ -94,7 +94,6 @@ export function ChoiceFlow({
     >
       <StepRibbon total={total} current={step} label={stepLabel} />
       <div key={answers.join("-")} className={`${styles.stage} ${styles[dir]}`}>
-        <p className={styles.kicker}>{stepLabel}</p>
         {done || !q ? (
           <>
             <h1 className={styles.heading}>{resultHeading}</h1>

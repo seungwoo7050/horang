@@ -44,8 +44,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <h1 className={styles.ask}>{t.home.ask}</h1>
       </div>
       <p className={styles.sub}>{t.home.sub}</p>
-      <ol className={styles.list}>
-        {SITUATIONS.map((key, i) => {
+      <ul className={styles.list}>
+        {SITUATIONS.map((key) => {
           const s = t.home.situations[key];
           return (
             <li key={key}>
@@ -54,9 +54,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                 className={styles.situation}
                 transitionTypes={["nav-forward"]}
               >
-                <span className={styles.num} aria-hidden="true">
-                  {i + 1}
-                </span>
                 <span className={styles.text}>
                   <MorphTitle name={key}>
                     <strong>{s.title}</strong>
@@ -70,7 +67,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             </li>
           );
         })}
-      </ol>
+      </ul>
     </Screen>
   );
 }

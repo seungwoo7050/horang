@@ -126,7 +126,7 @@ test.describe("forced colors", () => {
     expect(ring.width).toBeGreaterThanOrEqual(2);
   });
 
-  test("cards, options and buttons keep a visible edge", async ({ page }) => {
+  test("cards, options, buttons and fact dividers keep a visible edge", async ({ page }) => {
     const edge = (l: Locator) =>
       l.first().evaluate((e) => {
         const s = getComputedStyle(e);
@@ -141,17 +141,21 @@ test.describe("forced colors", () => {
     await page.goto("/en/gate/");
     seen["gate: option"] = await edge(page.getByRole("button", { name: "Not enough balance" }));
     await page.getByRole("button", { name: "Not enough balance" }).click();
-    seen["gate: fact card"] = await edge(page.locator("main li", { hasText: "top up" }));
     seen["gate: secondary button"] = await edge(page.getByRole("button", { name: "Still stuck" }));
     seen["gate: primary button"] = await edge(page.getByRole("button", { name: "That worked" }));
+    // 읽기만 하는 사실은 카드가 아니라 구분선으로 나눈다: 사실이 둘인 원인에서 둘째 항목 위 선이 남아야 한다
+    await page.goto("/en/gate/?cause=cardError&step=1");
+    seen["gate: fact divider"] = await edge(page.locator("main li").nth(1));
     await page.goto("/en/arex/");
     seen["arex: selected terminal"] = await edge(page.getByRole("button", { name: "Terminal 1" }));
     seen["arex: compare column"] = await edge(page.locator("section", { hasText: "Buy a ticket" }));
     seen["arex: next train panel"] = await edge(
       page.locator("section", { has: page.getByRole("heading", { name: "Next Express" }) }),
     );
-    seen["arex: fact sheet"] = await edge(
-      page.locator("section", { has: page.getByRole("heading", { name: "Express ticket" }) }),
+    seen["arex: fact sheet divider"] = await edge(
+      page.locator("section", {
+        has: page.getByRole("heading", { name: "All-stop and transit cards" }),
+      }),
     );
     await page.goto("/en/no-such-page/");
     seen["404: buttons"] = await edge(page.getByRole("link", { name: "最初の画面へ" }));

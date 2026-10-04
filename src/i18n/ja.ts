@@ -217,6 +217,7 @@ export const ja: Messages = {
     title: "スタッフに見せる",
     lead: `この画面を${B}駅員さんに${B}見せてください。`,
     others: "ほかの文",
+    show: "全画面で見せる",
     helpline: `日本語で${B}話せる人が${B}必要なら`,
   },
   phrase: { draft: "翻訳はネイティブ確認前の下書きです。" },

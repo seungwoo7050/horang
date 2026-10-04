@@ -70,7 +70,6 @@
   --tracking-tight: -0.01em;
   --tracking-tighter: -0.015em;
   --tracking-display: -0.02em;
-  --tracking-caps: 0.04em;
 
   /* 모션: 기본은 "움직임 없음". 아래 미디어 쿼리에서만 켠다 */
   --dur-tap: 0ms;
@@ -157,7 +156,6 @@ body {
   --tracking-tight: 0;
   --tracking-tighter: 0;
   --tracking-display: 0;
-  --tracking-caps: 0;
   font-family: var(--font-ja);
   letter-spacing: 0;
   line-break: strict;
