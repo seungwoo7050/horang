@@ -51,7 +51,7 @@
 }
 
 .open:active {
-  transform: scale(0.96);
+  transform: scale(0.98);
 }
 
 .placeholder {
@@ -65,7 +65,7 @@
 .sheet {
   position: fixed;
   inset: 0;
-  z-index: 10;
+  z-index: var(--z-sheet);
   display: grid;
   grid-template-rows: auto 1fr;
   padding: max(var(--space-3), env(safe-area-inset-top)) var(--gutter)
@@ -116,7 +116,7 @@
 
 .big blockquote {
   margin: 0;
-  font-size: clamp(var(--text-staff), min(14vw, 12dvh), 112px);
+  font-size: clamp(var(--text-staff), min(14vw, 12dvh), var(--text-staff-max));
   font-weight: 700;
   line-height: 1.3;
   word-break: keep-all;

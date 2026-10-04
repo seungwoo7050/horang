@@ -52,6 +52,9 @@
   --hit-min: 44px;
   --hit-primary: 52px;
 
+  /* 겹침: 화면 위에 덮는 것(직원 문장 화면 가득 보기)만. 화면 사이 전환의 헤더(1)보다 위 */
+  --z-sheet: 10;
+
   /* 글자 */
   --font-latin: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-ja:
@@ -66,6 +69,8 @@
   --text-xl: 24px;
   --text-display: 40px;
   --text-staff: 34px;
+  /* 직원 문장 화면 가득 보기의 상한(폭·높이에 맞춰 커지다 여기서 멈춘다, PhraseShow) */
+  --text-staff-max: 112px;
   /* 자간: 라틴 제목만 살짝 조인다. 일본어는 ベタ組라 아래 :lang(ja)에서 0(DESIGN.md §7) */
   --tracking-tight: -0.01em;
   --tracking-tighter: -0.015em;
