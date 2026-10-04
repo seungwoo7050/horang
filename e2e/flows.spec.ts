@@ -121,7 +121,7 @@ test("staff: the sentence goes full screen, and ×, Esc and system back all clos
 }) => {
   await page.goto("/en/staff/");
   await page.getByRole("button", { name: "Where is the elevator?" }).click();
-  const show = page.getByRole("button", { name: "Full screen" });
+  const show = page.getByRole("button", { name: "Show big" });
   const dialog = page.getByRole("dialog", { name: "Where is the elevator?" });
 
   await show.click();
@@ -177,7 +177,7 @@ test("gate: step 3 sentence also goes full screen, and system back closes it wit
   await page.getByRole("button", { name: "Not enough balance" }).click();
   await page.getByRole("button", { name: "Still stuck" }).click();
   await expect(page.locator("main h1")).toHaveText("Show this to station staff");
-  const show = page.getByRole("button", { name: "Full screen" });
+  const show = page.getByRole("button", { name: "Show big" });
   await show.click();
   const dialog = page.getByRole("dialog");
   await expect(dialog.locator('blockquote[lang="ko"]')).toContainText("잔액이 부족해요");
@@ -199,6 +199,36 @@ test("gate: step 3 sentence also goes full screen, and system back closes it wit
   // 한 번 더 뒤로 = 이전 단계
   await page.goBack();
   await expect(page.locator("main h1")).toHaveText("Top up, then tap out");
+});
+
+test("staff: where the browser allows it, showing big also hides the browser bars, and leaving that closes it", async ({
+  page,
+}) => {
+  await page.goto("/en/staff/");
+  const show = page.getByRole("button", { name: "Show big" });
+  const dialog = page.getByRole("dialog");
+  const fullscreen = () => page.evaluate(() => document.fullscreenElement !== null);
+  expect(await page.evaluate(() => document.fullscreenEnabled)).toBe(true);
+
+  // × 로 닫으면 전체 화면도 풀린다
+  await show.click();
+  await expect(dialog).toBeVisible();
+  await expect.poll(fullscreen).toBe(true);
+  await dialog.getByRole("button", { name: "Close" }).click();
+  await expect(dialog).toHaveCount(0);
+  await expect.poll(fullscreen).toBe(false);
+
+  // 브라우저 쪽에서 전체 화면을 끝내면(Android 뒤로가 먼저 전체 화면을 끝낸다) 크게 보기도 닫힌다. 화면은 그대로
+  await show.click();
+  await expect.poll(fullscreen).toBe(true);
+  // 모핑(크게 보기가 화면에 붙기 전)이 끝나기 전에 끝내도 놓치지 않는다: 전환 시간보다 기다려 늦게 열리지 않는지도 본다
+  await page.evaluate(() => document.exitFullscreen());
+  await expect
+    .poll(() => page.evaluate(() => "horangPhraseShow" in (history.state ?? {})))
+    .toBe(false);
+  await page.waitForTimeout(600);
+  await expect(dialog).toHaveCount(0);
+  await expect(page).toHaveURL(/\/en\/staff\/$/);
 });
 
 test("staff: full screen keeps the screen awake, again after coming back to the tab", async ({
@@ -225,7 +255,7 @@ test("staff: full screen keeps the screen awake, again after coming back to the 
     }, state);
 
   await page.goto("/en/staff/");
-  await page.getByRole("button", { name: "Full screen" }).click();
+  await page.getByRole("button", { name: "Show big" }).click();
   await expect.poll(count).toEqual({ req: 1, rel: 0 });
   await visibility("hidden");
   await visibility("visible");

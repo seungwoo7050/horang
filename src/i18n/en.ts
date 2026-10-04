@@ -201,7 +201,7 @@ export const en = {
     title: "Show this to staff",
     lead: "Show this screen to station staff.",
     others: "Other sentences",
-    show: "Full screen",
+    show: "Show big",
     helpline: "Need a person who speaks your language?",
   },
   phrase: { draft: "Draft translation, not yet checked by a native speaker." },
