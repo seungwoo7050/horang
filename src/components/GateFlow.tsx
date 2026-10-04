@@ -8,9 +8,9 @@ import { MorphLabel } from "./MorphLabel";
 import { FlowNav } from "./FlowNav";
 import { Screen, ScreenHeader } from "./Screen";
 import { StepRibbon } from "./StepRibbon";
+import { Scene } from "./Brand";
 import { HelpPanel } from "./HelpPanel";
 import { PhraseShow } from "./PhraseShow";
-import { TigerFace, TigerSitting } from "./Tiger";
 import { useFlowHistory, type FlowCodec } from "./useFlowHistory";
 
 export type GateCause = {
@@ -86,7 +86,7 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
   if (step === "solved") {
     body = (
       <div className={styles.center}>
-        <TigerSitting mood="solved" size={120} celebrate />
+        <Scene name="welcome" className={`${styles.sceneCenter} ${styles.celebrate}`} />
         <h1 className={styles.heading}>{g.solved}</h1>
       </div>
     );
@@ -138,7 +138,7 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
         <h1 className={styles.heading}>{cause.headline}</h1>
         {cause.help}
         <p className={styles.hint}>
-          <TigerFace mood="calm" size={32} />
+          <Scene name="calm" />
           {g.calm}
         </p>
       </>

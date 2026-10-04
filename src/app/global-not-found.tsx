@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mascot } from "@/components/Brand";
+import { Scene } from "@/components/Brand";
 import { getMessages, locales } from "@/i18n";
 import { appIcons, appViewport } from "./app-head";
 import styles from "./not-found.module.css";
@@ -19,7 +19,7 @@ export default function GlobalNotFound() {
     <html lang="en">
       <body>
         <main className={styles.page}>
-          <Mascot className={styles.mascot} />
+          <Scene name="help" className={styles.mascot} />
           {locales.map((lang) => {
             const t = getMessages(lang).notFound;
             return (

@@ -1,8 +1,8 @@
-// 파비콘(icon.svg): T1 얼굴(src/components/Tiger.tsx TigerFace mood="hi"와 같은 그림)을 다크 bg 위에.
+// 파비콘(icon.svg): T1 얼굴(예전 SVG 호랑이 TigerFace mood="hi"와 같은 그림, 화면에서는 2026-10-04 PNG로 바뀜)을 다크 bg 위에.
 // 색은 globals.css 토큰 값(다크 bg, tiger, tiger-ink)과 브랜드 크림. 홈 화면 아이콘 PNG는 마스코트(make-icons.mts)
 const C = { bg: "#0b1020", tiger: "#ffb547", cream: "#f7f1e8", ink: "#0e1424" };
 
-/** Tiger.tsx Head + Face(hi)를 SVG 문자열로(같은 식) */
+/** 예전 Tiger.tsx의 Head + Face(hi)를 SVG 문자열로(같은 식) */
 function face(
   cx: number,
   cy: number,

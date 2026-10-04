@@ -17,9 +17,6 @@
   --color-ribbon-text: #a85a00; /* 호박색 글자(bg 4.59:1, surface 5.09:1) */
   --color-ribbon-fill: #ffb547; /* 버튼 바탕 전용 */
   --color-on-ribbon: #0e1424;
-  /* 호랑이 SVG(장식, 정보 전달에 쓰지 않는다). 크림 부분은 마스코트와 같은 --brand-cream */
-  --color-tiger: #ffb547;
-  --color-tiger-ink: #0e1424;
   /*
    * 브랜드(사용자 제공 로고·워드마크 색, 2026-10-02). 두 밝기에서 같은 값이다.
    * 로고·마스코트 둘레에서만 쓴다: 화면 배경·글자·리본 색은 위 토큰 그대로(대비는 DESIGN.md §3-1)

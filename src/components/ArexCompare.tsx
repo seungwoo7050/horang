@@ -4,6 +4,7 @@ import { useState, type ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
 import styles from "./ArexCompare.module.css";
 import flow from "./flow.module.css";
+import { Scene } from "./Brand";
 import { NextTrain, type TrainRow } from "./NextTrain";
 
 export type Terminal = "t1" | "t2";
@@ -43,7 +44,10 @@ export function ArexCompare({
   if (leaving) {
     return (
       <div className={`${flow.stage} ${flow.forward}`}>
-        <h1 className={flow.heading}>{t.departHeading}</h1>
+        <div className={flow.sceneHead}>
+          <h1 className={flow.heading}>{t.departHeading}</h1>
+          <Scene name="travel" />
+        </div>
         <NextTrain
           lang={lang}
           rows={trains.toAirport[terminal]}

@@ -145,7 +145,9 @@ test.describe("brand", () => {
     }
   });
 
-  test("404: the waving mascot shows under the 404's own CSP", async ({ page }) => {
+  test("404: the thinking tiger shows under the 404's own CSP, its question mark readable in each brightness", async ({
+    page,
+  }) => {
     const violations: string[] = [];
     page.on("console", (m) => {
       if (/Content Security Policy/i.test(m.text())) violations.push(m.text());
@@ -154,12 +156,42 @@ test.describe("brand", () => {
       await page.emulateMedia({ colorScheme: scheme });
       const res = await page.goto("/en/no-such-page/");
       expect(res?.status()).toBe(404);
-      const mascot = page.locator("main img[src='/brand/mascot.webp']");
-      await expect(mascot).toHaveAttribute("alt", "");
-      await expect.poll(() => drawn(mascot), { message: scheme }).toBe(true);
-      expect((await mascot.boundingBox())!.height).toBe(168);
+      // 밝은 화면은 물음표를 네이비로 칠한 짝(-ink), 어두운 화면은 흰 물음표 그대로. 보이는 것은 한 장뿐
+      const shown = scheme === "light" ? "scene-help-ink" : "scene-help";
+      const hidden = scheme === "light" ? "scene-help" : "scene-help-ink";
+      const tiger = page.locator(`main img[src='/brand/${shown}.webp']`);
+      await expect(tiger).toHaveAttribute("alt", "");
+      await expect(tiger).toBeVisible();
+      await expect(page.locator(`main img[src='/brand/${hidden}.webp']`)).toBeHidden();
+      await expect.poll(() => drawn(tiger), { message: scheme }).toBe(true);
+      expect((await tiger.boundingBox())!.height).toBe(120);
     }
     expect(violations).toEqual([]);
+  });
+
+  test("scene tigers: one per screen, each drawn and decorative where its moment happens", async ({
+    page,
+  }) => {
+    const seen = async (src: string) => {
+      const img = page.locator(`main img[src='/brand/${src}.webp']`);
+      await expect(img).toBeVisible();
+      await expect(img).toHaveAttribute("alt", "");
+      await expect.poll(() => drawn(img)).toBe(true);
+      // 화면 하나에 상황별 호랑이는 하나
+      await expect(page.locator("main img[src*='/brand/scene-']:visible")).toHaveCount(
+        src.startsWith("scene-") ? 1 : 0,
+      );
+    };
+    await page.emulateMedia({ colorScheme: "light" });
+    await page.goto("/en/station/");
+    await seen("scene-explore");
+    await page.goto("/en/gate/?cause=lowBalance&step=1");
+    await seen("face-calm");
+    await page.goto("/en/gate/?cause=lowBalance&step=solved");
+    await seen("scene-welcome");
+    await page.goto("/en/arex/");
+    await page.getByRole("button", { name: "Going to the airport?" }).click();
+    await seen("scene-travel-ink");
   });
 
   test("/ without JavaScript: the logo matches the brightness above the two languages", async ({
