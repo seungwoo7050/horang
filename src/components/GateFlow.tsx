@@ -164,9 +164,6 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
     >
       <StepRibbon total={3} current={n} label={t.common.stepOf.replace("{n}", String(n + 1))} />
       <div key={`${step}-${causeId}`} className={`${styles.stage} ${styles[dir]}`}>
-        {step === "solved" ? null : (
-          <p className={styles.kicker}>{t.common.stepOf.replace("{n}", String(n + 1))}</p>
-        )}
         {body}
       </div>
     </Screen>
