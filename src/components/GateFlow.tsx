@@ -116,6 +116,19 @@ export function GateFlow({ lang, causes }: { lang: Locale; causes: GateCause[] }
         </ul>
       </>
     );
+    // 원인을 고르기 전에도 바로 직원에게: 고르기 어려운 사람이 막힌 채 남지 않게(첫 화면 아래 버튼과 같은 이름)
+    actions = (
+      <Link
+        href={`/${lang}/staff/`}
+        className={`${styles.secondary} ${styles.staffLink}`}
+        onClick={holdLink}
+      >
+        <span>{t.home.staff}</span>
+        <span lang="ko" className={styles.staffKo}>
+          {t.home.staffKo}
+        </span>
+      </Link>
+    );
   } else if (step === 1) {
     body = (
       <>
