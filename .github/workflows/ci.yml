@@ -21,7 +21,7 @@ permissions:
 jobs:
   check:
     name: 린트·타입·포맷·단위 테스트
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
@@ -34,7 +34,7 @@ jobs:
 
   e2e:
     name: 빌드·e2e
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v5
@@ -68,7 +68,7 @@ jobs:
     name: Cloudflare 배포
     needs: [check, e2e]
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     # 이 블록이 저장소 첫 화면의 Deployments와 Actions의 배포 링크를 만든다(environment는 첫 실행 때 자동 생성)
     environment:
