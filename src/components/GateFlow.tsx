@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { MouseEvent, ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
+import { cn } from "@/lib/utils";
 import styles from "./flow.module.css";
 import { MorphLabel } from "./MorphLabel";
 import { FlowNav } from "./FlowNav";
@@ -11,6 +12,7 @@ import { StepRibbon } from "./StepRibbon";
 import { Scene } from "./Brand";
 import { HelpPanel } from "./HelpPanel";
 import { PhraseShow } from "./PhraseShow";
+import { Button } from "./ui/button";
 import { useFlowHistory, type FlowCodec } from "./useFlowHistory";
 
 export type GateCause = {
@@ -100,15 +102,17 @@ export function GateFlow({
       </div>
     );
     actions = (
-      <Link href={home} className={styles.primary} onClick={holdLink}>
-        {g.home}
-      </Link>
+      <Button asChild className={styles.primary}>
+        <Link href={home} onClick={holdLink}>
+          {g.home}
+        </Link>
+      </Button>
     );
   } else if (step === 0 || !cause) {
     body = (
       <>
         <h1 className={styles.heading}>{g.ask}</h1>
-        <ul className={styles.options}>
+        <ul className={cn(styles.options, "flex flex-col gap-3")}>
           {causes.map((c) => (
             <li key={c.id}>
               <button
@@ -130,16 +134,14 @@ export function GateFlow({
     );
     // 원인을 고르기 전에도 바로 직원에게: 고르기 어려운 사람이 막힌 채 남지 않게(첫 화면 아래 버튼과 같은 이름)
     actions = (
-      <Link
-        href={`/${lang}/staff/`}
-        className={`${styles.secondary} ${styles.staffLink}`}
-        onClick={holdLink}
-      >
-        <span>{t.home.staff}</span>
-        <span lang="ko" className={styles.staffKo}>
-          {t.home.staffKo}
-        </span>
-      </Link>
+      <Button asChild variant="secondary" className={cn(styles.secondary, styles.staffLink)}>
+        <Link href={`/${lang}/staff/`} onClick={holdLink}>
+          <span>{t.home.staff}</span>
+          <span lang="ko" className={styles.staffKo}>
+            {t.home.staffKo}
+          </span>
+        </Link>
+      </Button>
     );
   } else if (step === 1) {
     body = (
@@ -153,13 +155,13 @@ export function GateFlow({
       </>
     );
     actions = (
-      <div className={styles.row}>
-        <button type="button" className={styles.secondary} onClick={go(2)}>
+      <div className={cn(styles.row, "grid grid-cols-2 gap-3")}>
+        <Button type="button" variant="secondary" className={styles.secondary} onClick={go(2)}>
           <MorphLabel>{g.still}</MorphLabel>
-        </button>
-        <button type="button" className={styles.primary} onClick={go("solved")}>
+        </Button>
+        <Button type="button" className={styles.primary} onClick={go("solved")}>
           <MorphLabel>{g.worked}</MorphLabel>
-        </button>
+        </Button>
       </div>
     );
   } else {
@@ -177,13 +179,15 @@ export function GateFlow({
       </>
     );
     actions = (
-      <div className={styles.row}>
-        <Link href={`/${lang}/staff/`} className={styles.secondary} onClick={holdLink}>
-          <MorphLabel>{g.moreSentences}</MorphLabel>
-        </Link>
-        <button type="button" className={styles.primary} onClick={go("solved")}>
+      <div className={cn(styles.row, "grid grid-cols-2 gap-3")}>
+        <Button asChild variant="secondary" className={styles.secondary}>
+          <Link href={`/${lang}/staff/`} onClick={holdLink}>
+            <MorphLabel>{g.moreSentences}</MorphLabel>
+          </Link>
+        </Button>
+        <Button type="button" className={styles.primary} onClick={go("solved")}>
           <MorphLabel>{g.worked}</MorphLabel>
-        </button>
+        </Button>
       </div>
     );
   }
@@ -195,7 +199,10 @@ export function GateFlow({
       actions={actions}
     >
       <StepRibbon total={3} current={n} label={t.common.stepOf.replace("{n}", String(n + 1))} />
-      <div key={`${step}-${causeId}`} className={`${styles.stage} ${styles[dir]}`}>
+      <div
+        key={`${step}-${causeId}`}
+        className={cn(styles.stage, styles[dir], "flex flex-col gap-4")}
+      >
         {body}
       </div>
     </Screen>

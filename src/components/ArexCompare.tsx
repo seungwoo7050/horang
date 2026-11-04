@@ -2,10 +2,14 @@
 
 import { useState, type ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
+import { cn } from "@/lib/utils";
 import styles from "./ArexCompare.module.css";
 import flow from "./flow.module.css";
 import { Scene } from "./Brand";
 import { NextTrain, type TrainRow } from "./NextTrain";
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import { Card } from "./ui/card";
 
 export type Terminal = "t1" | "t2";
 type Numbers = { expressMin: string; expressFare: string; allstopMin: string; allstopFare: string };
@@ -48,7 +52,7 @@ export function ArexCompare({
 
   if (leaving) {
     return (
-      <div className={`${flow.stage} ${flow.forward}`}>
+      <div className={cn(flow.stage, flow.forward, "flex flex-col gap-4")}>
         <div className={flow.sceneHead}>
           <h1 className={flow.heading}>{t.departHeading}</h1>
           <Scene name="travel" />
@@ -61,15 +65,20 @@ export function ArexCompare({
           meta={trainMeta.toAirport}
         />
         {depart}
-        <button type="button" className={flow.secondary} onClick={() => switchTo(false)}>
+        <Button
+          type="button"
+          variant="secondary"
+          className={flow.secondary}
+          onClick={() => switchTo(false)}
+        >
           {t.hurryBack}
-        </button>
+        </Button>
       </div>
     );
   }
 
   return (
-    <div className={flow.stage}>
+    <div className={cn(flow.stage, "flex flex-col gap-4")}>
       <h1 className={flow.heading}>{t.heading}</h1>
       <div className={styles.seg} role="group" aria-label={t.terminal}>
         {(["t1", "t2"] as const).map((id) => (
@@ -85,24 +94,28 @@ export function ArexCompare({
       </div>
       <p className={styles.route}>{t.route.replace("{t}", t[terminal])}</p>
       <div className={styles.compare}>
-        <section className={styles.col}>
-          <span className={styles.badgeFill}>{t.express}</span>
+        <Card className={styles.col}>
+          <Badge variant="default" className={styles.badgeFill}>
+            {t.express}
+          </Badge>
           <p className={styles.big}>
             {n.expressMin}
             <small>{t.min}</small>
           </p>
           <p className={styles.fare}>{n.expressFare}</p>
           <p className={styles.note}>{t.expressNote}</p>
-        </section>
-        <section className={styles.col}>
-          <span className={styles.badgeLine}>{t.allstop}</span>
+        </Card>
+        <Card className={styles.col}>
+          <Badge variant="outline" className={styles.badgeLine}>
+            {t.allstop}
+          </Badge>
           <p className={styles.big}>
             {n.allstopMin}
             <small>{t.min}</small>
           </p>
           <p className={styles.fare}>{n.allstopFare}</p>
           <p className={styles.note}>{t.allstopNote}</p>
-        </section>
+        </Card>
       </div>
       {meta[terminal]}
       <NextTrain
@@ -116,9 +129,9 @@ export function ArexCompare({
       {arrive}
       <h2 className={flow.section}>{t.atSeoul}</h2>
       {atSeoul}
-      <button type="button" className={flow.primary} onClick={() => switchTo(true)}>
+      <Button type="button" className={flow.primary} onClick={() => switchTo(true)}>
         {t.hurry}
-      </button>
+      </Button>
     </div>
   );
 }

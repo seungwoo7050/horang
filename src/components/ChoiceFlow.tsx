@@ -2,10 +2,12 @@
 
 import type { MouseEvent, ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
+import { cn } from "@/lib/utils";
 import styles from "./flow.module.css";
 import { FlowNav } from "./FlowNav";
 import { Screen, ScreenHeader } from "./Screen";
 import { StepRibbon } from "./StepRibbon";
+import { Button } from "./ui/button";
 import { useFlowHistory, type FlowCodec } from "./useFlowHistory";
 
 export type Question = {
@@ -86,14 +88,19 @@ export function ChoiceFlow({
       actionsFlow={done}
       actions={
         done ? (
-          <button type="button" className={styles.secondary} onClick={(e) => push([], e)}>
+          <Button
+            type="button"
+            variant="secondary"
+            className={styles.secondary}
+            onClick={(e) => push([], e)}
+          >
             {restart}
-          </button>
+          </Button>
         ) : null
       }
     >
       <StepRibbon total={total} current={step} label={stepLabel} />
-      <div key={answers.join("-")} className={`${styles.stage} ${styles[dir]}`}>
+      <div key={answers.join("-")} className={cn(styles.stage, styles[dir], "flex flex-col gap-4")}>
         {done || !q ? (
           <>
             <h1 className={styles.heading}>{resultHeading}</h1>
@@ -102,7 +109,7 @@ export function ChoiceFlow({
         ) : (
           <>
             <h1 className={styles.heading}>{q.ask}</h1>
-            <ul className={styles.options}>
+            <ul className={cn(styles.options, "flex flex-col gap-3")}>
               {q.options.map((o) => (
                 <li key={o.id}>
                   <button type="button" className={styles.option} onClick={(e) => choose(o.id, e)}>
