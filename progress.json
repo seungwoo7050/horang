@@ -1,0 +1,57 @@
+{
+  "updated": "2026-11-04",
+  "start_point": {
+    "branch": "main",
+    "commit": "98b0dca"
+  },
+  "baseline": {
+    "commit": "98b0dca",
+    "lint": "pass",
+    "typecheck": "pass",
+    "format": "pass",
+    "content": "claims 38, phrases 13, links 5",
+    "unit": "104/104 (10 files)",
+    "e2e": "82/82",
+    "note": "01~13편(인천공항→AREX→서울역 첫 1시간 안내, en/ja, CSS Modules) 완료 시점"
+  },
+  "current": {
+    "branch": "feature/harness",
+    "devlog": "14-harness",
+    "stage": "implementing",
+    "note": "기준점 측정 완료 후 feature/harness(14-harness) 구현 시작"
+  },
+  "branches": {
+    "feature/harness": "in_progress (devlog: 14-harness)",
+    "feature/design-system": "planned (devlog: 15-design-system)",
+    "feature/city-transit": "planned (devlog: 16-city-transit)",
+    "feature/dining-pay": "planned (devlog: 17-dining-pay)",
+    "feature/emergency-depart": "planned (devlog: 18-emergency-depart)",
+    "feature/i18n-expansion": "planned (devlog: 19-i18n-expansion)"
+  },
+  "blocked": [
+    {
+      "branch": "main",
+      "what": "서울역 및 주요 거점역(홍대입구·명동·강남·성수) 엘리베이터·환승게이트 현장 답사(B등급 → A등급 전환)",
+      "why": "현재 공식 출처(KRIC·서울교통공사·AREX) 기준 B등급으로 수록. 실제 현장 확인은 사람이 방문해 수행"
+    },
+    {
+      "branch": "main",
+      "what": "직원·기사님·약국 소통용 한국어 문장 및 다국어(ja, zh-CN, zh-TW, fr, es, ro) 원어민 감수",
+      "why": "앱에서는 reviewed: false로 초안 안내를 표시하며, 원어민 감수 후 true로 전환"
+    }
+  ],
+  "push_policy": "로컬 커밋만. 원격 푸시(git push)와 운영 배포(npm run deploy)는 사람에게 묻는다.",
+  "needs_human": [
+    "모든 단계 완료 후 GitHub 원격 저장소 푸시 및 Cloudflare Workers 운영 배포 시점 결정"
+  ],
+  "harness_gaps": [],
+  "guides": {
+    "14-harness": "optional",
+    "15-design-system": "optional",
+    "16-city-transit": "optional",
+    "17-dining-pay": "skip (devlog로 충분)",
+    "18-emergency-depart": "skip (devlog로 충분)",
+    "19-i18n-expansion": "optional"
+  },
+  "scope_decision": "2026-11-04 사람: 1단계(비공개 맥락 분리 + horang ai-work 구축) 후 코드 저장소는 숫자 없는 feature/<slug> 브랜치로 분리 구현·병합하고 비공개 학습 저장소의 devlog/에서만 14번부터 순차 번호를 부여한다. 범위는 Tailwind CSS + shadcn/ui 재구축, 시내 이동·식당/결제·긴급/출국 3대 도메인 전부, 그리고 7개 국어(en, ja, zh-CN, zh-TW, fr, es, ro) 확장이다."
+}
