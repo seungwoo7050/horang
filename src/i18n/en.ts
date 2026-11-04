@@ -33,6 +33,10 @@ export const en = {
         title: "Dining, kiosks & dietary cards",
         hint: "010 phone prompt, card errors, allergy & vegan cards",
       },
+      emergency: {
+        title: "Pharmacy, lost item & departure",
+        hint: "Symptom cards, 119/LOST112, lockers, City Airport, tax refund",
+      },
     },
     staff: "Show this to staff",
     staffKo: "직원에게 보여 주기",
@@ -399,6 +403,60 @@ export const en = {
     },
     staffHead: "Show this to restaurant or cafe staff",
     staffSub: "Pick your dietary or payment sentence and tap “Show big”.",
+  },
+  emergency: {
+    title: "Pharmacy, Lost Item & Departure",
+    ask: "Do you need medicine, lost-item help, or departure info?",
+    modeLabel: "Help topic",
+    modes: {
+      pharmacy: "Pharmacy & 119",
+      lost: "Lost & Found",
+      depart: "Luggage & Departure",
+    },
+    pharmacy: {
+      headline: "At a pharmacy ('약') or medical emergency",
+      summary:
+        "Show the Korean symptom cards below to a pharmacist. For urgent medical help with 24-hour interpretation, call 119 or 1330.",
+      cards: {
+        signTitle: "1. Look for the '약' (Yak) sign",
+        signBody:
+          "Pharmacists provide pain relievers, cold/stomach medicine, antihistamines, and bandages. Late at night, 24-hour convenience stores carry basic pain and digestive medicine.",
+        callTitle: "2. 119 Ambulance & 1330 Interpreting",
+        callBody:
+          "119 connects to emergency dispatch with 3-way foreign-language interpretation. 1330 helps with non-urgent pharmacy and clinic questions.",
+      },
+      factsHead: "Official emergency & pharmacy guide",
+    },
+    lost: {
+      headline: "Left something on the subway or in a taxi?",
+      summary:
+        "Act right away: note the station, time, and door number for the subway, or check your card/Tmoney receipt for a taxi.",
+      cards: {
+        subwayTitle: "1. Subway lost item (check the 4-digit door number)",
+        subwayBody:
+          "Write down the line, direction, time, and platform screen door number, then show the Korean sentence below at the station office.",
+        taxiTitle: "2. Taxi lost item (keep your receipt / Tmoney log)",
+        taxiBody:
+          "A paper receipt or Tmoney/card payment record has the vehicle ID. Ask hotel staff or 1330 to call the driver.",
+      },
+      factsHead: "Official lost & found portals",
+    },
+    depart: {
+      headline: "Luggage lockers, City Airport Terminal & Tax Refund",
+      summary:
+        "Store your bags at subway T-Lockers, check in early at Seoul Station B2, and claim tax refunds on purchases of ₩15,000+.",
+      cards: {
+        cityAirportTitle: "1. Seoul Station B2 City Airport Terminal",
+        cityAirportBody:
+          "With a same-day AREX Express ticket on participating airlines, finish check-in, bag drop, and immigration 3h before departure (3h 20m for T2).",
+        taxRefundTitle: "2. Tax Refund (₩15,000+ minimum purchase)",
+        taxRefundBody:
+          "Show your passport for instant refund under ₩1,000,000 in stores, or scan your Tax Free receipts at the airport kiosk before security.",
+      },
+      factsHead: "Official luggage, check-in & tax refund rules",
+    },
+    staffHead: "Show this to a pharmacist or station staff",
+    staffSub: "Select a symptom, lost-item, or check-in sentence and tap “Show big”.",
   },
   staff: {
     title: "Show this to staff",

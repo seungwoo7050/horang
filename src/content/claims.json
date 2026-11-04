@@ -1015,5 +1015,123 @@
     ],
     "verifiedAt": "2026-10-02",
     "verifiedBy": "Official tourism guide desk research"
+  },
+  {
+    "id": "emergency.119.interpreting",
+    "kind": "service",
+    "evidence": "B",
+    "text": {
+      "en": "Calling 119 connects to Korea's Fire & Ambulance emergency dispatch, which provides 24-hour 3-way foreign-language interpretation for medical emergencies. For non-urgent medical or pharmacy help, call or chat with the 1330 Korea Travel Helpline.",
+      "ja": "119番は韓国の消防・救急指令につながり、急病やけがのときは24時間・3者通話の外国語通訳が利用できます。緊急ではない病院・薬局の相談は1330観光通訳案内電話・チャットも使えます。"
+    },
+    "sources": [
+      {
+        "url": "https://english.visitkorea.or.kr/svc/contents/infoHtmlView.do?vcontsId=140632",
+        "title": "VisitKorea (KTO): Emergency numbers (119, 112, 1330)"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official tourism guide desk research",
+    "data": {
+      "emergencyNumber": 119
+    }
+  },
+  {
+    "id": "emergency.pharmacy.otc",
+    "kind": "service",
+    "evidence": "B",
+    "text": {
+      "en": "Pharmacies in Korea are marked with '약' (Yak). Pharmacists dispense over-the-counter medicine for pain, fever, colds, indigestion, allergies, and motion sickness. Basic household pain relievers, cold medicine, digestive aids, and bandages are also sold at 24-hour convenience stores.",
+      "ja": "韓国の薬局は「약（ヤク）」の表示が目印で、解熱鎮痛剤・風邪薬・胃腸薬・アレルギー薬・酔い止めなどを薬剤師から購入できます。基本的な鎮痛剤・風邪薬・消化薬・絆創膏は24時間営業のコンビニでも買えます。"
+    },
+    "sources": [
+      {
+        "url": "https://english.visitkorea.or.kr/svc/contents/infoHtmlView.do?vcontsId=140632",
+        "title": "VisitKorea (KTO): Pharmacies & medical guide in Korea"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official tourism guide desk research"
+  },
+  {
+    "id": "emergency.lost.subway-taxi",
+    "kind": "service",
+    "evidence": "B",
+    "text": {
+      "en": "If you leave an item on the subway, note the line number, direction, station, time, and car/door number (4 digits printed on the platform screen door) and ask at the station office or check the National Police LOST112 portal. For taxis, keep your card receipt or check your Tmoney history to identify the vehicle.",
+      "ja": "地下鉄に忘れ物をしたときは、路線・方面・降りた駅・時刻・車両やドア番号（ホームドアに書かれた4桁の番号）を控えて駅務室に伝えるか、警察庁の遺失物総合案内（LOST112）を確認します。タクシーの忘れ物は、カードの領収書やTmoneyの利用履歴から車両を照会できます。"
+    },
+    "sources": [
+      {
+        "url": "https://www.lost112.go.kr/",
+        "title": "National Police Agency: LOST112 Lost & Found Portal"
+      },
+      {
+        "url": "http://www.seoulmetro.co.kr/en/page.do?menuIdx=369",
+        "title": "Seoul Metro: Lost and Found guide"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official lost & found guide desk research"
+  },
+  {
+    "id": "depart.luggage.tlocker",
+    "kind": "service",
+    "evidence": "B",
+    "text": {
+      "en": "Subway stations across Seoul operate unmanned T-Locker storage boxes (small, medium, and large sizes for 4-hour base periods) and staffed T-Luggage centers at major hubs (Seoul Station, Hongik Univ., Myeong-dong, Incheon Airport) that offer same-day luggage storage and airport delivery.",
+      "ja": "ソウルの地下鉄駅には無人のコインロッカー（T-Locker、小・中・大サイズ、基本4時間単位）があり、主要駅（ソウル駅・弘大入口・明洞・仁川空港）には有人手荷物預かり・配送所（T-Luggage）もあります。"
+    },
+    "sources": [
+      {
+        "url": "https://www.tluggage.co.kr/eng",
+        "title": "Seoul Metro T-Luggage & T-Locker official guide"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official T-Luggage guide desk research"
+  },
+  {
+    "id": "depart.city-airport.seoul-station",
+    "kind": "service",
+    "evidence": "B",
+    "text": {
+      "en": "The Seoul Station City Airport Terminal is on B2. Travelers holding a same-day AREX Express Train ticket and flying on participating airlines departing Incheon Airport can complete airline check-in, baggage drop, and outbound immigration at least 3 hours before departure (3 hours 20 minutes for Terminal 2).",
+      "ja": "ソウル駅都心空港ターミナルは地下2階にあります。当日の空港鉄道直通列車の乗車券を持ち、仁川空港発の対象航空会社を利用する乗客は、出発の3時間前（第2ターミナル発は3時間20分前）までに搭乗手続き・手荷物預け・出国審査を済ませられます。"
+    },
+    "sources": [
+      {
+        "url": "https://www.airportrailroad.com/station/terminal",
+        "title": "AREX Seoul Station City Airport Terminal official guide"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official AREX City Airport Terminal guide desk research",
+    "data": {
+      "t1CutoffHours": 3,
+      "t2CutoffMinutes": 20
+    }
+  },
+  {
+    "id": "depart.tax-refund.minimum",
+    "kind": "fare",
+    "evidence": "B",
+    "text": {
+      "en": "Foreign tourists can claim a tax refund on purchases of at least ₩15,000 at participating Tax Free shops. Immediate tax refunds at the store apply to single purchases under ₩1,000,000 (up to ₩5,000,000 total per trip) when you show your passport; otherwise, scan your tax-free receipts at the airport kiosk before departure.",
+      "ja": "外国人旅行者は、免税（Tax Free）加盟店で1回15,000ウォン以上買い物するとタックスリファンドを受けられます。パスポートを提示すれば1回1,000,000ウォン未満（旅行期間中合計5,000,000ウォン以下）まで店頭での即時還付が可能で、それ以外は出国前に空港のキオスクでレシートを読み取ります。"
+    },
+    "sources": [
+      {
+        "url": "https://english.visitkorea.or.kr/svc/contents/infoHtmlView.do?vcontsId=140658",
+        "title": "VisitKorea (KTO): Tax Refund guide in Korea"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official tourism guide desk research",
+    "data": {
+      "minSpend": 15000,
+      "instantMax": 1000000,
+      "tripMax": 5000000
+    }
   }
 ]

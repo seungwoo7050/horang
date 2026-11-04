@@ -166,6 +166,29 @@ test("dining: kiosk 010 phone bypass, dietary rules, and full-screen allergy/veg
   await expect(dialog).toHaveCount(0);
 });
 
+test("emergency: pharmacy 119 link, lost-and-found LOST112, City Airport / tax refund, and symptom PhraseShow", async ({
+  page,
+}) => {
+  await page.goto("/en/");
+  await page.getByRole("link", { name: /Pharmacy, lost item & departure/ }).click();
+  await expect(page).toHaveURL(/\/en\/emergency\/$/);
+  await expect(page.getByRole("link", { name: /Call 119/ })).toHaveAttribute("href", "tel:+822119");
+  await page.getByRole("button", { name: "Lost & Found" }).click();
+  await expect(page.getByRole("link", { name: /LOST112/ })).toHaveAttribute(
+    "href",
+    "https://www.lost112.go.kr/",
+  );
+  await page.getByRole("button", { name: "Luggage & Departure" }).click();
+  await expect(page.getByText(/₩15,000/).first()).toBeVisible();
+
+  await page.getByRole("button", { name: /stomachache and diarrhea/ }).click();
+  await page.getByRole("button", { name: "Show big" }).click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog.locator('blockquote[lang="ko"]')).toContainText("배탈·소화제 주세요");
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
+});
+
 test("staff: switching sentences and calling 1330", async ({ page }) => {
   await page.goto("/ja/staff/");
   await page.getByRole("button", { name: "エレベーターはどこですか。" }).click();

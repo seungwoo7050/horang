@@ -15,6 +15,7 @@ export const PAGES = [
   "station/",
   "transit/",
   "dining/",
+  "emergency/",
   "staff/",
 ] as const;
 export type PagePath = (typeof PAGES)[number];
