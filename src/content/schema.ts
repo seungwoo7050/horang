@@ -18,12 +18,25 @@ export const Source = z.object({
   title: z.string().min(1),
 });
 
+export const CONTENT_LOCALES = ["en", "ja", "zh-CN", "zh-TW", "fr", "es", "ro"] as const;
+
+const LocalizedText = z.object({
+  en: z.string().min(1),
+  ja: z.string().min(1),
+  "zh-CN": z.string().min(1),
+  "zh-TW": z.string().min(1),
+  fr: z.string().min(1),
+  es: z.string().min(1),
+  ro: z.string().min(1),
+});
+
 /**
  * 문장에 그 숫자가 하나의 수로 있는지(더 큰 수의 일부는 안 된다: 15,000 안의 5,000, 43 안의 3).
+ * 천 단위 구분 기호는 쉼표(13,000), 마침표(13.000), 공백(13 000) 또는 무구분(13000)을 모두 허용한다.
  * 뒤에 오는 문장 부호 쉼표·마침표("₩5,000, 2 days")는 괜찮다
  */
 export function hasNumber(text: string, shown: string): boolean {
-  const escaped = shown.replace(/[.,]/g, "\\$&");
+  const escaped = shown.replace(/\./g, "\\.").replace(/,/g, "(?:[,\\.\\s\\u00a0]?)");
   return new RegExp(`(?<![\\d])(?<!\\d[.,])${escaped}(?![\\d]|[.,]\\d)`).test(text);
 }
 
@@ -31,13 +44,13 @@ export const Claim = z
   .object({
     id: Id,
     kind: ClaimKind,
-    text: z.object({ en: z.string().min(1), ja: z.string().min(1) }),
+    text: LocalizedText,
     evidence: Evidence,
     sources: z.array(Source).min(1, "출처 없는 claim은 넣을 수 없다"),
     verifiedAt: IsoDate,
     verifiedBy: z.string().min(1),
     /**
-     * 화면에 크게 쓰는 숫자(요금·분). 문장과 어긋나지 않게 en·ja 문장에 같은 숫자가 있어야 한다
+     * 화면에 크게 쓰는 숫자(요금·분). 문장과 어긋나지 않게 7개 지원 언어 문장에 모두 같은 숫자가 있어야 한다
      * (천 단위 쉼표 포함, 예: 13000 → "13,000")
      */
     data: z.record(z.string(), z.number()).optional(),
@@ -45,7 +58,7 @@ export const Claim = z
   .superRefine((claim, ctx) => {
     for (const [key, n] of Object.entries(claim.data ?? {})) {
       const shown = n.toLocaleString("en-US");
-      for (const lang of ["en", "ja"] as const) {
+      for (const lang of CONTENT_LOCALES) {
         if (!hasNumber(claim.text[lang], shown)) {
           ctx.addIssue({
             code: "custom",
@@ -64,6 +77,11 @@ export const Phrase = z.object({
   ko: z.string().min(1),
   en: z.string().min(1),
   ja: z.string().min(1),
+  "zh-CN": z.string().min(1),
+  "zh-TW": z.string().min(1),
+  fr: z.string().min(1),
+  es: z.string().min(1),
+  ro: z.string().min(1),
   reviewed: z.boolean(),
 });
 export type Phrase = z.infer<typeof Phrase>;
@@ -76,7 +94,7 @@ export const Link = z.object({
   id: Id,
   /** https 페이지, 또는 국가번호부터 쓴 전화(tel:+82…). 누르면 바로 걸린다 */
   url: z.union([z.url({ protocol: /^https$/ }), z.string().regex(/^tel:\+[1-9]\d{5,14}$/)]),
-  label: z.object({ en: z.string().min(1), ja: z.string().min(1) }),
+  label: LocalizedText,
   affiliate: z.boolean(),
   checkedAt: IsoDate,
 });

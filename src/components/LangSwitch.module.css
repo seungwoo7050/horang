@@ -1,20 +1,79 @@
 .nav {
-  display: flex;
-  gap: var(--space-1);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
 }
 
-.nav a {
-  display: grid;
-  place-items: center;
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
   min-height: var(--hit-min);
-  padding-inline: var(--space-2);
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-pill);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.globe {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.chev {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + var(--space-1));
+  right: 0;
+  z-index: var(--z-sheet);
+  min-width: 156px;
+  margin: 0;
+  padding: var(--space-1);
+  list-style: none;
+  border-radius: var(--radius);
+  box-shadow: var(--edge);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: var(--hit-min);
+  padding-inline: var(--space-3);
   border-radius: var(--radius-sm);
-  color: var(--color-muted);
   font-size: var(--text-sm);
   text-decoration: none;
 }
 
-.nav a[aria-current="page"] {
-  color: var(--color-ink);
-  font-weight: 700;
+.check {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
 }

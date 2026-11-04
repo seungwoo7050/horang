@@ -4,6 +4,11 @@
     "ko": "카드가 안 찍혀요. 도와주세요.",
     "en": "My card doesn't work at the gate. Please help.",
     "ja": "カードが改札で反応しません。助けてください。",
+    "zh-CN": "我的卡在闸机刷不上。请帮帮我。",
+    "zh-TW": "我的卡在閘門感應不到。請幫幫我。",
+    "fr": "Ma carte ne fonctionne pas au portillon. Aidez-moi s'il vous plaît.",
+    "es": "Mi tarjeta no funciona en el torno. Ayúdeme, por favor.",
+    "ro": "Cardul meu nu funcționează la turnichet. Vă rog să mă ajutați.",
     "reviewed": false
   },
   {
@@ -11,6 +16,11 @@
     "ko": "개찰구에서 나갈 수가 없어요.",
     "en": "I can't get out through the gate.",
     "ja": "改札から出られません。",
+    "zh-CN": "我出不了检票闸机。",
+    "zh-TW": "我出不了驗票閘門。",
+    "fr": "Je n'arrive pas à sortir par le portillon.",
+    "es": "No puedo salir por el torno.",
+    "ro": "Nu pot ieși prin turnichet.",
     "reviewed": false
   },
   {
@@ -18,6 +28,11 @@
     "ko": "잔액이 부족해요. 어디서 충전해요?",
     "en": "My card balance is too low. Where can I top it up?",
     "ja": "残高が足りません。どこでチャージできますか。",
+    "zh-CN": "卡里余额不足。请问在哪里充值？",
+    "zh-TW": "卡裡餘額不足。請問在哪裡儲值？",
+    "fr": "Mon solde est insuffisant. Où puis-je recharger ma carte ?",
+    "es": "No tengo suficiente saldo. ¿Dónde puedo recargar la tarjeta?",
+    "ro": "Soldul cardului este insuficient. Unde îl pot reîncărca?",
     "reviewed": false
   },
   {
@@ -25,6 +40,11 @@
     "ko": "공항철도 직통열차 타는 곳이 어디예요?",
     "en": "Where do I board the AREX Express Train?",
     "ja": "空港鉄道の直通列車の乗り場はどこですか。",
+    "zh-CN": "请问机场铁路直达列车在哪里乘车？",
+    "zh-TW": "請問機場鐵路直達列車在哪裡搭車？",
+    "fr": "Où dois-je prendre le train AREX Express ?",
+    "es": "¿Dónde se toma el tren Expreso AREX?",
+    "ro": "De unde iau trenul Expres AREX?",
     "reviewed": false
   },
   {
@@ -32,6 +52,11 @@
     "ko": "직통열차 표로 이 개찰구를 지나갈 수 있어요?",
     "en": "Can I go through this gate with my Express Train ticket?",
     "ja": "直通列車の切符でこの改札を通れますか。",
+    "zh-CN": "拿直达列车车票可以通过这个检票口吗？",
+    "zh-TW": "拿直達列車車票可以通過這個驗票口嗎？",
+    "fr": "Puis-je passer ce portillon avec mon billet de train Express ?",
+    "es": "¿Puedo pasar por este torno con mi billete del tren Expreso?",
+    "ro": "Pot trece prin acest turnichet cu biletul de tren Expres?",
     "reviewed": false
   },
   {
@@ -39,6 +64,11 @@
     "ko": "엘리베이터가 어디예요?",
     "en": "Where is the elevator?",
     "ja": "エレベーターはどこですか。",
+    "zh-CN": "请问电梯在哪里？",
+    "zh-TW": "請問電梯在哪裡？",
+    "fr": "Où est l'ascenseur ?",
+    "es": "¿Dónde está el ascensor?",
+    "ro": "Unde este liftul?",
     "reviewed": false
   },
   {
@@ -46,6 +76,11 @@
     "ko": "1회용 카드 보증금은 어디서 돌려받아요?",
     "en": "Where can I get my single-journey card deposit back?",
     "ja": "1回用交通カードの保証金はどこで返してもらえますか。",
+    "zh-CN": "请问一次性交通卡的押金在哪里退还？",
+    "zh-TW": "請問一次性交通卡的押金在哪裡退還？",
+    "fr": "Où puis-je récupérer la caution de ma carte 1 trajet ?",
+    "es": "¿Dónde puedo recuperar el depósito de la tarjeta de 1 viaje?",
+    "ro": "Unde pot recupera garanția pentru cartela de o călătorie?",
     "reviewed": false
   },
   {
@@ -53,6 +88,11 @@
     "ko": "반대 방향으로 잘못 들어왔어요.",
     "en": "I went through the gate for the wrong direction.",
     "ja": "反対方向の改札に入ってしまいました。",
+    "zh-CN": "我进错反方向的检票口了。",
+    "zh-TW": "我進錯反方向的驗票口了。",
+    "fr": "Je suis entré par le portillon de la mauvaise direction.",
+    "es": "Entré por el torno de la dirección equivocada.",
+    "ro": "Am intrat prin turnichetul pentru direcția greșită.",
     "reviewed": false
   },
   {
@@ -60,6 +100,11 @@
     "ko": "물건을 잃어버렸어요. 어디에 물어봐야 해요?",
     "en": "I lost something. Where should I ask?",
     "ja": "物をなくしました。どこに聞けばいいですか。",
+    "zh-CN": "我丢了东西。请问应该去哪里询问？",
+    "zh-TW": "我弄丟了東西。請問應該去哪裡詢問？",
+    "fr": "J'ai perdu un objet. Où dois-je m'adresser ?",
+    "es": "Perdí un objeto. ¿Dónde debo preguntar?",
+    "ro": "Am pierdut un obiect. Unde ar trebui să întreb?",
     "reviewed": false
   },
   {
@@ -67,6 +112,11 @@
     "ko": "이 호텔로 가려면 몇 번 출구로 나가요?",
     "en": "Which exit should I take for this hotel?",
     "ja": "このホテルへは何番出口から出ればいいですか。",
+    "zh-CN": "去这家酒店应该从几号出口出去？",
+    "zh-TW": "去這家飯店應該從幾號出口出去？",
+    "fr": "Quelle sortie dois-je prendre pour cet hôtel ?",
+    "es": "¿Qué salida debo tomar para ir a este hotel?",
+    "ro": "Pe ce ieșire trebuie să merg pentru acest hotel?",
     "reviewed": false
   },
   {
@@ -74,6 +124,11 @@
     "ko": "아이 표를 사고 싶어요.",
     "en": "I'd like to buy a child's ticket.",
     "ja": "子ども用の切符を買いたいです。",
+    "zh-CN": "我想买儿童票。",
+    "zh-TW": "我想買兒童票。",
+    "fr": "Je voudrais acheter un billet enfant.",
+    "es": "Quisiera comprar un billete para niño.",
+    "ro": "Aș dori să cumpăr un bilet pentru copii.",
     "reviewed": false
   },
   {
@@ -81,6 +136,11 @@
     "ko": "1호선, 4호선 갈아타는 곳이 어디예요?",
     "en": "Where do I transfer to Lines 1 and 4?",
     "ja": "1号線・4号線への乗り換えはどこですか。",
+    "zh-CN": "请问换乘1号线和4号线在哪里？",
+    "zh-TW": "請問轉乘1號線和4號線在哪裡？",
+    "fr": "Où est la correspondance pour les lignes 1 et 4 ?",
+    "es": "¿Dónde hago transbordo a las líneas 1 y 4?",
+    "ro": "Unde schimb spre liniile 1 și 4?",
     "reviewed": false
   },
   {
@@ -88,6 +148,11 @@
     "ko": "한국어를 잘 몰라요. 손가락으로 가리켜 주세요.",
     "en": "I don't understand much Korean. Could you point for me?",
     "ja": "韓国語があまりわかりません。指でさして教えてください。",
+    "zh-CN": "我不太懂韩语，请用手指指给我看。",
+    "zh-TW": "我不太懂韓語，請用手指指給我看。",
+    "fr": "Je comprends mal le coréen. Pouvez-vous me montrer du doigt ?",
+    "es": "No entiendo mucho coreano. ¿Podría señalarme con el dedo?",
+    "ro": "Nu înțeleg bine coreeana. Îmi puteți arăta cu degetul?",
     "reviewed": false
   },
   {
@@ -95,6 +160,11 @@
     "ko": "여기로 가 주세요.",
     "en": "Please take me to this address.",
     "ja": "ここへ行ってください。",
+    "zh-CN": "请载我去这个地址。",
+    "zh-TW": "請載我去這個地址。",
+    "fr": "Veuillez m'emmener à cette adresse, s'il vous plaît.",
+    "es": "Por favor, lléveme a esta dirección.",
+    "ro": "Vă rog să mă duceți la această adresă.",
     "reviewed": false
   },
   {
@@ -102,6 +172,11 @@
     "ko": "트렁크 좀 열어 주세요. 짐이 있어요.",
     "en": "Could you open the trunk? I have luggage.",
     "ja": "トランクを開けていただけますか。荷物があります。",
+    "zh-CN": "请帮我打开后备箱，我有行李。",
+    "zh-TW": "請幫我打開後車廂，我有行李。",
+    "fr": "Pourriez-vous ouvrir le coffre ? J'ai des bagages.",
+    "es": "¿Podría abrir el maletero? Llevo equipaje.",
+    "ro": "Puteți deschide portbagajul? Am bagaje.",
     "reviewed": false
   },
   {
@@ -109,6 +184,11 @@
     "ko": "카드(또는 티머니)로 계산할게요. 영수증 주세요.",
     "en": "I'll pay by card (or Tmoney). Could I have a receipt?",
     "ja": "カード（またはTmoney）で払います。領収書をください。",
+    "zh-CN": "我刷卡（或 Tmoney）付款，请给我发票收据。",
+    "zh-TW": "我刷卡（或 Tmoney）付款，請給我收據。",
+    "fr": "Je paie par carte (ou Tmoney). Puis-je avoir un reçu ?",
+    "es": "Pagaré con tarjeta (o Tmoney). ¿Me da un recibo, por favor?",
+    "ro": "Plătesc cu cardul (sau Tmoney). Îmi puteți da o chitanță?",
     "reviewed": false
   },
   {
@@ -116,6 +196,11 @@
     "ko": "이 버스가 거기로 가나요?",
     "en": "Does this bus go there?",
     "ja": "このバスはそこへ行きますか。",
+    "zh-CN": "请问这辆公交车去那里吗？",
+    "zh-TW": "請問這班公車有到那裡嗎？",
+    "fr": "Est-ce que ce bus va là-bas ?",
+    "es": "¿Este autobús va hacia allí?",
+    "ro": "Acest autobuz merge acolo?",
     "reviewed": false
   },
   {
@@ -123,6 +208,11 @@
     "ko": "내릴 때 카드를 못 찍었어요. 어떻게 해요?",
     "en": "I forgot to tap my card when getting off. What should I do?",
     "ja": "降りるときにカードをタッチし忘れました。どうすればいいですか。",
+    "zh-CN": "下车时忘了刷卡，请问该怎么办？",
+    "zh-TW": "下車時忘了刷卡，請問該怎麼辦？",
+    "fr": "J'ai oublié de valider ma carte en descendant. Que dois-je faire ?",
+    "es": "Olvidé validar mi tarjeta al bajar. ¿Qué debo hacer?",
+    "ro": "Am uitat să validez cardul la coborâre. Ce trebuie să fac?",
     "reviewed": false
   },
   {
@@ -130,6 +220,11 @@
     "ko": "키오스크에서 해외 카드가 안 돼요. 카운터에서 주문할 수 있나요?",
     "en": "My foreign card doesn't work at the kiosk. Can I order at the counter?",
     "ja": "キオスクで海外のカードが使えません。レジで注文できますか。",
+    "zh-CN": "点餐机刷不了我的海外卡，可以在柜台点餐吗？",
+    "zh-TW": "點餐機刷不了我的海外卡，可以在櫃檯點餐嗎？",
+    "fr": "Ma carte étrangère ne passe pas à la borne. Puis-je commander au comptoir ?",
+    "es": "Mi tarjeta extranjera no funciona en el quiosco. ¿Puedo pedir en el mostrador?",
+    "ro": "Cardul meu străin nu merge la chioșc. Pot comanda la tejghea?",
     "reviewed": false
   },
   {
@@ -137,6 +232,11 @@
     "ko": "한국 전화번호(010)가 없어요. 번호 없이 주문할 수 있나요?",
     "en": "I don't have a Korean phone number (010). Can I order without one?",
     "ja": "韓国の電話番号（010）がありません。番号なしで注文できますか。",
+    "zh-CN": "我没有韩国手机号（010），可以不填号码点餐吗？",
+    "zh-TW": "我沒有韓國手機號碼（010），可以不填號碼點餐嗎？",
+    "fr": "Je n'ai pas de numéro coréen (010). Puis-je commander sans numéro ?",
+    "es": "No tengo número de teléfono coreano (010). ¿Puedo pedir sin número?",
+    "ro": "Nu am număr de telefon coreean (010). Pot comanda fără număr?",
     "reviewed": false
   },
   {
@@ -144,6 +244,11 @@
     "ko": "땅콩·견과류 알레르기가 심해요. 견과류가 없는 메뉴가 뭔가요?",
     "en": "I have a severe peanut and tree-nut allergy. Which dish has no nuts?",
     "ja": "ピーナッツ・ナッツ類の重いアレルギーがあります。ナッツが入っていない料理はどれですか。",
+    "zh-CN": "我对花生和坚果严重过敏。请问哪道菜不含坚果？",
+    "zh-TW": "我對花生和堅果嚴重過敏。請問哪道菜不含堅果？",
+    "fr": "J'ai une grave allergie aux arachides et fruits à coque. Quel plat n'en contient pas ?",
+    "es": "Tengo alergia grave al maní y frutos secos. ¿Qué plato no lleva frutos secos?",
+    "ro": "Am alergie severă la arahide și nuci. Care fel de mâncare nu conține nuci?",
     "reviewed": false
   },
   {
@@ -151,6 +256,11 @@
     "ko": "새우·게·조개(갑각류) 알레르기가 있어요. 육수에도 안 들어가나요?",
     "en": "I'm allergic to shrimp, crab, and shellfish. Is the broth also free of them?",
     "ja": "エビ・カニ・貝類（甲殻類）のアレルギーがあります。だしにも入っていませんか。",
+    "zh-CN": "我对虾、蟹、贝类（甲壳类）过敏。请问高汤里也不含这些吗？",
+    "zh-TW": "我對蝦、蟹、貝類（甲殼類）過敏。請問高湯裡也不含這些嗎？",
+    "fr": "Je suis allergique aux crevettes, crabes et fruits de mer. Le bouillon en est-il aussi sans ?",
+    "es": "Soy alérgico a los camarones, cangrejos y mariscos. ¿El caldo tampoco los lleva?",
+    "ro": "Sunt alergic la creveți, crabi și fructe de mare. Supa de bază este și ea fără acestea?",
     "reviewed": false
   },
   {
@@ -158,6 +268,11 @@
     "ko": "계란·우유·밀가루 알레르기가 있어요. 안 들어간 메뉴를 알려 주세요.",
     "en": "I'm allergic to eggs, dairy, and wheat. Please show me dishes without them.",
     "ja": "卵・乳製品・小麦のアレルギーがあります。これらが入っていない料理を教えてください。",
+    "zh-CN": "我对鸡蛋、牛奶和面粉过敏。请告诉我没有这些成分的菜品。",
+    "zh-TW": "我對雞蛋、牛奶和麵粉過敏。請告訴我沒有這些成分的餐點。",
+    "fr": "Je suis allergique aux œufs, produits laitiers et blé. Montrez-moi les plats sans eux.",
+    "es": "Soy alérgico al huevo, lácteos y trigo. Indíqueme qué platos no los contienen.",
+    "ro": "Sunt alergic la ouă, lactate și grâu. Vă rog să-mi arătați preparatele fără acestea.",
     "reviewed": false
   },
   {
@@ -165,6 +280,11 @@
     "ko": "돼지고기·베이컨·햄·돼지육수를 먹지 못해요. 돼지고기가 없는 메뉴가 있나요?",
     "en": "I don't eat pork, bacon, ham, or pork broth. Which dish has no pork?",
     "ja": "豚肉・ベーコン・ハム・豚骨スープが食べられません。豚肉が入っていない料理はありますか。",
+    "zh-CN": "我不吃猪肉、培根、火腿或猪肉高汤。请问有不含猪肉的菜吗？",
+    "zh-TW": "我不吃豬肉、培根、火腿或豬肉高湯。請問有不含豬肉的餐點嗎？",
+    "fr": "Je ne mange ni porc, ni bacon, ni jambon, ni bouillon de porc. Quel plat est sans porc ?",
+    "es": "No como cerdo, tocino, jamón ni caldo de cerdo. ¿Qué plato no lleva cerdo?",
+    "ro": "Nu mănânc carne de porc, bacon, șuncă sau supă de porc. Ce preparat nu conține porc?",
     "reviewed": false
   },
   {
@@ -172,6 +292,11 @@
     "ko": "고기, 생선, 계란, 우유, 젓갈(육수 포함)을 안 먹는 채식(비건)이에요.",
     "en": "I'm vegan: no meat, fish, eggs, dairy, or fish/meat broth.",
     "ja": "肉・魚・卵・乳製品・魚介だしを食べないヴィーガン（菜食）です。",
+    "zh-CN": "我是纯素食者（Vegan）：不吃肉、鱼、蛋、奶以及含鱼肉或虾酱的高汤。",
+    "zh-TW": "我是全素食者（Vegan）：不吃肉、魚、蛋、奶以及含魚肉或蝦醬的高湯。",
+    "fr": "Je suis végan : sans viande, poisson, œufs, laitages ni bouillon de viande ou poisson.",
+    "es": "Soy vegano: no como carne, pescado, huevos, lácteos ni caldo de carne o pescado.",
+    "ro": "Sunt vegan: fără carne, pește, ouă, lactate sau supă de carne ori pește.",
     "reviewed": false
   },
   {
@@ -179,6 +304,11 @@
     "ko": "매운 걸 잘 못 먹어요. 안 맵게(또는 덜 맵게) 해 주세요.",
     "en": "I can't eat spicy food well. Please make it non-spicy (or less spicy).",
     "ja": "辛いものが苦手です。辛くしないで（または辛さ控えめで）お願いします。",
+    "zh-CN": "我不太能吃辣，请做成不辣（或微辣）。",
+    "zh-TW": "我不太能吃辣，請做成不辣（或微辣）。",
+    "fr": "Je supporte mal le piment. Pouvez-vous le faire non épicé (ou peu épicé) ?",
+    "es": "No tolero bien el picante. Por favor, hágalo sin picante (o poco picante).",
+    "ro": "Nu pot mânca foarte picant. Vă rog să-l faceți nepicant (sau mai puțin picant).",
     "reviewed": false
   },
   {
@@ -186,6 +316,11 @@
     "ko": "열이 나고 머리가 아파요. 해열·진통제 주세요.",
     "en": "I have a fever and headache. Could I get a pain and fever reliever?",
     "ja": "熱があって頭が痛いです。解熱鎮痛剤をください。",
+    "zh-CN": "我发烧并且头疼，请给我退烧止痛药。",
+    "zh-TW": "我發燒而且頭痛，請給我退燒止痛藥。",
+    "fr": "J'ai de la fièvre et mal à la tête. Puis-je avoir un antipyrétique et antalgique ?",
+    "es": "Tengo fiebre y dolor de cabeza. ¿Me puede dar un analgésico y antipirético?",
+    "ro": "Am febră și dureri de cap. Îmi puteți da un antitermic și analgezic?",
     "reviewed": false
   },
   {
@@ -193,6 +328,11 @@
     "ko": "배가 아프고 설사(또는 소화불량)가 나요. 배탈·소화제 주세요.",
     "en": "I have a stomachache and diarrhea (or indigestion). Could I get stomach medicine?",
     "ja": "お腹が痛くて下痢（または消化不良）があります。胃腸薬をください。",
+    "zh-CN": "我肚子疼并且腹泻（或消化不良），请给我肠胃药。",
+    "zh-TW": "我肚子痛而且腹瀉（或消化不良），請給我腸胃藥。",
+    "fr": "J'ai mal au ventre et la diarrhée (ou indigestion). Puis-je avoir un médicament pour l'estomac ?",
+    "es": "Tengo dolor de estómago y diarrea (o indigestión). ¿Me da medicina estomacal?",
+    "ro": "Mă doare stomacul și am diaree (sau indigestie). Îmi puteți da un medicament pentru stomac?",
     "reviewed": false
   },
   {
@@ -200,6 +340,11 @@
     "ko": "기침이 나고 목이 아파요. 감기약 주세요.",
     "en": "I have a cough and sore throat. Could I get cold medicine?",
     "ja": "咳が出て喉が痛いです。風邪薬をください。",
+    "zh-CN": "我咳嗽并且嗓子疼，请给我感冒药。",
+    "zh-TW": "我咳嗽而且喉嚨痛，請給我感冒藥。",
+    "fr": "J'ai de la toux et mal à la gorge. Puis-je avoir un médicament contre le rhume ?",
+    "es": "Tengo tos y dolor de garganta. ¿Me puede dar medicina para el resfriado?",
+    "ro": "Tușesc și mă doare în gât. Îmi puteți da un medicament de răceală?",
     "reviewed": false
   },
   {
@@ -207,6 +352,11 @@
     "ko": "알레르기(두드러기·비염)가 났어요. 먹는 알레르기약(항히스타민제) 주세요.",
     "en": "I'm having an allergic reaction (hives or rhinitis). Could I get an antihistamine?",
     "ja": "アレルギー（じんましん・鼻炎）が出ました。飲み薬（抗ヒスタミン剤）をください。",
+    "zh-CN": "我过敏了（荨麻疹或鼻炎），请给我口服抗过敏药（抗组胺药）。",
+    "zh-TW": "我過敏了（蕁麻疹或鼻炎），請給我口服抗過敏藥（抗組織胺）。",
+    "fr": "J'ai une réaction allergique (urticaire ou rhinite). Puis-je avoir un antihistaminique ?",
+    "es": "Tengo una reacción alérgica (urticaria o rinitis). ¿Me puede dar un antihistamínico?",
+    "ro": "Am o reacție alergică (urticarie sau rinită). Îmi puteți da un antihistaminic?",
     "reviewed": false
   },
   {
@@ -214,6 +364,11 @@
     "ko": "상처가 났어요. 소독약이랑 반창고(밴드) 주세요.",
     "en": "I have a cut. Could I get antiseptic and bandages?",
     "ja": "傷ができました。消毒薬と絆創膏をください。",
+    "zh-CN": "我受伤了，请给我消毒药水和创可贴。",
+    "zh-TW": "我受傷了，請給我消毒藥水和OK繃。",
+    "fr": "Je me suis coupé. Puis-je avoir un antiseptique et des pansements ?",
+    "es": "Tengo una herida. ¿Me puede dar antiséptico y tiritas?",
+    "ro": "M-am tăiat. Îmi puteți da dezinfectant și plasturi?",
     "reviewed": false
   },
   {
@@ -221,6 +376,11 @@
     "ko": "방금 내린 지하철에 가방(물건)을 두고 내렸어요. 역무실에 연락해 주세요.",
     "en": "I just left my bag (item) on the subway train. Please help me contact the station office.",
     "ja": "今降りた地下鉄にカバン（荷物）を置き忘れました。駅務室への連絡を手伝ってください。",
+    "zh-CN": "我刚下地铁，把包（东西）落在车上了。请帮我联系站务室。",
+    "zh-TW": "我剛下地鐵，把包包（東西）忘在車上了。請幫我聯繫站務室。",
+    "fr": "Je viens d'oublier mon sac (objet) dans le métro. Aidez-moi à contacter le bureau de la station.",
+    "es": "Acabo de dejar mi bolso (objeto) en el metro. Ayúdeme a contactar con la oficina de la estación.",
+    "ro": "Tocmai mi-am uitat geanta (obiectul) în metrou. Vă rog să mă ajutați să contactez biroul stației.",
     "reviewed": false
   },
   {
@@ -228,6 +388,11 @@
     "ko": "택시에 물건을 두고 내렸어요. 이 영수증(또는 카드 내역)으로 기사님께 연락할 수 있나요?",
     "en": "I left something in a taxi. Can we contact the driver using this receipt (or card record)?",
     "ja": "タクシーに忘れ物をしました。この領収書（またはカード履歴）で運転手さんに連絡できますか。",
+    "zh-CN": "我把东西落在出租车上了。可以用这张收据（或刷卡记录）联系司机吗？",
+    "zh-TW": "我把東西忘在計程車上了。可以用這張收據（或刷卡紀錄）聯繫司機嗎？",
+    "fr": "J'ai oublié un objet dans un taxi. Peut-on joindre le chauffeur avec ce reçu (ou relevé de carte) ?",
+    "es": "Dejé algo en un taxi. ¿Podemos contactar al conductor con este recibo (o registro de tarjeta)?",
+    "ro": "Am uitat ceva în taxi. Putem contacta șoferul folosind această chitanță (sau extrasul de card)?",
     "reviewed": false
   },
   {
@@ -235,6 +400,11 @@
     "ko": "서울역 도심공항터미널 탑승수속이랑 출국심사 받는 곳이 어디예요?",
     "en": "Where is the Seoul Station City Airport Terminal check-in and immigration counter?",
     "ja": "ソウル駅都心空港ターミナルの搭乗手続きと出国審査はどこですか。",
+    "zh-CN": "请问首尔站都心机场航站楼的值机柜台和出境审查处在哪里？",
+    "zh-TW": "請問首爾站都心機場航廈的報到櫃檯和出境審查處在哪裡？",
+    "fr": "Où se trouvent l'enregistrement et l'immigration du City Airport Terminal de la gare de Séoul ?",
+    "es": "¿Dónde están los mostradores de facturación e inmigración de la City Airport Terminal en la Estación de Seúl?",
+    "ro": "Unde este ghișeul de check-in și imigrare de la City Airport Terminal din Gara Seul?",
     "reviewed": false
   }
 ]

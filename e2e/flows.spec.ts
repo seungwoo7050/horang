@@ -13,7 +13,12 @@ test.describe("language", () => {
   test("/ follows the order of the browser's languages", async ({ browser }) => {
     for (const [languages, expected] of [
       [["en-US", "en", "ja"], "/en/"],
-      [["fr-FR", "ja", "en"], "/ja/"],
+      [["de-DE", "ja", "en"], "/ja/"],
+      [["fr-FR", "ja", "en"], "/fr/"],
+      [["zh-TW", "zh", "en"], "/zh-TW/"],
+      [["zh-CN", "en"], "/zh-CN/"],
+      [["es-ES", "en"], "/es/"],
+      [["ro-RO", "en"], "/ro/"],
       [["ko-KR"], "/en/"],
     ] as const) {
       const ctx = await browser.newContext();
@@ -37,12 +42,30 @@ test.describe("language", () => {
       "href",
       /\/ja\/$/,
     );
+    await expect(page.locator('link[rel="alternate"][hreflang="zh-CN"]')).toHaveAttribute(
+      "href",
+      /\/zh-CN\/$/,
+    );
+    await expect(page.locator('link[rel="alternate"][hreflang="ro"]')).toHaveAttribute(
+      "href",
+      /\/ro\/$/,
+    );
     await expect(page.locator('link[rel="alternate"][hreflang="x-default"]')).toHaveCount(1);
     await ctx.close();
   });
 
-  test("the chosen language is remembered", async ({ page }) => {
+  test("the chosen language is remembered and keyboard Escape closes the menu", async ({
+    page,
+  }) => {
     await page.goto("/en/");
+    const trigger = page.getByRole("button", { name: "Language" });
+    await trigger.click();
+    await expect(page.getByRole("link", { name: "Română" })).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("link", { name: "Română" })).toHaveCount(0);
+    await expect(trigger).toBeFocused();
+
+    await trigger.click();
     await page.getByRole("link", { name: "日本語" }).click();
     await expect(page).toHaveURL(/\/ja\/$/);
     await page.goto("/");
@@ -442,14 +465,30 @@ test("arex: switching to and from the departure mode starts at the top of the ne
   await expect(page.getByRole("heading", { name: "Express or All-stop?" })).toBeInViewport();
 });
 
-test("no screen scrolls sideways on a phone", async ({ page }) => {
-  for (const lang of ["en", "ja"]) {
-    for (const path of ["", "gate/", "card/", "arex/", "station/", "staff/"]) {
-      await page.goto(`/${lang}/${path}`);
-      const overflow = await page.evaluate(
-        () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      );
-      expect(overflow, `/${lang}/${path}`).toBeLessThanOrEqual(0);
+test("no screen scrolls sideways on a phone across all 7 languages (320px and 390px)", async ({
+  page,
+}) => {
+  test.slow();
+  for (const width of [320, 390]) {
+    await page.setViewportSize({ width, height: 800 });
+    for (const lang of ["en", "ja", "zh-CN", "zh-TW", "fr", "es", "ro"]) {
+      for (const path of [
+        "",
+        "gate/",
+        "card/",
+        "arex/",
+        "station/",
+        "transit/",
+        "dining/",
+        "emergency/",
+        "staff/",
+      ]) {
+        await page.goto(`/${lang}/${path}`);
+        const overflow = await page.evaluate(
+          () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        );
+        expect(overflow, `${width}px /${lang}/${path}`).toBeLessThanOrEqual(0);
+      }
     }
   }
 });

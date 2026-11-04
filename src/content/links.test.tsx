@@ -37,7 +37,15 @@ describe("LinksFile", () => {
   const link = {
     id: "arex-official",
     url: "https://www.airportrailroad.com/",
-    label: { en: "AREX", ja: "AREX" },
+    label: {
+      en: "AREX",
+      ja: "AREX",
+      "zh-CN": "AREX",
+      "zh-TW": "AREX",
+      fr: "AREX",
+      es: "AREX",
+      ro: "AREX",
+    },
     affiliate: false,
     checkedAt: "2026-10-01",
   };
