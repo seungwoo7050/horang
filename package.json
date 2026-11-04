@@ -11,6 +11,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "npm run lint && npm run typecheck && npm run format:check && npm run test",
+    "verify:fast": "bash scripts/harness/verify.sh fast",
+    "verify": "bash scripts/harness/verify.sh full",
     "content:check": "node scripts/check-content.mts",
     "prebuild": "npm run content:check",
     "test": "vitest run",
