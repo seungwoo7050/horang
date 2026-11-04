@@ -145,6 +145,27 @@ test("transit: city bus rules, taxi guide, and full-screen driver PhraseShow car
   await expect(dialog).toHaveCount(0);
 });
 
+test("dining: kiosk 010 phone bypass, dietary rules, and full-screen allergy/vegan PhraseShow card", async ({
+  page,
+}) => {
+  await page.goto("/en/");
+  await page.getByRole("link", { name: /Dining, kiosks & dietary cards/ }).click();
+  await expect(page).toHaveURL(/\/en\/dining\/$/);
+  await expect(page.getByText(/010-0000-0000/).first()).toBeVisible();
+  await page.getByRole("button", { name: "Dietary & Table Rules" }).click();
+  await expect(page.getByText(/salted shrimp/).first()).toBeVisible();
+
+  await page.getByRole("button", { name: /peanut and tree-nut allergy/ }).click();
+  await page.getByRole("button", { name: "Show big" }).click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog.locator('blockquote[lang="ko"]')).toContainText("땅콩·견과류 알레르기");
+  await expect(dialog.locator('p[lang="ko"]')).toHaveText(
+    "한국어를 잘 몰라요. 손가락으로 가리켜 주세요.",
+  );
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
+});
+
 test("staff: switching sentences and calling 1330", async ({ page }) => {
   await page.goto("/ja/staff/");
   await page.getByRole("button", { name: "エレベーターはどこですか。" }).click();

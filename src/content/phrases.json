@@ -124,5 +124,61 @@
     "en": "I forgot to tap my card when getting off. What should I do?",
     "ja": "降りるときにカードをタッチし忘れました。どうすればいいですか。",
     "reviewed": false
+  },
+  {
+    "id": "dining.kiosk-stuck",
+    "ko": "키오스크에서 해외 카드가 안 돼요. 카운터에서 주문할 수 있나요?",
+    "en": "My foreign card doesn't work at the kiosk. Can I order at the counter?",
+    "ja": "キオスクで海外のカードが使えません。レジで注文できますか。",
+    "reviewed": false
+  },
+  {
+    "id": "dining.no-korean-phone",
+    "ko": "한국 전화번호(010)가 없어요. 번호 없이 주문할 수 있나요?",
+    "en": "I don't have a Korean phone number (010). Can I order without one?",
+    "ja": "韓国の電話番号（010）がありません。番号なしで注文できますか。",
+    "reviewed": false
+  },
+  {
+    "id": "dining.allergy-nuts",
+    "ko": "땅콩·견과류 알레르기가 심해요. 견과류가 없는 메뉴가 뭔가요?",
+    "en": "I have a severe peanut and tree-nut allergy. Which dish has no nuts?",
+    "ja": "ピーナッツ・ナッツ類の重いアレルギーがあります。ナッツが入っていない料理はどれですか。",
+    "reviewed": false
+  },
+  {
+    "id": "dining.allergy-shellfish",
+    "ko": "새우·게·조개(갑각류) 알레르기가 있어요. 육수에도 안 들어가나요?",
+    "en": "I'm allergic to shrimp, crab, and shellfish. Is the broth also free of them?",
+    "ja": "エビ・カニ・貝類（甲殻類）のアレルギーがあります。だしにも入っていませんか。",
+    "reviewed": false
+  },
+  {
+    "id": "dining.allergy-egg-dairy-wheat",
+    "ko": "계란·우유·밀가루 알레르기가 있어요. 안 들어간 메뉴를 알려 주세요.",
+    "en": "I'm allergic to eggs, dairy, and wheat. Please show me dishes without them.",
+    "ja": "卵・乳製品・小麦のアレルギーがあります。これらが入っていない料理を教えてください。",
+    "reviewed": false
+  },
+  {
+    "id": "dining.no-pork-halal",
+    "ko": "돼지고기·베이컨·햄·돼지육수를 먹지 못해요. 돼지고기가 없는 메뉴가 있나요?",
+    "en": "I don't eat pork, bacon, ham, or pork broth. Which dish has no pork?",
+    "ja": "豚肉・ベーコン・ハム・豚骨スープが食べられません。豚肉が入っていない料理はありますか。",
+    "reviewed": false
+  },
+  {
+    "id": "dining.strict-vegan",
+    "ko": "고기, 생선, 계란, 우유, 젓갈(육수 포함)을 안 먹는 채식(비건)이에요.",
+    "en": "I'm vegan: no meat, fish, eggs, dairy, or fish/meat broth.",
+    "ja": "肉・魚・卵・乳製品・魚介だしを食べないヴィーガン（菜食）です。",
+    "reviewed": false
+  },
+  {
+    "id": "dining.less-spicy",
+    "ko": "매운 걸 잘 못 먹어요. 안 맵게(또는 덜 맵게) 해 주세요.",
+    "en": "I can't eat spicy food well. Please make it non-spicy (or less spicy).",
+    "ja": "辛いものが苦手です。辛くしないで（または辛さ控えめで）お願いします。",
+    "reviewed": false
   }
 ]

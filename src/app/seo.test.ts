@@ -27,7 +27,16 @@ describe("pageMetadata", () => {
   });
 
   it("covers every screen route", () => {
-    expect(PAGES).toEqual(["", "gate/", "card/", "arex/", "station/", "transit/", "staff/"]);
+    expect(PAGES).toEqual([
+      "",
+      "gate/",
+      "card/",
+      "arex/",
+      "station/",
+      "transit/",
+      "dining/",
+      "staff/",
+    ]);
   });
 });
 
