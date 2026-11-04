@@ -4,7 +4,12 @@
     "kind": "fare",
     "text": {
       "en": "The AREX Express Train costs ₩13,000 for an adult.",
-      "ja": "空港鉄道の直通列車は大人13,000ウォンです。"
+      "ja": "空港鉄道の直通列車は大人13,000ウォンです。",
+      "zh-CN": "机场铁路直达列车（AREX Express）成人票价为 ₩13,000。",
+      "zh-TW": "機場鐵路直達列車（AREX Express）成人票價為 ₩13,000。",
+      "fr": "Le train AREX Express coûte ₩13,000 pour un adulte.",
+      "es": "El tren Expreso AREX cuesta ₩13,000 para un adulto.",
+      "ro": "Trenul AREX Expres costă ₩13,000 pentru un adult."
     },
     "evidence": "B",
     "sources": [
@@ -28,7 +33,12 @@
     "kind": "schedule",
     "text": {
       "en": "The Express takes 43 minutes between Seoul Station and Terminal 1, and 51 minutes to Terminal 2.",
-      "ja": "直通列車はソウル駅から第1ターミナルまで43分、第2ターミナルまで51分です。"
+      "ja": "直通列車はソウル駅から第1ターミナルまで43分、第2ターミナルまで51分です。",
+      "zh-CN": "直达列车从首尔站到第1航站楼需 43 分钟，到第2航站楼需 51 分钟。",
+      "zh-TW": "直達列車從首爾站到第1航廈需 43 分鐘，到第2航廈需 51 分鐘。",
+      "fr": "L'Express met 43 minutes entre la gare de Séoul et le Terminal 1, et 51 minutes jusqu'au Terminal 2.",
+      "es": "El Expreso tarda 43 minutos entre la Estación de Seúl y la Terminal 1, y 51 minutos hasta la Terminal 2.",
+      "ro": "Expresul face 43 de minute între Gara Seul și Terminalul 1, și 51 de minute până la Terminalul 2."
     },
     "evidence": "B",
     "sources": [
@@ -49,7 +59,12 @@
     "kind": "fare",
     "text": {
       "en": "You can't pay for the Express with a transit card. Buy an Express ticket (cash or credit/debit card).",
-      "ja": "直通列車は交通カードで乗れません。直通列車の乗車券を買ってください（現金・クレジットカード・デビットカード）。"
+      "ja": "直通列車は交通カードで乗れません。直通列車の乗車券を買ってください（現金・クレジットカード・デビットカード）。",
+      "zh-CN": "直达列车不能直接刷交通卡进站，请先购买直达列车车票（可用现金或信用卡/借记卡）。",
+      "zh-TW": "直達列車不能直接刷交通卡進站，請先購買直達列車車票（可用現金或信用卡/簽帳卡）。",
+      "fr": "Vous ne pouvez pas payer l'Express avec une carte de transport. Achetez un billet Express (espèces ou carte bancaire).",
+      "es": "No puedes pagar el Expreso con tarjeta de transporte. Compra un billete Expreso (efectivo o tarjeta de crédito/débito).",
+      "ro": "Nu poți plăti Expresul cu un card de transport. Cumpără un bilet Expres (numerar sau card bancar)."
     },
     "evidence": "B",
     "sources": [
@@ -66,7 +81,12 @@
     "kind": "fare",
     "text": {
       "en": "All-stop train, Seoul Station → Terminal 1, adult: ₩4,750 with a transit card, ₩4,850 with a single-journey card.",
-      "ja": "一般列車のソウル駅→第1ターミナル（大人）は交通カードで4,750ウォン、1回用カードで4,850ウォンです。"
+      "ja": "一般列車のソウル駅→第1ターミナル（大人）は交通カードで4,750ウォン、1回用カードで4,850ウォンです。",
+      "zh-CN": "普通列车（首尔站 → 第1航站楼，成人）：刷交通卡 ₩4,750，一次性交通卡 ₩4,850。",
+      "zh-TW": "普通列車（首爾站 → 第1航廈，成人）：刷交通卡 ₩4,750，一次性交通卡 ₩4,850。",
+      "fr": "Train Omnibus, Gare de Séoul → Terminal 1, adulte : ₩4,750 avec carte de transport, ₩4,850 avec carte 1 trajet.",
+      "es": "Tren de parada en todas, Estación de Seúl → Terminal 1, adulto: ₩4,750 con tarjeta de transporte, ₩4,850 con tarjeta de 1 viaje.",
+      "ro": "Tren Personal, Gara Seul → Terminalul 1, adult: ₩4,750 cu card de transport, ₩4,850 cu cartelă de o călătorie."
     },
     "evidence": "B",
     "sources": [
@@ -87,7 +107,12 @@
     "kind": "fare",
     "text": {
       "en": "All-stop train, Seoul Station → Terminal 2, adult: ₩5,350 with a transit card, ₩5,450 with a single-journey card.",
-      "ja": "一般列車のソウル駅→第2ターミナル（大人）は交通カードで5,350ウォン、1回用カードで5,450ウォンです。"
+      "ja": "一般列車のソウル駅→第2ターミナル（大人）は交通カードで5,350ウォン、1回用カードで5,450ウォンです。",
+      "zh-CN": "普通列车（首尔站 → 第2航站楼，成人）：刷交通卡 ₩5,350，一次性交通卡 ₩5,450。",
+      "zh-TW": "普通列車（首爾站 → 第2航廈，成人）：刷交通卡 ₩5,350，一次性交通卡 ₩5,450。",
+      "fr": "Train Omnibus, Gare de Séoul → Terminal 2, adulte : ₩5,350 avec carte de transport, ₩5,450 avec carte 1 trajet.",
+      "es": "Tren de parada en todas, Estación de Seúl → Terminal 2, adulto: ₩5,350 con tarjeta de transporte, ₩5,450 con tarjeta de 1 viaje.",
+      "ro": "Tren Personal, Gara Seul → Terminalul 2, adult: ₩5,350 cu card de transport, ₩5,450 cu cartelă de o călătorie."
     },
     "evidence": "B",
     "sources": [
@@ -108,7 +133,12 @@
     "kind": "schedule",
     "text": {
       "en": "The All-stop train takes about 59 minutes between Seoul Station and Terminal 1, and about 66 minutes to Terminal 2.",
-      "ja": "一般列車はソウル駅から第1ターミナルまで約59分、第2ターミナルまで約66分です。"
+      "ja": "一般列車はソウル駅から第1ターミナルまで約59分、第2ターミナルまで約66分です。",
+      "zh-CN": "普通列车从首尔站到第1航站楼约需 59 分钟，到第2航站楼约需 66 分钟。",
+      "zh-TW": "普通列車從首爾站到第1航廈約需 59 分鐘，到第2航廈約需 66 分鐘。",
+      "fr": "Le train Omnibus met environ 59 minutes entre la gare de Séoul et le Terminal 1, et environ 66 minutes jusqu'au Terminal 2.",
+      "es": "El tren de parada en todas tarda unos 59 minutos entre la Estación de Seúl y la Terminal 1, y unos 66 minutos hasta la Terminal 2.",
+      "ro": "Trenul Personal face aproximativ 59 de minute între Gara Seul și Terminalul 1, și aproximativ 66 de minute până la Terminalul 2."
     },
     "evidence": "B",
     "sources": [
@@ -129,7 +159,12 @@
     "kind": "fare",
     "text": {
       "en": "On AREX, a single-journey card costs the fare + ₩100, plus a ₩500 deposit you get back at the deposit refund machine after you exit.",
-      "ja": "空港鉄道の1回用交通カードは運賃+100ウォンと保証金500ウォンです。保証金は降りた駅の保証金払い戻し機で戻ります。"
+      "ja": "空港鉄道の1回用交通カードは運賃+100ウォンと保証金500ウォンです。保証金は降りた駅の保証金払い戻し機で戻ります。",
+      "zh-CN": "在机场铁路使用一次性交通卡需支付车费 + ₩100，另加 ₩500 押金（出站后在押金退还机退回）。",
+      "zh-TW": "在機場鐵路使用一次性交通卡需支付車資 + ₩100，另加 ₩500 押金（出站後在押金退還機退回）。",
+      "fr": "Sur AREX, une carte 1 trajet coûte le tarif + ₩100, plus une caution de ₩500 remboursée à la machine après la sortie.",
+      "es": "En AREX, la tarjeta de 1 viaje cuesta la tarifa + ₩100, más un depósito de ₩500 que recuperas en la máquina de reembolso al salir.",
+      "ro": "Pe AREX, o cartelă pentru o călătorie costă tariful + ₩100, plus o garanție de ₩500 pe care o recuperezi la aparat după ieșire."
     },
     "evidence": "B",
     "sources": [
@@ -154,7 +189,12 @@
     "kind": "card-rule",
     "text": {
       "en": "Climate Card Tourist Pass: 1 day ₩5,000, 2 days ₩8,000, 3 days ₩10,000, 5 days ₩15,000, 7 days ₩20,000. The card itself is ₩3,000.",
-      "ja": "Climate Card 短期券：1日5,000ウォン、2日8,000ウォン、3日10,000ウォン、5日15,000ウォン、7日20,000ウォン。カード本体は3,000ウォンです。"
+      "ja": "Climate Card 短期券：1日5,000ウォン、2日8,000ウォン、3日10,000ウォン、5日15,000ウォン、7日20,000ウォン。カード本体は3,000ウォンです。",
+      "zh-CN": "气候同行卡短期游览券：1天 ₩5,000、2天 ₩8,000、3天 ₩10,000、5天 ₩15,000、7天 ₩20,000。实体卡工本费为 ₩3,000。",
+      "zh-TW": "氣候同行卡短期觀光券：1天 ₩5,000、2天 ₩8,000、3天 ₩10,000、5天 ₩15,000、7天 ₩20,000。實體卡工本費為 ₩3,000。",
+      "fr": "Climate Card Tourist Pass : 1 jour ₩5,000, 2 jours ₩8,000, 3 jours ₩10,000, 5 jours ₩15,000, 7 jours ₩20,000. La carte coûte ₩3,000.",
+      "es": "Climate Card Tourist Pass: 1 día ₩5,000, 2 días ₩8,000, 3 días ₩10,000, 5 días ₩15,000, 7 días ₩20,000. La tarjeta física cuesta ₩3,000.",
+      "ro": "Climate Card Tourist Pass: 1 zi ₩5,000, 2 zile ₩8,000, 3 zile ₩10,000, 5 zile ₩15,000, 7 zile ₩20,000. Cardul fizic costă ₩3,000."
     },
     "evidence": "B",
     "sources": [
@@ -183,7 +223,12 @@
     "kind": "card-rule",
     "text": {
       "en": "You can't board with a Climate Card at the Incheon Airport stations, so it doesn't cover your ride from the airport into Seoul.",
-      "ja": "仁川空港駅ではClimate Cardで乗車できません。空港からソウルへの移動には使えません。"
+      "ja": "仁川空港駅ではClimate Cardで乗車できません。空港からソウルへの移動には使えません。",
+      "zh-CN": "在仁川机场站不能使用气候同行卡进站乘车，因此不能用它从仁川机场前往首尔市区。",
+      "zh-TW": "在仁川機場站不能使用氣候同行卡進站搭車，因此不能用它從仁川機場前往首爾市區。",
+      "fr": "Vous ne pouvez pas monter avec une Climate Card aux stations de l'aéroport d'Incheon ; elle ne couvre pas le trajet de l'aéroport vers Séoul.",
+      "es": "No puedes subir con la Climate Card en las estaciones del Aeropuerto de Incheon, por lo que no cubre el viaje del aeropuerto a Seúl.",
+      "ro": "Nu te poți îmbarca cu Climate Card în stațiile Aeroportului Incheon, deci nu acoperă drumul de la aeroport spre Seul."
     },
     "evidence": "B",
     "sources": [
@@ -204,7 +249,12 @@
     "kind": "card-rule",
     "text": {
       "en": "Since March 17, 2026, the new ticket machines on Lines 1–8 accept overseas cards for single-journey tickets and the Climate Card Tourist Pass, with an average 3.7% fee.",
-      "ja": "2026年3月17日から、1〜8号線の新型券売機で海外カードを使って1回用乗車券とClimate Card短期券を買えます（手数料は平均3.7%）。"
+      "ja": "2026年3月17日から、1〜8号線の新型券売機で海外カードを使って1回用乗車券とClimate Card短期券を買えます（手数料は平均3.7%）。",
+      "zh-CN": "自 2026年3月17日起，首尔地铁 1–8号线的新型售票机支持使用海外银行卡购买一次性交通卡和气候同行卡短期券（平均手续费约 3.7%）。",
+      "zh-TW": "自 2026年3月17日起，首爾地鐵 1–8號線的新型售票機支援使用海外銀行卡購買一次性交通卡和氣候同行卡短期券（平均手續費約 3.7%）。",
+      "fr": "Depuis le 17 mars 2026, les nouveaux distributeurs des lignes 1 à 8 acceptent les cartes étrangères pour les billets 1 trajet et le Climate Card Tourist Pass (frais moyens de 3,7 %).",
+      "es": "Desde el 17 de marzo de 2026, las nuevas máquinas de las líneas 1 a 8 aceptan tarjetas extranjeras para billetes de 1 viaje y el Climate Card Tourist Pass (comisión media del 3,7%).",
+      "ro": "Din 17 martie 2026, noile automate de pe liniile 1–8 acceptă carduri străine pentru cartele de o călătorie și Climate Card Tourist Pass (comision mediu de 3,7%)."
     },
     "evidence": "B",
     "sources": [
@@ -221,7 +271,12 @@
     "kind": "card-rule",
     "text": {
       "en": "Topping up a regular Tmoney card at subway machines is cash only.",
-      "ja": "地下鉄の機械で一般のTmoneyにチャージするには現金が必要です。"
+      "ja": "地下鉄の機械で一般のTmoneyにチャージするには現金が必要です。",
+      "zh-CN": "在地铁站的充值机为普通 Tmoney 卡充值只能使用韩元现金。",
+      "zh-TW": "在地鐵站的儲值機為一般 Tmoney 卡儲值只能使用韓元現金。",
+      "fr": "La recharge d'une carte Tmoney classique aux distributeurs du métro se fait uniquement en espèces.",
+      "es": "Recargar una tarjeta Tmoney normal en las máquinas del metro es solo en efectivo.",
+      "ro": "Reîncărcarea unui card Tmoney obișnuit la automatele de metrou se face doar cu numerar."
     },
     "evidence": "B",
     "sources": [
@@ -238,7 +293,12 @@
     "kind": "card-rule",
     "text": {
       "en": "On AREX, if you tapped in for the wrong direction, tapping out and back in at the same station within 5 minutes is free once.",
-      "ja": "空港鉄道では、反対方向に入ってしまっても、同じ駅で5分以内に出て入り直せば1回だけ無料です。"
+      "ja": "空港鉄道では、反対方向に入ってしまっても、同じ駅で5分以内に出て入り直せば1回だけ無料です。",
+      "zh-CN": "在机场铁路进错方向时，5 分钟内在同一车站刷出并重新刷进可免费一次。",
+      "zh-TW": "在機場鐵路進錯方向時，5 分鐘內在同一車站刷出並重新刷進可免費一次。",
+      "fr": "Sur AREX, si vous êtes entré dans le mauvais sens, ressortir et rentrer à la même station dans les 5 minutes est gratuit une fois.",
+      "es": "En AREX, si entraste en la dirección equivocada, salir y volver a entrar en la misma estación en menos de 5 minutos es gratis una vez.",
+      "ro": "Pe AREX, dacă ai intrat în direcția greșită, ieșirea și reintrarea în aceeași stație în decurs de 5 minute este gratuită o singură dată."
     },
     "evidence": "B",
     "sources": [
@@ -255,7 +315,12 @@
     "kind": "card-rule",
     "text": {
       "en": "On Seoul Metro (Lines 1–8), tapping out and back in at the same station with the same card within 15 minutes is free once.",
-      "ja": "ソウル交通公社（1〜8号線）では、同じ駅で同じカードを使い15分以内に入り直せば1回だけ無料です。"
+      "ja": "ソウル交通公社（1〜8号線）では、同じ駅で同じカードを使い15分以内に入り直せば1回だけ無料です。",
+      "zh-CN": "在首尔地铁（1–8号线），15 分钟内使用同一张卡在同一车站刷出再重新刷进可免费一次。",
+      "zh-TW": "在首爾地鐵（1–8號線），15 分鐘內使用同一張卡在同一車站刷出再重新刷進可免費一次。",
+      "fr": "Sur le métro de Séoul (lignes 1 à 8), ressortir et rentrer à la même station avec la même carte dans les 15 minutes est gratuit une fois.",
+      "es": "En el Metro de Seúl (líneas 1 a 8), salir y volver a entrar en la misma estación con la misma tarjeta en menos de 15 minutos es gratis una vez.",
+      "ro": "La metroul din Seul (liniile 1–8), ieșirea și reintrarea în aceeași stație cu același card în 15 minute este gratuită o singură dată."
     },
     "evidence": "B",
     "sources": [
@@ -272,7 +337,12 @@
     "kind": "card-rule",
     "text": {
       "en": "If your balance is too low to exit, top up at the fare adjustment / top-up machine near the gate, then tap out.",
-      "ja": "残高不足で出られないときは、改札近くの精算・チャージ機でチャージしてから出てください。"
+      "ja": "残高不足で出られないときは、改札近くの精算・チャージ機でチャージしてから出てください。",
+      "zh-CN": "如果因余额不足无法出站，请在检票口附近的补票/充值机充值后再刷卡出闸。",
+      "zh-TW": "如果因餘額不足無法出站，請在驗票口附近的補票/儲值機儲值後再刷卡出閘。",
+      "fr": "Si votre solde est trop bas pour sortir, rechargez à la machine d'ajustement tarifaire près du portillon, puis validez pour sortir.",
+      "es": "Si tu saldo es insuficiente para salir, recarga en la máquina de ajuste de tarifa junto al torno y vuelve a validar para salir.",
+      "ro": "Dacă soldul este prea mic pentru a ieși, reîncarcă la aparatul de ajustare a tarifului de lângă turnichet, apoi validează ieșirea."
     },
     "evidence": "B",
     "sources": [
@@ -293,7 +363,12 @@
     "kind": "route",
     "text": {
       "en": "At Seoul Station, the AREX platform is on B7 and the AREX concourse is on B3. AREX's own exit is Exit 15 on 1F.",
-      "ja": "ソウル駅の空港鉄道ホームは地下7階、コンコースは地下3階です。空港鉄道の出口は1階の15番出口です。"
+      "ja": "ソウル駅の空港鉄道ホームは地下7階、コンコースは地下3階です。空港鉄道の出口は1階の15番出口です。",
+      "zh-CN": "在首尔站，机场铁路站台位于地下7层（B7），大厅位于地下3层（B3）。机场铁路专用出口是1层（1F）的15号出口。",
+      "zh-TW": "在首爾站，機場鐵路月台位於地下7樓（B7），大廳位於地下3樓（B3）。機場鐵路專用出口是1樓（1F）的15號出口。",
+      "fr": "À la gare de Séoul, le quai AREX est au B7 et le hall AREX au B3. La sortie dédiée AREX est la Sortie 15 au 1F.",
+      "es": "En la Estación de Seúl, el andén de AREX está en B7 y el vestíbulo en B3. La salida propia de AREX es la Salida 15 en 1F.",
+      "ro": "În Gara Seul, peronul AREX este la B7, iar holul AREX la B3. Ieșirea proprie AREX este Ieșirea 15 la nivelul 1F."
     },
     "evidence": "B",
     "sources": [
@@ -310,7 +385,12 @@
     "kind": "route",
     "text": {
       "en": "At Seoul Station, the Line 1 and Line 4 platforms are on B2 and their concourse is on B1.",
-      "ja": "ソウル駅の1号線・4号線のホームは地下2階、コンコースは地下1階です。"
+      "ja": "ソウル駅の1号線・4号線のホームは地下2階、コンコースは地下1階です。",
+      "zh-CN": "在首尔站，地铁1号线和4号线站台位于地下2层（B2），大厅位于地下1层（B1）。",
+      "zh-TW": "在首爾站，地鐵1號線和4號線月台位於地下2樓（B2），大廳位於地下1樓（B1）。",
+      "fr": "À la gare de Séoul, les quais des lignes 1 et 4 sont au B2 et leur hall est au B1.",
+      "es": "En la Estación de Seúl, los andenes de las líneas 1 y 4 están en B2 y su vestíbulo en B1.",
+      "ro": "În Gara Seul, peroanele liniilor 1 și 4 sunt la B2, iar holul lor este la B1."
     },
     "evidence": "B",
     "sources": [
@@ -331,7 +411,12 @@
     "kind": "service",
     "text": {
       "en": "Korea Travel Helpline: call 1330 in Korea, or +82-2-1330 from abroad. English and Japanese are available 24/7 (press 2 for English, 3 for Japanese). There is also a free online chat.",
-      "ja": "韓国観光通訳案内：韓国内は1330、海外からは+82-2-1330。英語・日本語は24時間年中無休です（英語は2番、日本語は3番）。無料のオンラインチャットもあります。"
+      "ja": "韓国観光通訳案内：韓国内は1330、海外からは+82-2-1330。英語・日本語は24時間年中無休です（英語は2番、日本語は3番）。無料のオンラインチャットもあります。",
+      "zh-CN": "韩国旅游咨询热线：在韩国国内拨打 1330，海外拨打 +82-2-1330。提供全天候 24 小时多语种服务（中文按 4，英语按 2，日语按 3），也支持免费在线聊天。",
+      "zh-TW": "韓國旅遊諮詢熱線：在韓國國內撥打 1330，海外撥打 +82-2-1330。提供全天候 24 小時多語種服務（中文按 4，英語按 2，日語按 3），也支援免費線上文字客服。",
+      "fr": "Ligne d'assistance voyage Corée : appelez le 1330 en Corée (+82-2-1330 depuis l'étranger). Service 24h/24 et 7j/7 (touche 2 pour l'anglais) et chat en ligne gratuit.",
+      "es": "Línea de ayuda turística de Corea: llama al 1330 en Corea (+82-2-1330 desde el extranjero). Disponible 24/7 (pulsa 2 para inglés) y con chat en línea gratuito.",
+      "ro": "Linia de asistență turistică Coreea: sună la 1330 în Coreea (+82-2-1330 din străinătate). Disponibilă 24/7 (apasă 2 pentru engleză) și chat online gratuit."
     },
     "evidence": "B",
     "sources": [
@@ -360,7 +445,12 @@
     "kind": "route",
     "text": {
       "en": "Elevator route from the AREX platform (B7) to Lines 1 and 4: elevator up to the AREX concourse (B3), through the transfer corridor, elevator up to the Lines 1·4 concourse (B1), then elevator down to the platform (B2).",
-      "ja": "空港鉄道ホーム（地下7階）から1号線・4号線へのエレベーター経路：エレベーターで空港鉄道コンコース（地下3階）へ上がり、乗り換え通路を通って、エレベーターで1・4号線コンコース（地下1階）へ上がり、エレベーターでホーム（地下2階）へ下ります。"
+      "ja": "空港鉄道ホーム（地下7階）から1号線・4号線へのエレベーター経路：エレベーターで空港鉄道コンコース（地下3階）へ上がり、乗り換え通路を通って、エレベーターで1・4号線コンコース（地下1階）へ上がり、エレベーターでホーム（地下2階）へ下ります。",
+      "zh-CN": "首尔站从机场铁路站台（B7）前往 1·4号线的电梯路线：乘电梯上至机场铁路大厅（B3），通过换乘通道，乘电梯上至 1·4号线大厅（B1），再乘电梯下至站台（B2）。",
+      "zh-TW": "首爾站從機場鐵路月台（B7）前往 1·4號線的電梯路線：搭電梯上至機場鐵路大廳（B3），通過轉乘通道，搭電梯上至 1·4號線大廳（B1），再搭電梯下至月台（B2）。",
+      "fr": "Itinéraire en ascenseur du quai AREX (B7) aux lignes 1 et 4 : ascenseur jusqu'au hall AREX (B3), couloir de correspondance, ascenseur jusqu'au hall des lignes 1·4 (B1), puis ascenseur jusqu'au quai (B2).",
+      "es": "Ruta en ascensor del andén AREX (B7) a las líneas 1 y 4: ascensor al vestíbulo AREX (B3), pasillo de transbordo, ascensor al vestíbulo de líneas 1·4 (B1) y ascensor al andén (B2).",
+      "ro": "Traseu cu liftul de la peronul AREX (B7) la liniile 1 și 4: lift până în holul AREX (B3), culoarul de transfer, lift până în holul liniilor 1·4 (B1), apoi lift până la peron (B2)."
     },
     "evidence": "B",
     "sources": [
@@ -381,7 +471,12 @@
     "kind": "route",
     "text": {
       "en": "Elevator route from the AREX platform (B7) to Exit 15: elevator up to the concourse (B3), out through the ticket gate, then elevator up to Exit 15 on 1F. Exit 15 is signed for Seoul Station (KTX and regular trains).",
-      "ja": "空港鉄道ホーム（地下7階）から15番出口へのエレベーター経路：エレベーターでコンコース（地下3階）へ上がり、改札を出て、エレベーターで1階の15番出口へ上がります。15番出口はソウル駅（KTX・一般列車）の案内です。"
+      "ja": "空港鉄道ホーム（地下7階）から15番出口へのエレベーター経路：エレベーターでコンコース（地下3階）へ上がり、改札を出て、エレベーターで1階の15番出口へ上がります。15番出口はソウル駅（KTX・一般列車）の案内です。",
+      "zh-CN": "首尔站从机场铁路站台（B7）前往 15号出口的电梯路线：乘电梯上至大厅（B3），刷卡出检票口，再乘电梯上至 1层 15号出口（通往首尔站 KTX 及一般列车）。",
+      "zh-TW": "首爾站從機場鐵路月台（B7）前往 15號出口的電梯路線：搭電梯上至大廳（B3），刷卡出驗票口，再搭電梯上至 1樓 15號出口（通往首爾站 KTX 及一般列車）。",
+      "fr": "Itinéraire en ascenseur du quai AREX (B7) à la Sortie 15 : ascenseur jusqu'au hall (B3), sortie par le portillon, puis ascenseur jusqu'à la Sortie 15 au 1F (direction gare de Séoul / KTX).",
+      "es": "Ruta en ascensor del andén AREX (B7) a la Salida 15: ascensor al vestíbulo (B3), sal por el torno y toma el ascensor a la Salida 15 en 1F (indicada para Estación de Seúl / KTX).",
+      "ro": "Traseu cu liftul de la peronul AREX (B7) la Ieșirea 15: lift până în hol (B3), ieșire prin turnichet, apoi lift până la Ieșirea 15 la 1F (spre Gara Seul / KTX)."
     },
     "evidence": "B",
     "sources": [
@@ -398,7 +493,12 @@
     "kind": "card-rule",
     "text": {
       "en": "When you transfer between AREX and Lines 1 or 4, tap your card at the transfer gate. No extra fare is taken. If you go out through an exit gate and come back in, it counts as a new ride.",
-      "ja": "空港鉄道と1号線・4号線を乗り換えるときは、乗り換え改札でカードをタッチします。追加の運賃はかかりません。出口の改札から出て入り直すと、新しい乗車になります。"
+      "ja": "空港鉄道と1号線・4号線を乗り換えるときは、乗り換え改札でカードをタッチします。追加の運賃はかかりません。出口の改札から出て入り直すと、新しい乗車になります。",
+      "zh-CN": "在机场铁路与 1·4号线之间换乘时，请在换乘闸机刷卡，不会额外扣费。如果走出站闸机再重新进站，会被算作新的一程。",
+      "zh-TW": "在機場鐵路與 1·4號線之間轉乘時，請在轉乘閘門刷卡，不會額外扣款。如果走出站閘門再重新進站，會被算作新的一程。",
+      "fr": "Lors d'une correspondance entre AREX et les lignes 1 ou 4, validez au portillon de correspondance sans surcoût. Sortir par un portillon de sortie et rentrer compte comme un nouveau trajet.",
+      "es": "Al hacer transbordo entre AREX y las líneas 1 o 4, valida tu tarjeta en el torno de transbordo sin cargo adicional. Salir por un torno de salida y volver a entrar cuenta como un viaje nuevo.",
+      "ro": "Când transferi între AREX și liniile 1 sau 4, validează cardul la turnichetul de transfer fără cost suplimentar. Dacă ieși pe la un turnichet de ieșire și reintri, se taxează ca o călătorie nouă."
     },
     "evidence": "B",
     "sources": [
@@ -415,7 +515,12 @@
     "kind": "card-rule",
     "text": {
       "en": "If another transit card is in your wallet, the gate may ask for one card only, or charge the wrong card. Take out the card you want to use and tap it on its own.",
-      "ja": "財布の中に別の交通カードがあると、改札が「カードは1枚だけ」と表示したり、違うカードで支払われたりすることがあります。使うカードを1枚だけ取り出してタッチしてください。"
+      "ja": "財布の中に別の交通カードがあると、改札が「カードは1枚だけ」と表示したり、違うカードで支払われたりすることがあります。使うカードを1枚だけ取り出してタッチしてください。",
+      "zh-CN": "如果钱包里有另一张交通卡或感应银行卡，闸机可能会提示“请只刷一张卡”或扣错卡。请将要用的那张卡单独拿出来刷。",
+      "zh-TW": "如果錢包裡有另一張交通卡或感應銀行卡，閘門可能會提示「請只刷一張卡」或扣錯卡。請將要用的那張卡單獨拿出來刷。",
+      "fr": "Si une autre carte sans contact se trouve dans votre portefeuille, le portillon peut afficher une erreur ou débiter la mauvaise carte. Sortez uniquement la carte voulue.",
+      "es": "Si llevas otra tarjeta sin contacto en la cartera, el torno puede dar error o cobrar la tarjeta equivocada. Saca solo la tarjeta que quieras usar.",
+      "ro": "Dacă ai un alt card în portofel, turnichetul poate cere un singur card sau poate taxa cardul greșit. Scoate doar cardul pe care vrei să îl folosești."
     },
     "evidence": "C",
     "sources": [
@@ -432,7 +537,12 @@
     "kind": "card-rule",
     "text": {
       "en": "If the gate shows an error, tap again on the same reader instead of moving to another gate. The readers are not connected to each other.",
-      "ja": "改札でエラーが出たら、別の改札に移らず同じ読み取り機にもう一度タッチしてください。読み取り機どうしはつながっていません。"
+      "ja": "改札でエラーが出たら、別の改札に移らず同じ読み取り機にもう一度タッチしてください。読み取り機どうしはつながっていません。",
+      "zh-CN": "如果闸机报错，请不要换到旁边的闸机，而是在同一个读卡器上再刷一次（各个闸机的读卡器互不联网同步）。",
+      "zh-TW": "如果閘門顯示錯誤，請不要換到旁邊的閘門，而是在同一個感應器上再刷一次（各個閘門的感應器互不連線同步）。",
+      "fr": "Si le portillon affiche une erreur, validez à nouveau sur le même lecteur sans changer de portillon (les lecteurs ne sont pas reliés entre eux).",
+      "es": "Si el torno muestra un error, vuelve a pasar la tarjeta en el mismo lector en lugar de cambiar de torno (los lectores no están conectados entre sí).",
+      "ro": "Dacă turnichetul afișează o eroare, atinge din nou același cititor în loc să te muți la alt turnichet (cititoarele nu sunt conectate între ele)."
     },
     "evidence": "C",
     "sources": [
@@ -449,7 +559,12 @@
     "kind": "card-rule",
     "text": {
       "en": "If a gate didn't process your ticket properly (for example, it was broken), station staff at the station where you get off will help you.",
-      "ja": "改札の故障などで乗車券が正しく処理されなかったときは、降りる駅の駅員が案内します。"
+      "ja": "改札の故障などで乗車券が正しく処理されなかったときは、降りる駅の駅員が案内します。",
+      "zh-CN": "如果因为闸机故障等原因未能正常刷卡，下车站的车站工作人员会为您处理。",
+      "zh-TW": "如果因為閘門故障等原因未能正常刷卡，下車站的車站工作人員會為您處理。",
+      "fr": "Si un portillon n'a pas traité votre titre correctement (par exemple en cas de panne), le personnel de la station d'arrivée vous aidera.",
+      "es": "Si un torno no procesó bien tu billete (por ejemplo, por avería), el personal de la estación de llegada te ayudará.",
+      "ro": "Dacă un turnichet nu ți-a procesat corect biletul (de exemplu, era defect), personalul din stația de destinație te va ajuta."
     },
     "evidence": "B",
     "sources": [
@@ -470,7 +585,12 @@
     "kind": "service",
     "text": {
       "en": "Your Express ticket has a QR code. Scan it on the QR reader at the Express gate to open it. Be on the platform at least 3 minutes before departure.",
-      "ja": "直通列車の乗車券にはQRコードがあります。直通列車の改札のQR読み取り機にかざすと開きます。発車の3分前までにホームに着いてください。"
+      "ja": "直通列車の乗車券にはQRコードがあります。直通列車の改札のQR読み取り機にかざすと開きます。発車の3分前までにホームに着いてください。",
+      "zh-CN": "直达列车车票上印有二维码（QR Code）。在直达列车专用闸机的二维码扫描区扫码即可开门。请至少在发车前 3 分钟到达站台。",
+      "zh-TW": "直達列車車票上印有 QR Code。在直達列車專用閘門的 QR 掃描區掃碼即可開門。請至少在發車前 3 分鐘抵達月台。",
+      "fr": "Votre billet Express comporte un code QR. Scannez-le sur le lecteur QR du portillon Express. Soyez sur le quai au moins 3 minutes avant le départ.",
+      "es": "Tu billete Expreso tiene un código QR. Escanéalo en el lector QR del torno Expreso. Llega al andén al menos 3 minutos antes de la salida.",
+      "ro": "Biletul tău Expres are un cod QR. Scanează-l la cititorul QR de la turnichetul Expres. Fii pe peron cu cel puțin 3 minute înainte de plecare."
     },
     "evidence": "B",
     "sources": [
@@ -491,7 +611,12 @@
     "kind": "card-rule",
     "text": {
       "en": "On AREX, the Climate Card covers Gimpo Airport to Seoul Station (Gimpo Airport, Gyeyang, Digital Media City, Hongik Univ., Gongdeok, Seoul Station). You can get off at Incheon Airport T1 and T2, but you can't board there.",
-      "ja": "空港鉄道でClimate Cardが使えるのは金浦空港〜ソウル駅（金浦空港・桂陽・デジタルメディアシティ・弘大入口・孔徳・ソウル駅）です。仁川空港第1・第2ターミナルでは降りられますが、乗ることはできません。"
+      "ja": "空港鉄道でClimate Cardが使えるのは金浦空港〜ソウル駅（金浦空港・桂陽・デジタルメディアシティ・弘大入口・孔徳・ソウル駅）です。仁川空港第1・第2ターミナルでは降りられますが、乗ることはできません。",
+      "zh-CN": "在机场铁路上，气候同行卡适用范围为金浦机场至首尔站（金浦机场、桂阳、数码媒体城、弘大入口、孔德、首尔站）。可在仁川机场第1、第2航站楼出站下车，但不能在仁川机场进站上车。",
+      "zh-TW": "在機場鐵路上，氣候同行卡適用範圍為金浦機場至首爾站（金浦機場、桂陽、數位媒體城、弘大入口、孔德、首爾站）。可在仁川機場第1、第2航廈出站下車，但不能在仁川機場進站上車。",
+      "fr": "Sur AREX, la Climate Card couvre de l'aéroport de Gimpo à la gare de Séoul. Vous pouvez descendre aux terminaux 1 et 2 de l'aéroport d'Incheon, mais pas y monter.",
+      "es": "En AREX, la Climate Card cubre desde el Aeropuerto de Gimpo hasta la Estación de Seúl. Puedes bajar en las terminales 1 y 2 de Incheon, pero no subir allí.",
+      "ro": "Pe AREX, Climate Card acoperă ruta Aeroportul Gimpo – Gara Seul. Poți coborî la Terminalele 1 și 2 ale Aeroportului Incheon, dar nu te poți îmbarca de acolo."
     },
     "evidence": "B",
     "sources": [
@@ -508,7 +633,12 @@
     "kind": "card-rule",
     "text": {
       "en": "The physical Climate Card is sold at the new card vending machines in Seoul Metro Line 1–8 stations. Short-term passes can be bought with international credit and debit cards.",
-      "ja": "Climate Cardの実物カードは、ソウル交通公社1〜8号線の駅にある新型カード販売機で買えます。短期券は海外のクレジットカード・デビットカードで買えます。"
+      "ja": "Climate Cardの実物カードは、ソウル交通公社1〜8号線の駅にある新型カード販売機で買えます。短期券は海外のクレジットカード・デビットカードで買えます。",
+      "zh-CN": "实体气候同行卡可在首尔地铁 1–8号线站内的新型售卡机购买。短期游览券支持使用国际信用卡和借记卡支付。",
+      "zh-TW": "實體氣候同行卡可在首爾地鐵 1–8號線站內的新型售卡機購買。短期觀光券支援使用國際信用卡和簽帳卡付款。",
+      "fr": "La Climate Card physique est vendue aux nouveaux distributeurs des stations des lignes 1 à 8 du métro de Séoul. Les forfaits courte durée sont payables par carte bancaire internationale.",
+      "es": "La Climate Card física se vende en las nuevas máquinas expendedoras de las estaciones de las líneas 1 a 8 del Metro de Seúl. Los pases de corta duración aceptan tarjetas internacionales.",
+      "ro": "Cardul fizic Climate Card se vinde la noile automate din stațiile liniilor 1–8 ale metroului din Seul. Abonamentele pe termen scurt pot fi cumpărate cu carduri internaționale."
     },
     "evidence": "B",
     "sources": [
@@ -525,7 +655,12 @@
     "kind": "card-rule",
     "text": {
       "en": "A regular Tmoney card costs from about ₩3,000 (some designs cost more), with balance added separately. Sold at convenience stores (GS25, CU, 7-Eleven, Emart24) and subway ticket machines.",
-      "ja": "一般のTmoneyカードは約3,000ウォンから（デザインによって高いものもあります）。残高は別にチャージします。コンビニ（GS25・CU・セブンイレブン・emart24）と地下鉄の券売機で買えます。"
+      "ja": "一般のTmoneyカードは約3,000ウォンから（デザインによって高いものもあります）。残高は別にチャージします。コンビニ（GS25・CU・セブンイレブン・emart24）と地下鉄の券売機で買えます。",
+      "zh-CN": "普通 Tmoney 卡空卡售价约 ₩3,000 起（特殊卡面更贵），乘车余额需另外充值。可在便利店（GS25、CU、7-Eleven、Emart24）和地铁售票机购买。",
+      "zh-TW": "一般 Tmoney 卡空卡售價約 ₩3,000 起（特殊卡面較貴），乘車餘額需另外儲值。可在便利商店（GS25、CU、7-Eleven、Emart24）和地鐵售票機購買。",
+      "fr": "Une carte Tmoney standard coûte à partir d'environ ₩3,000 (hors recharge). En vente dans les supérettes (GS25, CU, 7-Eleven, Emart24) et aux distributeurs du métro.",
+      "es": "Una tarjeta Tmoney normal cuesta desde unos ₩3,000 (el saldo se recarga aparte). Se vende en tiendas de conveniencia (GS25, CU, 7-Eleven, Emart24) y máquinas del metro.",
+      "ro": "Un card Tmoney obișnuit costă de la aproximativ ₩3,000 (soldul se încarcă separat). Se vinde în magazinele convenience (GS25, CU, 7-Eleven, Emart24) și la automatele de metrou."
     },
     "evidence": "B",
     "sources": [
@@ -545,7 +680,12 @@
     "kind": "card-rule",
     "text": {
       "en": "The Tmoney Travel Card costs ₩4,000. It's sold at convenience stores and the bus ticket office at Incheon Airport.",
-      "ja": "Tmoney Travel Cardは4,000ウォンです。仁川空港のコンビニとバスのチケット売り場で買えます。"
+      "ja": "Tmoney Travel Cardは4,000ウォンです。仁川空港のコンビニとバスのチケット売り場で買えます。",
+      "zh-CN": "Tmoney Travel Card 售价为 ₩4,000，可在仁川机场的便利店和机场巴士售票处购买。",
+      "zh-TW": "Tmoney Travel Card 售價為 ₩4,000，可在仁川機場的便利商店和機場巴士售票處購買。",
+      "fr": "La Tmoney Travel Card coûte ₩4,000. Elle est vendue dans les supérettes et au guichet des bus de l'aéroport d'Incheon.",
+      "es": "La Tmoney Travel Card cuesta ₩4,000. Se vende en tiendas de conveniencia y en la taquilla de autobuses del Aeropuerto de Incheon.",
+      "ro": "Cardul Tmoney Travel Card costă ₩4,000. Se vinde în magazinele convenience și la casa de bilete de autobuz din Aeroportul Incheon."
     },
     "evidence": "B",
     "sources": [
@@ -565,7 +705,12 @@
     "kind": "card-rule",
     "text": {
       "en": "WOWPASS is a prepaid card for visitors that works as a payment card and a Tmoney transit card. The card costs ₩6,000, or ₩5,500 if you book online in advance.",
-      "ja": "WOWPASSは旅行者向けのプリペイドカードで、支払いとTmoney交通カードの両方に使えます。カードは6,000ウォン、オンラインで事前予約すると5,500ウォンです。"
+      "ja": "WOWPASSは旅行者向けのプリペイドカードで、支払いとTmoney交通カードの両方に使えます。カードは6,000ウォン、オンラインで事前予約すると5,500ウォンです。",
+      "zh-CN": "WOWPASS 是面向外国旅客的预付卡，兼具刷卡消费和 Tmoney 交通卡功能。制卡费为 ₩6,000，提前在网上预约为 ₩5,500。",
+      "zh-TW": "WOWPASS 是面向外國旅客的預付卡，兼具刷卡消費和 Tmoney 交通卡功能。製卡費為 ₩6,000，提前在網路預約為 ₩5,500。",
+      "fr": "WOWPASS est une carte prépayée pour visiteurs combinant paiement et carte Tmoney. Elle coûte ₩6,000, ou ₩5,500 en réservant en ligne à l'avance.",
+      "es": "WOWPASS es una tarjeta prepago para visitantes que funciona como tarjeta de pago y Tmoney. Cuesta ₩6,000, o ₩5,500 si reservas en línea por adelantado.",
+      "ro": "WOWPASS este un card preplătit pentru vizitatori care funcționează atât pentru plăți, cât și ca Tmoney. Cardul costă ₩6,000, sau ₩5,500 dacă rezervi online în avans."
     },
     "evidence": "B",
     "sources": [
@@ -590,7 +735,12 @@
     "kind": "card-rule",
     "text": {
       "en": "WOWPASS has two balances. Trains and buses use the Tmoney balance, which you top up separately: at subway machines or convenience stores like any transit card, or in the app from your WOWPASS balance. Overseas cards can top up the WOWPASS balance in the app.",
-      "ja": "WOWPASSには残高が2つあります。電車・バスはTmoney残高を使い、これは別にチャージします（ふつうの交通カードと同じく地下鉄の機械やコンビニで、またはアプリでWOWPASS残高から）。海外カードはアプリでWOWPASS残高にチャージできます。"
+      "ja": "WOWPASSには残高が2つあります。電車・バスはTmoney残高を使い、これは別にチャージします（ふつうの交通カードと同じく地下鉄の機械やコンビニで、またはアプリでWOWPASS残高から）。海外カードはアプリでWOWPASS残高にチャージできます。",
+      "zh-CN": "WOWPASS 有两个独立余额。乘地铁和公交使用 Tmoney 余额，需单独充值（可在地铁充值机、便利店用现金充值，或在 App 内从 WOWPASS 余额转入）。海外银行卡可在 App 内为 WOWPASS 余额充值。",
+      "zh-TW": "WOWPASS 有兩個獨立餘額。搭地鐵和公車使用 Tmoney 餘額，需單獨儲值（可在地鐵儲值機、便利商店用現金儲值，或在 App 內從 WOWPASS 餘額轉入）。海外銀行卡可在 App 內為 WOWPASS 餘額儲值。",
+      "fr": "WOWPASS possède deux soldes distincts. Métro et bus utilisent le solde Tmoney, à recharger séparément (aux bornes, en supérette ou via l'application depuis le solde WOWPASS).",
+      "es": "WOWPASS tiene dos saldos. El metro y el autobús usan el saldo Tmoney, que se recarga por separado (en máquinas del metro, tiendas o en la app desde tu saldo WOWPASS).",
+      "ro": "WOWPASS are două solduri. Metroul și autobuzele folosesc soldul Tmoney, care se încarcă separat (la automatele de metrou, în magazine sau din aplicație din soldul WOWPASS)."
     },
     "evidence": "B",
     "sources": [
@@ -607,7 +757,12 @@
     "kind": "card-rule",
     "text": {
       "en": "At Incheon Airport, WOWPASS machines are at CU store 1 (T1) and CU store 3 (T2), and they take Korean won cash only. Cards booked online are picked up at the CU counter in the 1F arrivals hall.",
-      "ja": "仁川空港のWOWPASS機械は第1ターミナルのCU 1号店と第2ターミナルのCU 3号店にあり、韓国ウォンの現金のみ使えます。オンライン予約したカードは1階到着ロビーのCUのレジで受け取ります。"
+      "ja": "仁川空港のWOWPASS機械は第1ターミナルのCU 1号店と第2ターミナルのCU 3号店にあり、韓国ウォンの現金のみ使えます。オンライン予約したカードは1階到着ロビーのCUのレジで受け取ります。",
+      "zh-CN": "在仁川机场，WOWPASS 自助机位于第1航站楼 CU 1号店和第2航站楼 CU 3号店，仅支持韩元现金。网上预约的卡片可在 1层到达大厅的 CU 柜台领取。",
+      "zh-TW": "在仁川機場，WOWPASS 自助機位於第1航廈 CU 1號店和第2航廈 CU 3號店，僅支援韓元現金。線上預約的卡片可在 1樓入境大廳的 CU 櫃檯領取。",
+      "fr": "À l'aéroport d'Incheon, les bornes WOWPASS se trouvent aux magasins CU 1 (T1) et CU 3 (T2) et n'acceptent que les espèces en wons. Les cartes réservées en ligne se retirent au comptoir CU du hall d'arrivée (1F).",
+      "es": "En el Aeropuerto de Incheon, las máquinas WOWPASS están en las tiendas CU 1 (T1) y CU 3 (T2) y solo aceptan efectivo en wones. Las tarjetas reservadas en línea se recogen en el mostrador CU de llegadas (1F).",
+      "ro": "În Aeroportul Incheon, aparatele WOWPASS sunt la magazinele CU 1 (T1) și CU 3 (T2) și acceptă doar numerar în woni coreeni. Cardurile rezervate online se ridică de la tejgheaua CU din holul de sosiri (1F)."
     },
     "evidence": "B",
     "sources": [
@@ -628,7 +783,12 @@
     "kind": "schedule",
     "text": {
       "en": "Express trains leave Seoul Station for the airport from 06:00 to 23:00, 26 a day, about every 35–55 minutes. Weekday and holiday timetables are the same.",
-      "ja": "直通列車はソウル駅から空港へ6:00〜23:00、1日26本、約35〜55分おきに出ます。平日と休日の時刻表は同じです。"
+      "ja": "直通列車はソウル駅から空港へ6:00〜23:00、1日26本、約35〜55分おきに出ます。平日と休日の時刻表は同じです。",
+      "zh-CN": "从首尔站发往仁川机场的直达列车运行时间为 06:00 至 23:00，每天 26 班，间隔约 35–55 分钟。工作日与节假日时刻表相同。",
+      "zh-TW": "從首爾站發往仁川機場的直達列車運行時間為 06:00 至 23:00，每天 26 班，間隔約 35–55 分鐘。平日與假日時刻表相同。",
+      "fr": "Les trains Express partent de la gare de Séoul vers l'aéroport de 06:00 à 23:00, 26 fois par jour, toutes les 35 à 55 minutes environ. Horaires identiques en semaine et les jours fériés.",
+      "es": "Los trenes Expreso salen de la Estación de Seúl hacia el aeropuerto de 06:00 a 23:00, 26 al día, cada 35–55 minutos aprox. El horario es igual en días laborables y festivos.",
+      "ro": "Trenurile Expres pleacă din Gara Seul spre aeroport între 06:00 și 23:00, 26 pe zi, la fiecare 35–55 de minute. Orarul este același în zilele lucrătoare și de sărbătoare."
     },
     "evidence": "B",
     "sources": [
@@ -645,7 +805,12 @@
     "kind": "route",
     "text": {
       "en": "At Seoul Station, Express tickets are sold on B2. Go through the Express gate on B2, then take the elevator or escalator down to the B7 platform.",
-      "ja": "ソウル駅では、直通列車の乗車券は地下2階で買えます。地下2階の直通列車改札を通り、エレベーターかエスカレーターで地下7階のホームへ下ります。"
+      "ja": "ソウル駅では、直通列車の乗車券は地下2階で買えます。地下2階の直通列車改札を通り、エレベーターかエスカレーターで地下7階のホームへ下ります。",
+      "zh-CN": "在首尔站，直达列车售票处和专用检票口均位于地下2层（B2）。从 B2 直达列车检票口进站后，乘电梯或扶梯下至地下7层（B7）站台。",
+      "zh-TW": "在首爾站，直達列車售票處和專用驗票口均位於地下2樓（B2）。從 B2 直達列車驗票口進站後，搭電梯或電扶梯下至地下7樓（B7）月台。",
+      "fr": "À la gare de Séoul, les billets Express sont vendus au B2. Passez le portillon Express au B2, puis prenez l'ascenseur ou l'escalator jusqu'au quai au B7.",
+      "es": "En la Estación de Seúl, los billetes del Expreso se venden en B2. Cruza el torno Expreso en B2 y baja en ascensor o escalera mecánica al andén en B7.",
+      "ro": "În Gara Seul, biletele Expres se vând la nivelul B2. Treci prin turnichetul Expres la B2, apoi coboară cu liftul sau scara rulantă la peronul de la B7."
     },
     "evidence": "B",
     "sources": [
@@ -662,7 +827,12 @@
     "kind": "fare",
     "text": {
       "en": "On the Seoul subway, a single-journey ticket costs the fare plus a ₩500 deposit. Put the card in the deposit refund machine after you exit to get the ₩500 back.",
-      "ja": "ソウルの地下鉄の1回用乗車券は、運賃に保証金500ウォンが加わります。降りたあと保証金払い戻し機にカードを入れると500ウォンが戻ります。"
+      "ja": "ソウルの地下鉄の1回用乗車券は、運賃に保証金500ウォンが加わります。降りたあと保証金払い戻し機にカードを入れると500ウォンが戻ります。",
+      "zh-CN": "乘坐首尔地铁购买一次性交通卡时，需在车费外另付 ₩500 押金。出站后将卡片插入押金退还机即可退回 ₩500。",
+      "zh-TW": "搭乘首爾地鐵購買一次性交通卡時，需在車資外另付 ₩500 押金。出站後將卡片插入押金退還機即可退回 ₩500。",
+      "fr": "Dans le métro de Séoul, un billet 1 trajet coûte le tarif plus une caution de ₩500. Insérez la carte dans la machine de remboursement après la sortie pour récupérer vos ₩500.",
+      "es": "En el metro de Seúl, el billete de 1 viaje cuesta la tarifa más un depósito de ₩500. Introduce la tarjeta en la máquina de reembolso al salir para recuperar los ₩500.",
+      "ro": "La metroul din Seul, o cartelă pentru o călătorie costă tariful plus o garanție de ₩500. Introdu cartela în aparatul de restituire după ieșire pentru a primi înapoi cei ₩500."
     },
     "evidence": "B",
     "sources": [
@@ -687,7 +857,12 @@
     "evidence": "B",
     "text": {
       "en": "Express trains leave Incheon Airport for Seoul Station from 05:16 to 22:40 at Terminal 2 and 05:24 to 22:48 at Terminal 1, 26 a day. Weekday and holiday timetables are the same.",
-      "ja": "直通列車は仁川空港からソウル駅へ、第2ターミナル発5:16〜22:40、第1ターミナル発5:24〜22:48、1日26本です。平日と休日の時刻表は同じです。"
+      "ja": "直通列車は仁川空港からソウル駅へ、第2ターミナル発5:16〜22:40、第1ターミナル発5:24〜22:48、1日26本です。平日と休日の時刻表は同じです。",
+      "zh-CN": "从仁川机场发往首尔站的直达列车每天 26 班：第2航站楼为 05:16 至 22:40，第1航站楼为 05:24 至 22:48。工作日与节假日时刻表相同。",
+      "zh-TW": "從仁川機場發往首爾站的直達列車每天 26 班：第2航廈為 05:16 至 22:40，第1航廈為 05:24 至 22:48。平日與假日時刻表相同。",
+      "fr": "Les trains Express partent de l'aéroport d'Incheon vers la gare de Séoul de 05:16 à 22:40 au Terminal 2 et de 05:24 à 22:48 au Terminal 1 (26 par jour, horaires identiques tous les jours).",
+      "es": "Los trenes Expreso salen del Aeropuerto de Incheon hacia la Estación de Seúl de 05:16 a 22:40 en la Terminal 2 y de 05:24 a 22:48 en la Terminal 1 (26 al día, mismo horario todos los días).",
+      "ro": "Trenurile Expres pleacă de la Aeroportul Incheon spre Gara Seul între 05:16 și 22:40 de la Terminalul 2 și între 05:24 și 22:48 de la Terminalul 1 (26 pe zi, același orar zilnic)."
     },
     "sources": [
       {
@@ -704,7 +879,12 @@
     "evidence": "B",
     "text": {
       "en": "AREX says Express tickets can be paid with overseas credit cards: Visa, Mastercard, JCB, Diners Club, American Express and UnionPay.",
-      "ja": "空港鉄道によると、直通列車の乗車券は海外発行のクレジットカード（Visa・Mastercard・JCB・ダイナースクラブ・アメリカン・エキスプレス・銀聯）で払えます。"
+      "ja": "空港鉄道によると、直通列車の乗車券は海外発行のクレジットカード（Visa・Mastercard・JCB・ダイナースクラブ・アメリカン・エキスプレス・銀聯）で払えます。",
+      "zh-CN": "机场铁路官方说明：直达列车车票支持使用海外发行的信用卡购买（Visa、Mastercard、JCB、Diners Club、American Express 及银联 UnionPay）。",
+      "zh-TW": "機場鐵路官方說明：直達列車車票支援使用海外發行的信用卡購買（Visa、Mastercard、JCB、Diners Club、American Express 及銀聯 UnionPay）。",
+      "fr": "Selon AREX, les billets Express peuvent être payés par carte bancaire internationale : Visa, Mastercard, JCB, Diners Club, American Express et UnionPay.",
+      "es": "AREX confirma que los billetes del Expreso se pueden pagar con tarjetas de crédito extranjeras: Visa, Mastercard, JCB, Diners Club, American Express y UnionPay.",
+      "ro": "Conform AREX, biletele Expres pot fi plătite cu carduri internaționale: Visa, Mastercard, JCB, Diners Club, American Express și UnionPay."
     },
     "sources": [
       {
@@ -721,7 +901,12 @@
     "evidence": "B",
     "text": {
       "en": "Arriving at Seoul Station by Express, go up from the B7 platform to B3 and out through the gate. For KTX, go up to 2F. For the subway, you can buy a single-journey card at the ticket machines there.",
-      "ja": "直通列車でソウル駅に着いたら、地下7階のホームから地下3階へ上がり、改札を出ます。KTXは地上2階へ。地下鉄に乗るなら、そこの券売機で1回用交通カードを買えます。"
+      "ja": "直通列車でソウル駅に着いたら、地下7階のホームから地下3階へ上がり、改札を出ます。KTXは地上2階へ。地下鉄に乗るなら、そこの券売機で1回用交通カードを買えます。",
+      "zh-CN": "乘直达列车到达首尔站后，从地下7层（B7）站台上至地下3层（B3）刷卡出站。换乘 KTX 请上至地上2层（2F）；换乘地铁可在售票机购买一次性交通卡。",
+      "zh-TW": "搭直達列車抵達首爾站後，從地下7樓（B7）月台上至地下3樓（B3）刷卡出站。轉乘 KTX 請上至地上2樓（2F）；轉乘地鐵可在售票機購買一次性交通卡。",
+      "fr": "En arrivant à la gare de Séoul par l'Express, montez du quai B7 au B3 et sortez par le portillon. Pour le KTX, montez au 2F. Pour le métro, vous pouvez acheter une carte 1 trajet aux distributeurs.",
+      "es": "Al llegar a la Estación de Seúl en el Expreso, sube del andén B7 a B3 y sal por el torno. Para el KTX, sube a 2F. Para el metro, puedes comprar una tarjeta de 1 viaje en las máquinas.",
+      "ro": "Când sosești la Gara Seul cu Expresul, urcă de la peronul B7 la B3 și ieși prin turnichet. Pentru KTX, urcă la 2F. Pentru metrou, poți cumpăra o cartelă de o călătorie de la automate."
     },
     "sources": [
       {
@@ -738,7 +923,12 @@
     "evidence": "B",
     "text": {
       "en": "To reach the Express at Seoul Station: from KTX, go up to 2F, through the KTX concourse, then down to B2. From Exit 15, take the escalator down to B2. From Lines 1 and 4, go from B1 down to B3, out through the gate, then up to B2 to buy your ticket.",
-      "ja": "ソウル駅で直通列車へ行くには：KTXからは2階へ上がりKTX待合室を通って地下2階へ。15番出口からはエスカレーターで地下2階へ。1・4号線からは地下1階から地下3階へ下りて改札を出て、地下2階へ上がって乗車券を買います。"
+      "ja": "ソウル駅で直通列車へ行くには：KTXからは2階へ上がりKTX待合室を通って地下2階へ。15番出口からはエスカレーターで地下2階へ。1・4号線からは地下1階から地下3階へ下りて改札を出て、地下2階へ上がって乗車券を買います。",
+      "zh-CN": "在首尔站前往直达列车乘车处：从 KTX 下车请上至 2层（2F）穿过候车大厅再下至地下2层（B2）；从 15号出口请乘扶梯下至 B2；从地铁 1·4号线请从 B1 下至 B3 出闸，再上至 B2 购票。",
+      "zh-TW": "在首爾站前往直達列車搭車處：從 KTX 下車請上至 2樓（2F）穿過候車大廳再下至地下2樓（B2）；從 15號出口請搭電扶梯下至 B2；從地鐵 1·4號線請從 B1 下至 B3 出閘，再上至 B2 購票。",
+      "fr": "Pour rejoindre l'Express à la gare de Séoul : depuis le KTX, passez par le hall 2F puis descendez au B2. Depuis la Sortie 15, prenez l'escalator vers le B2. Depuis les lignes 1 et 4, descendez du B1 au B3, sortez par le portillon, puis montez au B2.",
+      "es": "Para ir al Expreso en la Estación de Seúl: desde KTX, pasa por el vestíbulo en 2F y baja a B2. Desde la Salida 15, baja en escalera mecánica a B2. Desde las líneas 1 y 4, baja de B1 a B3, sal por el torno y sube a B2.",
+      "ro": "Pentru a ajunge la Expres în Gara Seul: de la KTX, treci prin holul de la 2F și coboară la B2. De la Ieșirea 15, coboară cu scara rulantă la B2. De la liniile 1 și 4, coboară de la B1 la B3, ieși prin turnichet și urcă la B2."
     },
     "sources": [
       {
@@ -755,7 +945,12 @@
     "evidence": "B",
     "text": {
       "en": "At Hongik Univ. Station, the AREX platform is on B4 and the Line 2 platform is on B2. Take the elevator from the B4 AREX platform to the B3 concourse, pass the transfer gate, and take the elevator to the B2 Line 2 platform.",
-      "ja": "弘大入口駅では、空港鉄道ホームは地下4階、2号線ホームは地下2階にあります。地下4階の空港鉄道ホームからエレベーターで地下3階コンコースへ上がり、乗り換え改札を通ってエレベーターで地下2階の2号線ホームへ進みます。"
+      "ja": "弘大入口駅では、空港鉄道ホームは地下4階、2号線ホームは地下2階にあります。地下4階の空港鉄道ホームからエレベーターで地下3階コンコースへ上がり、乗り換え改札を通ってエレベーターで地下2階の2号線ホームへ進みます。",
+      "zh-CN": "在弘大入口站，机场铁路站台位于地下4层（B4），2号线站台位于地下2层（B2）。从 B4 乘电梯上至 B3 大厅，通过换乘闸机后再乘电梯前往 B2 的2号线站台。",
+      "zh-TW": "在弘大入口站，機場鐵路月台位於地下4樓（B4），2號線月台位於地下2樓（B2）。從 B4 搭電梯上至 B3 大廳，通過轉乘閘門後再搭電梯前往 B2 的2號線月台。",
+      "fr": "À la station Hongik Univ., le quai AREX est au B4 et celui de la Ligne 2 au B2. Prenez l'ascenseur du quai AREX (B4) au hall (B3), passez le portillon de correspondance, puis prenez l'ascenseur vers le quai de la Ligne 2 (B2).",
+      "es": "En la estación Hongik Univ., el andén AREX está en B4 y el de la Línea 2 en B2. Toma el ascensor de B4 al vestíbulo en B3, cruza el torno de transbordo y toma el ascensor al andén de la Línea 2 en B2.",
+      "ro": "În stația Hongik Univ., peronul AREX este la B4, iar peronul Liniei 2 la B2. Ia liftul de la B4 până în holul B3, treci prin turnichetul de transfer și ia liftul spre peronul Liniei 2 la B2."
     },
     "sources": [
       {
@@ -776,7 +971,12 @@
     "evidence": "B",
     "text": {
       "en": "At Hongik Univ. Station (Line 2), take the elevator from the B2 platform to the B1 concourse, tap out at the ticket gate, and take the street elevator between Exits 8 and 9 up to 1F.",
-      "ja": "弘大入口駅（2号線）では、地下2階ホームからエレベーターで地下1階コンコースへ上がり、改札を出て、8番・9番出口のあいだにある地上エレベーターで1階へ上がります。"
+      "ja": "弘大入口駅（2号線）では、地下2階ホームからエレベーターで地下1階コンコースへ上がり、改札を出て、8番・9番出口のあいだにある地上エレベーターで1階へ上がります。",
+      "zh-CN": "在弘大入口站（2号线），从地下2层（B2）站台乘电梯上至地下1层（B1）大厅，刷卡出检票口后，乘坐 8号与9号出口之间的地面电梯直达 1层（1F）。",
+      "zh-TW": "在弘大入口站（2號線），從地下2樓（B2）月台搭電梯上至地下1樓（B1）大廳，刷卡出驗票口後，搭乘 8號與9號出口之間的地面電梯直達 1樓（1F）。",
+      "fr": "À la station Hongik Univ. (Ligne 2), prenez l'ascenseur du quai B2 au hall B1, sortez par le portillon, puis prenez l'ascenseur de rue entre les sorties 8 et 9 jusqu'au 1F.",
+      "es": "En la estación Hongik Univ. (Línea 2), sube en ascensor del andén B2 al vestíbulo B1, sal por el torno y toma el ascensor a la calle entre las salidas 8 y 9 hasta 1F.",
+      "ro": "În stația Hongik Univ. (Linia 2), ia liftul de la peronul B2 la holul B1, ieși prin turnichet și ia liftul stradal dintre ieșirile 8 și 9 până la 1F."
     },
     "sources": [
       {
@@ -793,7 +993,12 @@
     "evidence": "B",
     "text": {
       "en": "At Myeong-dong Station (Line 4), take the elevator from the B3 platform up to the B2 concourse, tap out at the ticket gate, and take the street elevator near Exit 1 up to 1F.",
-      "ja": "明洞駅（4号線）では、地下3階ホームからエレベーターで地下2階コンコースへ上がり、改札を出て、1番出口近くの地上エレベーターで1階へ上がります。"
+      "ja": "明洞駅（4号線）では、地下3階ホームからエレベーターで地下2階コンコースへ上がり、改札を出て、1番出口近くの地上エレベーターで1階へ上がります。",
+      "zh-CN": "在明洞站（4号线），从地下3层（B3）站台乘电梯上至地下2层（B2）大厅，刷卡出检票口后，乘坐 1号出口附近的地面电梯上至 1层（1F）。",
+      "zh-TW": "在明洞站（4號線），從地下3樓（B3）月台搭電梯上至地下2樓（B2）大廳，刷卡出驗票口後，搭乘 1號出口附近的地面電梯上至 1樓（1F）。",
+      "fr": "À la station Myeong-dong (Ligne 4), prenez l'ascenseur du quai B3 au hall B2, sortez par le portillon, puis prenez l'ascenseur de rue près de la Sortie 1 jusqu'au 1F.",
+      "es": "En la estación Myeong-dong (Línea 4), sube en ascensor del andén B3 al vestíbulo B2, sal por el torno y toma el ascensor hacia la calle junto a la Salida 1 hasta 1F.",
+      "ro": "În stația Myeong-dong (Linia 4), urcă cu liftul de la peronul B3 în holul B2, ieși prin turnichet și ia liftul stradal de lângă Ieșirea 1 până la 1F."
     },
     "sources": [
       {
@@ -810,7 +1015,12 @@
     "evidence": "B",
     "text": {
       "en": "At Gangnam Station (Line 2), take the elevator from the B2 platform up to the B1 concourse, tap out at the ticket gate, and take the street elevator near Exit 1 up to 1F.",
-      "ja": "江南駅（2号線）では、地下2階ホームからエレベーターで地下1階コンコースへ上がり、改札を出て、1番出口近くの地上エレベーターで1階へ上がります。"
+      "ja": "江南駅（2号線）では、地下2階ホームからエレベーターで地下1階コンコースへ上がり、改札を出て、1番出口近くの地上エレベーターで1階へ上がります。",
+      "zh-CN": "在江南站（2号线），从地下2层（B2）站台乘电梯上至地下1层（B1）大厅，刷卡出检票口后，乘坐 1号出口附近的地面电梯上至 1层（1F）。",
+      "zh-TW": "在江南站（2號線），從地下2樓（B2）月台搭電梯上至地下1樓（B1）大廳，刷卡出驗票口後，搭乘 1號出口附近的地面電梯上至 1樓（1F）。",
+      "fr": "À la station Gangnam (Ligne 2), prenez l'ascenseur du quai B2 au hall B1, sortez par le portillon, puis prenez l'ascenseur de rue près de la Sortie 1 jusqu'au 1F.",
+      "es": "En la estación Gangnam (Línea 2), sube en ascensor del andén B2 al vestíbulo B1, sal por el torno y toma el ascensor hacia la calle junto a la Salida 1 hasta 1F.",
+      "ro": "În stația Gangnam (Linia 2), urcă cu liftul de la peronul B2 în holul B1, ieși prin turnichet și ia liftul stradal de lângă Ieșirea 1 până la 1F."
     },
     "sources": [
       {
@@ -827,7 +1037,12 @@
     "evidence": "B",
     "text": {
       "en": "At Seongsu Station (Line 2, elevated), take the elevator from the 3F platform down to the 2F concourse, tap out at the ticket gate, and take the elevator down to 1F near Exit 3.",
-      "ja": "聖水駅（2号線・高架駅）では、地上3階ホームからエレベーターで2階コンコースへ下り、改札を出て、3番出口近くのエレベーターで1階へ下ります。"
+      "ja": "聖水駅（2号線・高架駅）では、地上3階ホームからエレベーターで2階コンコースへ下り、改札を出て、3番出口近くのエレベーターで1階へ下ります。",
+      "zh-CN": "在圣水站（2号线高架站），从地上3层（3F）站台乘电梯下至 2层（2F）大厅，刷卡出检票口后，乘坐 3号出口附近的电梯下至 1层（1F）地面。",
+      "zh-TW": "在聖水站（2號線高架站），從地上3樓（3F）月台搭電梯下至 2樓（2F）大廳，刷卡出驗票口後，搭乘 3號出口附近的電梯下至 1樓（1F）地面。",
+      "fr": "À la station Seongsu (Ligne 2, aérienne), descendez en ascenseur du quai 3F au hall 2F, sortez par le portillon, puis prenez l'ascenseur jusqu'au 1F près de la Sortie 3.",
+      "es": "En la estación Seongsu (Línea 2, elevada), baja en ascensor del andén 3F al vestíbulo 2F, sal por el torno y toma el ascensor hasta 1F cerca de la Salida 3.",
+      "ro": "În stația Seongsu (Linia 2, suspendată), coboară cu liftul de la peronul 3F în holul 2F, ieși prin turnichet și ia liftul până la 1F lângă Ieșirea 3."
     },
     "sources": [
       {
@@ -844,7 +1059,12 @@
     "evidence": "B",
     "text": {
       "en": "On Seoul buses, board through the front door and tap your transit card. Before getting off through the rear door, tap your card again on the rear reader. If you don't tap out, a penalty of up to ₩800 is added on your next ride and you lose the transfer discount.",
-      "ja": "ソウルのバスは前扉から乗って交通カードをタッチし、後ろ扉から降りる前にもう一度タッチします。降りるときにタッチしないと、次の乗車時に最大800ウォンが追加され、乗り換え割引も受けられません。"
+      "ja": "ソウルのバスは前扉から乗って交通カードをタッチし、後ろ扉から降りる前にもう一度タッチします。降りるときにタッチしないと、次の乗車時に最大800ウォンが追加され、乗り換え割引も受けられません。",
+      "zh-CN": "乘坐首尔公交车时，请从前门上车并刷交通卡；从后门下车前，请务必在后门读卡器再刷一次卡。如果下车未刷卡，下次乘车将加收最高 ₩800 的附加费，且无法享受换乘优惠。",
+      "zh-TW": "搭乘首爾公車時，請從前門上車並刷交通卡；從後門下車前，請務必在後門感應器再刷一次卡。如果下車未刷卡，下次搭車將加收最高 ₩800 的附加費，且無法享有轉乘優惠。",
+      "fr": "Dans les bus de Séoul, montez par l'avant en validant votre carte et validez à nouveau à l'arrière avant de descendre. Sans validation à la descente, une pénalité allant jusqu'à ₩800 s'applique au trajet suivant et vous perdez la correspondance gratuite.",
+      "es": "En los autobuses de Seúl, sube por la puerta delantera validando tu tarjeta y vuelve a validarla en la puerta trasera antes de bajar. Si no validas al bajar, se cobra una penalización de hasta ₩800 en el siguiente viaje y pierdes el descuento de transbordo.",
+      "ro": "În autobuzele din Seul, urcă pe ușa din față validând cardul și validează din nou la ușa din spate înainte de coborâre. Dacă nu validezi la coborâre, se adaugă o penalizare de până la ₩800 la următoarea călătorie și pierzi reducerea de transfer."
     },
     "sources": [
       {
@@ -864,7 +1084,12 @@
     "evidence": "B",
     "text": {
       "en": "With a transit card (Tmoney or WOWPASS), transfers between the subway and Seoul buses get the transfer discount within 30 minutes of tapping out (60 minutes between 21:00 and 07:00), up to 4 transfers (5 rides). Transferring to the same bus route number does not get a discount.",
-      "ja": "交通カード（Tmoney・WOWPASS）を使うと、降りてタッチしてから30分以内（21:00〜翌7:00は60分以内）なら地下鉄とソウルのバスの乗り換えが最大4回（5乗車）まで乗り換え割引になります。同じ番号のバスへの乗り換えは割引されません。"
+      "ja": "交通カード（Tmoney・WOWPASS）を使うと、降りてタッチしてから30分以内（21:00〜翌7:00は60分以内）なら地下鉄とソウルのバスの乗り換えが最大4回（5乗車）まで乗り換え割引になります。同じ番号のバスへの乗り換えは割引されません。",
+      "zh-CN": "使用交通卡（Tmoney 或 WOWPASS）在地铁与首尔公交之间换乘时，下车刷卡后 30 分钟内（21:00 至次日 07:00 为 60 分钟内）可享换乘优惠，最多可连续换乘 4 次（共 5 段行程）。换乘相同路线的公交车不享受优惠。",
+      "zh-TW": "使用交通卡（Tmoney 或 WOWPASS）在地鐵與首爾公車之間轉乘時，下車刷卡後 30 分鐘內（21:00 至隔日 07:00 為 60 分鐘內）可享轉乘優惠，最多可連續轉乘 4 次（共 5 段行程）。轉乘相同路線的公車不享有優惠。",
+      "fr": "Avec une carte de transport (Tmoney ou WOWPASS), les correspondances entre métro et bus de Séoul bénéficient de la réduction dans les 30 minutes suivant la validation de sortie (60 minutes de 21:00 à 07:00), jusqu'à 4 correspondances (5 trajets). Pas de réduction vers la même ligne de bus.",
+      "es": "Con tarjeta de transporte (Tmoney o WOWPASS), los transbordos entre metro y autobús de Seúl tienen descuento dentro de los 30 minutos tras validar la salida (60 minutos entre 21:00 y 07:00), hasta 4 transbordos (5 viajes). Hacer transbordo al mismo número de autobús no tiene descuento.",
+      "ro": "Cu un card de transport (Tmoney sau WOWPASS), transferurile între metrou și autobuzele din Seul beneficiază de reducere în 30 de minute de la validarea ieșirii (60 de minute între 21:00 și 07:00), până la 4 transferuri (5 călătorii). Transferul la același număr de autobuz nu oferă reducere."
     },
     "sources": [
       {
@@ -886,7 +1111,12 @@
     "evidence": "B",
     "text": {
       "en": "Most Seoul city buses are cashless and do not have cash fare boxes. Prepare a transit card (Tmoney, WOWPASS, or Climate Card) with at least ₩1,500 before boarding.",
-      "ja": "ソウル市内のほとんどのバスは現金なしのバスで、運賃箱がありません。乗る前に1,500ウォン以上入った交通カード（Tmoney・WOWPASS・Climate Card）を用意してください。"
+      "ja": "ソウル市内のほとんどのバスは現金なしのバスで、運賃箱がありません。乗る前に1,500ウォン以上入った交通カード（Tmoney・WOWPASS・Climate Card）を用意してください。",
+      "zh-CN": "首尔市内绝大多数公交车已实行无现金化，车上不设投币箱。乘车前请准备好余额至少 ₩1,500 的交通卡（Tmoney、WOWPASS 或气候同行卡）。",
+      "zh-TW": "首爾市內絕大多數公車已實行無現金化，車上不設投幣箱。搭車前請準備好餘額至少 ₩1,500 的交通卡（Tmoney、WOWPASS 或氣候同行卡）。",
+      "fr": "La plupart des bus urbains de Séoul fonctionnent sans espèces et n'ont pas de boîte à monnaie. Préparez une carte de transport (Tmoney, WOWPASS ou Climate Card) avec au moins ₩1,500 avant de monter.",
+      "es": "La mayoría de los autobuses urbanos de Seúl no aceptan efectivo y no tienen alcancía. Prepara una tarjeta de transporte (Tmoney, WOWPASS o Climate Card) con al menos ₩1,500 antes de subir.",
+      "ro": "Majoritatea autobuzelor urbane din Seul nu acceptă numerar și nu au cutie pentru bani. Pregătește un card de transport (Tmoney, WOWPASS sau Climate Card) cu cel puțin ₩1,500 înainte de urcare."
     },
     "sources": [
       {
@@ -906,7 +1136,12 @@
     "evidence": "B",
     "text": {
       "en": "Seoul standard medium taxis start at a base fare of ₩4,800 for the first 1.6 km. Late-night surcharges of 20% to 40% apply between 22:00 and 04:00. Deluxe (black) and large (van) taxis start at ₩7,000 for the first 3 km with no late-night surcharge.",
-      "ja": "ソウルの一般中型タクシーは最初の1.6kmまで基本料金4,800ウォンで、22:00〜翌4:00は20%〜40%の深夜割増がかかります。模範タクシー（黒）と大型タクシーは最初の3kmまで7,000ウォンで、深夜割増はありません。"
+      "ja": "ソウルの一般中型タクシーは最初の1.6kmまで基本料金4,800ウォンで、22:00〜翌4:00は20%〜40%の深夜割増がかかります。模範タクシー（黒）と大型タクシーは最初の3kmまで7,000ウォンで、深夜割増はありません。",
+      "zh-CN": "首尔普通中型出租车前 1.6 公里起步价为 ₩4,800；22:00 至次日 04:00 加收 20% 至 40% 的夜间附加费。模范出租车（黑色）与大型出租车前 3 公里起步价为 ₩7,000，且无夜间附加费。",
+      "zh-TW": "首爾一般中型計程車前 1.6 公里起跳價為 ₩4,800；22:00 至隔日 04:00 加收 20% 至 40% 的夜間加成。模範計程車（黑色）與大型計程車前 3 公里起跳價為 ₩7,000，且無夜間加成。",
+      "fr": "Les taxis standard moyens de Séoul démarrent à un tarif de base de ₩4,800 pour les premiers 1,6 km (majoration de nuit de 20 % à 40 % entre 22:00 et 04:00). Les taxis Deluxe (noirs) et grands vans démarrent à ₩7,000 pour 3 km sans majoration de nuit.",
+      "es": "Los taxis medianos estándar de Seúl tienen una tarifa base de ₩4,800 los primeros 1,6 km (recargo nocturno del 20% al 40% entre 22:00 y 04:00). Los taxis Deluxe (negros) y furgonetas grandes empiezan en ₩7,000 los primeros 3 km sin recargo nocturno.",
+      "ro": "Taxiurile medii standard din Seul pornesc de la un tarif de bază de ₩4,800 pentru primii 1,6 km (suprataxă de noapte 20%–40% între 22:00 și 04:00). Taxiurile Deluxe (negre) și dubele mari pornesc de la ₩7,000 pentru primii 3 km, fără suprataxă de noapte."
     },
     "sources": [
       {
@@ -927,7 +1162,12 @@
     "evidence": "B",
     "text": {
       "en": "Seoul taxis accept Tmoney transit cards, credit/debit cards, and cash. If an overseas credit card is declined by the taxi reader, you can tap your Tmoney balance instead or ask for a printed receipt.",
-      "ja": "ソウルのタクシーはTmoney交通カード、クレジットカード・デビットカード、現金が使えます。海外発行のクレジットカードが端末で通らないときは、Tmoney残高でタッチして払うか、領収書をもらってください。"
+      "ja": "ソウルのタクシーはTmoney交通カード、クレジットカード・デビットカード、現金が使えます。海外発行のクレジットカードが端末で通らないときは、Tmoney残高でタッチして払うか、領収書をもらってください。",
+      "zh-CN": "首尔出租车支持 Tmoney 交通卡、信用卡/借记卡和韩元现金付款。如果您的海外信用卡在车载刷卡机上刷不过，可以改刷 Tmoney 余额付款，并向司机索取纸质收据。",
+      "zh-TW": "首爾計程車支援 Tmoney 交通卡、信用卡/簽帳卡和韓元現金付款。如果您的海外信用卡在車上刷卡機刷不過，可以改刷 Tmoney 餘額付款，並向司機索取紙本收據。",
+      "fr": "Les taxis de Séoul acceptent les cartes Tmoney, les cartes bancaires et les espèces. Si votre carte étrangère est refusée par le lecteur du taxi, payez avec votre solde Tmoney et demandez un reçu papier.",
+      "es": "Los taxis de Seúl aceptan tarjetas Tmoney, tarjetas de crédito/débito y efectivo. Si el lector del taxi rechaza tu tarjeta extranjera, puedes pagar con tu saldo Tmoney y pedir un recibo impreso.",
+      "ro": "Taxiurile din Seul acceptă carduri Tmoney, carduri bancare și numerar. Dacă un card străin este respins de cititorul din taxi, poți plăti cu soldul Tmoney și cere o chitanță tipărită."
     },
     "sources": [
       {
@@ -944,7 +1184,12 @@
     "evidence": "B",
     "text": {
       "en": "Many Korean cafe and restaurant kiosks ask for a Korean mobile number (010) to send a KakaoTalk or SMS pickup alert. If there is no skip button, enter 010-0000-0000 and watch the display screen for your order number, or order directly at the counter.",
-      "ja": "韓国のカフェや食堂のキオスク（無人注文機）では、カカオトークやSMSの呼び出し通知のために韓国の携帯電話番号（010）の入力を求められることがあります。スキップボタンがないときは010-0000-0000と入力して番号表示画面を見るか、レジで直接注文してください。"
+      "ja": "韓国のカフェや食堂のキオスク（無人注文機）では、カカオトークやSMSの呼び出し通知のために韓国の携帯電話番号（010）の入力を求められることがあります。スキップボタンがないときは010-0000-0000と入力して番号表示画面を見るか、レジで直接注文してください。",
+      "zh-CN": "韩国许多咖啡店和餐厅的自助点餐机（Kiosk）会要求输入 010 开头的韩国手机号以发送取餐通知。如果没有跳过按钮，可输入 010-0000-0000 并留意取餐叫号屏，或直接到柜台点餐。",
+      "zh-TW": "韓國許多咖啡廳和餐廳的自助點餐機（Kiosk）會要求輸入 010 開頭的韓國手機號碼以發送取餐通知。如果沒有略過按鈕，可輸入 010-0000-0000 並留意取餐叫號螢幕，或直接到櫃檯點餐。",
+      "fr": "De nombreuses bornes de cafés et restaurants demandent un numéro mobile coréen (010) pour envoyer une alerte SMS/KakaoTalk. S'il n'y a pas de bouton Passer, tapez 010-0000-0000 et surveillez l'écran d'appel, ou commandez au comptoir.",
+      "es": "Muchos quioscos de cafeterías y restaurantes piden un número móvil coreano (010) para avisar por KakaoTalk o SMS. Si no hay botón para omitir, ingresa 010-0000-0000 y mira la pantalla de pedidos, o pide en el mostrador.",
+      "ro": "Multe chioșcuri din cafenele și restaurante cer un număr mobil coreean (010) pentru alerta de ridicare. Dacă nu există buton de omitere, introdu 010-0000-0000 și urmărește ecranul cu numerele de comandă, sau comandă la tejghea."
     },
     "sources": [
       {
@@ -961,7 +1206,12 @@
     "evidence": "B",
     "text": {
       "en": "Unattended kiosks and table-order tablets work best with physical IC chip cards inserted chip-first. If your overseas credit card or mobile tap is declined at a kiosk, pay with a WOWPASS card, Tmoney (at convenience stores and partner cafes), or ask staff to process your card at the main POS counter.",
-      "ja": "キオスクやテーブルオーダー端末では、ICチップ付きの物理カードを奥まで差し込む方式が最も確実です。海外発行のクレジットカードやスマホのタッチ決済がキオスクで通らないときは、WOWPASSカードやTmoney（コンビニ・提携カフェ）を使うか、レジのPOS端末で決済してもらってください。"
+      "ja": "キオスクやテーブルオーダー端末では、ICチップ付きの物理カードを奥まで差し込む方式が最も確実です。海外発行のクレジットカードやスマホのタッチ決済がキオスクで通らないときは、WOWPASSカードやTmoney（コンビニ・提携カフェ）を使うか、レジのPOS端末で決済してもらってください。",
+      "zh-CN": "自助点餐机和桌边平板点餐机使用“芯片朝前插到底”的实体 IC 卡成功率最高。如果海外信用卡或手机 NFC 在点餐机被拒，请改用 WOWPASS、Tmoney（便利店及合作咖啡店），或请店员在收银台主 POS 机结账。",
+      "zh-TW": "自助點餐機和桌邊平板點餐機使用「晶片朝前插到底」的實體 IC 卡成功率最高。如果海外信用卡或手機感應在點餐機被拒，請改用 WOWPASS、Tmoney（便利商店及合作咖啡廳），或請店員在櫃檯主 POS 機結帳。",
+      "fr": "Les bornes et tablettes de table fonctionnent mieux en insérant une carte physique à puce IC. Si votre carte étrangère ou paiement mobile est refusé, payez avec WOWPASS, Tmoney, ou demandez au personnel d'encaisser au terminal POS du comptoir.",
+      "es": "Los quioscos y tabletas de mesa funcionan mejor insertando la tarjeta física con chip IC. Si rechazan tu tarjeta extranjera o pago móvil, usa WOWPASS, Tmoney, o pide al personal pagar en el terminal POS del mostrador.",
+      "ro": "Chioșcurile și tabletele de la masă funcționează cel mai bine cu carduri fizice cu cip IC introduse complet. Dacă plata cu cardul străin sau telefonul este respinsă, plătește cu WOWPASS, Tmoney sau la casa POS principală."
     },
     "sources": [
       {
@@ -982,7 +1232,12 @@
     "evidence": "B",
     "text": {
       "en": "Remaining Tmoney cash balance up to ₩20,000 (up to ₩30,000 at GS25, up to ₩50,000 at subway customer safety centers) can be refunded in Korean won cash at convenience stores (CU, GS25, 7-Eleven, Emart24) for a ₩500 fee. The physical card cost itself is non-refundable.",
-      "ja": "Tmoneyの残高は、20,000ウォン以下（GS25は30,000ウォン以下、地下鉄の顧客安全室は50,000ウォン以下）ならコンビニ（CU・GS25・セブンイレブン・emart24）で手数料500ウォンを差し引いて現金で払い戻せます。カード本体の代金は払い戻されません。"
+      "ja": "Tmoneyの残高は、20,000ウォン以下（GS25は30,000ウォン以下、地下鉄の顧客安全室は50,000ウォン以下）ならコンビニ（CU・GS25・セブンイレブン・emart24）で手数料500ウォンを差し引いて現金で払い戻せます。カード本体の代金は払い戻されません。",
+      "zh-CN": "Tmoney 卡内剩余现金余额在 ₩20,000 以下（GS25 便利店为 ₩30,000 以下，地铁站顾客安全室为 ₩50,000 以下）可在便利店（CU、GS25、7-Eleven、Emart24）扣除 ₩500 手续费后退还韩元现金。卡片本身的工本费不退。",
+      "zh-TW": "Tmoney 卡內剩餘現金餘額在 ₩20,000 以下（GS25 便利商店為 ₩30,000 以下，地鐵站顧客安全室為 ₩50,000 以下）可在便利商店（CU、GS25、7-Eleven、Emart24）扣除 ₩500 手續費後退還韓元現金。卡片本身的工本費不退。",
+      "fr": "Le solde Tmoney restant jusqu'à ₩20,000 (₩30,000 chez GS25, ₩50,000 aux centres de sécurité du métro) est remboursable en espèces dans les supérettes (CU, GS25, 7-Eleven, Emart24) moyennant ₩500 de frais. Le prix de la carte n'est pas remboursable.",
+      "es": "El saldo restante de Tmoney hasta ₩20,000 (hasta ₩30,000 en GS25 y ₩50,000 en centros de atención del metro) se reembolsa en efectivo en tiendas de conveniencia (CU, GS25, 7-Eleven, Emart24) con una comisión de ₩500. El costo de la tarjeta no es reembolsable.",
+      "ro": "Soldul Tmoney rămas de până la ₩20,000 (până la ₩30,000 la GS25, până la ₩50,000 la centrele din metrou) poate fi rambursat în numerar la magazinele convenience (CU, GS25, 7-Eleven, Emart24) cu un comision de ₩500. Costul cardului fizic nu se returnează."
     },
     "sources": [
       {
@@ -1005,7 +1260,12 @@
     "evidence": "B",
     "text": {
       "en": "In most Korean restaurants, tipping is not practiced, drinking water and extra side dishes (banchan) are often self-serve, and you pay at the front counter when leaving rather than at the table.",
-      "ja": "韓国のほとんどの食堂にはチップの習慣がなく、お水や追加のおかず（パンチャン）はセルフサービスのことが多く、食後はテーブルではなく入口のレジで会計します。"
+      "ja": "韓国のほとんどの食堂にはチップの習慣がなく、お水や追加のおかず（パンチャン）はセルフサービスのことが多く、食後はテーブルではなく入口のレジで会計します。",
+      "zh-CN": "韩国绝大多数餐厅没有小费习惯；饮用水和续加小菜（Banchan）通常为自助取用；用完餐后一般不是在餐桌买单，而是到门口收银台结账。",
+      "zh-TW": "韓國絕大多數餐廳沒有小費習慣；飲用水和續加小菜（Banchan）通常為自助取用；用完餐後一般不是在餐桌買單，而是到門口櫃檯結帳。",
+      "fr": "Dans la plupart des restaurants coréens, il n'y a pas de pourboire, l'eau potable et les accompagnements supplémentaires (banchan) sont souvent en libre-service, et l'addition se règle au comptoir en sortant.",
+      "es": "En la mayoría de los restaurantes coreanos no se deja propina, el agua y las guarniciones extra (banchan) suelen ser de autoservicio, y se paga en el mostrador al salir en lugar de en la mesa.",
+      "ro": "În majoritatea restaurantelor coreene nu se lasă bacșiș, apa potabilă și garniturile suplimentare (banchan) sunt adesea cu autoservire, iar plata se face la casă la plecare, nu la masă."
     },
     "sources": [
       {
@@ -1022,7 +1282,12 @@
     "evidence": "B",
     "text": {
       "en": "Calling 119 connects to Korea's Fire & Ambulance emergency dispatch, which provides 24-hour 3-way foreign-language interpretation for medical emergencies. For non-urgent medical or pharmacy help, call or chat with the 1330 Korea Travel Helpline.",
-      "ja": "119番は韓国の消防・救急指令につながり、急病やけがのときは24時間・3者通話の外国語通訳が利用できます。緊急ではない病院・薬局の相談は1330観光通訳案内電話・チャットも使えます。"
+      "ja": "119番は韓国の消防・救急指令につながり、急病やけがのときは24時間・3者通話の外国語通訳が利用できます。緊急ではない病院・薬局の相談は1330観光通訳案内電話・チャットも使えます。",
+      "zh-CN": "拨打 119 可接通韩国消防与救护车紧急调度中心，医疗急救时提供 24 小时三方外语翻译服务。若是非紧急的医院或药店咨询，可拨打或在线联系 1330 韩国旅游咨询热线。",
+      "zh-TW": "撥打 119 可接通韓國消防與救護車緊急調度中心，醫療急救時提供 24 小時三方外語口譯服務。若是非緊急的醫院或藥局諮詢，可撥打或線上聯繫 1330 韓國旅遊諮詢熱線。",
+      "fr": "Appeler le 119 vous relie aux secours (pompiers et ambulance) avec un service d'interprétation téléphonique à trois 24h/24 pour les urgences médicales. Pour les demandes non urgentes, contactez le 1330.",
+      "es": "Llamar al 119 conecta con emergencias (bomberos y ambulancias) con interpretación telefónica a tres bandas las 24 horas para urgencias médicas. Para consultas médicas o de farmacia no urgentes, llama o chatea con el 1330.",
+      "ro": "Apelarea numărului 119 face legătura cu dispeceratul de urgență (pompieri și ambulanță), care oferă interpretare în trei 24/7 pentru urgențe medicale. Pentru ajutor medical sau farmaceutic non-urgent, apelează 1330."
     },
     "sources": [
       {
@@ -1042,7 +1307,12 @@
     "evidence": "B",
     "text": {
       "en": "Pharmacies in Korea are marked with '약' (Yak). Pharmacists dispense over-the-counter medicine for pain, fever, colds, indigestion, allergies, and motion sickness. Basic household pain relievers, cold medicine, digestive aids, and bandages are also sold at 24-hour convenience stores.",
-      "ja": "韓国の薬局は「약（ヤク）」の表示が目印で、解熱鎮痛剤・風邪薬・胃腸薬・アレルギー薬・酔い止めなどを薬剤師から購入できます。基本的な鎮痛剤・風邪薬・消化薬・絆創膏は24時間営業のコンビニでも買えます。"
+      "ja": "韓国の薬局は「약（ヤク）」の表示が目印で、解熱鎮痛剤・風邪薬・胃腸薬・アレルギー薬・酔い止めなどを薬剤師から購入できます。基本的な鎮痛剤・風邪薬・消化薬・絆創膏は24時間営業のコンビニでも買えます。",
+      "zh-CN": "韩国药店标有“약”（药）字。药剂师可配售止痛退烧药、感冒药、肠胃消化药、抗过敏药和晕车药等非处方药。24 小时便利店也出售常备止痛药、感冒药、助消化药和创可贴。",
+      "zh-TW": "韓國藥局標有「약」（藥）字。藥師可配售止痛退燒藥、感冒藥、腸胃消化藥、抗過敏藥和暈車藥等非處方藥。24 小時便利商店也販售常備止痛藥、感冒藥、助消化藥和OK繃。",
+      "fr": "Les pharmacies en Corée sont signalées par « 약 » (Yak). Les pharmaciens délivrent des médicaments sans ordonnance (douleur, fièvre, rhume, digestion, allergies). Les supérettes 24h/24 vendent aussi des antalgiques de base, digestifs et pansements.",
+      "es": "Las farmacias en Corea están marcadas con «약» (Yak). Los farmacéuticos dispensan medicamentos sin receta para dolor, fiebre, resfriado, indigestión y alergias. Las tiendas de conveniencia 24 horas también venden analgésicos básicos, digestivos y vendas.",
+      "ro": "Farmaciile din Coreea sunt marcate cu „약” (Yak). Farmaciștii eliberează medicamente fără prescripție pentru durere, febră, răceală, indigestie și alergii. Magazinele convenience non-stop vând și analgezice de bază, digestive și plasturi."
     },
     "sources": [
       {
@@ -1059,7 +1329,12 @@
     "evidence": "B",
     "text": {
       "en": "If you leave an item on the subway, note the line number, direction, station, time, and car/door number (4 digits printed on the platform screen door) and ask at the station office or check the National Police LOST112 portal. For taxis, keep your card receipt or check your Tmoney history to identify the vehicle.",
-      "ja": "地下鉄に忘れ物をしたときは、路線・方面・降りた駅・時刻・車両やドア番号（ホームドアに書かれた4桁の番号）を控えて駅務室に伝えるか、警察庁の遺失物総合案内（LOST112）を確認します。タクシーの忘れ物は、カードの領収書やTmoneyの利用履歴から車両を照会できます。"
+      "ja": "地下鉄に忘れ物をしたときは、路線・方面・降りた駅・時刻・車両やドア番号（ホームドアに書かれた4桁の番号）を控えて駅務室に伝えるか、警察庁の遺失物総合案内（LOST112）を確認します。タクシーの忘れ物は、カードの領収書やTmoneyの利用履歴から車両を照会できます。",
+      "zh-CN": "如果把物品落在地铁上，请记下路线、方向、车站、时间和车厢/屏蔽门上的 4 位数字编号，向站务室求助或查询韩国警察厅 LOST112 遗失物平台。如果落在出租车上，请凭刷卡收据或 Tmoney 交易记录查找车辆。",
+      "zh-TW": "如果把物品落在地鐵上，請記下路線、方向、車站、時間和車廂/月台門上的 4 位數字編號，向站務室求助或查詢韓國警察廳 LOST112 遺失物平台。如果落在計程車上，請憑刷卡收據或 Tmoney 交易紀錄查找車輛。",
+      "fr": "En cas d'objet oublié dans le métro, notez la ligne, la direction, la station, l'heure et le numéro à 4 chiffres inscrit sur la porte palière, puis adressez-vous au bureau de la station ou au portail LOST112 de la police. En taxi, gardez le reçu de carte ou l'historique Tmoney.",
+      "es": "Si olvidas algo en el metro, anota la línea, dirección, estación, hora y el número de 4 dígitos impreso en la puerta del andén, y pregunta en la oficina de la estación o en el portal policial LOST112. En taxi, guarda el recibo de tarjeta o historial Tmoney.",
+      "ro": "Dacă uiți un obiect în metrou, notează linia, direcția, stația, ora și numărul din 4 cifre de pe ușa de peron, apoi întreabă la biroul stației sau pe portalul poliției LOST112. Pentru taxi, păstrează chitanța cardului sau istoricul Tmoney."
     },
     "sources": [
       {
@@ -1080,7 +1355,12 @@
     "evidence": "B",
     "text": {
       "en": "Subway stations across Seoul operate unmanned T-Locker storage boxes (small, medium, and large sizes for 4-hour base periods) and staffed T-Luggage centers at major hubs (Seoul Station, Hongik Univ., Myeong-dong, Incheon Airport) that offer same-day luggage storage and airport delivery.",
-      "ja": "ソウルの地下鉄駅には無人のコインロッカー（T-Locker、小・中・大サイズ、基本4時間単位）があり、主要駅（ソウル駅・弘大入口・明洞・仁川空港）には有人手荷物預かり・配送所（T-Luggage）もあります。"
+      "ja": "ソウルの地下鉄駅には無人のコインロッカー（T-Locker、小・中・大サイズ、基本4時間単位）があり、主要駅（ソウル駅・弘大入口・明洞・仁川空港）には有人手荷物預かり・配送所（T-Luggage）もあります。",
+      "zh-CN": "首尔各地铁站设有无人自助寄存柜（T-Locker，分小、中、大号，按 4 小时基础时段计费），且在首尔站、弘大入口、明洞、仁川机场等枢纽站设有人工行李寄存与机场配送中心（T-Luggage）。",
+      "zh-TW": "首爾各地鐵站設有無人自助寄物櫃（T-Locker，分小、中、大尺寸，按 4 小時基礎時段計費），且在首爾站、弘大入口、明洞、仁川機場等樞紐站設有人工行李寄放與機場配送中心（T-Luggage）。",
+      "fr": "Les stations de métro de Séoul disposent de consignes automatiques T-Locker (tailles S, M, L par tranches de 4 heures) et de centres T-Luggage avec personnel dans les grandes gares (Séoul, Hongik Univ., Myeong-dong, Incheon) pour la garde et la livraison de bagages à l'aéroport.",
+      "es": "Las estaciones de metro de Seúl cuentan con consignas automáticas T-Locker (tamaños pequeño, mediano y grande por bloques base de 4 horas) y centros T-Luggage con personal en estaciones principales (Seúl, Hongik Univ., Myeong-dong, Incheon) para custodia y envío de equipaje al aeropuerto.",
+      "ro": "Stațiile de metrou din Seul au dulapuri automate T-Locker (mărimi mică, medie și mare, pe intervale de bază de 4 ore) și centre T-Luggage cu personal în nodurile principale (Gara Seul, Hongik Univ., Myeong-dong, Incheon) pentru depozitarea și livrarea bagajelor la aeroport."
     },
     "sources": [
       {
@@ -1097,7 +1377,12 @@
     "evidence": "B",
     "text": {
       "en": "The Seoul Station City Airport Terminal is on B2. Travelers holding a same-day AREX Express Train ticket and flying on participating airlines departing Incheon Airport can complete airline check-in, baggage drop, and outbound immigration at least 3 hours before departure (3 hours 20 minutes for Terminal 2).",
-      "ja": "ソウル駅都心空港ターミナルは地下2階にあります。当日の空港鉄道直通列車の乗車券を持ち、仁川空港発の対象航空会社を利用する乗客は、出発の3時間前（第2ターミナル発は3時間20分前）までに搭乗手続き・手荷物預け・出国審査を済ませられます。"
+      "ja": "ソウル駅都心空港ターミナルは地下2階にあります。当日の空港鉄道直通列車の乗車券を持ち、仁川空港発の対象航空会社を利用する乗客は、出発の3時間前（第2ターミナル発は3時間20分前）までに搭乗手続き・手荷物預け・出国審査を済ませられます。",
+      "zh-CN": "首尔站都心机场航站楼位于地下2层（B2）。持有当日机场铁路直达列车车票并乘坐仁川机场出发的参与航司航班的旅客，可在航班起飞前至少 3 小时（第2航站楼出发为 3 小时 20 分钟）提前办完值机、行李托运和出境审查。",
+      "zh-TW": "首爾站都心機場航廈位於地下2樓（B2）。持有當日機場鐵路直達列車車票並搭乘仁川機場出發的參與航空航班的旅客，可在航班起飛前至少 3 小時（第2航廈出發為 3 小時 20 分鐘）提前辦完報到、行李託運和出境審查。",
+      "fr": "Le City Airport Terminal de la gare de Séoul se trouve au B2. Les voyageurs munis d'un billet AREX Express du jour sur une compagnie participante au départ d'Incheon peuvent effectuer l'enregistrement, le dépôt bagages et l'immigration au moins 3 heures avant le départ (3 heures 20 minutes pour le Terminal 2).",
+      "es": "La City Airport Terminal de la Estación de Seúl está en B2. Los viajeros con billete del AREX Expreso del mismo día en aerolíneas participantes desde Incheon pueden completar facturación, entrega de equipaje e inmigración al menos 3 horas antes de la salida (3 horas y 20 minutos para la Terminal 2).",
+      "ro": "City Airport Terminal din Gara Seul se află la nivelul B2. Călătorii cu bilet AREX Expres din aceeași zi la companiile aeriene participante cu plecare din Incheon pot finaliza check-in-ul, predarea bagajelor și controlul de frontieră cu cel puțin 3 ore înainte de decolare (3 ore și 20 de minute pentru Terminalul 2)."
     },
     "sources": [
       {
@@ -1118,7 +1403,12 @@
     "evidence": "B",
     "text": {
       "en": "Foreign tourists can claim a tax refund on purchases of at least ₩15,000 at participating Tax Free shops. Immediate tax refunds at the store apply to single purchases under ₩1,000,000 (up to ₩5,000,000 total per trip) when you show your passport; otherwise, scan your tax-free receipts at the airport kiosk before departure.",
-      "ja": "外国人旅行者は、免税（Tax Free）加盟店で1回15,000ウォン以上買い物するとタックスリファンドを受けられます。パスポートを提示すれば1回1,000,000ウォン未満（旅行期間中合計5,000,000ウォン以下）まで店頭での即時還付が可能で、それ以外は出国前に空港のキオスクでレシートを読み取ります。"
+      "ja": "外国人旅行者は、免税（Tax Free）加盟店で1回15,000ウォン以上買い物するとタックスリファンドを受けられます。パスポートを提示すれば1回1,000,000ウォン未満（旅行期間中合計5,000,000ウォン以下）まで店頭での即時還付が可能で、それ以外は出国前に空港のキオスクでレシートを読み取ります。",
+      "zh-CN": "外国游客在贴有 Tax Free 标识的免税加盟店单笔消费满 ₩15,000 即可申请退税。单笔消费未满 ₩1,000,000（每次访韩行程累计不超过 ₩5,000,000）出示护照可在店内直接享受即时退税；其余情况请在出境前于机场自助退税机扫描退税单。",
+      "zh-TW": "外國旅客在貼有 Tax Free 標誌的免稅加盟店單筆消費滿 ₩15,000 即可申請退稅。單筆消費未滿 ₩1,000,000（每次訪韓行程累計不超過 ₩5,000,000）出示護照可在店內直接享有即時退稅；其餘情況請在出境前於機場自助退稅機掃描退稅單。",
+      "fr": "Les touristes étrangers peuvent demander la détaxe dès ₩15,000 d'achat dans les magasins Tax Free. La détaxe immédiate en magasin s'applique aux achats uniques inférieurs à ₩1,000,000 (jusqu'à ₩5,000,000 au total par séjour) sur présentation du passeport ; sinon, scannez vos reçus aux bornes de l'aéroport avant le départ.",
+      "es": "Los turistas extranjeros pueden solicitar Tax Refund en compras de al menos ₩15,000 en tiendas Tax Free. El reembolso inmediato en tienda aplica a compras individuales menores de ₩1,000,000 (hasta ₩5,000,000 en total por viaje) mostrando el pasaporte; de lo contrario, escanea tus recibos en el quiosco del aeropuerto antes de salir.",
+      "ro": "Turiștii străini pot solicita rambursarea taxelor (Tax Refund) pentru cumpărături de cel puțin ₩15,000 în magazinele Tax Free. Rambursarea pe loc în magazin se aplică achizițiilor individuale sub ₩1,000,000 (până la ₩5,000,000 în total pe călătorie) la prezentarea pașaportului; altfel, scanează bonurile la chioșcul din aeroport înainte de plecare."
     },
     "sources": [
       {

@@ -74,8 +74,9 @@ async function networkFirst(request, key, url) {
     const hit = await cache.match(key);
     if (hit) return hit;
     if (request.mode === "navigate") {
-      // "/ja"(끝 슬래시 없음)도 일본어. 온라인이면 Cloudflare가 /ja/로 보내지만 오프라인에서는 여기서 고른다
-      const lang = /^\/ja(\/|$)/.test(url.pathname) ? "/ja/" : "/en/";
+      // "/ja"·"/zh-CN" 등 끝 슬래시 없는 언어 주소도 해당 언어로. 온라인이면 Cloudflare가 리다이렉트하지만 오프라인에서는 여기서 고른다
+      const m = /^\/(en|ja|zh-CN|zh-TW|fr|es|ro)(\/|$)/.exec(url.pathname);
+      const lang = m ? `/${m[1]}/` : "/en/";
       const home = await cache.match(lang);
       if (home) return home;
     }

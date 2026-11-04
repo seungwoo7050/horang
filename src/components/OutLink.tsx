@@ -1,15 +1,22 @@
 import type { ReactNode } from "react";
 import { getLink } from "@/content";
+import type { Locale } from "@/i18n";
 
-type Lang = "en" | "ja";
-
-// 제휴 고지 문구. ja는 원어민 검수 전 초안이다.
-const PAID_LABEL: Record<Lang, string> = { en: "Paid link", ja: "広告" };
+// 제휴 고지 문구.
+const PAID_LABEL: Record<Locale, string> = {
+  en: "Paid link",
+  ja: "広告",
+  "zh-CN": "赞助链接",
+  "zh-TW": "贊助連結",
+  fr: "Lien sponsorisé",
+  es: "Enlace patrocinado",
+  ro: "Link sponsorizat",
+};
 
 type Props = {
   /** src/content/links.json의 id */
   id: string;
-  lang?: Lang;
+  lang?: Locale;
   /** 생략하면 레지스트리의 label을 쓴다 */
   children?: ReactNode;
   className?: string;

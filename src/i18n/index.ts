@@ -1,11 +1,24 @@
 import { en, type Messages } from "./en";
+import { es } from "./es";
+import { fr } from "./fr";
 import { ja } from "./ja";
+import { ro } from "./ro";
+import { zhCN } from "./zh-CN";
+import { zhTW } from "./zh-TW";
 
-export const locales = ["en", "ja"] as const;
+export const locales = ["en", "ja", "zh-CN", "zh-TW", "fr", "es", "ro"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "en";
 
-const messages: Record<Locale, Messages> = { en, ja };
+const messages: Record<Locale, Messages> = {
+  en,
+  ja,
+  "zh-CN": zhCN,
+  "zh-TW": zhTW,
+  fr,
+  es,
+  ro,
+};
 
 export const isLocale = (value: string): value is Locale =>
   (locales as readonly string[]).includes(value);
@@ -24,4 +37,4 @@ export type { Messages };
  * navigator.languages는 우선순위 목록이라 앞에서부터 보고 지원 언어와 처음 맞는 것을 고른다.
  * 하나도 없으면 기본 언어. 인자: (languages, 지원 언어 목록, 기본 언어)
  */
-export const pickLocaleSource = `function(n,s,d){for(var i=0;i<n.length;i++){var m=/^([a-z]+)\\b/i.exec(n[i]||"");if(m&&s.indexOf(m[1].toLowerCase())>=0)return m[1].toLowerCase()}return d}`;
+export const pickLocaleSource = `function(n,s,d){for(var i=0;i<n.length;i++){var t=String(n[i]||"").toLowerCase();if(/^zh\\b/.test(t)){var z=/^zh[-_](tw|hk|mo|hant)\\b/.test(t)?"zh-TW":"zh-CN";if(s.indexOf(z)>=0)return z}var m=/^([a-z]+)\\b/.exec(t);if(m&&s.indexOf(m[1])>=0)return m[1]}return d}`;

@@ -10,6 +10,11 @@ describe("pageMetadata", () => {
     expect(m.alternates?.languages).toEqual({
       en: "/en/gate/",
       ja: "/ja/gate/",
+      "zh-CN": "/zh-CN/gate/",
+      "zh-TW": "/zh-TW/gate/",
+      fr: "/fr/gate/",
+      es: "/es/gate/",
+      ro: "/ro/gate/",
       "x-default": "/en/gate/",
     });
   });
@@ -46,6 +51,15 @@ describe("rootMetadata (the language picker at /)", () => {
     const m = rootMetadata();
     expect(m.title).toBe("Horang");
     expect(m.alternates?.canonical).toBe("/");
-    expect(m.alternates?.languages).toEqual({ en: "/en/", ja: "/ja/", "x-default": "/" });
+    expect(m.alternates?.languages).toEqual({
+      en: "/en/",
+      ja: "/ja/",
+      "zh-CN": "/zh-CN/",
+      "zh-TW": "/zh-TW/",
+      fr: "/fr/",
+      es: "/es/",
+      ro: "/ro/",
+      "x-default": "/",
+    });
   });
 });

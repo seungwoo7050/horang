@@ -4,7 +4,12 @@
     "url": "https://www.airportrailroad.com/",
     "label": {
       "en": "AREX official site",
-      "ja": "空港鉄道(AREX)公式サイト"
+      "ja": "空港鉄道(AREX)公式サイト",
+      "zh-CN": "机场铁路（AREX）官方网站",
+      "zh-TW": "機場鐵路（AREX）官方網站",
+      "fr": "Site officiel AREX",
+      "es": "Sitio oficial de AREX",
+      "ro": "Site oficial AREX"
     },
     "affiliate": false,
     "checkedAt": "2026-10-01"
@@ -14,7 +19,12 @@
     "url": "https://english.seoul.go.kr/policy/transportation/climate-card/",
     "label": {
       "en": "Climate Card (Seoul city)",
-      "ja": "Climate Card(ソウル市)"
+      "ja": "Climate Card(ソウル市)",
+      "zh-CN": "气候同行卡（首尔市官方）",
+      "zh-TW": "氣候同行卡（首爾市官方）",
+      "fr": "Climate Card (Ville de Séoul)",
+      "es": "Climate Card (Ciudad de Seúl)",
+      "ro": "Climate Card (Primăria Seul)"
     },
     "affiliate": false,
     "checkedAt": "2026-10-01"
@@ -24,7 +34,12 @@
     "url": "https://www.wowpass.io/en",
     "label": {
       "en": "WOWPASS",
-      "ja": "WOWPASS"
+      "ja": "WOWPASS",
+      "zh-CN": "WOWPASS",
+      "zh-TW": "WOWPASS",
+      "fr": "WOWPASS",
+      "es": "WOWPASS",
+      "ro": "WOWPASS"
     },
     "affiliate": false,
     "checkedAt": "2026-10-01"
@@ -34,7 +49,12 @@
     "url": "tel:+8221330",
     "label": {
       "en": "Call 1330",
-      "ja": "1330に電話する"
+      "ja": "1330に電話する",
+      "zh-CN": "拨打 1330",
+      "zh-TW": "撥打 1330",
+      "fr": "Appeler le 1330",
+      "es": "Llamar al 1330",
+      "ro": "Sună la 1330"
     },
     "affiliate": false,
     "checkedAt": "2026-10-02"
@@ -44,7 +64,12 @@
     "url": "https://english.visitkorea.or.kr/svc/contents/contentsView.do?menuSn=454&vcontsId=140632",
     "label": {
       "en": "1330 online chat",
-      "ja": "1330 オンラインチャット"
+      "ja": "1330 オンラインチャット",
+      "zh-CN": "1330 在线聊天",
+      "zh-TW": "1330 線上客服",
+      "fr": "Chat en ligne 1330",
+      "es": "Chat en línea 1330",
+      "ro": "Chat online 1330"
     },
     "affiliate": false,
     "checkedAt": "2026-10-02"
@@ -54,7 +79,12 @@
     "url": "tel:+822119",
     "label": {
       "en": "Call 119 (Fire & Ambulance)",
-      "ja": "119に電話する（救急・消防）"
+      "ja": "119に電話する（救急・消防）",
+      "zh-CN": "拨打 119（急救与消防）",
+      "zh-TW": "撥打 119（急救與消防）",
+      "fr": "Appeler le 119 (Secours et Ambulance)",
+      "es": "Llamar al 119 (Bomberos y Ambulancia)",
+      "ro": "Sună la 119 (Pompieri și Ambulanță)"
     },
     "affiliate": false,
     "checkedAt": "2026-10-02"
@@ -64,7 +94,12 @@
     "url": "https://www.lost112.go.kr/",
     "label": {
       "en": "LOST112 Police Lost & Found",
-      "ja": "LOST112 警察庁遺失物ポータル"
+      "ja": "LOST112 警察庁遺失物ポータル",
+      "zh-CN": "LOST112 警察厅失物招领平台",
+      "zh-TW": "LOST112 警察廳遺失物平台",
+      "fr": "Portail LOST112 Objets trouvés (Police)",
+      "es": "Portal LOST112 Objetos perdidos (Policía)",
+      "ro": "Portal LOST112 Obiecte pierdute (Poliție)"
     },
     "affiliate": false,
     "checkedAt": "2026-10-02"

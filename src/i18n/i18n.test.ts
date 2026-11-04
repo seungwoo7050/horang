@@ -3,8 +3,13 @@ import { join } from "node:path";
 import ts from "typescript";
 import { describe, expect, it } from "vitest";
 import { en } from "./en";
+import { es } from "./es";
+import { fr } from "./fr";
 import { ja } from "./ja";
-import { defaultLocale, locales, pickLocaleSource } from ".";
+import { ro } from "./ro";
+import { zhCN } from "./zh-CN";
+import { zhTW } from "./zh-TW";
+import { defaultLocale, getMessages, locales, pickLocaleSource } from ".";
 
 const SRC = join(process.cwd(), "src");
 const UI_DIRS = ["app", "components"].map((d) => join(SRC, d));
@@ -106,16 +111,22 @@ describe("UI text comes from message files", () => {
 });
 
 describe("message files", () => {
-  it("en and ja have the same keys", () => {
-    expect(keys(ja).sort()).toEqual(keys(en).sort());
+  it("all 7 locales have the exact same keys as en", () => {
+    const base = keys(en).sort();
+    for (const lang of locales) {
+      expect(keys(getMessages(lang)).sort(), lang).toEqual(base);
+    }
   });
 
-  it("no empty strings", () => {
-    expect([...values(en), ...values(ja)].filter((v) => !String(v).trim())).toEqual([]);
+  it("no empty strings in any locale", () => {
+    const allValues = locales.flatMap((lang) => values(getMessages(lang)));
+    expect(allValues.filter((v) => !String(v).trim())).toEqual([]);
   });
 
   it("phrase breaks (U+200B) only sit between words in Japanese copy", () => {
-    expect(values(en).filter((v) => String(v).includes("\u200b"))).toEqual([]);
+    for (const m of [en, zhCN, zhTW, fr, es, ro]) {
+      expect(values(m).filter((v) => String(v).includes("\u200b"))).toEqual([]);
+    }
     const bad = /^\u200b|\u200b$|\u200b\u200b|\s\u200b|\u200b\s/;
     expect(values(ja).filter((v) => bad.test(String(v)))).toEqual([]);
   });
@@ -134,10 +145,20 @@ describe("first-visit language (inline script on /)", () => {
   ) => string;
   const first = (languages: string[]) => pick(languages, locales, defaultLocale);
 
-  it("follows the browser's priority order", () => {
+  it("follows the browser's priority order across all 7 locales", () => {
     expect(first(["en-US", "en", "ja"])).toBe("en");
     expect(first(["ja-JP", "en"])).toBe("ja");
-    expect(first(["fr-FR", "ja", "en"])).toBe("ja");
+    expect(first(["de-DE", "ja", "en"])).toBe("ja");
+    expect(first(["fr-FR", "ja", "en"])).toBe("fr");
+    expect(first(["es-ES", "en"])).toBe("es");
+    expect(first(["ro-RO", "en"])).toBe("ro");
+    expect(first(["zh-TW", "zh", "en"])).toBe("zh-TW");
+    expect(first(["zh-HK", "en"])).toBe("zh-TW");
+    expect(first(["zh-MO", "en"])).toBe("zh-TW");
+    expect(first(["zh-Hant-TW", "en"])).toBe("zh-TW");
+    expect(first(["zh-CN", "en"])).toBe("zh-CN");
+    expect(first(["zh-Hans", "en"])).toBe("zh-CN");
+    expect(first(["zh", "en"])).toBe("zh-CN");
     expect(first(["JA"])).toBe("ja");
   });
 
