@@ -937,5 +937,83 @@
     ],
     "verifiedAt": "2026-10-02",
     "verifiedBy": "Official tourism guide desk research"
+  },
+  {
+    "id": "dining.kiosk.phone-number",
+    "kind": "service",
+    "evidence": "B",
+    "text": {
+      "en": "Many Korean cafe and restaurant kiosks ask for a Korean mobile number (010) to send a KakaoTalk or SMS pickup alert. If there is no skip button, enter 010-0000-0000 and watch the display screen for your order number, or order directly at the counter.",
+      "ja": "韓国のカフェや食堂のキオスク（無人注文機）では、カカオトークやSMSの呼び出し通知のために韓国の携帯電話番号（010）の入力を求められることがあります。スキップボタンがないときは010-0000-0000と入力して番号表示画面を見るか、レジで直接注文してください。"
+    },
+    "sources": [
+      {
+        "url": "https://english.visitkorea.or.kr/svc/contents/infoHtmlView.do?vcontsId=140662",
+        "title": "VisitKorea (KTO): Ordering food & payment tips in Korea"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official tourism guide desk research"
+  },
+  {
+    "id": "dining.payment.foreign-card-fallback",
+    "kind": "card-rule",
+    "evidence": "B",
+    "text": {
+      "en": "Unattended kiosks and table-order tablets work best with physical IC chip cards inserted chip-first. If your overseas credit card or mobile tap is declined at a kiosk, pay with a WOWPASS card, Tmoney (at convenience stores and partner cafes), or ask staff to process your card at the main POS counter.",
+      "ja": "キオスクやテーブルオーダー端末では、ICチップ付きの物理カードを奥まで差し込む方式が最も確実です。海外発行のクレジットカードやスマホのタッチ決済がキオスクで通らないときは、WOWPASSカードやTmoney（コンビニ・提携カフェ）を使うか、レジのPOS端末で決済してもらってください。"
+    },
+    "sources": [
+      {
+        "url": "https://www.wowpass.io/guide",
+        "title": "WOWPASS official: Prepaid card & payment guide in Korea"
+      },
+      {
+        "url": "https://english.visitkorea.or.kr/svc/contents/infoHtmlView.do?vcontsId=140656",
+        "title": "VisitKorea (KTO): Currency & credit cards in Korea"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official tourism guide desk research"
+  },
+  {
+    "id": "dining.tmoney.refund-rule",
+    "kind": "card-rule",
+    "evidence": "B",
+    "text": {
+      "en": "Remaining Tmoney cash balance up to ₩20,000 (up to ₩30,000 at GS25, up to ₩50,000 at subway customer safety centers) can be refunded in Korean won cash at convenience stores (CU, GS25, 7-Eleven, Emart24) for a ₩500 fee. The physical card cost itself is non-refundable.",
+      "ja": "Tmoneyの残高は、20,000ウォン以下（GS25は30,000ウォン以下、地下鉄の顧客安全室は50,000ウォン以下）ならコンビニ（CU・GS25・セブンイレブン・emart24）で手数料500ウォンを差し引いて現金で払い戻せます。カード本体の代金は払い戻されません。"
+    },
+    "sources": [
+      {
+        "url": "https://pay.tmoney.co.kr/ncs/pct/ugd/ReadRfndGd.dev",
+        "title": "Tmoney official: Balance refund guide"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official page opened in session",
+    "data": {
+      "storeLimit": 20000,
+      "gs25Limit": 30000,
+      "stationLimit": 50000,
+      "fee": 500
+    }
+  },
+  {
+    "id": "dining.etiquette.self-service",
+    "kind": "service",
+    "evidence": "B",
+    "text": {
+      "en": "In most Korean restaurants, tipping is not practiced, drinking water and extra side dishes (banchan) are often self-serve, and you pay at the front counter when leaving rather than at the table.",
+      "ja": "韓国のほとんどの食堂にはチップの習慣がなく、お水や追加のおかず（パンチャン）はセルフサービスのことが多く、食後はテーブルではなく入口のレジで会計します。"
+    },
+    "sources": [
+      {
+        "url": "https://english.visitkorea.or.kr/svc/contents/infoHtmlView.do?vcontsId=140662",
+        "title": "VisitKorea (KTO): Korean dining etiquette & payment"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official tourism guide desk research"
   }
 ]

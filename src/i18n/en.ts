@@ -29,6 +29,10 @@ export const en = {
         title: "City bus & taxi guide",
         hint: "Tap-out rule, 30-min transfers, driver cards",
       },
+      dining: {
+        title: "Dining, kiosks & dietary cards",
+        hint: "010 phone prompt, card errors, allergy & vegan cards",
+      },
     },
     staff: "Show this to staff",
     staffKo: "직원에게 보여 주기",
@@ -356,6 +360,45 @@ export const en = {
     },
     driverHead: "Show this to the driver",
     driverSub: "Tap a sentence, then tap “Show big” to fill the screen.",
+  },
+  dining: {
+    title: "Dining, Kiosks & Dietary Cards",
+    ask: "Need help ordering, paying, or explaining dietary needs?",
+    modeLabel: "Dining help topic",
+    modes: {
+      kiosk: "Kiosk & Card Fixes",
+      dietary: "Dietary & Table Rules",
+    },
+    kiosk: {
+      headline: "Stuck at a kiosk or table-order tablet?",
+      summary:
+        "Self-order kiosks often ask for a Korean 010 phone number or reject overseas tap-to-pay cards. Here is how to get around both immediately.",
+      cards: {
+        phoneTitle: "1. Kiosk asks for a 010 phone number",
+        phoneBody:
+          "Look for a Skip button, or type 010-0000-0000 and watch the pickup screen for your order number.",
+        cardTitle: "2. Overseas card declined at kiosk",
+        cardBody:
+          "Insert the physical IC chip card all the way in, use WOWPASS or Tmoney, or ask staff to ring you up at the counter POS.",
+      },
+      factsHead: "Official kiosk, card & refund rules",
+    },
+    dietary: {
+      headline: "Allergies, vegan/halal & Korean restaurant basics",
+      summary:
+        "Even vegetable dishes in Korea often use anchovy, beef, or pork broth. Select your dietary card below and tap “Show big” so kitchen staff can read it clearly.",
+      cards: {
+        brothTitle: "Check the soup stock (육수 / 젓갈)",
+        brothBody:
+          "Kimchi and stews often contain salted shrimp (새우젓), anchovy stock, or meat broth. Use the Korean cards below to ask before ordering.",
+        etiquetteTitle: "Water, side dishes & paying at the counter",
+        etiquetteBody:
+          "Water and extra side dishes are often self-serve. Press the table call bell for staff, and pay at the front counter when leaving.",
+      },
+      factsHead: "Official dining & etiquette notes",
+    },
+    staffHead: "Show this to restaurant or cafe staff",
+    staffSub: "Pick your dietary or payment sentence and tap “Show big”.",
   },
   staff: {
     title: "Show this to staff",
