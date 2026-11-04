@@ -1,13 +1,33 @@
 import { notFound } from "next/navigation";
 import { pageMetadata } from "@/app/seo";
-import { Fact, FactList } from "@/components/Fact";
+import { Fact } from "@/components/Fact";
+import { FactSheet } from "@/components/FactSheet";
 import styles from "@/components/flow.module.css";
 import { OutLink } from "@/components/OutLink";
 import { PhraseCard } from "@/components/PhraseCard";
 import { StaffPhrases } from "@/components/StaffPhrases";
-import { TransitFlow } from "@/components/TransitFlow";
-import { POINT_PHRASE, getPhrase, phrases } from "@/content";
-import { getMessages, isLocale } from "@/i18n";
+import { TransitFlow, type TransitNumbers } from "@/components/TransitFlow";
+import { POINT_PHRASE, getClaim, getPhrase, phrases } from "@/content";
+import { getMessages, isLocale, type Locale } from "@/i18n";
+
+function num(id: string, key: string) {
+  const n = getClaim(id).data?.[key];
+  if (n === undefined) throw new Error(`claim ${id}에 data.${key} 없음`);
+  return n;
+}
+
+function numbers(lang: Locale): TransitNumbers {
+  const won = (n: number) => getMessages(lang).arex.won.replace("{n}", n.toLocaleString("en-US"));
+  return {
+    busBase: won(num("transit.bus.cashless", "baseFare")),
+    penaltyMax: won(num("transit.bus.tap-both", "penaltyMax")),
+    transferMin: String(num("transit.transfer.30min-rule", "minutes")),
+    nightMin: String(num("transit.transfer.30min-rule", "nightMinutes")),
+    maxTransfers: String(num("transit.transfer.30min-rule", "maxTransfers")),
+    taxiStandard: won(num("transit.taxi.base-fare", "standardBase")),
+    taxiDeluxe: won(num("transit.taxi.base-fare", "deluxeBase")),
+  };
+}
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/transit">) {
   const { lang } = await params;
@@ -24,13 +44,21 @@ export default async function TransitPage({ params }: PageProps<"/[lang]/transit
   return (
     <TransitFlow
       lang={lang}
+      numbers={numbers(lang)}
       busFacts={
-        <FactList
+        <FactSheet
+          title={m.transit.bus.factsHead}
           ids={["transit.bus.tap-both", "transit.transfer.30min-rule", "transit.bus.cashless"]}
           lang={lang}
         />
       }
-      taxiFacts={<FactList ids={["transit.taxi.base-fare", "transit.taxi.payment"]} lang={lang} />}
+      taxiFacts={
+        <FactSheet
+          title={m.transit.taxi.factsHead}
+          ids={["transit.taxi.base-fare", "transit.taxi.payment"]}
+          lang={lang}
+        />
+      }
       driverPhrases={
         <StaffPhrases
           cards={Object.fromEntries(
@@ -45,7 +73,7 @@ export default async function TransitPage({ params }: PageProps<"/[lang]/transit
         />
       }
       helpline={
-        <section className="flex flex-col gap-3 border-t border-solid border-[var(--color-line)] pt-4">
+        <section className={styles.stage}>
           <h2 className={styles.section}>{m.staff.helpline}</h2>
           <Fact id="helpline.1330" lang={lang} />
           <div className={styles.row}>

@@ -179,9 +179,14 @@ test("dining: kiosk 010 phone bypass, dietary rules, and full-screen allergy/veg
   await expect(page.getByText(/salted shrimp/).first()).toBeVisible();
 
   await page.getByRole("button", { name: /peanut and tree-nut allergy/ }).click();
+  // 복수 알레르기·식이제한 칩 조합: 땅콩 알레르기 + 갑각류 알레르기를 함께 켜면 두 문장이 한 카드로 합쳐진다
+  await page.getByRole("button", { name: /\+.*갑각류/ }).click();
   await page.getByRole("button", { name: "Show big" }).click();
   const dialog = page.getByRole("dialog");
   await expect(dialog.locator('blockquote[lang="ko"]')).toContainText("땅콩·견과류 알레르기");
+  await expect(dialog.locator('blockquote[lang="ko"]')).toContainText(
+    "새우·게·조개(갑각류) 알레르기",
+  );
   await expect(dialog.locator('p[lang="ko"]')).toHaveText(
     "한국어를 잘 몰라요. 손가락으로 가리켜 주세요.",
   );
@@ -690,6 +695,14 @@ test.describe("fewer template signs", () => {
       const header = (await page.locator("header").first().boundingBox())!;
       const hero = (await page.locator("main img[src='/brand/mascot.webp']").boundingBox())!;
       expect(hero.y - (header.y + header.height), lang).toBeLessThanOrEqual(40);
+      // 홈 화면 목록은 사각 상자(좌우 테두리)가 아니라 위쪽 가는 선(1px)으로만 나눈다
+      const sideBorders = await page.locator("main ul li").evaluateAll((items) =>
+        items.map((el) => {
+          const cs = getComputedStyle(el);
+          return `${cs.borderLeftWidth}/${cs.borderRightWidth}/${cs.borderTopWidth}`;
+        }),
+      );
+      for (const b of sideBorders) expect(b, lang).toBe("0px/0px/1px");
     }
   });
 

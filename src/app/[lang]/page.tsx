@@ -48,31 +48,23 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </>
       }
     >
-      <div className={cn(styles.hello, "flex items-center gap-3 pt-2")}>
+      <div className={styles.hello}>
         <Boop>
           <Mascot className={styles.mascot} />
         </Boop>
         <h1 className={styles.ask}>{t.home.ask}</h1>
       </div>
-      <ul
-        className={cn(
-          styles.list,
-          "m-0 list-none p-0 border-b border-solid border-[var(--color-line)]",
-        )}
-      >
+      <ul className={styles.list}>
         {SITUATIONS.map((key) => {
           const s = t.home.situations[key];
           return (
-            <li key={key} className="border-t border-solid border-[var(--color-line)]">
+            <li key={key}>
               <Link
                 href={`/${lang}/${key}/`}
-                className={cn(
-                  styles.situation,
-                  "flex items-center gap-3 py-3 no-underline text-inherit",
-                )}
+                className={styles.situation}
                 transitionTypes={["nav-forward"]}
               >
-                <span className={cn(styles.text, "flex flex-1 flex-col gap-1")}>
+                <span className={styles.text}>
                   <MorphTitle name={key}>
                     <strong>{s.title}</strong>
                   </MorphTitle>

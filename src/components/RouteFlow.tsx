@@ -119,7 +119,7 @@ export function RouteFlow({ lang, routes, stations, places }: Props) {
             <Scene name="explore" />
           </div>
           {stations && stations.length > 1 ? (
-            <div role="group" aria-label={s.stationSelect} className="flex flex-wrap gap-2">
+            <div role="group" aria-label={s.stationSelect} className={styles.hubTrack}>
               {stations.map((st) => {
                 const selected = st.id === activeStation?.id;
                 return (
@@ -128,12 +128,7 @@ export function RouteFlow({ lang, routes, stations, places }: Props) {
                     type="button"
                     aria-pressed={selected}
                     onClick={() => setStationId(st.id)}
-                    className={cn(
-                      "min-h-10 cursor-pointer rounded-[var(--radius-sm)] border border-solid px-3 py-1.5 text-[length:var(--text-sm)] font-semibold transition-colors",
-                      selected
-                        ? "border-[var(--color-ribbon)] bg-[var(--color-ribbon-fill)] text-[var(--color-on-ribbon)]"
-                        : "border-[var(--color-line)] bg-[var(--color-surface)] text-[var(--color-muted)]",
-                    )}
+                    className={styles.hubBtn}
                   >
                     {st.name}
                   </button>

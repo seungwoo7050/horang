@@ -2,120 +2,131 @@
 
 import { useState, type ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
-import { cn } from "@/lib/utils";
-import styles from "./flow.module.css";
+import flow from "./flow.module.css";
 import { Screen } from "./Screen";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import styles from "./TransitFlow.module.css";
+
+export type TransitNumbers = {
+  busBase: string;
+  penaltyMax: string;
+  transferMin: string;
+  nightMin: string;
+  maxTransfers: string;
+  taxiStandard: string;
+  taxiDeluxe: string;
+};
 
 type Props = {
   lang: Locale;
+  numbers: TransitNumbers;
   busFacts: ReactNode;
   taxiFacts: ReactNode;
   driverPhrases: ReactNode;
   helpline: ReactNode;
 };
 
-export function TransitFlow({ lang, busFacts, taxiFacts, driverPhrases, helpline }: Props) {
-  const t = getMessages(lang).transit;
+export function TransitFlow({
+  lang,
+  numbers: n,
+  busFacts,
+  taxiFacts,
+  driverPhrases,
+  helpline,
+}: Props) {
+  const m = getMessages(lang);
+  const t = m.transit;
   const [mode, setMode] = useState<"bus" | "taxi">("bus");
 
   return (
     <Screen lang={lang} back={`/${lang}/`} title={t.title} morph="transit">
-      <div className="flex flex-col gap-4">
-        <h1 className={styles.heading}>{t.ask}</h1>
-        <div role="group" aria-label={t.modeLabel} className="grid grid-cols-2 gap-2">
-          {(["bus", "taxi"] as const).map((m) => {
-            const active = mode === m;
-            return (
-              <button
-                key={m}
-                type="button"
-                aria-pressed={active}
-                onClick={() => setMode(m)}
-                className={cn(
-                  "min-h-11 cursor-pointer rounded-[var(--radius-md)] border border-solid px-3 py-2 text-[length:var(--text-sm)] font-semibold transition-colors",
-                  active
-                    ? "border-[var(--color-ribbon)] bg-[var(--color-ribbon-fill)] text-[var(--color-on-ribbon)]"
-                    : "border-[var(--color-line)] bg-[var(--color-surface)] text-[var(--color-muted)]",
-                )}
-              >
-                {t.modes[m]}
-              </button>
-            );
-          })}
+      <div className={flow.stage}>
+        <h1 className={flow.heading}>{t.ask}</h1>
+        <div role="group" aria-label={t.modeLabel} className={styles.seg}>
+          {(["bus", "taxi"] as const).map((id) => (
+            <button key={id} type="button" aria-pressed={mode === id} onClick={() => setMode(id)}>
+              {t.modes[id]}
+            </button>
+          ))}
         </div>
 
         {mode === "bus" ? (
-          <div className="flex flex-col gap-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>{t.bus.headline}</CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col gap-3">
-                <p className={styles.body}>{t.bus.summary}</p>
-                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                  <div className="rounded-[var(--radius-sm)] border border-solid border-[var(--color-line)] p-3">
-                    <strong className="block text-[length:var(--text-sm)]">
-                      {t.bus.cards.tapBothTitle}
-                    </strong>
-                    <p className="mt-1 m-0 text-[length:var(--text-sm)] text-[var(--color-muted)]">
-                      {t.bus.cards.tapBothBody}
-                    </p>
-                  </div>
-                  <div className="rounded-[var(--radius-sm)] border border-solid border-[var(--color-line)] p-3">
-                    <strong className="block text-[length:var(--text-sm)]">
-                      {t.bus.cards.transferTitle}
-                    </strong>
-                    <p className="mt-1 m-0 text-[length:var(--text-sm)] text-[var(--color-muted)]">
-                      {t.bus.cards.transferBody}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <section className="flex flex-col gap-2">
-              <h2 className={styles.section}>{t.bus.factsHead}</h2>
-              {busFacts}
-            </section>
+          <div key="bus" className={`${flow.stage} ${flow.forward}`}>
+            <p className={flow.body}>{t.bus.summary}</p>
+
+            {/* 앞문 승차(1) → 환승 유지 리본 → 뒷문 하차(2) 도해 */}
+            <svg className={styles.diagram} viewBox="0 0 320 76" aria-hidden="true">
+              <rect className={styles.busBody} x="8" y="8" width="304" height="60" rx="16" />
+              <path className={styles.ribbonTrack} d="M 64 34 H 256" />
+              <path className={styles.ribbonLine} d="M 64 34 H 256" />
+              <g className={styles.nodeDone}>
+                <circle cx="64" cy="34" r="12" />
+                <text x="64" y="34">
+                  1
+                </text>
+              </g>
+              <g className={styles.nodeDone}>
+                <circle cx="256" cy="34" r="12" />
+                <text x="256" y="34">
+                  2
+                </text>
+              </g>
+              <text className={styles.diagramTag} x="64" y="59">
+                {n.busBase}
+              </text>
+              <text className={styles.diagramSub} x="160" y="24">
+                {n.transferMin} {m.arex.min} · ×{n.maxTransfers}
+              </text>
+              <text className={styles.diagramTag} x="256" y="59">
+                +{n.penaltyMax}
+              </text>
+            </svg>
+
+            <div className={styles.compare}>
+              <section className={styles.col}>
+                <span className={styles.badgeFill}>1 → 2</span>
+                <p className={styles.big}>{n.busBase}</p>
+                <p className={styles.sub}>{t.bus.cards.tapBothTitle}</p>
+                <p className={styles.note}>{t.bus.cards.tapBothBody}</p>
+              </section>
+              <section className={styles.col}>
+                <span className={styles.badgeLine}>×{n.maxTransfers}</span>
+                <p className={styles.big}>
+                  {n.transferMin}
+                  <small>{m.arex.min}</small>
+                </p>
+                <p className={styles.sub}>{t.bus.cards.transferTitle}</p>
+                <p className={styles.note}>{t.bus.cards.transferBody}</p>
+              </section>
+            </div>
+
+            {busFacts}
           </div>
         ) : (
-          <div className="flex flex-col gap-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>{t.taxi.headline}</CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col gap-3">
-                <p className={styles.body}>{t.taxi.summary}</p>
-                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                  <div className="rounded-[var(--radius-sm)] border border-solid border-[var(--color-line)] p-3">
-                    <strong className="block text-[length:var(--text-sm)]">
-                      {t.taxi.cards.standardTitle}
-                    </strong>
-                    <p className="mt-1 m-0 text-[length:var(--text-sm)] text-[var(--color-muted)]">
-                      {t.taxi.cards.standardBody}
-                    </p>
-                  </div>
-                  <div className="rounded-[var(--radius-sm)] border border-solid border-[var(--color-line)] p-3">
-                    <strong className="block text-[length:var(--text-sm)]">
-                      {t.taxi.cards.deluxeTitle}
-                    </strong>
-                    <p className="mt-1 m-0 text-[length:var(--text-sm)] text-[var(--color-muted)]">
-                      {t.taxi.cards.deluxeBody}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <section className="flex flex-col gap-2">
-              <h2 className={styles.section}>{t.taxi.factsHead}</h2>
-              {taxiFacts}
-            </section>
+          <div key="taxi" className={`${flow.stage} ${flow.forward}`}>
+            <p className={flow.body}>{t.taxi.summary}</p>
+
+            <div className={styles.compare}>
+              <section className={styles.col}>
+                <span className={styles.badgeFill}>22:00–04:00 +20~40%</span>
+                <p className={styles.big}>{n.taxiStandard}</p>
+                <p className={styles.sub}>{t.taxi.cards.standardTitle}</p>
+                <p className={styles.note}>{t.taxi.cards.standardBody}</p>
+              </section>
+              <section className={styles.col}>
+                <span className={styles.badgeLine}>22:00–04:00 +0%</span>
+                <p className={styles.big}>{n.taxiDeluxe}</p>
+                <p className={styles.sub}>{t.taxi.cards.deluxeTitle}</p>
+                <p className={styles.note}>{t.taxi.cards.deluxeBody}</p>
+              </section>
+            </div>
+
+            {taxiFacts}
           </div>
         )}
 
-        <section className="flex flex-col gap-3 border-t border-solid border-[var(--color-line)] pt-4">
-          <h2 className={styles.section}>{t.driverHead}</h2>
-          <p className={styles.note}>{t.driverSub}</p>
+        <section className={styles.divider}>
+          <h2 className={flow.section}>{t.driverHead}</h2>
+          <p className={flow.note}>{t.driverSub}</p>
           {driverPhrases}
         </section>
 

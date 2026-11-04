@@ -1,14 +1,23 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import { PHARMACY_SIGN } from "@/content";
 import { getMessages, type Locale } from "@/i18n";
-import { cn } from "@/lib/utils";
-import styles from "./flow.module.css";
+import { Scene } from "./Brand";
+import styles from "./EmergencyFlow.module.css";
+import flow from "./flow.module.css";
 import { Screen } from "./Screen";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+
+export type EmergencyNumbers = {
+  cutoffHours: string;
+  cutoffT2Minutes: string;
+  taxMinSpend: string;
+  taxInstantMax: string;
+};
 
 type Props = {
   lang: Locale;
+  numbers: EmergencyNumbers;
   pharmacyFacts: ReactNode;
   pharmacyLinks: ReactNode;
   lostFacts: ReactNode;
@@ -19,6 +28,7 @@ type Props = {
 
 export function EmergencyFlow({
   lang,
+  numbers: n,
   pharmacyFacts,
   pharmacyLinks,
   lostFacts,
@@ -31,136 +41,102 @@ export function EmergencyFlow({
 
   return (
     <Screen lang={lang} back={`/${lang}/`} title={t.title} morph="emergency">
-      <div className="flex flex-col gap-4">
-        <h1 className={styles.heading}>{t.ask}</h1>
-        <div role="group" aria-label={t.modeLabel} className="grid grid-cols-3 gap-2">
-          {(["pharmacy", "lost", "depart"] as const).map((m) => {
-            const active = mode === m;
-            return (
-              <button
-                key={m}
-                type="button"
-                aria-pressed={active}
-                onClick={() => setMode(m)}
-                className={cn(
-                  "min-h-11 cursor-pointer rounded-[var(--radius-md)] border border-solid px-2 py-2 text-[length:var(--text-sm)] font-semibold transition-colors",
-                  active
-                    ? "border-[var(--color-ribbon)] bg-[var(--color-ribbon-fill)] text-[var(--color-on-ribbon)]"
-                    : "border-[var(--color-line)] bg-[var(--color-surface)] text-[var(--color-muted)]",
-                )}
-              >
-                {t.modes[m]}
-              </button>
-            );
-          })}
+      <div className={flow.stage}>
+        <h1 className={flow.heading}>{t.ask}</h1>
+        <div role="group" aria-label={t.modeLabel} className={styles.seg}>
+          {(["pharmacy", "lost", "depart"] as const).map((id) => (
+            <button key={id} type="button" aria-pressed={mode === id} onClick={() => setMode(id)}>
+              {t.modes[id]}
+            </button>
+          ))}
         </div>
 
         {mode === "pharmacy" ? (
-          <div className="flex flex-col gap-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>{t.pharmacy.headline}</CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col gap-3">
-                <p className={styles.body}>{t.pharmacy.summary}</p>
-                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                  <div className="rounded-[var(--radius-sm)] border border-solid border-[var(--color-line)] p-3">
-                    <strong className="block text-[length:var(--text-sm)]">
-                      {t.pharmacy.cards.signTitle}
-                    </strong>
-                    <p className="mt-1 m-0 text-[length:var(--text-sm)] text-[var(--color-muted)]">
-                      {t.pharmacy.cards.signBody}
-                    </p>
-                  </div>
-                  <div className="rounded-[var(--radius-sm)] border border-solid border-[var(--color-line)] p-3">
-                    <strong className="block text-[length:var(--text-sm)]">
-                      {t.pharmacy.cards.callTitle}
-                    </strong>
-                    <p className="mt-1 m-0 text-[length:var(--text-sm)] text-[var(--color-muted)]">
-                      {t.pharmacy.cards.callBody}
-                    </p>
-                  </div>
-                </div>
-                {pharmacyLinks}
-              </CardContent>
-            </Card>
-            <section className="flex flex-col gap-2">
-              <h2 className={styles.section}>{t.pharmacy.factsHead}</h2>
-              {pharmacyFacts}
-            </section>
+          <div key="pharmacy" className={`${flow.stage} ${flow.forward}`}>
+            <p className={flow.body}>{t.pharmacy.summary}</p>
+
+            {/* 한국 약국 간판('약') 상징 배지 콜아웃 */}
+            <div className={styles.signCallout}>
+              <span lang="ko" className={styles.yakSeal} aria-hidden="true">
+                {PHARMACY_SIGN}
+              </span>
+              <div className={styles.calloutText}>
+                <strong>{t.pharmacy.cards.signTitle}</strong>
+                <p>{t.pharmacy.cards.signBody}</p>
+              </div>
+            </div>
+
+            {pharmacyLinks}
+
+            <div className={styles.editorialList}>
+              <div className={styles.editorialItem}>
+                <strong>{t.pharmacy.cards.callTitle}</strong>
+                <p>{t.pharmacy.cards.callBody}</p>
+              </div>
+            </div>
+
+            {pharmacyFacts}
           </div>
         ) : mode === "lost" ? (
-          <div className="flex flex-col gap-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>{t.lost.headline}</CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col gap-3">
-                <p className={styles.body}>{t.lost.summary}</p>
-                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                  <div className="rounded-[var(--radius-sm)] border border-solid border-[var(--color-line)] p-3">
-                    <strong className="block text-[length:var(--text-sm)]">
-                      {t.lost.cards.subwayTitle}
-                    </strong>
-                    <p className="mt-1 m-0 text-[length:var(--text-sm)] text-[var(--color-muted)]">
-                      {t.lost.cards.subwayBody}
-                    </p>
-                  </div>
-                  <div className="rounded-[var(--radius-sm)] border border-solid border-[var(--color-line)] p-3">
-                    <strong className="block text-[length:var(--text-sm)]">
-                      {t.lost.cards.taxiTitle}
-                    </strong>
-                    <p className="mt-1 m-0 text-[length:var(--text-sm)] text-[var(--color-muted)]">
-                      {t.lost.cards.taxiBody}
-                    </p>
-                  </div>
-                </div>
-                {lostLinks}
-              </CardContent>
-            </Card>
-            <section className="flex flex-col gap-2">
-              <h2 className={styles.section}>{t.lost.factsHead}</h2>
-              {lostFacts}
-            </section>
+          <div key="lost" className={`${flow.stage} ${flow.forward}`}>
+            <p className={flow.body}>{t.lost.summary}</p>
+
+            {/* 지하철 승강장 스크린도어 4자리 번호 도해 */}
+            <div className={styles.signCallout}>
+              <div className={styles.doorBadge} aria-hidden="true">
+                <span className={styles.doorTop}>3 - 4</span>
+                <span className={styles.doorNum}>2391</span>
+              </div>
+              <div className={styles.calloutText}>
+                <strong>{t.lost.cards.subwayTitle}</strong>
+                <p>{t.lost.cards.subwayBody}</p>
+              </div>
+            </div>
+
+            <div className={styles.editorialList}>
+              <div className={styles.editorialItem}>
+                <strong>{t.lost.cards.taxiTitle}</strong>
+                <p>{t.lost.cards.taxiBody}</p>
+              </div>
+            </div>
+
+            {lostLinks}
+            {lostFacts}
           </div>
         ) : (
-          <div className="flex flex-col gap-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>{t.depart.headline}</CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col gap-3">
-                <p className={styles.body}>{t.depart.summary}</p>
-                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                  <div className="rounded-[var(--radius-sm)] border border-solid border-[var(--color-line)] p-3">
-                    <strong className="block text-[length:var(--text-sm)]">
-                      {t.depart.cards.cityAirportTitle}
-                    </strong>
-                    <p className="mt-1 m-0 text-[length:var(--text-sm)] text-[var(--color-muted)]">
-                      {t.depart.cards.cityAirportBody}
-                    </p>
-                  </div>
-                  <div className="rounded-[var(--radius-sm)] border border-solid border-[var(--color-line)] p-3">
-                    <strong className="block text-[length:var(--text-sm)]">
-                      {t.depart.cards.taxRefundTitle}
-                    </strong>
-                    <p className="mt-1 m-0 text-[length:var(--text-sm)] text-[var(--color-muted)]">
-                      {t.depart.cards.taxRefundBody}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <section className="flex flex-col gap-2">
-              <h2 className={styles.section}>{t.depart.factsHead}</h2>
-              {departFacts}
-            </section>
+          <div key="depart" className={`${flow.stage} ${flow.forward}`}>
+            <div className={flow.sceneHead}>
+              <p className={flow.body}>{t.depart.summary}</p>
+              <Scene name="travel" />
+            </div>
+
+            <div className={styles.compare}>
+              <section className={styles.col}>
+                <span className={styles.badgeFill}>
+                  -{n.cutoffHours}:{n.cutoffT2Minutes}
+                </span>
+                <p className={styles.big}>-{n.cutoffHours}:00</p>
+                <p className={styles.sub}>{t.depart.cards.cityAirportTitle}</p>
+                <p className={styles.note}>{t.depart.cards.cityAirportBody}</p>
+              </section>
+              <section className={styles.col}>
+                <span className={styles.badgeLine}>
+                  {"< "}
+                  {n.taxInstantMax}
+                </span>
+                <p className={styles.big}>{n.taxMinSpend}+</p>
+                <p className={styles.sub}>{t.depart.cards.taxRefundTitle}</p>
+                <p className={styles.note}>{t.depart.cards.taxRefundBody}</p>
+              </section>
+            </div>
+
+            {departFacts}
           </div>
         )}
 
-        <section className="flex flex-col gap-3 border-t border-solid border-[var(--color-line)] pt-4">
-          <h2 className={styles.section}>{t.staffHead}</h2>
-          <p className={styles.note}>{t.staffSub}</p>
+        <section className={styles.divider}>
+          <h2 className={flow.section}>{t.staffHead}</h2>
+          <p className={flow.note}>{t.staffSub}</p>
           {staffPhrases}
         </section>
       </div>

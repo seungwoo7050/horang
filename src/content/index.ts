@@ -27,6 +27,7 @@ export function getLink(id: string) {
  * 고르는 문장 목록에는 넣지 않는다(크게 보기마다 이미 보인다)
  */
 export const POINT_PHRASE = "staff.point";
+export const PHARMACY_SIGN = "약";
 
 export function getPhrase(id: string) {
   const phrase = phrases.find((p) => p.id === id);

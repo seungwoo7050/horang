@@ -1,13 +1,29 @@
 import { notFound } from "next/navigation";
 import { pageMetadata } from "@/app/seo";
-import { EmergencyFlow } from "@/components/EmergencyFlow";
-import { FactList } from "@/components/Fact";
+import { EmergencyFlow, type EmergencyNumbers } from "@/components/EmergencyFlow";
+import { FactSheet } from "@/components/FactSheet";
 import styles from "@/components/flow.module.css";
 import { OutLink } from "@/components/OutLink";
 import { PhraseCard } from "@/components/PhraseCard";
 import { StaffPhrases } from "@/components/StaffPhrases";
-import { POINT_PHRASE, getPhrase, phrases } from "@/content";
-import { getMessages, isLocale } from "@/i18n";
+import { POINT_PHRASE, getClaim, getPhrase, phrases } from "@/content";
+import { getMessages, isLocale, type Locale } from "@/i18n";
+
+function num(id: string, key: string) {
+  const n = getClaim(id).data?.[key];
+  if (n === undefined) throw new Error(`claim ${id}에 data.${key} 없음`);
+  return n;
+}
+
+function numbers(lang: Locale): EmergencyNumbers {
+  const won = (n: number) => getMessages(lang).arex.won.replace("{n}", n.toLocaleString("en-US"));
+  return {
+    cutoffHours: String(num("depart.city-airport.seoul-station", "t1CutoffHours")),
+    cutoffT2Minutes: String(num("depart.city-airport.seoul-station", "t2CutoffMinutes")),
+    taxMinSpend: won(num("depart.tax-refund.minimum", "minSpend")),
+    taxInstantMax: won(num("depart.tax-refund.minimum", "instantMax")),
+  };
+}
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/emergency">) {
   const { lang } = await params;
@@ -24,8 +40,10 @@ export default async function EmergencyPage({ params }: PageProps<"/[lang]/emerg
   return (
     <EmergencyFlow
       lang={lang}
+      numbers={numbers(lang)}
       pharmacyFacts={
-        <FactList
+        <FactSheet
+          title={m.emergency.pharmacy.factsHead}
           ids={["emergency.119.interpreting", "emergency.pharmacy.otc", "helpline.1330"]}
           lang={lang}
         />
@@ -44,7 +62,13 @@ export default async function EmergencyPage({ params }: PageProps<"/[lang]/emerg
           />
         </div>
       }
-      lostFacts={<FactList ids={["emergency.lost.subway-taxi"]} lang={lang} />}
+      lostFacts={
+        <FactSheet
+          title={m.emergency.lost.factsHead}
+          ids={["emergency.lost.subway-taxi"]}
+          lang={lang}
+        />
+      }
       lostLinks={
         <div className={styles.row}>
           <OutLink
@@ -60,7 +84,8 @@ export default async function EmergencyPage({ params }: PageProps<"/[lang]/emerg
         </div>
       }
       departFacts={
-        <FactList
+        <FactSheet
+          title={m.emergency.depart.factsHead}
           ids={[
             "depart.luggage.tlocker",
             "depart.city-airport.seoul-station",
