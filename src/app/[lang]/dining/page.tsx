@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { pageMetadata } from "@/app/seo";
 import { DiningFlow } from "@/components/DiningFlow";
 import { FactSheet } from "@/components/FactSheet";
+import { PhraseCard } from "@/components/PhraseCard";
+import { StaffPhrases } from "@/components/StaffPhrases";
 import { POINT_PHRASE, getPhrase, phrases } from "@/content";
 import { getMessages, isLocale } from "@/i18n";
 
@@ -39,13 +41,19 @@ export default async function DiningPage({ params }: PageProps<"/[lang]/dining">
           lang={lang}
         />
       }
-      options={choices.map((p) => ({
-        id: p.id,
-        label: p[lang],
-        ko: p.ko,
-        reviewed: p.reviewed,
-      }))}
-      reply={{ ko: point.ko, label: point[lang] }}
+      staffPhrases={
+        <StaffPhrases
+          cards={Object.fromEntries(
+            choices.map((p) => [p.id, <PhraseCard key={p.id} id={p.id} lang={lang} />]),
+          )}
+          options={choices.map((p) => ({ id: p.id, label: p[lang], ko: p.ko }))}
+          initial="dining.kiosk-stuck"
+          othersLabel={m.staff.others}
+          showLabel={m.staff.show}
+          closeLabel={m.common.close}
+          reply={{ ko: point.ko, label: point[lang] }}
+        />
+      }
     />
   );
 }

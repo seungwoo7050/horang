@@ -179,14 +179,9 @@ test("dining: kiosk 010 phone bypass, dietary rules, and full-screen allergy/veg
   await expect(page.getByText(/salted shrimp/).first()).toBeVisible();
 
   await page.getByRole("button", { name: /peanut and tree-nut allergy/ }).click();
-  // 복수 알레르기·식이제한 칩 조합: 땅콩 알레르기 + 갑각류 알레르기를 함께 켜면 두 문장이 한 카드로 합쳐진다
-  await page.getByRole("button", { name: /\+.*갑각류/ }).click();
   await page.getByRole("button", { name: "Show big" }).click();
   const dialog = page.getByRole("dialog");
   await expect(dialog.locator('blockquote[lang="ko"]')).toContainText("땅콩·견과류 알레르기");
-  await expect(dialog.locator('blockquote[lang="ko"]')).toContainText(
-    "새우·게·조개(갑각류) 알레르기",
-  );
   await expect(dialog.locator('p[lang="ko"]')).toHaveText(
     "한국어를 잘 몰라요. 손가락으로 가리켜 주세요.",
   );
@@ -194,7 +189,7 @@ test("dining: kiosk 010 phone bypass, dietary rules, and full-screen allergy/veg
   await expect(dialog).toHaveCount(0);
 });
 
-test("emergency: pharmacy 119 link, lost-and-found LOST112, City Airport / tax refund, and symptom PhraseShow", async ({
+test("emergency: pharmacy 119 link, lost-and-found Minwon24, City Airport / tax refund, and symptom PhraseShow", async ({
   page,
 }) => {
   await page.goto("/en/");
@@ -202,9 +197,9 @@ test("emergency: pharmacy 119 link, lost-and-found LOST112, City Airport / tax r
   await expect(page).toHaveURL(/\/en\/emergency\/$/);
   await expect(page.getByRole("link", { name: /Call 119/ })).toHaveAttribute("href", "tel:+822119");
   await page.getByRole("button", { name: "Lost & Found" }).click();
-  await expect(page.getByRole("link", { name: /LOST112/ })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: /Minwon24/ })).toHaveAttribute(
     "href",
-    "https://www.lost112.go.kr/",
+    "https://minwon24.police.go.kr/cvlcpt/cvlcptAply.do?cvlcptId=MW-201&keyword=",
   );
   await page.getByRole("button", { name: "Luggage & Departure" }).click();
   await expect(page.getByText(/₩15,000/).first()).toBeVisible();

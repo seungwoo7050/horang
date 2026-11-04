@@ -85,7 +85,7 @@ export default async function TransitPage({ params }: PageProps<"/[lang]/transit
             <OutLink
               id="helpline-1330-call"
               lang={lang}
-              className={`${styles.primary} ${styles.fromContent}`}
+              className={`${styles.secondary} ${styles.fromContent}`}
             />
           </div>
         </section>

@@ -91,15 +91,15 @@
   },
   {
     "id": "lost112-portal",
-    "url": "https://www.lost112.go.kr/",
+    "url": "https://minwon24.police.go.kr/cvlcpt/cvlcptAply.do?cvlcptId=MW-201&keyword=",
     "label": {
-      "en": "LOST112 Police Lost & Found",
-      "ja": "LOST112 警察庁遺失物ポータル",
-      "zh-CN": "LOST112 警察厅失物招领平台",
-      "zh-TW": "LOST112 警察廳遺失物平台",
-      "fr": "Portail LOST112 Objets trouvés (Police)",
-      "es": "Portal LOST112 Objetos perdidos (Policía)",
-      "ro": "Portal LOST112 Obiecte pierdute (Poliție)"
+      "en": "Police Lost & Found (Minwon24)",
+      "ja": "警察庁遺失物検索（警察民願24）",
+      "zh-CN": "警察厅失物招领查询（警察民愿24）",
+      "zh-TW": "警察廳遺失物查詢（警察民願24）",
+      "fr": "Objets trouvés de la Police (Minwon24)",
+      "es": "Objetos perdidos de la Policía (Minwon24)",
+      "ro": "Obiecte pierdute Poliție (Minwon24)"
     },
     "affiliate": false,
     "checkedAt": "2026-10-02"

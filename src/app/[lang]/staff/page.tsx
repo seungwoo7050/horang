@@ -51,7 +51,7 @@ export default async function StaffPage({ params }: PageProps<"/[lang]/staff">) 
         <OutLink
           id="helpline-1330-call"
           lang={lang}
-          className={`${styles.primary} ${styles.fromContent}`}
+          className={`${styles.secondary} ${styles.fromContent}`}
         />
       </div>
     </Screen>

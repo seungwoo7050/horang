@@ -53,7 +53,7 @@ export default async function EmergencyPage({ params }: PageProps<"/[lang]/emerg
           <OutLink
             id="emergency-119-call"
             lang={lang}
-            className={`${styles.primary} ${styles.fromContent}`}
+            className={`${styles.secondary} ${styles.fromContent}`}
           />
           <OutLink
             id="helpline-1330-call"
@@ -79,7 +79,7 @@ export default async function EmergencyPage({ params }: PageProps<"/[lang]/emerg
           <OutLink
             id="helpline-1330-chat"
             lang={lang}
-            className={`${styles.primary} ${styles.fromContent}`}
+            className={`${styles.secondary} ${styles.fromContent}`}
           />
         </div>
       }

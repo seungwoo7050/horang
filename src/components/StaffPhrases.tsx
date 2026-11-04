@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import styles from "./flow.module.css";
 import { PhraseShow } from "./PhraseShow";
 
@@ -32,10 +32,11 @@ export function StaffPhrases({
   reply,
 }: Props) {
   const [current, setCurrent] = useState(initial);
+  const cardRef = useRef<HTMLDivElement>(null);
   const phrase = options.find((o) => o.id === current)!;
   return (
     <>
-      <div key={current} className={`${styles.stage} ${styles.forward}`}>
+      <div ref={cardRef} key={current} className={`${styles.stage} ${styles.forward}`}>
         <PhraseShow
           card={cards[current]}
           ko={phrase.ko}
@@ -55,7 +56,10 @@ export function StaffPhrases({
               aria-pressed={o.id === current}
               onClick={() => {
                 setCurrent(o.id);
-                window.scrollTo({ top: 0 });
+                const el = cardRef.current;
+                if (el && el.getBoundingClientRect().top < 12) {
+                  el.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
               }}
             >
               {o.label}
