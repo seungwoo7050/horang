@@ -15,10 +15,10 @@
     "note": "01~13편(인천공항→AREX→서울역 첫 1시간 안내, en/ja, CSS Modules) 완료 시점"
   },
   "current": {
-    "branch": "feature/i18n-expansion",
+    "branch": "main",
     "devlog": "19-i18n-expansion",
-    "stage": "implementing",
-    "note": "feature/emergency-depart(18-emergency-depart) 구현·평가·병합·devlog 완료 후 feature/i18n-expansion 시작"
+    "stage": "completed",
+    "note": "6개 feature 브랜치(14-harness ~ 19-i18n-expansion) 모두 구현·독립 평가·main 병합·devlog 작성 완료 (HEAD @ 1974c04)"
   },
   "branches": {
     "feature/harness": "merged @ 8b45c01 (verify 통과: unit 104/104, guard 18/18, e2e 82/82, 평가 4/4 통과, devlog 14-harness 완료)",
@@ -26,7 +26,7 @@
     "feature/city-transit": "merged @ 7de0212 (verify 통과: unit 105/105, guard 18/18, e2e 85/85, 평가 3/3 통과, devlog 16-city-transit 완료)",
     "feature/dining-pay": "merged @ d8f2b52 (verify 통과: unit 105/105, guard 18/18, e2e 86/86, 평가 3/3 통과, devlog 17-dining-pay 완료)",
     "feature/emergency-depart": "merged @ 9ea76aa (verify 통과: unit 105/105, guard 18/18, e2e 87/87, 평가 3/3 통과, devlog 18-emergency-depart 완료)",
-    "feature/i18n-expansion": "in_progress (devlog: 19-i18n-expansion)"
+    "feature/i18n-expansion": "merged @ 0d38b27 (verify 통과: unit 105/105, guard 18/18, e2e 87/87, 69 static routes, 366 precached assets, 평가 4/4 통과, devlog 19-i18n-expansion 완료)"
   },
   "blocked": [
     {
