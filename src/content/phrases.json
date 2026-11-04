@@ -89,5 +89,40 @@
     "en": "I don't understand much Korean. Could you point for me?",
     "ja": "韓国語があまりわかりません。指でさして教えてください。",
     "reviewed": false
+  },
+  {
+    "id": "transit.taxi-destination",
+    "ko": "여기로 가 주세요.",
+    "en": "Please take me to this address.",
+    "ja": "ここへ行ってください。",
+    "reviewed": false
+  },
+  {
+    "id": "transit.taxi-trunk",
+    "ko": "트렁크 좀 열어 주세요. 짐이 있어요.",
+    "en": "Could you open the trunk? I have luggage.",
+    "ja": "トランクを開けていただけますか。荷物があります。",
+    "reviewed": false
+  },
+  {
+    "id": "transit.taxi-card",
+    "ko": "카드(또는 티머니)로 계산할게요. 영수증 주세요.",
+    "en": "I'll pay by card (or Tmoney). Could I have a receipt?",
+    "ja": "カード（またはTmoney）で払います。領収書をください。",
+    "reviewed": false
+  },
+  {
+    "id": "transit.bus-stop-check",
+    "ko": "이 버스가 거기로 가나요?",
+    "en": "Does this bus go there?",
+    "ja": "このバスはそこへ行きますか。",
+    "reviewed": false
+  },
+  {
+    "id": "transit.forgot-tap-out",
+    "ko": "내릴 때 카드를 못 찍었어요. 어떻게 해요?",
+    "en": "I forgot to tap my card when getting off. What should I do?",
+    "ja": "降りるときにカードをタッチし忘れました。どうすればいいですか。",
+    "reviewed": false
   }
 ]

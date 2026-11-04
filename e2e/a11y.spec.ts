@@ -2,7 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
 // WCAG 2.2 AA(DESIGN.md §4): axe 자동 검사 + axe가 보지 않는 그래픽 대비·동작 줄이기
-const SCREENS = ["", "gate/", "card/", "arex/", "station/", "staff/"];
+const SCREENS = ["", "gate/", "card/", "arex/", "station/", "transit/", "staff/"];
 
 async function axe(page: Page) {
   const result = await new AxeBuilder({ page })

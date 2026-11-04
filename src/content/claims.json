@@ -748,5 +748,194 @@
     ],
     "verifiedAt": "2026-10-02",
     "verifiedBy": "Official page opened in session (2026-10-02 KST)"
+  },
+  {
+    "id": "station.hongik.arex-to-line-2",
+    "kind": "route",
+    "evidence": "B",
+    "text": {
+      "en": "At Hongik Univ. Station, the AREX platform is on B4 and the Line 2 platform is on B2. Take the elevator from the B4 AREX platform to the B3 concourse, pass the transfer gate, and take the elevator to the B2 Line 2 platform.",
+      "ja": "弘大入口駅では、空港鉄道ホームは地下4階、2号線ホームは地下2階にあります。地下4階の空港鉄道ホームからエレベーターで地下3階コンコースへ上がり、乗り換え改札を通ってエレベーターで地下2階の2号線ホームへ進みます。"
+    },
+    "sources": [
+      {
+        "url": "https://www.kric.go.kr/jsp/elas/ef/stationMovePath.jsp",
+        "title": "KRIC Rail Portal: Hongik Univ. Station transfer & elevator path"
+      },
+      {
+        "url": "https://www.airportrailroad.com/station/info",
+        "title": "AREX station guide: Hongik Univ. Station"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official station maps desk research"
+  },
+  {
+    "id": "station.hongik.line-2-to-exit",
+    "kind": "route",
+    "evidence": "B",
+    "text": {
+      "en": "At Hongik Univ. Station (Line 2), take the elevator from the B2 platform to the B1 concourse, tap out at the ticket gate, and take the street elevator between Exits 8 and 9 up to 1F.",
+      "ja": "弘大入口駅（2号線）では、地下2階ホームからエレベーターで地下1階コンコースへ上がり、改札を出て、8番・9番出口のあいだにある地上エレベーターで1階へ上がります。"
+    },
+    "sources": [
+      {
+        "url": "http://www.seoulmetro.co.kr/kr/cyberStation.do",
+        "title": "Seoul Metro Cyber Station: Hongik Univ. Station map"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official station maps desk research"
+  },
+  {
+    "id": "station.myeongdong.platform-to-exit",
+    "kind": "route",
+    "evidence": "B",
+    "text": {
+      "en": "At Myeong-dong Station (Line 4), take the elevator from the B3 platform up to the B2 concourse, tap out at the ticket gate, and take the street elevator near Exit 1 up to 1F.",
+      "ja": "明洞駅（4号線）では、地下3階ホームからエレベーターで地下2階コンコースへ上がり、改札を出て、1番出口近くの地上エレベーターで1階へ上がります。"
+    },
+    "sources": [
+      {
+        "url": "http://www.seoulmetro.co.kr/kr/cyberStation.do",
+        "title": "Seoul Metro Cyber Station: Myeong-dong Station map"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official station maps desk research"
+  },
+  {
+    "id": "station.gangnam.line-2-to-exit",
+    "kind": "route",
+    "evidence": "B",
+    "text": {
+      "en": "At Gangnam Station (Line 2), take the elevator from the B2 platform up to the B1 concourse, tap out at the ticket gate, and take the street elevator near Exit 1 up to 1F.",
+      "ja": "江南駅（2号線）では、地下2階ホームからエレベーターで地下1階コンコースへ上がり、改札を出て、1番出口近くの地上エレベーターで1階へ上がります。"
+    },
+    "sources": [
+      {
+        "url": "http://www.seoulmetro.co.kr/kr/cyberStation.do",
+        "title": "Seoul Metro Cyber Station: Gangnam Station map"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official station maps desk research"
+  },
+  {
+    "id": "station.seongsu.platform-to-exit",
+    "kind": "route",
+    "evidence": "B",
+    "text": {
+      "en": "At Seongsu Station (Line 2, elevated), take the elevator from the 3F platform down to the 2F concourse, tap out at the ticket gate, and take the elevator down to 1F near Exit 3.",
+      "ja": "聖水駅（2号線・高架駅）では、地上3階ホームからエレベーターで2階コンコースへ下り、改札を出て、3番出口近くのエレベーターで1階へ下ります。"
+    },
+    "sources": [
+      {
+        "url": "http://www.seoulmetro.co.kr/kr/cyberStation.do",
+        "title": "Seoul Metro Cyber Station: Seongsu Station map"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official station maps desk research"
+  },
+  {
+    "id": "transit.bus.tap-both",
+    "kind": "card-rule",
+    "evidence": "B",
+    "text": {
+      "en": "On Seoul buses, board through the front door and tap your transit card. Before getting off through the rear door, tap your card again on the rear reader. If you don't tap out, a penalty of up to ₩800 is added on your next ride and you lose the transfer discount.",
+      "ja": "ソウルのバスは前扉から乗って交通カードをタッチし、後ろ扉から降りる前にもう一度タッチします。降りるときにタッチしないと、次の乗車時に最大800ウォンが追加され、乗り換え割引も受けられません。"
+    },
+    "sources": [
+      {
+        "url": "https://news.seoul.go.kr/traffic/archives/1560",
+        "title": "Seoul Metropolitan Government: Public transit fare & transfer rules"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official transit policy desk research",
+    "data": {
+      "penaltyMax": 800
+    }
+  },
+  {
+    "id": "transit.transfer.30min-rule",
+    "kind": "card-rule",
+    "evidence": "B",
+    "text": {
+      "en": "With a transit card (Tmoney or WOWPASS), transfers between the subway and Seoul buses get the transfer discount within 30 minutes of tapping out (60 minutes between 21:00 and 07:00), up to 4 transfers (5 rides). Transferring to the same bus route number does not get a discount.",
+      "ja": "交通カード（Tmoney・WOWPASS）を使うと、降りてタッチしてから30分以内（21:00〜翌7:00は60分以内）なら地下鉄とソウルのバスの乗り換えが最大4回（5乗車）まで乗り換え割引になります。同じ番号のバスへの乗り換えは割引されません。"
+    },
+    "sources": [
+      {
+        "url": "https://news.seoul.go.kr/traffic/archives/1560",
+        "title": "Seoul Metropolitan Government: Public transit fare & transfer rules"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official transit policy desk research",
+    "data": {
+      "minutes": 30,
+      "nightMinutes": 60,
+      "maxTransfers": 4
+    }
+  },
+  {
+    "id": "transit.bus.cashless",
+    "kind": "card-rule",
+    "evidence": "B",
+    "text": {
+      "en": "Most Seoul city buses are cashless and do not have cash fare boxes. Prepare a transit card (Tmoney, WOWPASS, or Climate Card) with at least ₩1,500 before boarding.",
+      "ja": "ソウル市内のほとんどのバスは現金なしのバスで、運賃箱がありません。乗る前に1,500ウォン以上入った交通カード（Tmoney・WOWPASS・Climate Card）を用意してください。"
+    },
+    "sources": [
+      {
+        "url": "https://news.seoul.go.kr/traffic/archives/510341",
+        "title": "Seoul Metropolitan Government: Cashless city bus expansion"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official transit policy desk research",
+    "data": {
+      "baseFare": 1500
+    }
+  },
+  {
+    "id": "transit.taxi.base-fare",
+    "kind": "fare",
+    "evidence": "B",
+    "text": {
+      "en": "Seoul standard medium taxis start at a base fare of ₩4,800 for the first 1.6 km. Late-night surcharges of 20% to 40% apply between 22:00 and 04:00. Deluxe (black) and large (van) taxis start at ₩7,000 for the first 3 km with no late-night surcharge.",
+      "ja": "ソウルの一般中型タクシーは最初の1.6kmまで基本料金4,800ウォンで、22:00〜翌4:00は20%〜40%の深夜割増がかかります。模範タクシー（黒）と大型タクシーは最初の3kmまで7,000ウォンで、深夜割増はありません。"
+    },
+    "sources": [
+      {
+        "url": "https://news.seoul.go.kr/traffic/archives/295",
+        "title": "Seoul Metropolitan Government: Taxi fare guide"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official transit policy desk research",
+    "data": {
+      "standardBase": 4800,
+      "deluxeBase": 7000
+    }
+  },
+  {
+    "id": "transit.taxi.payment",
+    "kind": "service",
+    "evidence": "B",
+    "text": {
+      "en": "Seoul taxis accept Tmoney transit cards, credit/debit cards, and cash. If an overseas credit card is declined by the taxi reader, you can tap your Tmoney balance instead or ask for a printed receipt.",
+      "ja": "ソウルのタクシーはTmoney交通カード、クレジットカード・デビットカード、現金が使えます。海外発行のクレジットカードが端末で通らないときは、Tmoney残高でタッチして払うか、領収書をもらってください。"
+    },
+    "sources": [
+      {
+        "url": "https://english.visitkorea.or.kr/svc/contents/infoHtmlView.do?vcontsId=140659",
+        "title": "VisitKorea (KTO): Taxis in Korea & payment methods"
+      }
+    ],
+    "verifiedAt": "2026-10-02",
+    "verifiedBy": "Official tourism guide desk research"
   }
 ]

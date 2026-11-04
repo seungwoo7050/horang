@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { claims, phrases } from "@/content";
 import { layoutRoute, MAP, validateStation } from "./graph";
+import { hubStations } from "./hub-stations";
 import { seoulStation } from "./seoul-station";
 import type { Station } from "./types";
 
@@ -65,6 +66,29 @@ describe("Seoul Station graph", () => {
     expect(l.floors.find((f) => f.floor === "B7")?.skipBefore).toBe(true);
     expect(l.floors.find((f) => f.floor === "B2")?.place).toBe("line-4-platform");
     expect(l.gates).toHaveLength(1);
+  });
+
+  it("all 5 hub stations (Seoul, Hongik, Myeong-dong, Gangnam, Seongsu) pass validation and layout", () => {
+    const phraseIds = new Set(phrases.map((p) => p.id));
+    expect(hubStations.map((s) => s.id)).toEqual([
+      "seoul-station",
+      "hongik-univ",
+      "myeong-dong",
+      "gangnam",
+      "seongsu",
+    ]);
+    for (const station of hubStations) {
+      expect(validateStation(station, claimIds), station.id).toEqual([]);
+      for (const r of station.routes) {
+        const { stepEnds, stops } = layoutRoute(station, r.id);
+        expect(stepEnds).toHaveLength(r.steps.length);
+        expect(stepEnds.at(-1)).toBe(1);
+        expect(stops).toHaveLength(r.steps.length + 1);
+        for (const s of r.steps) {
+          expect(phraseIds).toContain(s.phrase ?? "station.where-elevator");
+        }
+      }
+    }
   });
 });
 

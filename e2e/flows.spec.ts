@@ -106,6 +106,45 @@ test("station: Line 1 flags unchecked steps where they happen and walks three st
   await expect(page.getByRole("heading", { name: "You made it!" })).toBeVisible();
 });
 
+test("station: hub station selector switches to Hongik Univ., Myeong-dong, Gangnam, and Seongsu elevator routes", async ({
+  page,
+}) => {
+  await page.goto("/en/station/");
+  await page.getByRole("button", { name: "Hongik Univ." }).click();
+  await expect(
+    page.getByRole("heading", { name: "At Hongik Univ. Station, where are you going?" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: /AREX → Line 2 transfer/ }).click();
+  await expect(
+    page.getByRole("heading", { name: "Take the elevator from B4 up to B3" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Next" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Pass the transfer gate to the B2 Line 2 platform" }),
+  ).toBeVisible();
+});
+
+test("transit: city bus rules, taxi guide, and full-screen driver PhraseShow card", async ({
+  page,
+}) => {
+  await page.goto("/en/");
+  await page.getByRole("link", { name: /City bus & taxi guide/ }).click();
+  await expect(page).toHaveURL(/\/en\/transit\/$/);
+  await expect(
+    page.getByRole("heading", { name: "How are you getting around the city?" }),
+  ).toBeVisible();
+  await expect(page.getByText(/30 minutes/).first()).toBeVisible();
+  await page.getByRole("button", { name: "Taxi Guide" }).click();
+  await expect(page.getByText(/₩4,800/).first()).toBeVisible();
+
+  await page.getByRole("button", { name: /open the trunk/ }).click();
+  await page.getByRole("button", { name: "Show big" }).click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog.locator('blockquote[lang="ko"]')).toContainText("트렁크 좀 열어 주세요");
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
+});
+
 test("staff: switching sentences and calling 1330", async ({ page }) => {
   await page.goto("/ja/staff/");
   await page.getByRole("button", { name: "エレベーターはどこですか。" }).click();

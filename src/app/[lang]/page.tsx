@@ -10,7 +10,7 @@ import { getMessages, isLocale } from "@/i18n";
 import { cn } from "@/lib/utils";
 import styles from "./home.module.css";
 
-const SITUATIONS = ["gate", "card", "arex", "station"] as const;
+const SITUATIONS = ["gate", "card", "arex", "station", "transit"] as const;
 
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
