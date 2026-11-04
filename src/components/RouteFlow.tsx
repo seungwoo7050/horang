@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
+import { cn } from "@/lib/utils";
 import type { RouteLayout } from "@/station-map/graph";
 import styles from "./flow.module.css";
 import { RouteMap } from "./RouteMap";
@@ -11,6 +12,7 @@ import { SmoothHeight } from "./SmoothHeight";
 import { FlowNav } from "./FlowNav";
 import { Screen, ScreenHeader } from "./Screen";
 import { Scene } from "./Brand";
+import { Button } from "./ui/button";
 import { useFlowHistory, type FlowCodec } from "./useFlowHistory";
 
 export type RouteChoice = {
@@ -72,7 +74,7 @@ const codecFor = (routes: RouteChoice[]): FlowCodec<State> => {
   };
 };
 
-/** 서울역 경로: 목적지 고르기 → 리본을 따라 한 단계씩 */
+/** 역 경로: 목적지 고르기 → 리본을 따라 한 단계씩 */
 export function RouteFlow({ lang, routes, places }: Props) {
   const t = getMessages(lang);
   const s = t.station;
@@ -96,12 +98,12 @@ export function RouteFlow({ lang, routes, places }: Props) {
   if (!route) {
     return (
       <Screen lang={lang} header={<ScreenHeader left={left} title={s.title} morph="station" />}>
-        <div className={`${styles.stage} ${styles[dir]}`}>
+        <div className={cn(styles.stage, styles[dir], "flex flex-col gap-4")}>
           <div className={styles.sceneHead}>
             <h1 className={styles.heading}>{s.ask}</h1>
             <Scene name="explore" />
           </div>
-          <ul className={styles.options}>
+          <ul className={cn(styles.options, "flex flex-col gap-3")}>
             {routes.map((r) => (
               <li key={r.id}>
                 <button
@@ -136,19 +138,22 @@ export function RouteFlow({ lang, routes, places }: Props) {
       header={<ScreenHeader left={left} title={route.label} />}
       actions={
         arrived ? (
-          <Link href={`/${lang}/`} className={styles.primary} onClick={holdLink}>
-            {s.home}
-          </Link>
+          <Button asChild className={styles.primary}>
+            <Link href={`/${lang}/`} onClick={holdLink}>
+              {s.home}
+            </Link>
+          </Button>
         ) : (
-          <div className={styles.row}>
-            <button
+          <div className={cn(styles.row, "grid grid-cols-2 gap-3")}>
+            <Button
               type="button"
+              variant="secondary"
               className={styles.secondary}
               onClick={() => setHelpAt(help ? null : here)}
             >
               {s.cantFind}
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
               className={styles.primary}
               onClick={(e) =>
@@ -156,7 +161,7 @@ export function RouteFlow({ lang, routes, places }: Props) {
               }
             >
               <MorphLabel>{last ? s.done : s.next}</MorphLabel>
-            </button>
+            </Button>
           </div>
         )
       }
@@ -175,7 +180,10 @@ export function RouteFlow({ lang, routes, places }: Props) {
             <h1 className={styles.heading}>{s.arrived}</h1>
           </div>
         ) : (
-          <div key={`${route.id}-${step}`} className={`${styles.stage} ${styles[dir]}`}>
+          <div
+            key={`${route.id}-${step}`}
+            className={cn(styles.stage, styles[dir], "flex flex-col gap-4")}
+          >
             <p className={styles.srOnly}>{stepLabel}</p>
             <h1 className={styles.heading}>{current.title}</h1>
             <p className={styles.body}>{current.body}</p>

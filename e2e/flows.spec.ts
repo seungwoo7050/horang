@@ -593,4 +593,22 @@ test.describe("fewer template signs", () => {
     const box = (await label.boundingBox())!;
     expect(box.width).toBeLessThanOrEqual(1);
   });
+
+  test("responsive viewports (390px, 768px, 1440px): zero horizontal overflow in light and dark modes", async ({
+    page,
+  }) => {
+    for (const width of [390, 768, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      for (const scheme of ["light", "dark"] as const) {
+        await page.emulateMedia({ colorScheme: scheme });
+        for (const path of ["/en/", "/ja/", "/en/arex/", "/en/gate/", "/en/station/"]) {
+          await page.goto(path);
+          const overflow = await page.evaluate(
+            () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+          );
+          expect(overflow, `${width}px ${scheme} ${path}`).toBeLessThanOrEqual(0);
+        }
+      }
+    }
+  });
 });

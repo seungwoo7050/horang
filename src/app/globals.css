@@ -1,8 +1,24 @@
 /*
- * 디자인 토큰 — B · Night arrival (DESIGN.md §3-1·§3-2).
- * 값은 후보이며 실기기 확인 후 확정한다. dur-ribbon 500ms·ease-enter는 권장값으로 먼저 넣었다(2026-10-01).
- * 토큰 밖의 색·폰트·모션을 화면에서 직접 쓰지 않는다(CLAUDE.md).
+ * 디자인 토큰 — B · Night arrival (DESIGN.md §3-1·§3-2) + Tailwind CSS v4 & shadcn/ui 매핑.
+ * 토큰 밖의 색·폰트·모션을 화면에서 직접 쓰지 않는다(AGENTS.md).
  */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme inline {
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-ink);
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-ink);
+  --color-primary: var(--color-ribbon-fill);
+  --color-primary-foreground: var(--color-on-ribbon);
+  --color-secondary: var(--color-surface-2);
+  --color-secondary-foreground: var(--color-ink);
+  --color-muted: var(--color-muted);
+  --color-muted-foreground: var(--color-muted);
+  --color-border: var(--color-line);
+  --color-ring: var(--color-ribbon);
+}
 
 :root {
   /* 색: 라이트 */

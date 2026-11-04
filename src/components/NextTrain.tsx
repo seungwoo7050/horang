@@ -4,6 +4,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
 import { koreaMinutes, minutesOf, nextDepartures } from "@/lib/next-departures";
 import styles from "./NextTrain.module.css";
+import { Card } from "./ui/card";
 
 export type TrainRow = { depart: string; arrive: string };
 
@@ -61,7 +62,7 @@ export function NextTrain({ lang, rows, from, to, meta }: Props) {
 
   return (
     // 패널 전체를 live로 두면 매분 바뀌는 시계·남은 분이 읽는 중에 끼어든다. 알릴 것만 아래 숨은 줄에
-    <section className={styles.panel}>
+    <Card className={styles.panel}>
       <p className={styles.announce} aria-live="polite">
         {news}
       </p>
@@ -93,6 +94,6 @@ export function NextTrain({ lang, rows, from, to, meta }: Props) {
       )}
       <p className={styles.note}>{t.note}</p>
       {meta}
-    </section>
+    </Card>
   );
 }

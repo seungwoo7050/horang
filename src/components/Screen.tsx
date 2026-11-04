@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ViewTransition, type ReactNode } from "react";
 import { getMessages, type Locale } from "@/i18n";
+import { cn } from "@/lib/utils";
 import { BrandLettering } from "./Brand";
 import { NavIcon } from "./NavIcon";
 import styles from "./Screen.module.css";
@@ -8,7 +9,12 @@ import styles from "./Screen.module.css";
 /** 왼쪽 위 닫기(첫 화면으로). 단계 없는 화면용 — 흐름 화면은 FlowNav */
 export function CloseLink({ href, label }: { href: string; label: string }) {
   return (
-    <Link href={href} className={styles.back} aria-label={label} transitionTypes={["nav-back"]}>
+    <Link
+      href={href}
+      className={cn(styles.back, "grid place-items-center rounded-[var(--radius-pill)]")}
+      aria-label={label}
+      transitionTypes={["nav-back"]}
+    >
       <NavIcon mode="close" />
     </Link>
   );
@@ -35,13 +41,20 @@ export function ScreenHeader({
   morph?: string;
   aside?: ReactNode;
 }) {
-  const titleEl = title ? <span className={styles.title}>{title}</span> : null;
+  const titleEl = title ? (
+    <span className={cn(styles.title, "text-center font-bold text-[length:var(--text-base)]")}>
+      {title}
+    </span>
+  ) : null;
   return (
     // 화면 전환 때 헤더는 제자리(globals.css의 screen-header). CSS Modules가 이름을 바꾸지 않게 인라인으로 둔다
-    <header className={styles.header} style={{ viewTransitionName: "screen-header" }}>
+    <header
+      className={cn(styles.header, "items-center")}
+      style={{ viewTransitionName: "screen-header" }}
+    >
       {left}
       {titleEl && morph ? <MorphTitle name={morph}>{titleEl}</MorphTitle> : titleEl}
-      <span className={styles.aside}>{aside}</span>
+      <span className={cn(styles.aside, "justify-self-end whitespace-nowrap")}>{aside}</span>
     </header>
   );
 }
@@ -49,7 +62,15 @@ export function ScreenHeader({
 /** 엄지 닿는 아래쪽 동작(DESIGN.md §6-1) */
 export function Actions({ children, flow = false }: { children: ReactNode; flow?: boolean }) {
   return (
-    <div className={flow ? `${styles.actions} ${styles.flow}` : styles.actions}>{children}</div>
+    <div
+      className={cn(
+        styles.actions,
+        "flex flex-col gap-3 pt-3 bg-[var(--color-bg)]",
+        flow && styles.flow,
+      )}
+    >
+      {children}
+    </div>
   );
 }
 
@@ -71,7 +92,7 @@ type Props = {
   children: ReactNode;
 };
 
-/** 한 화면 한 상황: 위 헤더, 가운데 내용, 아래 동작 */
+/** 한 화면 한 상황: 위 헤더, 가운데 내용, 아래 동작 (모바일·태블릿·데스크톱 중심 정렬 컨테이너) */
 export function Screen({
   lang,
   title,
@@ -92,11 +113,11 @@ export function Screen({
   // 앞으로 가면 화면이 오른쪽에서, 뒤로 가면 왼쪽에서 들어온다. 헤더는 이름이 따로 있어 제자리(DESIGN.md §6-1)
   return (
     <ViewTransition enter={SLIDE} exit={SLIDE} default="none">
-      <div className={styles.screen}>
+      <div className={cn(styles.screen, "mx-auto flex w-full max-w-[480px] flex-col gap-5")}>
         {header ?? (
           <ScreenHeader left={left} title={back ? title : undefined} morph={morph} aside={aside} />
         )}
-        <main className={styles.main}>{children}</main>
+        <main className={cn(styles.main, "flex flex-1 flex-col gap-4")}>{children}</main>
         {actions ? <Actions flow={actionsFlow}>{actions}</Actions> : null}
       </div>
     </ViewTransition>
