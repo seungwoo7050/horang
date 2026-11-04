@@ -32,9 +32,17 @@ export type RouteChoice = {
   evidence: ReactNode;
 };
 
+export type StationGroup = {
+  id: string;
+  name: string;
+  ask: string;
+  routes: RouteChoice[];
+};
+
 type Props = {
   lang: Locale;
   routes: RouteChoice[];
+  stations?: StationGroup[];
   places: Record<string, string>;
 };
 
@@ -74,17 +82,21 @@ const codecFor = (routes: RouteChoice[]): FlowCodec<State> => {
   };
 };
 
-/** 역 경로: 목적지 고르기 → 리본을 따라 한 단계씩 */
-export function RouteFlow({ lang, routes, places }: Props) {
+/** 역 경로: 거점역 및 목적지 고르기 → 리본을 따라 한 단계씩 */
+export function RouteFlow({ lang, routes, stations, places }: Props) {
   const t = getMessages(lang);
   const s = t.station;
-  const { state, dir, push, back, holdLink } = useFlowHistory(codecFor(routes));
+  const allRoutes = stations ? stations.flatMap((st) => st.routes) : routes;
+  const { state, dir, push, back, holdLink } = useFlowHistory(codecFor(allRoutes));
   const { route: routeId, step, arrived } = state;
+  const [stationId, setStationId] = useState(stations?.[0]?.id ?? "seoul-station");
   // "못 찾겠어요" 문장 카드는 단계를 바꾸지 않는다(기록에 넣지 않음). 펼친 단계가 지금 단계일 때만 보인다
   const here = `${routeId}-${step}-${arrived}`;
   const [helpAt, setHelpAt] = useState(null as string | null);
   const help = helpAt === here;
-  const route = routes.find((r) => r.id === routeId);
+  const route = allRoutes.find((r) => r.id === routeId);
+  const activeStation = stations?.find((st) => st.id === stationId) ?? stations?.[0];
+  const visibleRoutes = activeStation ? activeStation.routes : routes;
 
   const left = (
     <FlowNav
@@ -97,14 +109,40 @@ export function RouteFlow({ lang, routes, places }: Props) {
 
   if (!route) {
     return (
-      <Screen lang={lang} header={<ScreenHeader left={left} title={s.title} morph="station" />}>
+      <Screen
+        lang={lang}
+        header={<ScreenHeader left={left} title={activeStation?.name ?? s.title} morph="station" />}
+      >
         <div className={cn(styles.stage, styles[dir], "flex flex-col gap-4")}>
           <div className={styles.sceneHead}>
-            <h1 className={styles.heading}>{s.ask}</h1>
+            <h1 className={styles.heading}>{activeStation?.ask ?? s.ask}</h1>
             <Scene name="explore" />
           </div>
+          {stations && stations.length > 1 ? (
+            <div role="group" aria-label={s.stationSelect} className="flex flex-wrap gap-2">
+              {stations.map((st) => {
+                const selected = st.id === activeStation?.id;
+                return (
+                  <button
+                    key={st.id}
+                    type="button"
+                    aria-pressed={selected}
+                    onClick={() => setStationId(st.id)}
+                    className={cn(
+                      "min-h-10 cursor-pointer rounded-[var(--radius-sm)] border border-solid px-3 py-1.5 text-[length:var(--text-sm)] font-semibold transition-colors",
+                      selected
+                        ? "border-[var(--color-ribbon)] bg-[var(--color-ribbon-fill)] text-[var(--color-on-ribbon)]"
+                        : "border-[var(--color-line)] bg-[var(--color-surface)] text-[var(--color-muted)]",
+                    )}
+                  >
+                    {st.name}
+                  </button>
+                );
+              })}
+            </div>
+          ) : null}
           <ul className={cn(styles.options, "flex flex-col gap-3")}>
-            {routes.map((r) => (
+            {visibleRoutes.map((r) => (
               <li key={r.id}>
                 <button
                   type="button"

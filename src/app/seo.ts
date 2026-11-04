@@ -7,7 +7,7 @@ import { getMessages, locales, type Locale } from "@/i18n";
 export const SITE_URL = (process.env.SITE_URL || site.url).replace(/\/$/, "");
 
 /** 앱의 화면 경로(언어 뒤). "" = 첫 화면 */
-export const PAGES = ["", "gate/", "card/", "arex/", "station/", "staff/"] as const;
+export const PAGES = ["", "gate/", "card/", "arex/", "station/", "transit/", "staff/"] as const;
 export type PagePath = (typeof PAGES)[number];
 
 export const pathFor = (lang: Locale, page: PagePath) => `/${lang}/${page}`;

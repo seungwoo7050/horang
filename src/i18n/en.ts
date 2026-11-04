@@ -25,6 +25,10 @@ export const en = {
       card: { title: "Which card?", hint: "Single-journey, Tmoney, Climate Card" },
       arex: { title: "AREX: Express or All-stop?", hint: "Airport ↔ Seoul Station" },
       station: { title: "Seoul Station: exits & transfers", hint: "Lines 1 · 4, KTX, Exit 15" },
+      transit: {
+        title: "City bus & taxi guide",
+        hint: "Tap-out rule, 30-min transfers, driver cards",
+      },
     },
     staff: "Show this to staff",
     staffKo: "직원에게 보여 주기",
@@ -139,6 +143,29 @@ export const en = {
   },
   station: {
     title: "Seoul Station",
+    stationSelect: "Station",
+    stations: {
+      "seoul-station": {
+        name: "Seoul Station",
+        ask: "From the AREX platform, where are you going?",
+      },
+      "hongik-univ": {
+        name: "Hongik Univ.",
+        ask: "At Hongik Univ. Station, where are you going?",
+      },
+      "myeong-dong": {
+        name: "Myeong-dong",
+        ask: "At Myeong-dong Station, where are you going?",
+      },
+      gangnam: {
+        name: "Gangnam",
+        ask: "At Gangnam Station, where are you going?",
+      },
+      seongsu: {
+        name: "Seongsu",
+        ask: "At Seongsu Station, where are you going?",
+      },
+    },
     ask: "From the AREX platform, where are you going?",
     schematic: "Elevator routes for luggage. Maps are schematic, not to scale.",
     legend: { start: "Start", gate: "Ticket gate" },
@@ -150,6 +177,31 @@ export const en = {
         label: "Exit 15 (KTX side)",
         hint: "Elevator route to 1F",
         line: "Exit 15",
+      },
+      "hongik-arex-to-line-2": {
+        label: "AREX → Line 2 transfer",
+        hint: "Elevator route from B4 via B3 to B2",
+        line: "Line 2",
+      },
+      "hongik-line-2-to-exit-9": {
+        label: "Line 2 → Exit 9 (street elevator)",
+        hint: "Elevator from B2 via B1 to 1F",
+        line: "Exit 9",
+      },
+      "myeongdong-to-exit-1": {
+        label: "Line 4 → Exit 1 (street elevator)",
+        hint: "Elevator from B3 via B2 to 1F",
+        line: "Exit 1",
+      },
+      "gangnam-to-exit-1": {
+        label: "Line 2 → Exit 1 (street elevator)",
+        hint: "Elevator from B2 via B1 to 1F",
+        line: "Exit 1",
+      },
+      "seongsu-to-exit-3": {
+        label: "Line 2 → Exit 3 (street elevator)",
+        hint: "Elevator from 3F via 2F to 1F",
+        line: "Exit 3",
       },
     },
     steps: {
@@ -173,6 +225,62 @@ export const en = {
         title: "Up to Exit 15",
         body: "Take the elevator up to Exit 15 on 1F. It's signed for Seoul Station (KTX and regular trains).",
       },
+      "hongik-up-b3": {
+        title: "Take the elevator from B4 up to B3",
+        body: "From the AREX platform on B4, take the elevator up to the B3 concourse.",
+      },
+      "hongik-transfer-b2": {
+        title: "Pass the transfer gate to the B2 Line 2 platform",
+        body: "Tap your card at the transfer gate, take the elevator down to B2, and walk to the Line 2 platform.",
+      },
+      "hongik-up-b1": {
+        title: "Take the elevator from B2 up to B1",
+        body: "From the Line 2 platform on B2, take the elevator up to the B1 concourse.",
+      },
+      "hongik-out-gate": {
+        title: "Tap out at the B1 ticket gate",
+        body: "Tap your transit card at the gate and head toward Exits 8 and 9.",
+      },
+      "hongik-up-exit-9": {
+        title: "Take the street elevator up to 1F (Exit 9)",
+        body: "Take the elevator between Exits 8 and 9 up to street level (1F).",
+      },
+      "myeongdong-up-b2": {
+        title: "Take the elevator from B3 up to B2",
+        body: "From the Line 4 platform on B3, take the elevator up to the B2 concourse.",
+      },
+      "myeongdong-out-gate": {
+        title: "Tap out at the B2 ticket gate",
+        body: "Tap out at the ticket gate and follow signs toward Exit 1.",
+      },
+      "myeongdong-up-1f": {
+        title: "Take the elevator near Exit 1 up to 1F",
+        body: "Take the street elevator near Exit 1 up to 1F.",
+      },
+      "gangnam-up-b1": {
+        title: "Take the elevator from B2 up to B1",
+        body: "From the Line 2 platform on B2, take the elevator up to the B1 concourse.",
+      },
+      "gangnam-out-gate": {
+        title: "Tap out at the B1 ticket gate",
+        body: "Tap your transit card at the gate and follow signs toward Exit 1.",
+      },
+      "gangnam-up-1f": {
+        title: "Take the street elevator near Exit 1 up to 1F",
+        body: "Take the elevator near Exit 1 up to street level (1F).",
+      },
+      "seongsu-down-2f": {
+        title: "Take the elevator from 3F down to 2F",
+        body: "From the elevated Line 2 platform on 3F, take the elevator down to the 2F concourse.",
+      },
+      "seongsu-out-gate": {
+        title: "Tap out at the 2F ticket gate",
+        body: "Tap your transit card at the gate and head toward Exit 3.",
+      },
+      "seongsu-down-1f": {
+        title: "Take the elevator down to 1F (Exit 3)",
+        body: "Take the elevator near Exit 3 down to street level (1F).",
+      },
     },
     places: {
       "arex-platform": "AREX platform",
@@ -181,6 +289,20 @@ export const en = {
       "line-4-platform": "Line 4 platform",
       "line-1-platform": "Line 1 platform",
       "exit-15": "Exit 15",
+      "hongik-arex-platform": "AREX platform",
+      "hongik-arex-concourse": "AREX concourse",
+      "hongik-line-2-platform": "Line 2 platform",
+      "hongik-line-2-concourse": "Line 2 concourse",
+      "hongik-exit-9": "Exit 9 (1F)",
+      "myeongdong-platform": "Line 4 platform",
+      "myeongdong-concourse": "B2 concourse",
+      "myeongdong-exit-1": "Exit 1 (1F)",
+      "gangnam-platform": "Line 2 platform",
+      "gangnam-concourse": "B1 concourse",
+      "gangnam-exit-1": "Exit 1 (1F)",
+      "seongsu-platform": "Line 2 platform",
+      "seongsu-concourse": "2F concourse",
+      "seongsu-exit-3": "Exit 3 (1F)",
     },
     mapLabel: "Route map for {route}, from the AREX platform. Schematic, not to scale.",
     unconfirmed: {
@@ -195,6 +317,45 @@ export const en = {
     cantFind: "Can't find it?",
     arrived: "You made it!",
     home: "Back to start",
+  },
+  transit: {
+    title: "Bus & Taxi Guide",
+    ask: "How are you getting around the city?",
+    modeLabel: "Transit mode",
+    modes: {
+      bus: "City Bus & Transfers",
+      taxi: "Taxi Guide",
+    },
+    bus: {
+      headline: "Tap on at the front door, tap off at the rear door",
+      summary:
+        "Most Seoul buses are cashless. Always tap your card again before stepping off so you keep your 30-minute transfer discount and avoid penalty fares.",
+      cards: {
+        tapBothTitle: "1. Front door on, rear door off (tap both!)",
+        tapBothBody:
+          "Board at the front and tap your Tmoney or WOWPASS. Before getting off at the rear door, tap the rear reader.",
+        transferTitle: "2. Free transfer window: 30 minutes",
+        transferBody:
+          "Subway ↔ bus transfers are discounted within 30 minutes of tapping out (60 minutes from 21:00 to 07:00), up to 4 transfers.",
+      },
+      factsHead: "Official rules & fares",
+    },
+    taxi: {
+      headline: "Standard vs. Deluxe taxis & payment",
+      summary:
+        "Show the Korean destination card below to your driver. Taxis take Tmoney, credit cards, or cash.",
+      cards: {
+        standardTitle: "Standard medium taxi (₩4,800 base)",
+        standardBody:
+          "Orange, white, or silver cars. Base fare covers 1.6 km; 20%–40% late-night surcharge from 22:00 to 04:00.",
+        deluxeTitle: "Deluxe / Large van taxi (₩7,000 base)",
+        deluxeBody:
+          "Black cars with gold stripes or large vans. Base fare covers 3 km with no late-night surcharge.",
+      },
+      factsHead: "Official fares & payment rules",
+    },
+    driverHead: "Show this to the driver",
+    driverSub: "Tap a sentence, then tap “Show big” to fill the screen.",
   },
   staff: {
     title: "Show this to staff",

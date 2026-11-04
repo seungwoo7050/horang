@@ -33,6 +33,10 @@ export const ja: Messages = {
       card: { title: "どのカードを使う？", hint: "1回用・Tmoney・Climate Card" },
       arex: { title: `AREX：${B}直通列車と${B}一般列車`, hint: "空港 ↔ ソウル駅" },
       station: { title: `ソウル駅：${B}出口と${B}乗り換え`, hint: "1号線・4号線・KTX・15番出口" },
+      transit: {
+        title: `市内バス・${B}タクシー案内`,
+        hint: "降車タッチ・30分乗り換え・運転手さんへの文",
+      },
     },
     staff: "スタッフに見せる",
     staffKo: "직원에게 보여 주기",
@@ -147,6 +151,29 @@ export const ja: Messages = {
   },
   station: {
     title: "ソウル駅",
+    stationSelect: "駅",
+    stations: {
+      "seoul-station": {
+        name: "ソウル駅",
+        ask: `空港鉄道の${B}ホームから、${B}どこへ${B}行きますか？`,
+      },
+      "hongik-univ": {
+        name: "弘大入口駅",
+        ask: `弘大入口駅で、${B}どこへ${B}行きますか？`,
+      },
+      "myeong-dong": {
+        name: "明洞駅",
+        ask: `明洞駅で、${B}どこへ${B}行きますか？`,
+      },
+      gangnam: {
+        name: "江南駅",
+        ask: `江南駅で、${B}どこへ${B}行きますか？`,
+      },
+      seongsu: {
+        name: "聖水駅",
+        ask: `聖水駅で、${B}どこへ${B}行きますか？`,
+      },
+    },
     ask: `空港鉄道の${B}ホームから、${B}どこへ${B}行きますか？`,
     schematic: "荷物があっても通れるエレベーター経路です。図は略図で、縮尺は正確ではありません。",
     legend: { start: "出発", gate: "改札" },
@@ -166,6 +193,31 @@ export const ja: Messages = {
         label: "15番出口（KTX側）",
         hint: `1階への${B}エレベーター経路`,
         line: "15番出口",
+      },
+      "hongik-arex-to-line-2": {
+        label: "空港鉄道 → 2号線乗り換え",
+        hint: `地下4階から${B}地下3階を${B}通って${B}地下2階へ`,
+        line: "2号線",
+      },
+      "hongik-line-2-to-exit-9": {
+        label: "2号線 → 9番出口（エレベーター）",
+        hint: `地下2階から${B}地下1階を${B}通って${B}1階へ`,
+        line: "9番出口",
+      },
+      "myeongdong-to-exit-1": {
+        label: "4号線 → 1番出口（エレベーター）",
+        hint: `地下3階から${B}地下2階を${B}通って${B}1階へ`,
+        line: "1番出口",
+      },
+      "gangnam-to-exit-1": {
+        label: "2号線 → 1番出口（エレベーター）",
+        hint: `地下2階から${B}地下1階を${B}通って${B}1階へ`,
+        line: "1番出口",
+      },
+      "seongsu-to-exit-3": {
+        label: "2号線 → 3番出口（エレベーター）",
+        hint: `地上3階から${B}2階を${B}通って${B}1階へ`,
+        line: "3番出口",
       },
     },
     steps: {
@@ -189,6 +241,62 @@ export const ja: Messages = {
         title: `15番出口へ${B}上がる`,
         body: "エレベーターで1階の15番出口へ上がります。15番出口はソウル駅（KTX・一般列車）の案内です。",
       },
+      "hongik-up-b3": {
+        title: `エレベーターで${B}地下4階から${B}地下3階へ`,
+        body: "地下4階の空港鉄道ホームから、エレベーターで地下3階コンコースへ上がります。",
+      },
+      "hongik-transfer-b2": {
+        title: `乗り換え改札を${B}通って${B}地下2階の${B}2号線ホームへ`,
+        body: "乗り換え改札にカードをタッチし、エレベーターで地下2階へ下りて2号線ホームへ進みます。",
+      },
+      "hongik-up-b1": {
+        title: `エレベーターで${B}地下2階から${B}地下1階へ`,
+        body: "地下2階の2号線ホームから、エレベーターで地下1階コンコースへ上がります。",
+      },
+      "hongik-out-gate": {
+        title: `地下1階の${B}改札を${B}出る`,
+        body: "改札に交通カードをタッチして出て、8番・9番出口方面へ進みます。",
+      },
+      "hongik-up-exit-9": {
+        title: `地上エレベーターで${B}1階（9番出口）へ`,
+        body: "8番・9番出口のあいだにあるエレベーターで地上1階へ上がります。",
+      },
+      "myeongdong-up-b2": {
+        title: `エレベーターで${B}地下3階から${B}地下2階へ`,
+        body: "地下3階の4号線ホームから、エレベーターで地下2階コンコースへ上がります。",
+      },
+      "myeongdong-out-gate": {
+        title: `地下2階の${B}改札を${B}出る`,
+        body: "改札にカードをタッチして出て、1番出口の案内に沿って進みます。",
+      },
+      "myeongdong-up-1f": {
+        title: `1番出口近くの${B}エレベーターで${B}1階へ`,
+        body: "1番出口近くの地上エレベーターで1階へ上がります。",
+      },
+      "gangnam-up-b1": {
+        title: `エレベーターで${B}地下2階から${B}地下1階へ`,
+        body: "地下2階の2号線ホームから、エレベーターで地下1階コンコースへ上がります。",
+      },
+      "gangnam-out-gate": {
+        title: `地下1階の${B}改札を${B}出る`,
+        body: "改札に交通カードをタッチして出て、1番出口方面へ進みます。",
+      },
+      "gangnam-up-1f": {
+        title: `1番出口近くの${B}エレベーターで${B}1階へ`,
+        body: "1番出口近くの地上エレベーターで1階へ上がります。",
+      },
+      "seongsu-down-2f": {
+        title: `エレベーターで${B}地上3階から${B}2階へ`,
+        body: "地上3階の2号線ホームから、エレベーターで2階コンコースへ下ります。",
+      },
+      "seongsu-out-gate": {
+        title: `2階の${B}改札を${B}出る`,
+        body: "改札に交通カードをタッチして出て、3番出口方面へ進みます。",
+      },
+      "seongsu-down-1f": {
+        title: `エレベーターで${B}1階（3番出口）へ`,
+        body: "3番出口近くのエレベーターで地上1階へ下ります。",
+      },
     },
     places: {
       "arex-platform": "空港鉄道ホーム",
@@ -197,6 +305,20 @@ export const ja: Messages = {
       "line-4-platform": "4号線ホーム",
       "line-1-platform": "1号線ホーム",
       "exit-15": "15番出口",
+      "hongik-arex-platform": "空港鉄道ホーム",
+      "hongik-arex-concourse": "空港鉄道コンコース",
+      "hongik-line-2-platform": "2号線ホーム",
+      "hongik-line-2-concourse": "2号線コンコース",
+      "hongik-exit-9": "9番出口（1階）",
+      "myeongdong-platform": "4号線ホーム",
+      "myeongdong-concourse": "地下2階コンコース",
+      "myeongdong-exit-1": "1番出口（1階）",
+      "gangnam-platform": "2号線ホーム",
+      "gangnam-concourse": "地下1階コンコース",
+      "gangnam-exit-1": "1番出口（1階）",
+      "seongsu-platform": "2号線ホーム",
+      "seongsu-concourse": "2階コンコース",
+      "seongsu-exit-3": "3番出口（1階）",
     },
     mapLabel: "{route}への経路図（空港鉄道ホームから）。略図で、縮尺は正確ではありません。",
     unconfirmed: {
@@ -211,6 +333,45 @@ export const ja: Messages = {
     cantFind: "見つからない",
     arrived: "着きました！",
     home: "最初に戻る",
+  },
+  transit: {
+    title: "市内バス・タクシー案内",
+    ask: `市内を${B}どう${B}移動しますか？`,
+    modeLabel: "移動手段",
+    modes: {
+      bus: "市内バス・乗り換え",
+      taxi: "タクシー案内",
+    },
+    bus: {
+      headline: `前扉から乗って${B}タッチ、${B}後ろ扉から降りるときも${B}タッチ`,
+      summary:
+        "ソウルのほとんどのバスは現金が使えません。降りる前にもう一度タッチすると、30分以内の乗り換え割引が適用され、追加運賃を防げます。",
+      cards: {
+        tapBothTitle: "1. 前扉で乗車タッチ、後ろ扉で降車タッチ",
+        tapBothBody:
+          "前扉から乗ってTmoneyやWOWPASSをタッチし、後ろ扉から降りる前にもう一度タッチします。",
+        transferTitle: "2. 乗り換え割引は30分以内",
+        transferBody:
+          "降りてタッチしてから30分以内（21時〜翌7時は60分以内）なら、地下鉄とバスの乗り換えが最大4回まで割引されます。",
+      },
+      factsHead: "公式ルールと運賃",
+    },
+    taxi: {
+      headline: `一般タクシーと${B}模範・大型タクシー、${B}支払い方法`,
+      summary:
+        "下の韓国語カードを運転手さんに見せてください。Tmoney交通カード、クレジットカード、現金が使えます。",
+      cards: {
+        standardTitle: "一般中型タクシー（基本4,800ウォン）",
+        standardBody:
+          "オレンジ・白・銀色の車体。最初の1.6kmまで基本料金で、22時〜翌4時は20%〜40%の深夜割増があります。",
+        deluxeTitle: "模範（黒）・大型タクシー（基本7,000ウォン）",
+        deluxeBody:
+          "金色の帯が入った黒い車体や大型バン。最初の3kmまで基本料金で、深夜割増はありません。",
+      },
+      factsHead: "公式運賃と支払いルール",
+    },
+    driverHead: "運転手さん・乗務員に見せる",
+    driverSub: "文を選んで「大きく見せる」を押すと画面いっぱいに表示されます。",
   },
   staff: {
     title: "スタッフに見せる",

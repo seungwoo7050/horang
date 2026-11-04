@@ -20,6 +20,16 @@ export function CardHeader({ className, ...props }: React.ComponentProps<"header
   );
 }
 
+export function CardTitle({ className, ...props }: React.ComponentProps<"h2">) {
+  return (
+    <h2
+      data-slot="card-title"
+      className={cn("m-0 text-[length:var(--text-lg)] font-bold leading-snug", className)}
+      {...props}
+    />
+  );
+}
+
 export function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div data-slot="card-content" className={cn("flex flex-col gap-3", className)} {...props} />

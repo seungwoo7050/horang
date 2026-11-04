@@ -1,11 +1,20 @@
 // 역 안내도 그래프(ARCHITECTURE.md §5). 문구는 담지 않는다 — 이름은 i18n의 map.places에서 id로 찾는다.
 
 /** 이 앱이 그리는 층. 위에서 아래 순서 */
-export const FLOORS = ["1F", "B1", "B2", "B3", "B7"] as const;
+export const FLOORS = ["3F", "2F", "1F", "B1", "B2", "B3", "B4", "B7"] as const;
 export type FloorId = (typeof FLOORS)[number];
 
-/** 층 높이(1F = 0, Bn = -n). 차이가 1보다 크면 사이 층을 건너뛴다 */
-export const FLOOR_LEVEL: Record<FloorId, number> = { "1F": 0, B1: -1, B2: -2, B3: -3, B7: -7 };
+/** 층 높이(1F = 0, nF = n - 1, Bn = -n). 차이가 1보다 크면 사이 층을 건너뛴다 */
+export const FLOOR_LEVEL: Record<FloorId, number> = {
+  "3F": 2,
+  "2F": 1,
+  "1F": 0,
+  B1: -1,
+  B2: -2,
+  B3: -3,
+  B4: -4,
+  B7: -7,
+};
 
 /** 그래프의 점. lane 0은 층 상자의 오른쪽 가장자리(장소), 1 이상은 그 오른쪽의 세로 통로 */
 export type StationNode = {

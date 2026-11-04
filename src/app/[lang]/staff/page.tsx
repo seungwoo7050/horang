@@ -15,12 +15,16 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/staff">) {
   return isLocale(lang) ? pageMetadata(lang, "staff/", getMessages(lang).staff.title) : {};
 }
 
+const STATION_PREFIXES = ["gate.", "card.", "arex.", "station."];
+
 export default async function StaffPage({ params }: PageProps<"/[lang]/staff">) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   const t = getMessages(lang).staff;
-  // 고르는 목록에는 "가리켜 주세요"를 넣지 않는다(크게 보기마다 아래에 붙는다)
-  const choices = phrases.filter((p) => p.id !== POINT_PHRASE);
+  // 고르는 목록에는 역·개찰구·열차 관련 문장만 넣고 "가리켜 주세요"는 크게 보기마다 아래에 붙는다
+  const choices = phrases.filter(
+    (p) => p.id !== POINT_PHRASE && STATION_PREFIXES.some((pre) => p.id.startsWith(pre)),
+  );
   const point = getPhrase(POINT_PHRASE);
   return (
     <Screen lang={lang} back={`/${lang}/`} title={t.title} morph="staff">
