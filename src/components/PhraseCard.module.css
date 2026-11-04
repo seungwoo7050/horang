@@ -1,31 +1,98 @@
+/*
+ * 실물 커뮤니케이션 패스(Tactile Communication Pass):
+ * 상단 패스 캡슐 헤더(.passBar) + 중앙 대형 한국어 타이포(.ko) + 점선 절취선 구분선 + 하단 번역 스텁(.local)을
+ * 하나의 일체형 티켓 프레임(.card) 안에 담는다.
+ */
 .card {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  background: var(--color-surface);
+  border: 2px solid var(--color-ribbon);
+  border-radius: var(--radius);
+  box-shadow: var(--edge);
+  overflow: hidden;
+}
+
+.passBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-5);
+  background: var(--color-pass-stub);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.passDots {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.dotPrimary {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-ribbon-fill);
+  border: 1.5px solid var(--color-ribbon);
+}
+
+.dotMuted {
+  width: 24px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--color-line);
+}
+
+.serial {
+  font-size: var(--text-xs);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
 }
 
 /* 직원이 1m 거리에서 읽는 글자(DESIGN.md §3-2 text-staff) */
 .ko {
   margin: 0;
-  padding: var(--space-6) var(--space-5);
+  padding: var(--space-5);
   background: var(--color-surface);
-  border: 2px solid var(--color-ribbon);
-  border-radius: var(--radius);
   font-size: var(--text-staff);
-  font-weight: 700;
-  line-height: 1.35;
+  font-weight: 800;
+  line-height: 1.32;
   word-break: keep-all;
 }
 
+/* 티켓 하단 절취선 스텁(번역문 + 초안 안내) */
 .local {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-pass-stub);
+  border-top: 2px dashed var(--color-line);
   font-size: var(--text-base);
+}
+
+.localText {
+  font-weight: 600;
+  color: var(--color-ink);
 }
 
 .draft {
   color: var(--color-muted);
   font-size: var(--text-xs);
+}
+
+@media (forced-colors: active) {
+  .card {
+    border: 2px solid CanvasText;
+  }
+
+  .passBar {
+    border-bottom: 1px solid CanvasText;
+  }
+
+  .local {
+    border-top: 1px dashed CanvasText;
+  }
 }

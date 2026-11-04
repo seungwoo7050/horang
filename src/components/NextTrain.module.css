@@ -4,7 +4,8 @@
   gap: var(--space-2);
   padding: var(--space-4);
   background: var(--color-surface);
-  border: 0;
+  border: 1px solid var(--color-line);
+  border-left: 4px solid var(--color-ribbon);
   box-shadow: var(--edge);
   border-radius: var(--radius);
 }
@@ -30,9 +31,19 @@
 .head h2 {
   margin: 0;
   font-size: var(--text-base);
+  font-weight: 800;
 }
 
-.clock,
+.clock {
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-2);
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
 .route,
 .note {
   color: var(--color-muted);
@@ -47,13 +58,20 @@
 }
 
 .none {
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-2);
   font-size: var(--text-md);
+  font-weight: 600;
 }
 
 .list {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
   display: flex;
   flex-direction: column;
 }
@@ -64,7 +82,7 @@
   align-items: baseline;
   gap: var(--space-3);
   padding-block: var(--space-2);
-  border-top: 1px solid var(--color-line);
+  border-top: 1px dashed var(--color-line);
   font-variant-numeric: tabular-nums;
 }
 
@@ -74,6 +92,7 @@
 
 .list strong {
   font-size: var(--text-lg);
+  font-weight: 800;
 }
 
 .list .first strong {
@@ -82,7 +101,11 @@
 }
 
 .list span {
-  font-weight: 600;
+  font-weight: 700;
+}
+
+.list .first span {
+  color: var(--color-ribbon-text);
 }
 
 .list small {
@@ -92,7 +115,8 @@
 
 /* 강제 색상 모드는 box-shadow(edge)를 지운다: 경계를 시스템 색 테두리로 남긴다 */
 @media (forced-colors: active) {
-  .panel {
+  .panel,
+  .list {
     border: 1px solid CanvasText;
   }
 }

@@ -1,7 +1,7 @@
 /*
- * 시내 이동(버스·택시) 화면: 상자 안의 상자(이중 카드)를 쓰지 않는다.
- * 위쪽은 오목한 세그먼트 트랙(.seg), 핵심 수치는 공항철도 화면과 같은 2단 큰 숫자 비교(.compare),
- * 버스 승·하차 태그 동선은 호박색 리본 다이어그램(.diagram)으로 보여 주고, 아래 사실 묶음은 FactSheet 구분선으로만 나눈다.
+ * 시내 이동(버스·택시) 화면:
+ * 위쪽은 오목한 세그먼트 트랙(.seg), 버스 승·하차 태그 동선은 서울 저상버스 측면 리본 다이어그램(.diagram),
+ * 핵심 수치는 2단 티켓 보드(.compare), 아래 사실 묶음은 에디토리얼 FactSheet로 구성한다.
  */
 
 .seg {
@@ -37,7 +37,7 @@
 .diagram {
   display: block;
   width: 100%;
-  height: 76px;
+  height: 92px;
   overflow: visible;
 }
 
@@ -45,6 +45,32 @@
   fill: var(--color-surface);
   stroke: var(--color-line);
   stroke-width: 1.5;
+}
+
+.busStripeBlue {
+  fill: none;
+  stroke: var(--color-transit-blue);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.busStripeGreen {
+  fill: none;
+  stroke: var(--color-transit-green);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.busDoor {
+  fill: var(--color-surface-2);
+  stroke: var(--color-line);
+  stroke-width: 1;
+}
+
+.busWheel {
+  fill: var(--color-ink);
+  stroke: var(--color-surface);
+  stroke-width: 2;
 }
 
 .ribbonTrack {
@@ -79,7 +105,7 @@
 .diagramTag {
   fill: var(--color-ink);
   font-size: var(--text-xs);
-  font-weight: 700;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
   text-anchor: middle;
 }
@@ -87,11 +113,12 @@
 .diagramSub {
   fill: var(--color-muted);
   font-size: var(--text-xs);
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
   text-anchor: middle;
 }
 
-/* 2단 핵심 수치 비교(AREX 비교와 같은 밀도, 중첩 상자 없음) */
+/* 2단 핵심 수치 비교 */
 .compare {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -112,8 +139,36 @@
   gap: var(--space-2);
   padding: var(--space-4);
   background: var(--color-surface);
+  border: 1px solid var(--color-line);
   box-shadow: var(--edge);
   border-radius: var(--radius);
+}
+
+.colPrimary {
+  border-top: 4px solid var(--color-ribbon);
+}
+
+.colSecondary {
+  border-top: 4px solid var(--color-transit-blue);
+}
+
+.taxiHead {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.taxiIcon {
+  flex: none;
+  width: var(--space-5);
+  height: var(--space-5);
+  fill: none;
+  stroke: var(--color-ribbon-text);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .col p {
@@ -157,8 +212,11 @@
 }
 
 .sub {
+  width: 100%;
+  padding-top: var(--space-2);
+  border-top: 1px dashed var(--color-line);
   font-size: var(--text-sm);
-  font-weight: 700;
+  font-weight: 800;
   color: var(--color-ink);
 }
 

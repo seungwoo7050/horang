@@ -22,6 +22,7 @@
   background: var(--color-raised);
   box-shadow: var(--edge);
   color: var(--color-ink);
+  font-weight: 700;
 }
 
 .route {
@@ -36,16 +37,48 @@
   gap: var(--space-3);
 }
 
+/* 실물 열차 탑승권 스텁(Boarding Pass Stub) 스타일 */
 .col {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-1);
+  gap: var(--space-2);
   padding: var(--space-4);
   background: var(--color-surface);
-  border: 0;
+  border: 1px solid var(--color-line);
   box-shadow: var(--edge);
   border-radius: var(--radius);
+}
+
+.colExpress {
+  border-top: 4px solid var(--color-ribbon);
+}
+
+.colAllstop {
+  border-top: 4px solid var(--color-transit-blue);
+}
+
+.ticketHead {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.ticketIcon {
+  flex: none;
+  width: var(--space-4);
+  height: var(--space-4);
+  fill: none;
+  stroke: var(--color-muted);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.colExpress .ticketIcon {
+  stroke: var(--color-ribbon-text);
 }
 
 .col p {
@@ -89,14 +122,23 @@
 }
 
 .fare {
+  width: 100%;
+  padding-top: var(--space-2);
+  border-top: 1px dashed var(--color-line);
   font-size: var(--text-lg);
-  font-weight: 700;
+  font-weight: 800;
+  color: var(--color-ribbon-text);
   font-variant-numeric: tabular-nums;
+}
+
+.colAllstop .fare {
+  color: var(--color-ink);
 }
 
 .note {
   color: var(--color-muted);
   font-size: var(--text-sm);
+  line-height: 1.4;
 }
 
 /* 일본어: ja.ts의 구 경계에서만 줄을 바꾼다(globals.css 짧은 줄 규칙과 같음) */

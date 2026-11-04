@@ -34,19 +34,43 @@ export function DiningFlow({ lang, kioskFacts, dietaryFacts, staffPhrases }: Pro
           <div key="kiosk" className={`${flow.stage} ${flow.forward}`}>
             <p className={flow.body}>{t.kiosk.summary}</p>
 
-            {/* 키오스크 010 번호 입력 화면 콜아웃(중첩 상자 없이 왼쪽 호박색 리본 강조) */}
+            {/* 키오스크 010 번호 입력 터치스크린 모사 UI */}
             <div className={styles.kioskDisplay}>
-              <p className={styles.kioskNumber}>010 - 0000 - 0000</p>
+              <div className={styles.kioskBezel} aria-hidden="true">
+                <span className={styles.bezelDots}>
+                  <span />
+                  <span />
+                  <span />
+                </span>
+                <span className={styles.bezelStep}>01</span>
+              </div>
+              <div className={styles.kioskScreen}>
+                <p className={styles.kioskNumber}>010 - 0000 - 0000</p>
+                <span className={styles.kioskEnter} aria-hidden="true">
+                  <svg viewBox="0 0 20 20">
+                    <path d="M4 10.5l4 4L16 6.5" />
+                  </svg>
+                </span>
+              </div>
               <p className={styles.kioskTitle}>{t.kiosk.cards.phoneTitle}</p>
               <p className={styles.kioskBody}>{t.kiosk.cards.phoneBody}</p>
             </div>
 
             <div className={styles.editorialList}>
               <div className={styles.editorialItem}>
-                <div className={styles.editorialHead}>
-                  <strong>{t.kiosk.cards.cardTitle}</strong>
+                <span className={styles.editorialIcon} aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="3" y="5" width="18" height="14" rx="2.5" />
+                    <path d="M3 10h18M7 14h3" />
+                  </svg>
+                  <small>02</small>
+                </span>
+                <div className={styles.editorialContent}>
+                  <div className={styles.editorialHead}>
+                    <strong>{t.kiosk.cards.cardTitle}</strong>
+                  </div>
+                  <p>{t.kiosk.cards.cardBody}</p>
                 </div>
-                <p>{t.kiosk.cards.cardBody}</p>
               </div>
             </div>
 
@@ -58,16 +82,32 @@ export function DiningFlow({ lang, kioskFacts, dietaryFacts, staffPhrases }: Pro
 
             <div className={styles.editorialList}>
               <div className={styles.editorialItem}>
-                <div className={styles.editorialHead}>
-                  <strong>{t.dietary.cards.brothTitle}</strong>
+                <span className={styles.editorialIcon} aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M4 11h16a8 8 0 0 1-16 0zM8 19h8M9 7c0-1.5 1-2 1-3M15 7c0-1.5 1-2 1-3" />
+                  </svg>
+                  <small>01</small>
+                </span>
+                <div className={styles.editorialContent}>
+                  <div className={styles.editorialHead}>
+                    <strong>{t.dietary.cards.brothTitle}</strong>
+                  </div>
+                  <p>{t.dietary.cards.brothBody}</p>
                 </div>
-                <p>{t.dietary.cards.brothBody}</p>
               </div>
               <div className={styles.editorialItem}>
-                <div className={styles.editorialHead}>
-                  <strong>{t.dietary.cards.etiquetteTitle}</strong>
+                <span className={styles.editorialIcon} aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M18 16H6a6 6 0 0 1 12 0zM4 16h16M12 7v3M10 7h4" />
+                  </svg>
+                  <small>02</small>
+                </span>
+                <div className={styles.editorialContent}>
+                  <div className={styles.editorialHead}>
+                    <strong>{t.dietary.cards.etiquetteTitle}</strong>
+                  </div>
+                  <p>{t.dietary.cards.etiquetteBody}</p>
                 </div>
-                <p>{t.dietary.cards.etiquetteBody}</p>
               </div>
             </div>
 

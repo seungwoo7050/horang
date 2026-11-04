@@ -4,6 +4,12 @@
   line-height: 1.5;
 }
 
+.claimText {
+  margin: 0;
+  font-size: var(--text-md);
+  line-height: 1.5;
+}
+
 .meta {
   display: block;
   margin-top: var(--space-1);
@@ -13,11 +19,14 @@
 }
 
 .grade {
+  display: inline-block;
   margin-right: var(--space-1);
-  padding-inline: var(--space-1);
+  padding: 1px var(--space-2);
+  background: var(--color-surface-2);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-pill);
-  font-weight: 700;
+  font-weight: 800;
+  color: var(--color-ink);
 }
 
 .stale {
@@ -30,8 +39,9 @@
   color: var(--color-muted);
 }
 
-/* 읽기만 하는 사실 목록: 상자로 띄우지 않고 구분선으로 나눈다(FactSheet와 같은 규칙) */
-.list {
+/* 에디토리얼 규칙 리스트: 좌측 도메인 아이콘+번호 스텝 배지, 우측 핵심 스펙 칩 + 본문 */
+.list,
+.group {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -39,40 +49,97 @@
   flex-direction: column;
 }
 
-.list > li {
+.itemRow {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: flex-start;
+  gap: var(--space-3);
   padding-block: var(--space-3);
   border-top: 1px solid var(--color-line);
 }
 
-.list > li:first-child {
+:is(.list, .group) > .itemRow:first-child {
   padding-top: 0;
   border-top: 0;
 }
 
-/* 한 장 안의 사실 문장: 상자 대신 구분선 */
-.group {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  font-size: var(--text-md);
-  line-height: 1.5;
+.group > .itemRow:last-child {
+  padding-bottom: 0;
 }
 
-.group > li {
-  padding-block: var(--space-3);
-  border-top: 1px solid var(--color-line);
+.stepBadge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 36px;
+  padding: var(--space-1) 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-line);
+  color: var(--color-ribbon-text);
 }
 
-.group > li:first-child {
-  padding-top: 0;
-  border-top: 0;
+.kindSvg {
+  width: var(--space-4);
+  height: var(--space-4);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.stepBadge small {
+  font-size: 10px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--color-muted);
+}
+
+.itemBody {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.specChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-tint);
+  border: 1px solid var(--color-ribbon);
+  color: var(--color-ribbon-text);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+}
+
+.sources {
+  padding-top: var(--space-2);
+  border-top: 1px dashed var(--color-line);
 }
 
 .sources > summary {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--space-3);
   min-height: var(--hit-min);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-2);
   list-style: none;
   cursor: pointer;
 }
@@ -119,7 +186,7 @@
 .full {
   list-style: none;
   margin: var(--space-3) 0 0;
-  padding: var(--space-3) 0 0;
+  padding: var(--space-3) var(--space-3) 0;
   border-top: 1px solid var(--color-line);
   display: flex;
   flex-direction: column;
@@ -131,6 +198,14 @@
   color: var(--color-muted);
 }
 
-.group > li:last-child {
-  padding-bottom: 0;
+@media (forced-colors: active) {
+  .itemRow {
+    border-top-color: CanvasText;
+  }
+
+  .stepBadge,
+  .specChip,
+  .sources > summary {
+    border: 1px solid CanvasText;
+  }
 }

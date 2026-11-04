@@ -48,29 +48,37 @@ export function StaffPhrases({
       </div>
       <h2 className={styles.section}>{othersLabel}</h2>
       <ul className={styles.lines}>
-        {options.map((o) => (
-          <li key={o.id}>
-            <button
-              type="button"
-              className={`${styles.line} ${styles.fromContent}`}
-              aria-pressed={o.id === current}
-              onClick={() => {
-                setCurrent(o.id);
-                const el = cardRef.current;
-                if (el && el.getBoundingClientRect().top < 12) {
-                  el.scrollIntoView({ behavior: "smooth", block: "start" });
-                }
-              }}
-            >
-              {o.label}
-              {o.id === current ? (
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M5 12.5l4.5 4.5L19 7.5" />
-                </svg>
-              ) : null}
-            </button>
-          </li>
-        ))}
+        {options.map((o, idx) => {
+          const active = o.id === current;
+          return (
+            <li key={o.id} className={active ? styles.lineItemActive : undefined}>
+              <button
+                type="button"
+                className={`${styles.line} ${styles.fromContent}`}
+                aria-pressed={active}
+                onClick={() => {
+                  setCurrent(o.id);
+                  const el = cardRef.current;
+                  if (el && el.getBoundingClientRect().top < 12) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }
+                }}
+              >
+                <span className={styles.lineNum} aria-hidden="true">
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+                <span className={styles.lineBody}>{o.label}</span>
+                {active ? (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 12.5l4.5 4.5L19 7.5" />
+                  </svg>
+                ) : (
+                  <span className={styles.lineDot} aria-hidden="true" />
+                )}
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </>
   );

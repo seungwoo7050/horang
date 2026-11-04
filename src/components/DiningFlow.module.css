@@ -1,7 +1,8 @@
 /*
- * 식당·키오스크·결제 화면: 상자 안의 상자(이중 카드)를 쓰지 않는다.
- * 키오스크 010 번호 입력기 도해(.kioskDisplay), 2단 행동 요약(.compare),
- * 그리고 여러 알레르기·식이제한 조건을 한 장의 큰 한국어 카드로 합치는 조합기(.chips)를 둔다.
+ * 식당·키오스크·결제 화면:
+ * 키오스크 010 번호 입력 터치스크린 모사 UI(.kioskDisplay),
+ * 도메인 아이콘과 번호 배지가 결합된 에디토리얼 가이드(.editorialList),
+ * 그리고 실물 한국어 소통 패스(StaffPhrases)로 구성한다.
  */
 
 .seg {
@@ -33,16 +34,60 @@
   font-weight: 700;
 }
 
-/* 키오스크 010 번호 입력 화면 시각 콜아웃 */
+/* 키오스크 010 번호 입력 화면 터치스크린 모사 콜아웃 */
 .kioskDisplay {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  padding: var(--space-4) var(--space-5);
+  gap: var(--space-3);
+  padding: var(--space-4);
   background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-top: 4px solid var(--color-ribbon);
   box-shadow: var(--edge);
   border-radius: var(--radius);
-  border-left: 4px solid var(--color-ribbon);
+}
+
+.kioskBezel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bezelDots {
+  display: inline-flex;
+  gap: var(--space-1);
+}
+
+.bezelDots span {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-line);
+}
+
+.bezelDots span:first-child {
+  background: var(--color-ribbon-fill);
+}
+
+.bezelStep {
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-2);
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.kioskScreen {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface-2);
+  border: 1.5px solid var(--color-ribbon);
+  border-radius: var(--radius-sm);
 }
 
 .kioskNumber {
@@ -54,10 +99,31 @@
   color: var(--color-ribbon-text);
 }
 
+.kioskEnter {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--color-ribbon-fill);
+  color: var(--color-on-ribbon);
+}
+
+.kioskEnter svg {
+  width: var(--space-4);
+  height: var(--space-4);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .kioskTitle {
   margin: 0;
   font-size: var(--text-base);
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .kioskBody {
@@ -67,23 +133,61 @@
   line-height: 1.5;
 }
 
-/* 상자 없는 구분선 행(국물 육수·식당 예절 등 읽기 전용 안내) */
+/* 아이콘 + 번호 배지가 결합된 에디토리얼 카드 행 */
 .editorialList {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid var(--color-line);
-  border-bottom: 1px solid var(--color-line);
+  gap: var(--space-3);
 }
 
 .editorialItem {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  box-shadow: var(--edge);
+}
+
+.editorialIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 40px;
+  padding: var(--space-2) 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-line);
+  color: var(--color-ribbon-text);
+}
+
+.editorialIcon svg {
+  width: var(--space-5);
+  height: var(--space-5);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.editorialIcon small {
+  font-size: 10px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-muted);
+}
+
+.editorialContent {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
-  padding-block: var(--space-4);
-}
-
-.editorialItem + .editorialItem {
-  border-top: 1px solid var(--color-line);
 }
 
 .editorialHead {
@@ -95,16 +199,7 @@
 
 .editorialHead strong {
   font-size: var(--text-base);
-  font-weight: 700;
-}
-
-.koTag {
-  padding: 2px var(--space-2);
-  border-radius: var(--radius-pill);
-  background: var(--color-surface-2);
-  color: var(--color-ribbon-text);
-  font-size: var(--text-xs);
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .editorialItem p {
@@ -127,12 +222,13 @@
     border: 2px solid Highlight;
   }
 
-  .kioskDisplay {
+  .kioskDisplay,
+  .kioskScreen,
+  .editorialItem,
+  .editorialIcon {
     border: 1px solid CanvasText;
   }
 
-  .editorialList,
-  .editorialItem + .editorialItem,
   .divider {
     border-color: CanvasText;
   }

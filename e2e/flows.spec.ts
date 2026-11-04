@@ -683,21 +683,23 @@ for (const width of [320, 360]) {
 }
 
 test.describe("fewer template signs", () => {
-  test("home starts right under the header: no empty band above the tiger", async ({ page }) => {
+  test("home starts right under the header: urgent SOS pass on top and structured bento/wayfinding grid", async ({
+    page,
+  }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     for (const lang of ["en", "ja"]) {
       await page.goto(`/${lang}/`);
       const header = (await page.locator("header").first().boundingBox())!;
       const hero = (await page.locator("main img[src='/brand/mascot.webp']").boundingBox())!;
       expect(hero.y - (header.y + header.height), lang).toBeLessThanOrEqual(40);
-      // 홈 화면 목록은 사각 상자(좌우 테두리)가 아니라 위쪽 가는 선(1px)으로만 나눈다
-      const sideBorders = await page.locator("main ul li").evaluateAll((items) =>
-        items.map((el) => {
-          const cs = getComputedStyle(el);
-          return `${cs.borderLeftWidth}/${cs.borderRightWidth}/${cs.borderTopWidth}`;
-        }),
-      );
-      for (const b of sideBorders) expect(b, lang).toBe("0px/0px/1px");
+      // 첫 번째 항목(gate)은 상단 전체 폭을 차지하는 위기 탈출 하이라이트 패스, 그 아래(arex, card)는 2열 벤토 그리드
+      const items = page.locator("main ul li");
+      await expect(items).toHaveCount(7);
+      const gateBox = (await items.nth(0).boundingBox())!;
+      const arexBox = (await items.nth(1).boundingBox())!;
+      const cardBox = (await items.nth(2).boundingBox())!;
+      expect(gateBox.width, lang).toBeGreaterThan(arexBox.width * 1.5);
+      expect(Math.abs(arexBox.y - cardBox.y), lang).toBeLessThanOrEqual(2);
     }
   });
 

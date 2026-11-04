@@ -1,15 +1,17 @@
+import type { ReactNode } from "react";
 import type { Locale } from "@/i18n";
 import { FactGroup } from "./Fact";
 import { Figures, type Figure } from "./Figures";
 import styles from "./FactSheet.module.css";
 
 /**
- * 사실 한 묶음 = 한 장: 이름 → 요점 숫자 → 문장(구분선) → 근거 한 줄과 접힌 출처.
- * 상자를 사실마다 두지 않는다(DESIGN.md §6-1, Benji 점진적 드러냄·Rauno 위계).
+ * 사실 한 묶음 = 에디토리얼 시트:
+ * 헤더(선택적 배지/아이콘 + 제목 + 부제) → 티켓 요금 매트릭스(Figures) → 구조화된 규칙(FactGroup) → 검증 스탬프.
  */
 export function FactSheet({
   title,
   sub,
+  badge,
   rows,
   ids,
   folded,
@@ -20,6 +22,8 @@ export function FactSheet({
   /** 제목 단계(위 섹션 제목이 h2면 3) */
   level?: 2 | 3;
   sub?: string;
+  /** 카드·도메인 시각 배지(선택) */
+  badge?: ReactNode;
   rows?: Figure[];
   ids: readonly string[];
   /** 표가 문장을 다 보여 주는 claim. 문장은 접힌 출처 안에만 둔다 */
@@ -29,8 +33,11 @@ export function FactSheet({
   return (
     <section className={styles.sheet}>
       {title ? (
-        <header>
-          {level === 2 ? <h2>{title}</h2> : <h3>{title}</h3>}
+        <header className={styles.header}>
+          <div className={styles.titleRow}>
+            {level === 2 ? <h2>{title}</h2> : <h3>{title}</h3>}
+            {badge ? <span className={styles.badgeWrap}>{badge}</span> : null}
+          </div>
           {sub ? <p>{sub}</p> : null}
         </header>
       ) : null}

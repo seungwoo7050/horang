@@ -21,6 +21,44 @@ const CARDS = {
 } as const;
 type CardId = keyof typeof CARDS;
 
+/** 실물 교통카드 IC칩 미니 플레이트 그래픽 */
+function CardPlate({ id }: { id: CardId }) {
+  const accent =
+    id === "wowpass"
+      ? "var(--color-ribbon-fill)"
+      : id === "climate"
+        ? "var(--color-transit-green)"
+        : id === "tmoney"
+          ? "var(--color-transit-blue)"
+          : "var(--color-muted)";
+  return (
+    <svg width="44" height="28" viewBox="0 0 44 28" aria-hidden="true">
+      <rect
+        x="1"
+        y="1"
+        width="42"
+        height="26"
+        rx="5"
+        fill="var(--color-surface-2)"
+        stroke="var(--color-line)"
+        strokeWidth="1.5"
+      />
+      <rect x="1" y="5" width="42" height="5" fill={accent} />
+      <rect
+        x="7"
+        y="14"
+        width="9"
+        height="7"
+        rx="1.5"
+        fill="var(--color-ribbon-fill)"
+        stroke="var(--color-ribbon)"
+        strokeWidth="1"
+      />
+      <circle cx="34" cy="18" r="3.5" fill={accent} />
+    </svg>
+  );
+}
+
 /** 상황별 추천(안내 판단이며 사실은 각 카드의 claim이 맡는다) */
 const RESULTS: Record<string, { now: CardId[]; later?: CardId[]; note?: string[] }> = {
   // 공항에서는 Climate Card로 탈 수 없고, 직통열차는 교통카드로 탈 수 없다
@@ -92,7 +130,14 @@ function figures(id: CardId, lang: Locale): { rows: Figure[]; folded: string[] }
 function Pick({ id, lang }: { id: CardId; lang: Locale }) {
   const c = getMessages(lang).card.cards[id];
   return (
-    <FactSheet title={c.name} sub={c.why} ids={CARDS[id]} lang={lang} {...figures(id, lang)} />
+    <FactSheet
+      title={c.name}
+      sub={c.why}
+      badge={<CardPlate id={id} />}
+      ids={CARDS[id]}
+      lang={lang}
+      {...figures(id, lang)}
+    />
   );
 }
 

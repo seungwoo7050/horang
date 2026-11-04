@@ -3,23 +3,25 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
+/* 눈에 확 띄는 전체화면 확대 패스 액션 바 */
 .open {
-  align-self: flex-end;
+  align-self: stretch;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-2);
   min-height: var(--hit-min);
-  padding: 0 var(--space-4);
-  border: 0;
-  border-radius: var(--radius-pill);
-  background: var(--color-surface-2);
+  padding: var(--space-2) var(--space-4);
+  border: 1.5px solid var(--color-ribbon);
+  border-radius: var(--radius);
+  background: var(--color-tint);
   color: var(--color-ink);
   font: inherit;
   font-size: var(--text-sm);
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
 }
 
@@ -37,11 +39,15 @@
   height: var(--space-4);
 }
 
+.open svg {
+  color: var(--color-ribbon-text);
+}
+
 .open path,
 .close path {
   fill: none;
   stroke: currentColor;
-  stroke-width: 2;
+  stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -49,7 +55,9 @@
 /* 누름 피드백은 버튼 자리만 줄어든다(카드 글자는 흔들지 않는다) */
 @media (prefers-reduced-motion: no-preference) {
   .open {
-    transition: transform var(--dur-tap) ease-out;
+    transition:
+      transform var(--dur-tap) ease-out,
+      background-color var(--dur-fast) ease-out;
   }
 }
 
@@ -96,16 +104,16 @@
   height: var(--hit-min);
   margin-left: calc(var(--space-3) * -1);
   padding: 0;
-  border: 0;
+  border: 1px solid var(--color-line);
   border-radius: var(--radius-pill);
-  background: none;
+  background: var(--color-surface);
   color: inherit;
   cursor: pointer;
 }
 
 .close svg {
-  width: var(--space-6);
-  height: var(--space-6);
+  width: var(--space-5);
+  height: var(--space-5);
 }
 
 .big {
@@ -113,7 +121,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-5);
   text-align: center;
 }
 
@@ -121,7 +129,7 @@
   margin: 0;
   /* --fit: 스크립트가 남은 높이에 맞춰 정한 크기(PhraseShow fitSheet). 정하기 전에는 폭·높이로 어림한 크기 */
   font-size: var(--fit, clamp(var(--text-staff), min(14vw, 12dvh), var(--text-staff-max)));
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.3;
   word-break: keep-all;
   text-wrap: balance;
@@ -132,7 +140,7 @@
   flex-direction: column;
   gap: var(--space-1);
   padding-top: var(--space-4);
-  border-top: 1px solid var(--color-line);
+  border-top: 2px dashed var(--color-line);
   text-align: center;
 }
 
@@ -177,6 +185,7 @@
 .big figcaption {
   color: var(--color-muted);
   font-size: var(--text-md);
+  font-weight: 600;
 }
 
 .hidden {
@@ -194,7 +203,8 @@
     background: Canvas;
   }
 
-  .open {
+  .open,
+  .close {
     border: 1px solid ButtonText;
   }
 }

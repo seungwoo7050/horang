@@ -94,10 +94,18 @@ export function ArexCompare({
       </div>
       <p className={styles.route}>{t.route.replace("{t}", t[terminal])}</p>
       <div className={styles.compare}>
-        <Card className={styles.col}>
-          <Badge variant="default" className={styles.badgeFill}>
-            {t.express}
-          </Badge>
+        <Card className={`${styles.col} ${styles.colExpress}`}>
+          <div className={styles.ticketHead}>
+            <Badge variant="default" className={styles.badgeFill}>
+              {t.express}
+            </Badge>
+            <svg className={styles.ticketIcon} viewBox="0 0 20 20" aria-hidden="true">
+              <rect x="3" y="3" width="5" height="5" rx="1" />
+              <rect x="12" y="3" width="5" height="5" rx="1" />
+              <rect x="3" y="12" width="5" height="5" rx="1" />
+              <path d="M12 12h2v2h-2zM15 15h2v2h-2zM15 12h2M12 15v2" />
+            </svg>
+          </div>
           <p className={styles.big}>
             {n.expressMin}
             <small>{t.min}</small>
@@ -105,10 +113,16 @@ export function ArexCompare({
           <p className={styles.fare}>{n.expressFare}</p>
           <p className={styles.note}>{t.expressNote}</p>
         </Card>
-        <Card className={styles.col}>
-          <Badge variant="outline" className={styles.badgeLine}>
-            {t.allstop}
-          </Badge>
+        <Card className={`${styles.col} ${styles.colAllstop}`}>
+          <div className={styles.ticketHead}>
+            <Badge variant="outline" className={styles.badgeLine}>
+              {t.allstop}
+            </Badge>
+            <svg className={styles.ticketIcon} viewBox="0 0 20 20" aria-hidden="true">
+              <rect x="2.5" y="4.5" width="15" height="11" rx="2" />
+              <path d="M2.5 8.5h15M6 12h3" />
+            </svg>
+          </div>
           <p className={styles.big}>
             {n.allstopMin}
             <small>{t.min}</small>
