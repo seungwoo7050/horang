@@ -27,9 +27,14 @@ export function FlowNav({
       type="button"
       className={styles.back}
       aria-label={label}
-      onClick={(e) =>
-        mode === "close" ? router.push(home, { transitionTypes: ["nav-back"] }) : onBack(e)
-      }
+      onClick={(e) => {
+        if (mode === "close") {
+          if (e.detail > 1) return;
+          router.push(home, { transitionTypes: ["nav-back"] });
+        } else {
+          onBack(e);
+        }
+      }}
     >
       <NavIcon mode={mode} />
     </button>

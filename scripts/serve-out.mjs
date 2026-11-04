@@ -23,10 +23,16 @@ const TYPES = {
   ".woff2": "font/woff2",
 };
 
-function parseHeaders() {
+let cachedMtime = -1;
+let cachedRules = [];
+
+function getRules() {
   const file = join(ROOT, "_headers");
   if (!existsSync(file)) return [];
-  return readFileSync(file, "utf8")
+  const mtime = statSync(file).mtimeMs;
+  if (mtime === cachedMtime) return cachedRules;
+  cachedMtime = mtime;
+  cachedRules = readFileSync(file, "utf8")
     .trim()
     .split(/\n\s*\n/)
     .map((block) => {
@@ -34,16 +40,24 @@ function parseHeaders() {
       const headers = Object.fromEntries(
         lines
           .map((l) => l.trim())
-          .map((l) => [l.slice(0, l.indexOf(":")), l.slice(l.indexOf(":") + 1).trim()]),
+          .map((l) => {
+            const k = l.slice(0, l.indexOf(":"));
+            let v = l.slice(l.indexOf(":") + 1).trim();
+            // 로컬 HTTP 서버(http://localhost)에서는 upgrade-insecure-requests가 307 리다이렉트를 https://로 바꿔 SSL 오류를 내므로 제외한다
+            if (k.toLowerCase() === "content-security-policy") {
+              v = v.replace(/;\s*upgrade-insecure-requests/g, "");
+            }
+            return [k, v];
+          }),
       );
       return { pattern: pattern.trim(), headers };
     });
+  return cachedRules;
 }
-const RULES = parseHeaders();
 
 function headersFor(pathname) {
   const out = {};
-  for (const { pattern, headers } of RULES) {
+  for (const { pattern, headers } of getRules()) {
     const hit = pattern.endsWith("*")
       ? pathname.startsWith(pattern.slice(0, -1))
       : pathname === pattern;
