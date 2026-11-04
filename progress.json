@@ -15,17 +15,17 @@
     "note": "01~13편(인천공항→AREX→서울역 첫 1시간 안내, en/ja, CSS Modules) 완료 시점"
   },
   "current": {
-    "branch": "feature/dining-pay",
-    "devlog": "17-dining-pay",
+    "branch": "feature/emergency-depart",
+    "devlog": "18-emergency-depart",
     "stage": "implementing",
-    "note": "feature/city-transit(16-city-transit) 구현·평가·병합·devlog 완료 후 feature/dining-pay 시작"
+    "note": "feature/dining-pay(17-dining-pay) 구현·평가·병합·devlog 완료 후 feature/emergency-depart 시작"
   },
   "branches": {
     "feature/harness": "merged @ 8b45c01 (verify 통과: unit 104/104, guard 18/18, e2e 82/82, 평가 4/4 통과, devlog 14-harness 완료)",
     "feature/design-system": "merged @ 7aa8a59 (verify 통과: unit 104/104, guard 18/18, e2e 83/83, 평가 3/3 통과, devlog 15-design-system 완료)",
     "feature/city-transit": "merged @ 7de0212 (verify 통과: unit 105/105, guard 18/18, e2e 85/85, 평가 3/3 통과, devlog 16-city-transit 완료)",
-    "feature/dining-pay": "in_progress (devlog: 17-dining-pay)",
-    "feature/emergency-depart": "planned (devlog: 18-emergency-depart)",
+    "feature/dining-pay": "merged @ d8f2b52 (verify 통과: unit 105/105, guard 18/18, e2e 86/86, 평가 3/3 통과, devlog 17-dining-pay 완료)",
+    "feature/emergency-depart": "in_progress (devlog: 18-emergency-depart)",
     "feature/i18n-expansion": "planned (devlog: 19-i18n-expansion)"
   },
   "blocked": [
