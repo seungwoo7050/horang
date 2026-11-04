@@ -15,14 +15,14 @@
     "note": "01~13편(인천공항→AREX→서울역 첫 1시간 안내, en/ja, CSS Modules) 완료 시점"
   },
   "current": {
-    "branch": "feature/harness",
-    "devlog": "14-harness",
+    "branch": "feature/design-system",
+    "devlog": "15-design-system",
     "stage": "implementing",
-    "note": "기준점 측정 완료 후 feature/harness(14-harness) 구현 시작"
+    "note": "feature/harness(14-harness) 구현·평가·병합·devlog 완료 후 feature/design-system 시작"
   },
   "branches": {
-    "feature/harness": "in_progress (devlog: 14-harness)",
-    "feature/design-system": "planned (devlog: 15-design-system)",
+    "feature/harness": "merged @ 8b45c01 (verify 통과: unit 104/104, guard 18/18, e2e 82/82, 평가 4/4 통과, devlog 14-harness 완료)",
+    "feature/design-system": "in_progress (devlog: 15-design-system)",
     "feature/city-transit": "planned (devlog: 16-city-transit)",
     "feature/dining-pay": "planned (devlog: 17-dining-pay)",
     "feature/emergency-depart": "planned (devlog: 18-emergency-depart)",
