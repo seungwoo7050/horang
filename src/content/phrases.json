@@ -180,5 +180,61 @@
     "en": "I can't eat spicy food well. Please make it non-spicy (or less spicy).",
     "ja": "辛いものが苦手です。辛くしないで（または辛さ控えめで）お願いします。",
     "reviewed": false
+  },
+  {
+    "id": "emergency.pain-fever",
+    "ko": "열이 나고 머리가 아파요. 해열·진통제 주세요.",
+    "en": "I have a fever and headache. Could I get a pain and fever reliever?",
+    "ja": "熱があって頭が痛いです。解熱鎮痛剤をください。",
+    "reviewed": false
+  },
+  {
+    "id": "emergency.stomach-diarrhea",
+    "ko": "배가 아프고 설사(또는 소화불량)가 나요. 배탈·소화제 주세요.",
+    "en": "I have a stomachache and diarrhea (or indigestion). Could I get stomach medicine?",
+    "ja": "お腹が痛くて下痢（または消化不良）があります。胃腸薬をください。",
+    "reviewed": false
+  },
+  {
+    "id": "emergency.cold-throat",
+    "ko": "기침이 나고 목이 아파요. 감기약 주세요.",
+    "en": "I have a cough and sore throat. Could I get cold medicine?",
+    "ja": "咳が出て喉が痛いです。風邪薬をください。",
+    "reviewed": false
+  },
+  {
+    "id": "emergency.allergy-antihistamine",
+    "ko": "알레르기(두드러기·비염)가 났어요. 먹는 알레르기약(항히스타민제) 주세요.",
+    "en": "I'm having an allergic reaction (hives or rhinitis). Could I get an antihistamine?",
+    "ja": "アレルギー（じんましん・鼻炎）が出ました。飲み薬（抗ヒスタミン剤）をください。",
+    "reviewed": false
+  },
+  {
+    "id": "emergency.bandage-antiseptic",
+    "ko": "상처가 났어요. 소독약이랑 반창고(밴드) 주세요.",
+    "en": "I have a cut. Could I get antiseptic and bandages?",
+    "ja": "傷ができました。消毒薬と絆創膏をください。",
+    "reviewed": false
+  },
+  {
+    "id": "emergency.lost-subway",
+    "ko": "방금 내린 지하철에 가방(물건)을 두고 내렸어요. 역무실에 연락해 주세요.",
+    "en": "I just left my bag (item) on the subway train. Please help me contact the station office.",
+    "ja": "今降りた地下鉄にカバン（荷物）を置き忘れました。駅務室への連絡を手伝ってください。",
+    "reviewed": false
+  },
+  {
+    "id": "emergency.lost-taxi",
+    "ko": "택시에 물건을 두고 내렸어요. 이 영수증(또는 카드 내역)으로 기사님께 연락할 수 있나요?",
+    "en": "I left something in a taxi. Can we contact the driver using this receipt (or card record)?",
+    "ja": "タクシーに忘れ物をしました。この領収書（またはカード履歴）で運転手さんに連絡できますか。",
+    "reviewed": false
+  },
+  {
+    "id": "emergency.city-airport-checkin",
+    "ko": "서울역 도심공항터미널 탑승수속이랑 출국심사 받는 곳이 어디예요?",
+    "en": "Where is the Seoul Station City Airport Terminal check-in and immigration counter?",
+    "ja": "ソウル駅都心空港ターミナルの搭乗手続きと出国審査はどこですか。",
+    "reviewed": false
   }
 ]

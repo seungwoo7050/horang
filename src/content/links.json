@@ -48,5 +48,25 @@
     },
     "affiliate": false,
     "checkedAt": "2026-10-02"
+  },
+  {
+    "id": "emergency-119-call",
+    "url": "tel:+822119",
+    "label": {
+      "en": "Call 119 (Fire & Ambulance)",
+      "ja": "119に電話する（救急・消防）"
+    },
+    "affiliate": false,
+    "checkedAt": "2026-10-02"
+  },
+  {
+    "id": "lost112-portal",
+    "url": "https://www.lost112.go.kr/",
+    "label": {
+      "en": "LOST112 Police Lost & Found",
+      "ja": "LOST112 警察庁遺失物ポータル"
+    },
+    "affiliate": false,
+    "checkedAt": "2026-10-02"
   }
 ]

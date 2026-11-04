@@ -35,6 +35,7 @@ describe("pageMetadata", () => {
       "station/",
       "transit/",
       "dining/",
+      "emergency/",
       "staff/",
     ]);
   });
