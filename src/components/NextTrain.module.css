@@ -102,10 +102,7 @@
 
 .list span {
   font-weight: 700;
-}
-
-.list .first span {
-  color: var(--color-ribbon-text);
+  color: var(--color-ink);
 }
 
 .list small {
