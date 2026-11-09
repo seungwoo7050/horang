@@ -15,6 +15,7 @@
     "verify": "bash scripts/harness/verify.sh full",
     "content:check": "node scripts/check-content.mts",
     "prebuild": "npm run content:check",
+    "check:budget": "node scripts/check-bundle-budget.mts",
     "test": "vitest run",
     "postbuild": "node scripts/postbuild.mts",
     "e2e": "npm run build && playwright test",
