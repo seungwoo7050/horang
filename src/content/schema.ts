@@ -1,5 +1,6 @@
 // 콘텐츠 스키마(CONTENT_OPS.md §1~§3). 이 파일은 node가 직접 실행하는 검사 스크립트에서도
 // 불러오므로 상대 경로 import를 두지 않는다.
+import { differenceInCalendarDays, parseISO } from "date-fns";
 import { z } from "zod";
 
 /** A 현장 확인 / B 공식 출처 / C 여행자 보고 */
@@ -126,11 +127,9 @@ export const STALENESS_POLICY: Record<ClaimKind, { recheck: number; warn: number
 
 export type Staleness = "fresh" | "due" | "stale";
 
-const DAY_MS = 24 * 60 * 60 * 1000;
-
 /** fresh: 주기 안 / due: 재검증할 때(운영 리포트) / stale: 화면에 "Needs recheck" 표시 */
 export function staleness(claim: Pick<Claim, "kind" | "verifiedAt">, today: string): Staleness {
-  const age = Math.floor((Date.parse(today) - Date.parse(claim.verifiedAt)) / DAY_MS);
+  const age = differenceInCalendarDays(parseISO(today), parseISO(claim.verifiedAt));
   const policy = STALENESS_POLICY[claim.kind];
   if (age > policy.warn) return "stale";
   if (age > policy.recheck) return "due";

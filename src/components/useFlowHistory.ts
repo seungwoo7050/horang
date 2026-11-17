@@ -1,5 +1,7 @@
 "use client";
 
+import { clamp } from "es-toolkit";
+import { parseAsString } from "nuqs";
 import {
   useEffect,
   useRef,
@@ -37,16 +39,17 @@ export type FlowCodec<S> = {
 /** 단계를 바꾼 탭 뒤 이 시간 안에 같은 자리에 온 탭은 두 번째 탭으로 본다 */
 export const SETTLE_MS = 300;
 /** 같은 자리로 보는 거리(px) */
-const TAP_SLOP = 24;
+export const TAP_SLOP = 24;
 
-type Tap = ReactMouseEvent | MouseEvent;
+export type Tap = ReactMouseEvent | MouseEvent;
 
 /** history.state 안에 이 흐름이 쌓은 기록 깊이 */
-const DEPTH = "horangFlowDepth";
+export const DEPTH = "horangFlowDepth";
 
 const listeners = new Set<() => void>();
-const notify = () => listeners.forEach((l) => l());
-function subscribe(listener: () => void) {
+export const notifyFlow = () => listeners.forEach((l) => l());
+
+export function subscribeFlow(listener: () => void) {
   listeners.add(listener);
   window.addEventListener("popstate", listener);
   return () => {
@@ -54,25 +57,44 @@ function subscribe(listener: () => void) {
     window.removeEventListener("popstate", listener);
   };
 }
-const clientSearch = () => window.location.search;
+
+const clientSearch = () => parseAsString.parseServerSide(window.location.search);
 // 정적 HTML(서버)과 첫 하이드레이션은 처음 단계로 그린다
 const serverSearch = () => null;
 
-const depthOf = (state: unknown) =>
+export const depthOf = (state: unknown): number =>
   typeof state === "object" && state !== null && DEPTH in state
-    ? Number((state as Record<string, unknown>)[DEPTH]) || 0
+    ? clamp(Number((state as Record<string, unknown>)[DEPTH]) || 0, 0, Number.MAX_SAFE_INTEGER)
     : 0;
 
+export function parseFlowState<S>(codec: FlowCodec<S>, search: string | null): S {
+  if (search === null) return codec.initial;
+  const raw = parseAsString.parseServerSide(search);
+  return codec.decode(new URLSearchParams(raw ?? "")) ?? codec.initial;
+}
+
+export function isRepeatedTap(
+  e: Tap | undefined,
+  lastTap: { t: number; x: number; y: number },
+  now = performance.now(),
+): boolean {
+  if (!e || e.detail === 0) return false;
+  if (e.detail > 1) return true;
+  return (
+    now - lastTap.t < SETTLE_MS &&
+    Math.hypot(e.clientX - lastTap.x, e.clientY - lastTap.y) < TAP_SLOP
+  );
+}
+
 export function useFlowHistory<S>(codec: FlowCodec<S>) {
-  const search = useSyncExternalStore(subscribe, clientSearch, serverSearch);
-  const state =
-    search === null ? codec.initial : (codec.decode(new URLSearchParams(search)) ?? codec.initial);
+  const search = useSyncExternalStore(subscribeFlow, clientSearch, serverSearch);
+  const state = parseFlowState(codec, search);
 
   const [dir, setDir] = useState<Dir>("forward");
   const [moves, setMoves] = useState(0);
   const codecRef = useRef(codec);
   /** 마지막으로 그린 단계의 검색어(시스템 뒤로 때 방향 계산). 이벤트 처리에서만 바꾼다 */
-  const shown = useRef(null as string | null);
+  const shown = useRef<string | null>(null);
   const lastTap = useRef({ t: -Infinity, x: 0, y: 0 });
 
   useEffect(() => {
@@ -85,22 +107,15 @@ export function useFlowHistory<S>(codec: FlowCodec<S>) {
     return window.location.pathname + (q ? `?${q}` : "");
   };
 
-  /** 이 탭이 방금 단계를 바꾼 탭의 두 번째 탭인지 */
-  const repeated = (e?: Tap) => {
-    if (!e || e.detail === 0) return false;
-    if (e.detail > 1) return true;
-    const last = lastTap.current;
-    return (
-      performance.now() - last.t < SETTLE_MS &&
-      Math.hypot(e.clientX - last.x, e.clientY - last.y) < TAP_SLOP
-    );
-  };
+  const repeated = (e?: Tap) => isRepeatedTap(e, lastTap.current);
+
   const remember = (e?: Tap) => {
     lastTap.current =
       e && e.detail > 0
         ? { t: performance.now(), x: e.clientX, y: e.clientY }
         : { t: -Infinity, x: 0, y: 0 };
   };
+
   const moved = (to: Dir) => {
     setDir(to);
     setMoves((n) => n + 1);
@@ -112,9 +127,8 @@ export function useFlowHistory<S>(codec: FlowCodec<S>) {
       // 단계는 그대로인 기록 이동(직원 문장 화면 가득 보기를 닫는 뒤로 등)은 단계 이동이 아니다: 초점·방향을 건드리지 않는다
       if (window.location.search === shown.current) return;
       const c = codecRef.current;
-      const read = (q: string | null) => c.decode(new URLSearchParams(q ?? "")) ?? c.initial;
-      const before = read(shown.current);
-      const after = read(window.location.search);
+      const before = parseFlowState(c, shown.current);
+      const after = parseFlowState(c, window.location.search);
       shown.current = window.location.search;
       setDir(c.order(after) < c.order(before) ? "backward" : "forward");
       setMoves((n) => n + 1);
@@ -145,7 +159,7 @@ export function useFlowHistory<S>(codec: FlowCodec<S>) {
     }
     window.history.pushState({ ...window.history.state, [DEPTH]: depth + 1 }, "", urlFor(next));
     shown.current = window.location.search;
-    notify();
+    notifyFlow();
     moved(codec.order(next) < codec.order(state) ? "backward" : "forward");
     return true;
   };
@@ -162,7 +176,7 @@ export function useFlowHistory<S>(codec: FlowCodec<S>) {
     if (parent === null) return;
     window.history.replaceState(window.history.state, "", urlFor(parent));
     shown.current = window.location.search;
-    notify();
+    notifyFlow();
     moved("backward");
   };
 

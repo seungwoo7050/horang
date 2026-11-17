@@ -1,17 +1,22 @@
+import { differenceInMinutes, parse, startOfDay } from "date-fns";
+import { sortBy, take } from "es-toolkit";
+
 // "다음 열차": 시각표와 지금 한국 시각으로 다음 출발 몇 개를 고른다. 기기 시간대와 상관없이 한국 시각(KST)을 쓴다.
 
-export const minutesOf = (hhmm: string) => Number(hhmm.slice(0, 2)) * 60 + Number(hhmm.slice(3, 5));
+export const minutesOf = (hhmm: string): number => {
+  const time = parse(hhmm, "HH:mm", new Date());
+  return differenceInMinutes(time, startOfDay(time));
+};
 
 /** 지금 한국 시각(자정부터 분). 여행자 폰이 아직 고향 시간대여도 맞게 계산한다 */
 export function koreaMinutes(now: Date): number {
-  const parts = new Intl.DateTimeFormat("en-GB", {
+  const kst = new Intl.DateTimeFormat("en-GB", {
     timeZone: "Asia/Seoul",
     hour: "2-digit",
     minute: "2-digit",
     hourCycle: "h23",
-  }).formatToParts(now);
-  const get = (type: string) => Number(parts.find((p) => p.type === type)?.value ?? 0);
-  return get("hour") * 60 + get("minute");
+  }).format(now);
+  return minutesOf(kst);
 }
 
 export type Departure<T> = { row: T; time: string; inMinutes: number };
@@ -26,8 +31,8 @@ export function nextDepartures<T>(
   nowMinutes: number,
   count = 3,
 ): Departure<T>[] {
-  return rows
+  const upcoming = rows
     .map((row) => ({ row, time: timeOf(row), inMinutes: minutesOf(timeOf(row)) - nowMinutes }))
-    .filter((d) => d.inMinutes >= 0)
-    .slice(0, count);
+    .filter((d) => d.inMinutes >= 0);
+  return take(sortBy(upcoming, [(d) => d.inMinutes]), count);
 }
