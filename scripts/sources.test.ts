@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { baselineKey, claimNumbers, nextBaseline, pageHasNumber } from "./sources-lib.mts";
+import {
+  baselineKey,
+  claimNumbers,
+  nextBaseline,
+  pageHasNumber,
+  verifyClaimWithCiteguard,
+} from "./sources-lib.mts";
 
 describe("claimNumbers", () => {
   it("keeps amounts, clock times and percentages, not small counts", () => {
@@ -69,5 +75,51 @@ describe("nextBaseline (--update-baseline)", () => {
   it("reports entries whose numbers are back so they can be dropped", () => {
     const { removable } = nextBaseline(prev, [], new Set([fare]));
     expect(removable).toEqual([k2]);
+  });
+});
+
+describe("verifyClaimWithCiteguard (optional build/CI RAG context audit)", () => {
+  it("evaluates claim grounding and numeric faithfulness against citeguard /v1/ask", async () => {
+    const fakeFetch = (async () =>
+      new Response(
+        JSON.stringify({
+          status: "answered",
+          faithfulness_score: 0.92,
+          unverified_numbers: [],
+        }),
+        { status: 200, headers: { "Content-Type": "application/json" } },
+      )) as unknown as typeof fetch;
+
+    const ok = await verifyClaimWithCiteguard(
+      "http://localhost:8003",
+      { id: "arex.express-fare", claim: "AREX Express train adult fare is ₩13,000." },
+      0.6,
+      fakeFetch,
+    );
+    expect(ok).toEqual({
+      claimId: "arex.express-fare",
+      grounded: true,
+      faithfulnessScore: 0.92,
+      unverifiedNumbers: [],
+    });
+
+    const ungroundedFetch = (async () =>
+      new Response(
+        JSON.stringify({
+          status: "insufficient_evidence",
+          faithfulness_score: 0.25,
+          unverified_numbers: ["13000"],
+        }),
+        { status: 200, headers: { "Content-Type": "application/json" } },
+      )) as unknown as typeof fetch;
+
+    const rejected = await verifyClaimWithCiteguard(
+      "http://localhost:8003/",
+      { id: "arex.express-fare", claim: "AREX Express train adult fare is ₩13,000." },
+      0.6,
+      ungroundedFetch,
+    );
+    expect(rejected.grounded).toBe(false);
+    expect(rejected.unverifiedNumbers).toEqual(["13000"]);
   });
 });

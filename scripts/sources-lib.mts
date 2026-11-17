@@ -53,3 +53,46 @@ export function nextBaseline(
   const removable = Object.keys(prev).filter((k) => !(k in baseline));
   return { baseline, removable };
 }
+
+export interface CiteguardClaimAuditResult {
+  claimId: string;
+  grounded: boolean;
+  faithfulnessScore: number;
+  unverifiedNumbers: string[];
+}
+
+/**
+ * 선택적 로컬 citeguard(Qdrant + Ollama Hybrid RRF & Faithfulness Gate) 연동:
+ * 정규식(pageHasNumber)만으로는 잡지 못하는 표 행 뒤바뀜(예: T1/T2 운임 행 교차)이나 문맥 변조를
+ * 빌드/CI 출처 감시 단계에서 검증한다. 브라우저 런타임(정적 export PWA)에는 일절 의존성을 추가하지 않는다.
+ */
+export async function verifyClaimWithCiteguard(
+  citeguardUrl: string,
+  claim: { id: string; claim: string },
+  minFaithfulness = 0.6,
+  fetchFn: typeof fetch = fetch,
+): Promise<CiteguardClaimAuditResult> {
+  const res = await fetchFn(`${citeguardUrl.replace(/\/$/, "")}/v1/ask`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      question: claim.claim,
+      top_k: 3,
+      min_faithfulness: minFaithfulness,
+    }),
+  });
+  if (!res.ok) {
+    throw new Error(`citeguard ask failed (${res.status}) for claim ${claim.id}`);
+  }
+  const body = (await res.json()) as {
+    status: "answered" | "insufficient_evidence";
+    faithfulness_score: number;
+    unverified_numbers?: string[];
+  };
+  return {
+    claimId: claim.id,
+    grounded: body.status === "answered" && body.faithfulness_score >= minFaithfulness,
+    faithfulnessScore: body.faithfulness_score,
+    unverifiedNumbers: body.unverified_numbers ?? [],
+  };
+}
