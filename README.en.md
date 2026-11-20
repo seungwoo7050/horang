@@ -88,12 +88,12 @@ npm ci
 npm run dev        # http://localhost:3000
 ```
 
-| Command               | Description                                                                                                        |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `npm run verify:fast` | Content schema & sync check, lint, typecheck, format check, unit tests (Vitest), static rule & design token checks |
+| Command                | Description                                                                                                        |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `npm run verify:fast`  | Content schema & sync check, lint, typecheck, format check, unit tests (Vitest), static rule & design token checks |
 | `npm run check:budget` | Validates bundle budget (550KB JS chunk, 14MB total precache) and required offline routes on `out/`                |
-| `npm run verify`      | Runs `verify:fast`, builds static export (`out/`, `sw.js`, `_headers`), and executes the full Playwright E2E suite |
-| `npm run deploy`      | Builds and deploys `out/` to Cloudflare Workers static assets                                                      |
+| `npm run verify`       | Runs `verify:fast`, builds static export (`out/`, `sw.js`, `_headers`), and executes the full Playwright E2E suite |
+| `npm run deploy`       | Builds and deploys `out/` to Cloudflare Workers static assets                                                      |
 
 CI runs check, build, bundle budget gate, Playwright E2E tests, and Cloudflare Workers PR preview deployment with W3C TraceContext synthetic probes on every pull request, and deploys `main` to Cloudflare Workers when all checks pass.
 

@@ -49,9 +49,7 @@ describe("evaluateBundleBudget", () => {
 
     const reportOversized = evaluateBundleBudget(oversizedJsAssets);
     expect(reportOversized.passed).toBe(false);
-    expect(
-      reportOversized.violations.some((v) => v.includes("huge-chunk.js")),
-    ).toBe(true);
+    expect(reportOversized.violations.some((v) => v.includes("huge-chunk.js"))).toBe(true);
 
     const missingRouteAssets = [
       { path: "/", size: 10_000 },
@@ -68,9 +66,7 @@ describe("evaluateBundleBudget", () => {
 
     const reportMissing = evaluateBundleBudget(missingRouteAssets);
     expect(reportMissing.passed).toBe(false);
-    expect(
-      reportMissing.violations.some((v) => v.includes("/en/staff/")),
-    ).toBe(true);
+    expect(reportMissing.violations.some((v) => v.includes("/en/staff/"))).toBe(true);
   });
 });
 
@@ -97,17 +93,9 @@ describe("Synthetic Probe and W3C TraceContext", () => {
     const successResult = verifyOfflineReadinessManifest(completeCache);
     expect(successResult.offlineReady).toBe(true);
     expect(successResult.missingRoutes).toHaveLength(0);
-    expect(successResult.traceparent).toMatch(
-      /^00-[0-9a-f]{32}-[0-9a-f]{16}-01$/,
-    );
+    expect(successResult.traceparent).toMatch(/^00-[0-9a-f]{32}-[0-9a-f]{16}-01$/);
 
-    const incompleteCache = [
-      "/",
-      "/sw.js",
-      "/manifest.webmanifest",
-      "/en/",
-      "/ja/",
-    ];
+    const incompleteCache = ["/", "/sw.js", "/manifest.webmanifest", "/en/", "/ja/"];
     const failResult = verifyOfflineReadinessManifest(incompleteCache);
     expect(failResult.offlineReady).toBe(false);
     expect(failResult.missingRoutes).toContain("/zh-CN/");

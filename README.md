@@ -96,12 +96,12 @@ npm ci
 npm run dev        # http://localhost:3000
 ```
 
-| 명령                  | 설명                                                                                                 |
-| --------------------- | ---------------------------------------------------------------------------------------------------- |
-| `npm run verify:fast` | 콘텐츠 스키마 및 동기화 검사, 린트, 타입 검사, 포맷 검사, 단위 테스트(Vitest), 정적 규칙 및 디자인 토큰 검사 |
-| `npm run check:budget` | 정적 산출물(`out/`)의 단일 JS 청크(550KB), 총 프리캐시(14MB), 필수 오프라인 경로 예산 검증 |
-| `npm run verify`      | `verify:fast` 실행 후 정적 빌드(`out/`, `sw.js`, `_headers`) 및 Playwright E2E 전체 검증             |
-| `npm run deploy`      | 정적 빌드 산출물(`out/`)을 Cloudflare Workers 정적 자산으로 배포                                     |
+| 명령                   | 설명                                                                                                         |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `npm run verify:fast`  | 콘텐츠 스키마 및 동기화 검사, 린트, 타입 검사, 포맷 검사, 단위 테스트(Vitest), 정적 규칙 및 디자인 토큰 검사 |
+| `npm run check:budget` | 정적 산출물(`out/`)의 단일 JS 청크(550KB), 총 프리캐시(14MB), 필수 오프라인 경로 예산 검증                   |
+| `npm run verify`       | `verify:fast` 실행 후 정적 빌드(`out/`, `sw.js`, `_headers`) 및 Playwright E2E 전체 검증                     |
+| `npm run deploy`       | 정적 빌드 산출물(`out/`)을 Cloudflare Workers 정적 자산으로 배포                                             |
 
 CI 파이프라인은 모든 Pull Request에서 정적 검사, 빌드, 번들 예산 게이트, Playwright E2E 테스트, Cloudflare Workers PR 프리뷰 배포를 순서대로 실행하며, 모두 통과하면 `main` 브랜치를 Cloudflare Workers에 배포합니다.
 

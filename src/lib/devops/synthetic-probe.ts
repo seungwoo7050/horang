@@ -39,15 +39,7 @@ export const DEFAULT_BUDGET_CONFIG: BundleBudgetConfig = {
   ],
 };
 
-export const SUPPORTED_LANGUAGES = [
-  "en",
-  "ja",
-  "zh-CN",
-  "zh-TW",
-  "fr",
-  "es",
-  "ro",
-] as const;
+export const SUPPORTED_LANGUAGES = ["en", "ja", "zh-CN", "zh-TW", "fr", "es", "ro"] as const;
 
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
 
@@ -97,8 +89,7 @@ export function evaluateBundleBudget(
     ...DEFAULT_BUDGET_CONFIG,
     ...config,
     requiredOfflineRoutes:
-      config?.requiredOfflineRoutes ??
-      DEFAULT_BUDGET_CONFIG.requiredOfflineRoutes,
+      config?.requiredOfflineRoutes ?? DEFAULT_BUDGET_CONFIG.requiredOfflineRoutes,
   };
 
   const violations: string[] = [];
@@ -133,10 +124,8 @@ export function evaluateBundleBudget(
   for (const requiredRoute of mergedConfig.requiredOfflineRoutes) {
     const matches =
       normalizedRoutes.has(requiredRoute) ||
-      (requiredRoute.endsWith("/") &&
-        normalizedRoutes.has(requiredRoute.slice(0, -1))) ||
-      (!requiredRoute.endsWith("/") &&
-        normalizedRoutes.has(requiredRoute + "/"));
+      (requiredRoute.endsWith("/") && normalizedRoutes.has(requiredRoute.slice(0, -1))) ||
+      (!requiredRoute.endsWith("/") && normalizedRoutes.has(requiredRoute + "/"));
 
     if (!matches) {
       violations.push(`필수 오프라인 경로 누락: ${requiredRoute}`);
