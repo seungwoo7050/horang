@@ -60,7 +60,7 @@ export interface SyntheticProbeResult {
 }
 
 function isJsChunk(filePath: string): boolean {
-  const clean = filePath.split("?")[0].toLowerCase();
+  const clean = (filePath.split("?")[0] ?? "").toLowerCase();
   return clean.endsWith(".js") || clean.endsWith(".mjs");
 }
 

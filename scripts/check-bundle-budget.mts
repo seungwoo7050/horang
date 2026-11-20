@@ -8,7 +8,8 @@ import {
 const args = process.argv.slice(2);
 const isDryRun = args.includes("--dry-run");
 const targetDirArgIndex = args.findIndex((arg) => !arg.startsWith("--"));
-const targetDir = targetDirArgIndex !== -1 ? args[targetDirArgIndex] : "out";
+const targetDir =
+  (targetDirArgIndex !== -1 ? args[targetDirArgIndex] : undefined) ?? "out";
 
 function collectAssets(dir: string, baseDir = dir): BundleAssetStat[] {
   if (!existsSync(dir)) return [];
